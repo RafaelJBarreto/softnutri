@@ -8,4 +8,6 @@ import br.com.softnutri.dominio.Papel;
 @Repository
 public interface PapelRepository  extends JpaRepository<Papel, Long>{
 
+	Papel findByDescricao(String descricao);
+
 }
