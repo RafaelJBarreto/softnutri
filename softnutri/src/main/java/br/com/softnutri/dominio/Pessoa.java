@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.softnutri.util.Security;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -72,7 +73,7 @@ public class Pessoa {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = Security.encode(nome);
 	}
 
 	public String getEmail() {
@@ -80,7 +81,7 @@ public class Pessoa {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = Security.encode(email);
 	}
 
 	public String getCpf() {
@@ -88,7 +89,7 @@ public class Pessoa {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		this.cpf = Security.encode(cpf);
 	}
 
 	public LocalDate getDataNascimento() {
@@ -104,7 +105,7 @@ public class Pessoa {
 	}
 
 	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+		this.endereco = Security.encode(endereco);
 	}
 
 	public Sexo getSexo() {

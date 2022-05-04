@@ -3,8 +3,6 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -14,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.com.softnutri.dominio.Nutricionista;
 import br.com.softnutri.dominio.Pessoa;
 import br.com.softnutri.dominio.Sexo;
-import br.com.softnutri.dominio.Telefone;
 import br.com.softnutri.dominio.TipoUsuario;
 import br.com.softnutri.dominio.Usuario;
+import br.com.softnutri.dto.PessoaDto;
 import br.com.softnutri.repository.PessoaRepository;
 import br.com.softnutri.repository.TelefoneRepository;
 import br.com.softnutri.repository.UsuarioRepository;
@@ -90,13 +88,13 @@ class SoftnutriApplicationTests {
 
     @Test
 	void testaCadastroTelefone() {
-		Optional<Pessoa> pessoaCadastrada = pessoaRepository.findById(4L);
+		Optional<Pessoa> pessoaCadastrada = pessoaRepository.findById(1L);
+		
+		
+		
 		if (pessoaCadastrada.isPresent()) {
-			List<Telefone> telefones = Arrays.asList(new Telefone(null, "32984320174", pessoaCadastrada.get()),
-					new Telefone(null, "32984027813", pessoaCadastrada.get()));
-			telefones.forEach(tel -> assertEquals(tel.getNumero(), telefoneRepository.save(tel).getNumero())
-
-			);
+			PessoaDto pessoa = new PessoaDto(pessoaCadastrada.get());
+			
 		}
 	}
 

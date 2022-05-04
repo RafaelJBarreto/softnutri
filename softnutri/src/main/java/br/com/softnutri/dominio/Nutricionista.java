@@ -1,5 +1,6 @@
 package br.com.softnutri.dominio;
 
+import br.com.softnutri.util.Security;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import jakarta.persistence.Table;
 public class Nutricionista extends Usuario {
 
 	@Basic(optional = false)
-	@Column(name = "crn", nullable = false, length = 10)
+	@Column(name = "crn", nullable = false)
 	private String crn;
 	private boolean anuidade;
 
@@ -23,7 +24,7 @@ public class Nutricionista extends Usuario {
 	}
 
 	public void setCrn(String crn) {
-		this.crn = crn;
+		this.crn = Security.encode(crn);
 	}
 
 	public boolean isAnuidade() {

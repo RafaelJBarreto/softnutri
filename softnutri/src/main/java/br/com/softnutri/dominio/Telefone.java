@@ -2,6 +2,7 @@ package br.com.softnutri.dominio;
 
 import java.util.Objects;
 
+import br.com.softnutri.util.Security;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,21 +22,11 @@ public class Telefone {
 	private Long idTelefone;
 
 	@Basic(optional = true)
-	@Column(name = "numero", nullable = true, length = 11)
+	@Column(name = "numero", nullable = true)
 	private String numero;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Pessoa pessoa;
-
-	public Telefone() {
-
-	}
-
-	public Telefone(Long idTelefone, String numero, Pessoa pessoa) {
-		this.idTelefone = idTelefone;
-		this.numero = numero;
-		this.pessoa = pessoa;
-	}
 
 	public Long getIdTelefone() {
 		return idTelefone;
@@ -50,7 +41,7 @@ public class Telefone {
 	}
 
 	public void setNumero(String numero) {
-		this.numero = numero;
+		this.numero = Security.encode(numero);
 	}
 
 	public Pessoa getPessoa() {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.softnutri.dominio.Pessoa;
+import br.com.softnutri.util.Security;
 
 public class PessoaDto {
 
@@ -18,11 +19,11 @@ public class PessoaDto {
 	private List<TelefoneDto> telefones;
 
 	public PessoaDto(Pessoa pessoa) {
-		this.nome = pessoa.getNome();
-		this.email = pessoa.getEmail();
-		this.cpf = pessoa.getCpf();
+		this.nome = Security.decode(pessoa.getNome());
+		this.email = Security.decode(pessoa.getEmail());
+		this.cpf = Security.decode(pessoa.getCpf());
 		this.dataNascimento = pessoa.getDataNascimento();
-		this.endereco = pessoa.getEndereco();
+		this.endereco = Security.decode(pessoa.getEndereco());
 		this.telefones = new ArrayList<>();
 		this.telefones.addAll(pessoa.getTelefones().stream().map(TelefoneDto::new).toList());
 	}

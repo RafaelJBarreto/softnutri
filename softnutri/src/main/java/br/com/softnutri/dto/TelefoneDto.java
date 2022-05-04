@@ -7,7 +7,7 @@ public class TelefoneDto {
 	private String numero;
 
 	public TelefoneDto(Telefone telefone) {
-		this.numero = telefone.getNumero();
+		this.numero = (telefone.getNumero());
 	}
 
 	public String getNumero() {
