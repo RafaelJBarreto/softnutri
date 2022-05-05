@@ -1,6 +1,6 @@
 package br.com.softnutri.dominio;
 
-import br.com.softnutri.util.Security;
+import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +24,7 @@ public class Nutricionista extends Usuario {
 	}
 
 	public void setCrn(String crn) {
-		this.crn = Security.encode(crn);
+		this.crn = Criptografia.encode(crn);
 	}
 
 	public boolean isAnuidade() {

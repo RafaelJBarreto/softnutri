@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "softnutri.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'softnutri.app.jwtSecret'"
+  },
+  {
+    "name": "softnutri.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'softnutri.app.jwtExpirationMs'"
+  },
+  {
+    "name": "softnutri.app.jwtRefreshExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'softnutri.app.jwtRefreshExpirationMs'"
+  }
+]}

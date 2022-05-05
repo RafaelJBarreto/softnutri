@@ -3,8 +3,9 @@ package br.com.softnutri.dominio;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import br.com.softnutri.util.Security;
+import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,6 +18,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,6 +30,7 @@ import jakarta.persistence.Table;
 public class Pessoa {
 
 	@Id
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long idPessoa;
 
@@ -59,6 +64,23 @@ public class Pessoa {
 
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<HistoricoCorporal> historicoPeso = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "pessoaPapel",
+            joinColumns = {
+            @JoinColumn(name = "idPessoa")
+            },
+            inverseJoinColumns = {
+            @JoinColumn(name = "idPapel") })
+    private Set<Papel> papel;
+	
+	public Set<Papel> getPapel() {
+		return papel;
+	}
+
+	public void setPapel(Set<Papel> papel) {
+		this.papel = papel;
+	}
 
 	public Long getIdPessoa() {
 		return idPessoa;
@@ -73,7 +95,7 @@ public class Pessoa {
 	}
 
 	public void setNome(String nome) {
-		this.nome = Security.encode(nome);
+		this.nome = Criptografia.encode(nome);
 	}
 
 	public String getEmail() {
@@ -81,7 +103,7 @@ public class Pessoa {
 	}
 
 	public void setEmail(String email) {
-		this.email = Security.encode(email);
+		this.email = Criptografia.encode(email);
 	}
 
 	public String getCpf() {
@@ -89,7 +111,7 @@ public class Pessoa {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = Security.encode(cpf);
+		this.cpf = Criptografia.encode(cpf);
 	}
 
 	public LocalDate getDataNascimento() {
@@ -105,7 +127,7 @@ public class Pessoa {
 	}
 
 	public void setEndereco(String endereco) {
-		this.endereco = Security.encode(endereco);
+		this.endereco = Criptografia.encode(endereco);
 	}
 
 	public Sexo getSexo() {

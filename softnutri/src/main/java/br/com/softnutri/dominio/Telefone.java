@@ -2,7 +2,7 @@ package br.com.softnutri.dominio;
 
 import java.util.Objects;
 
-import br.com.softnutri.util.Security;
+import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,7 +41,7 @@ public class Telefone {
 	}
 
 	public void setNumero(String numero) {
-		this.numero = Security.encode(numero);
+		this.numero = Criptografia.encode(numero);
 	}
 
 	public Pessoa getPessoa() {

@@ -16,7 +16,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 
  
 @Entity
-@Table(name = "modulos")
+@Table(name = "modulo")
 public class Modulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Modulo {
 	@Column(name = "ordem", nullable = false)
 	private Integer ordem;
 
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "modulos", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "modulo", fetch = FetchType.LAZY)
 	private List<ModuloPapel> moduloPapel;
 
 	public Long getIdModulo() {
