@@ -8,6 +8,7 @@ import br.com.softnutri.repository.PapelRepository;
 @Service
 public class PapelService {
 
+	@SuppressWarnings("unused")
 	private final PapelRepository papelRepository;
 
 	@Autowired

@@ -13,5 +13,20 @@
     "name": "softnutri.app.jwtRefreshExpirationMs",
     "type": "java.lang.String",
     "description": "A description for 'softnutri.app.jwtRefreshExpirationMs'"
+  },
+  {
+    "name": "softnutri.app.jwtRefreshExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'softnutri.app.jwtRefreshExpirationMs'"
+  },
+  {
+    "name": "softnutri.app.jwtRefreshExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'softnutri.app.jwtRefreshExpirationMs'"
+  },
+  {
+    "name": "softnutri.app.authorities.key",
+    "type": "java.lang.String",
+    "description": "A description for 'softnutri.app.authorities.key'"
   }
 ]}

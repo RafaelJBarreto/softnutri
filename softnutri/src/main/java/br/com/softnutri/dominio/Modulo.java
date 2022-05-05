@@ -22,10 +22,10 @@ public class Modulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idModulo;
 
-	@Column(name = "nome", nullable = false, length = 25)
+	@Column(name = "nome", unique = true, nullable = false, length = 25)
 	private String nome;
 
-	@Column(name = "pathBase", length = 40, nullable = false)
+	@Column(name = "pathBase", unique = true, length = 40, nullable = false)
 	private String pathBase;
 
 	@Lob

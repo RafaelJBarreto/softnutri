@@ -16,9 +16,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	boolean existsByEmail(String email);
 	
-	@Query(value = "SELECT u.idioma FROM usuario u join pessoa p on p.idPessoa = u.idPessoa WHERE p.idPessoa = :idPessoa", nativeQuery=true)
+	@Query(value = "SELECT u.idioma FROM usuario u join pessoa p on p.id_pessoa = u.id_pessoa WHERE p.id_pessoa = :idPessoa", nativeQuery=true)
 	String findIdiomaByIdPessoa(@Param("idPessoa") Long idPessoa);
 	
-	@Query(value = "SELECT u.senha FROM usuario u join pessoa p on p.idPessoa = u.idPessoa WHERE p.idPessoa = :idPessoa", nativeQuery=true)
+	@Query(value = "SELECT u.senha FROM usuario u join pessoa p on p.id_pessoa = u.id_pessoa WHERE p.id_pessoa = :idPessoa", nativeQuery=true)
 	String getSenhaByIdPessoa(@Param("idPessoa") Long idPessoa);
 }

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import br.com.softnutri.config.security.jwt.JwtUtils;
+import br.com.softnutri.config.security.payload.request.LogOutRequest;
+import br.com.softnutri.config.security.payload.request.LoginRequest;
+import br.com.softnutri.config.security.payload.request.SignupRequest;
+import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
+import br.com.softnutri.config.security.payload.response.JwtResponse;
+import br.com.softnutri.config.security.payload.response.MessageResponse;
+import br.com.softnutri.config.security.services.RefreshTokenService;
+import br.com.softnutri.config.security.services.UserDetailsImpl;
+import br.com.softnutri.config.security.services.UtilsServiceImpl;
 import br.com.softnutri.dominio.Papel;
 import br.com.softnutri.dominio.Pessoa;
 import br.com.softnutri.dominio.RefreshToken;
@@ -24,21 +33,13 @@ import br.com.softnutri.dominio.Usuario;
 import br.com.softnutri.dto.UsuarioDTO;
 import br.com.softnutri.exception.TokenRefreshException;
 import br.com.softnutri.repository.UsuarioRepository;
-import br.com.softnutri.security.jwt.JwtUtils;
-import br.com.softnutri.security.payload.request.LogOutRequest;
-import br.com.softnutri.security.payload.request.LoginRequest;
-import br.com.softnutri.security.payload.request.SignupRequest;
-import br.com.softnutri.security.payload.request.TokenRefreshRequest;
-import br.com.softnutri.security.payload.response.JwtResponse;
-import br.com.softnutri.security.payload.response.MessageResponse;
-import br.com.softnutri.security.payload.response.TokenRefreshResponse;
-import br.com.softnutri.security.services.RefreshTokenService;
-import br.com.softnutri.security.services.UserDetailsImpl;
-import br.com.softnutri.security.services.UtilsServiceImpl;
+import br.com.softnutri.util.Criptografia;
 
 @Service(value = "usuarioService")
 public class UsuarioService{
 
+	static final String ROLENOTFOUND = "Error: Papel is not found.";
+	
 	private final UsuarioRepository usuarioRepository;
 
 	private final AuthenticationManager authenticationManager;
@@ -77,7 +78,6 @@ public class UsuarioService{
 			return ResponseEntity.badRequest().body(new MessageResponse("GLOBAL_WORD.MSG_EMAIL_ALREADY"));
 		}
 
-		// Create new usuario's account
 		Usuario usuario = new Usuario();
 		usuario.setEmail(signUpRequest.getUsername());
 		usuario.setSenha(signUpRequest.getPassword());
@@ -99,24 +99,48 @@ public class UsuarioService{
 
 	public ResponseEntity<JwtResponse> autenticacao(LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+				new UsernamePasswordAuthenticationToken(Criptografia.encode(loginRequest.getUsername()), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		JwtResponse jwt = gerarTokens(authentication);
+		return ResponseEntity.ok(jwt);
+	}
+	
+	/**
+	 * @param request
+	 * @return
+	 * @throws TokenRefreshException
+	 */
+	public ResponseEntity<JwtResponse> refreshToken(TokenRefreshRequest request) throws TokenRefreshException {
+		String requestRefreshToken = request.getRefreshToken();
+		Optional<Pessoa> resultUsuario = refreshTokenService.findByToken(requestRefreshToken)
+				.map(refreshTokenService::verifyExpiration).map(RefreshToken::getPessoa);
+		if (resultUsuario.isPresent()) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			JwtResponse jwt = gerarTokens(authentication);
+			return ResponseEntity.ok(jwt);
+		}
 
-		UserDetailsImpl usuarioDetails = (UserDetailsImpl) authentication.getPrincipal();
-		String languageUsuario = this.getLanguageUsuario(usuarioDetails.getId());
-
-		String jwt = jwtUtils.generateJwtToken(usuarioDetails);
-
-		List<String> papels = usuarioDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-				.toList();
-
-		RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
-
-		return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), usuarioDetails.getId(),
-				usuarioDetails.getUsername(), papels, languageUsuario));
+		throw new TokenRefreshException(requestRefreshToken, "Refresh token is not in database!");
 	}
 
+	/**
+	 * @param authentication
+	 * @return JwtResponse
+	 */
+	private JwtResponse gerarTokens(Authentication authentication) {
+		UserDetailsImpl usuarioDetails = (UserDetailsImpl) authentication.getPrincipal();
+		String languageUsuario = this.getLanguageUsuario(usuarioDetails.getId());
+		JwtResponse jwt = jwtUtils.generateToken(authentication);
+		List<String> papels = usuarioDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+				.toList();
+		RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
+		jwt.setLanguage(languageUsuario);
+		jwt.setRefreshToken(refreshToken.getToken());
+		jwt.setRoles(papels);
+		return jwt;
+	}
+
+	
 	public String getLanguageUsuario(Long idPessoa) {
 		return this.usuarioRepository.findIdiomaByIdPessoa(idPessoa);
 	}
@@ -130,27 +154,6 @@ public class UsuarioService{
 		return ResponseEntity.ok(new MessageResponse("Log out successful!"));
 	}
 
-	/**
-	 * @param request
-	 * @return
-	 * @throws TokenRefreshException
-	 */
-	public ResponseEntity<TokenRefreshResponse> refreshToken(TokenRefreshRequest request) throws TokenRefreshException {
-		/**
-		 * TODO Futuramente tem que colocar uma maneira de atualizar o horário, pois
-		 * atualmente só faz um refresh
-		 */
-		String requestRefreshToken = request.getRefreshToken();
-
-		Optional<Pessoa> resultUsuario = refreshTokenService.findByToken(requestRefreshToken)
-				.map(refreshTokenService::verifyExpiration).map(RefreshToken::getPessoa);
-		if (resultUsuario.isPresent()) {
-			String token = jwtUtils.generateTokenFromUsername(resultUsuario.get().getEmail());
-			return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
-		}
-
-		throw new TokenRefreshException(requestRefreshToken, "Refresh token is not in database!");
-	}
 
 	/**
 	 * @param idUsuario

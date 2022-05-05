@@ -21,7 +21,7 @@ public class Papel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPapel;
 	
-	@Column(name = "descricao", nullable = false, length = 50)
+	@Column(name = "descricao",unique = true, nullable = false, length = 50)
 	private String descricao;
 	
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "papel", fetch = FetchType.LAZY)

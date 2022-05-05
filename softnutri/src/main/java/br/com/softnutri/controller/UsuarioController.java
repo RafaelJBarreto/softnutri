@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.softnutri.config.security.payload.request.LogOutRequest;
+import br.com.softnutri.config.security.payload.request.LoginRequest;
+import br.com.softnutri.config.security.payload.request.SignupRequest;
+import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
+import br.com.softnutri.config.security.payload.response.JwtResponse;
+import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.UsuarioDTO;
-import br.com.softnutri.security.payload.request.LogOutRequest;
-import br.com.softnutri.security.payload.request.LoginRequest;
-import br.com.softnutri.security.payload.request.SignupRequest;
-import br.com.softnutri.security.payload.request.TokenRefreshRequest;
-import br.com.softnutri.security.payload.response.JwtResponse;
-import br.com.softnutri.security.payload.response.MessageResponse;
-import br.com.softnutri.security.payload.response.TokenRefreshResponse;
 import br.com.softnutri.service.UsuarioService;
 import jakarta.validation.Valid;
 
@@ -26,8 +25,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/usuario")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class UsuarioController {
-
-	static final String ROLENOTFOUND = "Error: Papel is not found.";
 
 	private final UsuarioService usuarioService;
 
@@ -57,7 +54,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/auth/refreshtoken")
-	public ResponseEntity<TokenRefreshResponse> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
+	public ResponseEntity<JwtResponse> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
 		return usuarioService.refreshToken(request);
 	}
 
