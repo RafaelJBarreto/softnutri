@@ -3,7 +3,6 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,7 @@ import br.com.softnutri.dominio.Pessoa;
 import br.com.softnutri.dominio.Sexo;
 import br.com.softnutri.dominio.TipoUsuario;
 import br.com.softnutri.dominio.Usuario;
-import br.com.softnutri.dto.PessoaDto;
 import br.com.softnutri.repository.PessoaRepository;
-import br.com.softnutri.repository.TelefoneRepository;
 import br.com.softnutri.repository.UsuarioRepository;
 
 @SpringBootTest
@@ -24,9 +21,6 @@ class SoftnutriApplicationTests {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-
-	@Autowired
-	private TelefoneRepository telefoneRepository;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -84,18 +78,6 @@ class SoftnutriApplicationTests {
 
 		assertEquals(p.getEmail(), nc.getEmail());
 
-	}
-
-    @Test
-	void testaCadastroTelefone() {
-		Optional<Pessoa> pessoaCadastrada = pessoaRepository.findById(1L);
-		
-		
-		
-		if (pessoaCadastrada.isPresent()) {
-			PessoaDto pessoa = new PessoaDto(pessoaCadastrada.get());
-			
-		}
 	}
 
 }
