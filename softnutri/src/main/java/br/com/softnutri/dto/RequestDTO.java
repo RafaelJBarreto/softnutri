@@ -2,7 +2,7 @@ package br.com.softnutri.dto;
 
 import br.com.softnutri.dominio.Usuario;
 
-public class RequestDto {
+public class RequestDTO {
 
 	private Long idRequest;
 	private Usuario user;

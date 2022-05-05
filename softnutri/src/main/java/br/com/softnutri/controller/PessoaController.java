@@ -1,6 +1,5 @@
 package br.com.softnutri.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.softnutri.controller.form.PessoaForm;
 import br.com.softnutri.dominio.Pessoa;
-import br.com.softnutri.dto.PessoaDto;
+import br.com.softnutri.dto.PessoaDTO;
 import br.com.softnutri.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
 
@@ -26,24 +24,20 @@ public class PessoaController {
 	private PessoaRepository pessoaRepository;
 
 	@GetMapping
-	public List<PessoaDto> lista(String nome) {
+	public List<PessoaDTO> lista(String nome) {
 		if (nome == null) {
 			List<Pessoa> pessoas = pessoaRepository.findAll();
-			return PessoaDto.converter(pessoas);
+			return PessoaDTO.converter(pessoas);
 		} else {
 			List<Pessoa> pessoas = pessoaRepository.findByNome(nome);
-			return PessoaDto.converter(pessoas);
+			return PessoaDTO.converter(pessoas);
 		}
 	}
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<PessoaDto> cadastrar(@RequestBody PessoaForm form, UriComponentsBuilder uriBuilder) {
-		Pessoa pessoa = form.converter(pessoaRepository);
-		pessoaRepository.save(pessoa);
-		
-		URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(pessoa.getIdPessoa()).toUri();
-		return ResponseEntity.created(uri).body(new PessoaDto(pessoa));
+	public ResponseEntity<PessoaDTO> cadastrar(@RequestBody PessoaDTO form, UriComponentsBuilder uriBuilder) {
+		return null;
 	}
 
 }

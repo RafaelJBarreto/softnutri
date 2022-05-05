@@ -2,11 +2,11 @@ package br.com.softnutri.dto;
 
 import br.com.softnutri.dominio.Telefone;
 
-public class TelefoneDto {
+public class TelefoneDTO {
 
 	private String numero;
 
-	public TelefoneDto(Telefone telefone) {
+	public TelefoneDTO(Telefone telefone) {
 		this.numero = (telefone.getNumero());
 	}
 
