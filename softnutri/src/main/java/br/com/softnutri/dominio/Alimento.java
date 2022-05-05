@@ -1,5 +1,6 @@
 package br.com.softnutri.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Basic;
@@ -28,9 +29,12 @@ public class Alimento {
 
 	@Embedded
 	private DadosNutricionais dadosNutricionais;
-	
+
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "alimento", fetch = FetchType.LAZY)
-	private List<GrupoAlimento> grupoAlimento;
+	private List<GrupoAlimento> grupoAlimento = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "alimento", fetch = FetchType.LAZY)
+	private List<CardapioPessoa> cardapioPessoa = new ArrayList<>();
 
 	public Alimento() {
 	}
@@ -55,4 +59,29 @@ public class Alimento {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public DadosNutricionais getDadosNutricionais() {
+		return dadosNutricionais;
+	}
+
+	public void setDadosNutricionais(DadosNutricionais dadosNutricionais) {
+		this.dadosNutricionais = dadosNutricionais;
+	}
+
+	public List<GrupoAlimento> getGrupoAlimento() {
+		return grupoAlimento;
+	}
+
+	public void setGrupoAlimento(List<GrupoAlimento> grupoAlimento) {
+		this.grupoAlimento = grupoAlimento;
+	}
+
+	public List<CardapioPessoa> getCardapioPessoa() {
+		return cardapioPessoa;
+	}
+
+	public void setCardapioPessoa(List<CardapioPessoa> cardapioPessoa) {
+		this.cardapioPessoa = cardapioPessoa;
+	}
+
 }

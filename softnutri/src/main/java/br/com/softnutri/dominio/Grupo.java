@@ -1,5 +1,6 @@
 package br.com.softnutri.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Basic;
@@ -24,9 +25,9 @@ public class Grupo {
 	@Basic(optional = false)
 	@Column(name = "descricao", nullable = false, length = 100)
 	private String descricao;
-	
+
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "grupo", fetch = FetchType.LAZY)
-	private List<GrupoAlimento> grupoAlimento;
+	private List<GrupoAlimento> grupoAlimento = new ArrayList<>();
 
 	public Long getIdGrupo() {
 		return idGrupo;
@@ -42,6 +43,14 @@ public class Grupo {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<GrupoAlimento> getGrupoAlimento() {
+		return grupoAlimento;
+	}
+
+	public void setGrupoAlimento(List<GrupoAlimento> grupoAlimento) {
+		this.grupoAlimento = grupoAlimento;
 	}
 
 }
