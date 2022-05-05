@@ -31,7 +31,7 @@ class SoftnutriApplicationTests {
 		Nutricionista p = new Nutricionista();
 		p.setCpf("18956896533");
 		p.setDataNascimento(LocalDate.now());
-		p.setEmail("ana_eliza@outlook.com.br");
+		p.setEmail("ana_eliza1@outlook.com.br");
 		p.setEndereco("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
 		p.setNome("Ana Eliza");
 		p.setSexo(Sexo.F);
@@ -39,6 +39,7 @@ class SoftnutriApplicationTests {
 		p.setTipoUsuario(TipoUsuario.NUTRICIONISTA);
 		p.setCrn("123456789");
 		p.setAnuidade(true);
+		p.setIdioma("pt-Br");
 
 		Usuario nc = usuarioRepository.save(p);
 
@@ -52,7 +53,7 @@ class SoftnutriApplicationTests {
 		Pessoa p = new Pessoa();
 		p.setCpf("10490376690");
 		p.setDataNascimento(LocalDate.now());
-		p.setEmail("rafaelbarreto@outlook.com.br");
+		p.setEmail("rola@outlook.com.br");
 		p.setEndereco("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
 		p.setNome("Rafael");
 		p.setSexo(Sexo.M);
@@ -67,12 +68,13 @@ class SoftnutriApplicationTests {
 		Usuario p = new Usuario();
 		p.setCpf("18956896533");
 		p.setDataNascimento(LocalDate.now());
-		p.setEmail("picadura@outlook.com.br");
+		p.setEmail("picadura1@outlook.com.br");
 		p.setEndereco("Rua da preguiça, Barbacena-MG");
 		p.setNome("Xuxu baitola");
 		p.setSexo(Sexo.F);
 		p.setSenha("123456");
 		p.setTipoUsuario(TipoUsuario.RECEPCIONISTA);
+		p.setIdioma("pt-Br");
 
 		Usuario nc = usuarioRepository.save(p);
 
