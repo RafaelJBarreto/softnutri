@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.request.LogOutRequest;
 import br.com.softnutri.config.security.payload.request.LoginRequest;
-import br.com.softnutri.config.security.payload.request.SignupRequest;
 import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
 import br.com.softnutri.config.security.payload.response.JwtResponse;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
@@ -46,11 +45,6 @@ public class UsuarioController {
 	@PostMapping("/auth/signin")
 	public ResponseEntity<JwtResponse> authenticateUsuario(@Valid @RequestBody LoginRequest loginRequest) {
 		return usuarioService.autenticacao(loginRequest);
-	}
-
-	@PostMapping("/auth/signup")
-	public ResponseEntity<MessageResponse> registerUsuario(@Valid @RequestBody SignupRequest signUpRequest) {
-		return usuarioService.save(signUpRequest);
 	}
 
 	@PostMapping("/auth/refreshtoken")

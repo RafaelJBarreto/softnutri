@@ -10,7 +10,7 @@ public class JwtResponse {
 	private String refreshToken;
 	private String language;
 	private Date expiration;
- 
+	private List<String> roles;
 
 	public JwtResponse(String token, String type, String refreshToken, String language, Date expiration,
 			List<String> roles) {
@@ -32,8 +32,6 @@ public class JwtResponse {
 	public void setExpiration(Date expiration) {
 		this.expiration = expiration;
 	}
-
-	private List<String> roles;
 
 	public String getToken() {
 		return token;
