@@ -5,12 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { AgmCoreModule } from '@agm/core';
+import { NgApexchartsModule } from 'ng-apexcharts'; 
 
 import {
-  DashedLineChartComponent,
-  HeatmapChartComponent,
+  DashedLineChartComponent, 
   IconsPageComponent,
   LineChartComponent,
   PieChartComponent
@@ -32,8 +30,7 @@ import { googleMapKey } from './consts';
     MapPageComponent,
     LineChartComponent,
     DashedLineChartComponent,
-    PieChartComponent,
-    HeatmapChartComponent
+    PieChartComponent 
   ],
   imports: [
     CommonModule,
@@ -42,11 +39,7 @@ import { googleMapKey } from './consts';
     MatCardModule,
     MatTabsModule,
     MatIconModule,
-    NgApexchartsModule,
-    AgmCoreModule,
-    AgmCoreModule.forRoot({
-      apiKey: googleMapKey
-    }),
+    NgApexchartsModule, 
     MatToolbarModule,
     SharedModule,
     DashboardModule,
