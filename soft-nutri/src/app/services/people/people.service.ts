@@ -9,14 +9,14 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PessoasService {
+export class PeopleService {
 
   constructor(
     private http: HttpClient
   ) { }
 
   listAll(): Observable<any> { 
-    return this.http.get(e.api.rota +e.api.pessoas.listarTodos);
+    return this.http.get(e.api.rota +e.api.people.listarTodos);
   }
  
   

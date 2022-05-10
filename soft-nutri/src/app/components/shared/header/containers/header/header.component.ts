@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/consts/routes';
-import { AuthService } from 'src/app/components/pages/auth/services';
+import { AuthService } from 'src/app/services';
+import { ConstService } from 'src/app/services/shared/const.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HeaderComponent {
   public routers: typeof routes = routes;
 
   constructor(
-    private userService: AuthService,
+    private authService: AuthService,
     private router: Router
   ) {
     //this.user$ = this.userService.getUser();
@@ -31,7 +32,7 @@ export class HeaderComponent {
   }
 
   public signOut(): void {
-    this.userService.signOut();
+    this.authService.signOut();
 
     this.router.navigate([this.routers.LOGIN]);
   }

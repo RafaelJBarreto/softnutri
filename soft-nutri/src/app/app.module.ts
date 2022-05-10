@@ -8,13 +8,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { NotFoundComponent } from './components/pages/not-found/not-found.component';
-import { AuthModule } from './components/pages/auth/auth.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthModule } from './components/auth/auth.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { authInterceptorProviders } from './interceptor/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FoodsComponent } from './components/foods/foods.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -26,7 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FoodsComponent
   ],
   imports: [
     BrowserModule,

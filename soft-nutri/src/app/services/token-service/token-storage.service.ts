@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
  
 import { LogOutRequest } from 'src/app/model';
 import { UserInfoService,UserService } from '../index'; 
+import { ConstService } from '../shared/const.service';
 
 const TOKEN_KEY = 'token';
 const USER_KEY = 'loginData';
@@ -16,7 +17,8 @@ export class TokenStorageService {
   constructor(
     private userInfoService: UserInfoService,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private jwtConst: ConstService
   ) { }
 
   public signOut(): void {
@@ -45,7 +47,10 @@ export class TokenStorageService {
   }
 
   public getToken(): string | null {
-    var token = localStorage.getItem(TOKEN_KEY);
+    console.log("xuxu viado");
+    var token = this.jwtConst.getTokenVar();
+    console.log(token);
+
     if (token != null) {
       this.userInfoService.alterValue(true);
     }

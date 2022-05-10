@@ -15,7 +15,7 @@ export class UserService {
   ) { }
 
   getSignIn(signin: SignIn): Observable<any> { 
-    return this.http.post(e.api.rota +e.api.usuario.autenticar, signin);
+    return this.http.post(e.api.rota +e.api.user.autenticar, signin);
   }
 
 //   alterDataUser(user: User): Observable<any> {
@@ -23,7 +23,7 @@ export class UserService {
 //   }
 
   logoutUser(logOutRequest: LogOutRequest): Observable<any> {
-    return this.http.post(e.api.rota +e.api.usuario.logout, logOutRequest);
+    return this.http.post(e.api.rota +e.api.user.logout, logOutRequest);
   }
   
 }

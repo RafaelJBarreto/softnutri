@@ -7,9 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginFormComponent, SearchFormComponent } from './components';
-import { AuthPageComponent } from './containers/auth-page/auth-page.component';
-import { AuthService} from './services';
-import { AuthGuard } from './guards';
+import { AuthPageComponent } from './containers/auth-page/auth-page.component'; 
 
 @NgModule({
   declarations: [
@@ -26,9 +24,7 @@ import { AuthGuard } from './guards';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [
-    AuthService,
-    AuthGuard
+  providers: [ 
   ]
 })
 export class AuthModule { }

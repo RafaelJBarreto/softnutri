@@ -9,15 +9,15 @@ export const environment = {
 
   api: {
     rota: "http://localhost:8080/",
-    usuario: {
-      usuario: "usuario",
+    user: {
+      user: "user",
       autenticar: "usuario/auth/signin",
-      refreshtoken: "usuario/auth/refreshtoken",
-      logout: "usuario/auth/logout"
+      refreshtoken: "user/auth/refreshtoken",
+      logout: "user/auth/logout"
     },
-    pessoas:{
-      pessoas:"pessoas",
-      listarTodos:"pessoas/"
+    people:{
+      people:"people",
+      listarTodos:"people/"
     }
   },
   redirect: {

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './components/pages/not-found/not-found.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LayoutComponent } from './components/shared/layout/layout.component';
-import { AuthGuard } from './components/pages/auth/guards';
+import { AuthGuardService as AuthGuard  } from './services';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./components/pages/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: '404',

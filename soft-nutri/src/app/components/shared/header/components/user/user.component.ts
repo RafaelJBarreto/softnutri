@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from 'src/app/components/pages/auth/models/user';
+import { UserSimple } from 'src/app/model';
 import { routes } from 'src/app/consts/routes';
 
 
@@ -9,7 +9,7 @@ import { routes } from 'src/app/consts/routes';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  @Input() user!: User;
+  @Input() user!: UserSimple;
   @Output() signOut: EventEmitter<void> = new EventEmitter<void>();
   public routes: typeof routes = routes;
 
