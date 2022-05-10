@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.softnutri.dominio.Usuario;
+import br.com.softnutri.domain.User;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -31,15 +31,15 @@ public class UserDetailsImpl implements UserDetails {
 	    this.authorities = authorities;
 	  }
 
-	  public static UserDetailsImpl build(Usuario user) {
+	  public static UserDetailsImpl build(User user) {
 	    List<SimpleGrantedAuthority> authorities = user.getPapel().stream()
-	        .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getDescricao().toUpperCase()))
+	        .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getDescription().toUpperCase()))
 	        .toList();
 
 	    return new UserDetailsImpl(
-	        user.getIdPessoa(), 
+	        user.getIdPerson(), 
 	        user.getEmail(), 
-	        user.getSenha(), 
+	        user.getPassword(), 
 	        authorities);
 	  }
 

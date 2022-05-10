@@ -1,11 +1,11 @@
 package br.com.softnutri.dto;
 
-import br.com.softnutri.dominio.Usuario;
+import br.com.softnutri.domain.User;
 
 public class RequestDTO {
 
 	private Long idRequest;
-	private Usuario user;
+	private User user;
 	private String name;
 	private Long amount;
 	private String deliveryAddress;
@@ -51,11 +51,11 @@ public class RequestDTO {
 		this.observation = observation;
 	}
 
-	public Usuario getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Usuario user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 }
