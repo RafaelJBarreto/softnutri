@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { routes } from 'src/app/consts/routes';
+import { Router } from '@angular/router'; 
 import { AuthService } from 'src/app/services';
 import { ConstService } from 'src/app/services/shared/const.service';
 
@@ -15,12 +14,12 @@ import { ConstService } from 'src/app/services/shared/const.service';
 export class HeaderComponent {
   @Input() isMenuOpened!: boolean;
   @Output() isShowSidebar = new EventEmitter<boolean>();
-  //public user$: Observable<User>
-  public routers: typeof routes = routes;
+  //public user$: Observable<User> 
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private global: ConstService
   ) {
     //this.user$ = this.userService.getUser();
   }
@@ -34,6 +33,6 @@ export class HeaderComponent {
   public signOut(): void {
     this.authService.signOut();
 
-    this.router.navigate([this.routers.LOGIN]);
+    this.router.navigate([this.global.redirect.LOGIN]);
   }
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment as e } from 'src/environments/environment'; 
+import { ConstService } from '../shared/const.service';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -12,11 +13,12 @@ const httpOptions = {
 export class PeopleService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private api:ConstService
   ) { }
 
   listAll(): Observable<any> { 
-    return this.http.get(e.api.rota +e.api.people.listarTodos);
+    return this.http.get(this.api.rest.people.listall);
   }
  
   

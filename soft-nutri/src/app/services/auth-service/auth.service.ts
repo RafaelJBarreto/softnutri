@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment as e } from '../../../environments/environment';
 import { LoginRequest, SignIn, SignupRequest } from 'src/app/model';
 import { TokenStorageService } from '../';
+import { ConstService } from '../shared/const.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,15 +20,16 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     public jwtHelper: JwtHelperService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private api:ConstService
   ) { }
 
   public login(signin: SignIn): Observable<any> {
-    return this.http.post(e.api.rota + e.api.user.autenticar, signin, httpOptions);
+    return this.http.post(this.api.rest.user.signin, signin, httpOptions);
   } 
 
   refreshToken(token: string) {
-    return this.http.post(e.api.rota+e.api.user.refreshtoken, {
+    return this.http.post(this.api.rest.user.refreshtoken, {
       refreshToken: token
     }, httpOptions);
   }

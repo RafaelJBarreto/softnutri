@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UserSimple } from 'src/app/model';
-import { routes } from 'src/app/consts/routes';
+import { UserSimple } from 'src/app/model'; 
 
 
 @Component({
@@ -10,8 +9,7 @@ import { routes } from 'src/app/consts/routes';
 })
 export class UserComponent {
   @Input() user!: UserSimple;
-  @Output() signOut: EventEmitter<void> = new EventEmitter<void>();
-  public routes: typeof routes = routes;
+  @Output() signOut: EventEmitter<void> = new EventEmitter<void>(); 
 
   public signOutEmit(): void {
     this.signOut.emit();

@@ -46,11 +46,8 @@ export class TokenStorageService {
     }
   }
 
-  public getToken(): string | null {
-    console.log("xuxu viado");
-    var token = this.jwtConst.getTokenVar();
-    console.log(token);
-
+  public getToken(): string | null { 
+    var token = this.jwtConst.getTokenVar();  
     if (token != null) {
       this.userInfoService.alterValue(true);
     }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { routes } from 'src/app/consts/routes';
+import { Component, OnInit } from '@angular/core'; 
+import { ConstService } from 'src/app/services/shared/const.service';
 
 @Component({
   selector: 'app-not-found',
@@ -7,7 +7,8 @@ import { routes } from 'src/app/consts/routes';
   styleUrls: ['./not-found.component.scss']
 })
 export class NotFoundComponent{
-
-  public routes: typeof routes = routes;
-
+  public rota: any;
+  constructor( 
+    private global:ConstService
+  ) {this.rota=this.global.redirect.DASHBOARD }
 }

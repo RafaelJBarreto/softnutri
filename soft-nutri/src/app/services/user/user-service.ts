@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment as e } from 'src/environments/environment';
 import { LogOutRequest, SignIn } from 'src/app/model';
+import { ConstService } from '../shared/const.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,12 @@ import { LogOutRequest, SignIn } from 'src/app/model';
 export class UserService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private api:ConstService
   ) { }
 
   getSignIn(signin: SignIn): Observable<any> { 
-    return this.http.post(e.api.rota +e.api.user.autenticar, signin);
+    return this.http.post(this.api.rest.user.signin, signin);
   }
 
 //   alterDataUser(user: User): Observable<any> {
@@ -23,7 +25,7 @@ export class UserService {
 //   }
 
   logoutUser(logOutRequest: LogOutRequest): Observable<any> {
-    return this.http.post(e.api.rota +e.api.user.logout, logOutRequest);
+    return this.http.post(this.api.rest.user.logout, logOutRequest);
   }
   
 }

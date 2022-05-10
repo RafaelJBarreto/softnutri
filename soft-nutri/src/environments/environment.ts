@@ -6,31 +6,7 @@
 export const environment = {
   production: false,
   hmr: false,
-
-  api: {
-    rota: "http://localhost:8080/",
-    user: {
-      user: "user",
-      autenticar: "usuario/auth/signin",
-      refreshtoken: "user/auth/refreshtoken",
-      logout: "user/auth/logout"
-    },
-    people:{
-      people:"people",
-      listarTodos:"people/"
-    }
-  },
-  redirect: {
-    DASHBOARD: '/dashboard',
-    TYPOGRAPHY: '/typography',
-    TABLES: '/tables',
-    NOTIFICATION: '/notification',
-    UI_ELEMENTS_ICONS: '/ui/icons',
-    UI_ELEMENTS_CHARTS: '/ui/charts',
-    UI_ELEMENTS_MAP: '/ui/map',
-    LOGIN: '/login'
-  }
-
+  rota:"http://localhost:8080/",   
 
 };
 
