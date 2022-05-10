@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.softnutri.dominio.Pessoa;
-import br.com.softnutri.dominio.RefreshToken;
-import br.com.softnutri.dominio.Usuario;
+import br.com.softnutri.domain.Person;
+import br.com.softnutri.domain.RefreshToken;
+import br.com.softnutri.domain.User;
 import br.com.softnutri.exception.TokenRefreshException;
 import br.com.softnutri.repository.RefreshTokenRepository;
-import br.com.softnutri.repository.UsuarioRepository;
+import br.com.softnutri.repository.UserRepository;
  
 
 @Service
@@ -27,7 +27,7 @@ public class RefreshTokenService {
 	private RefreshTokenRepository refreshTokenRepository;
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository usuarioRepository;
 
 	public Optional<RefreshToken> findByToken(String token) {
 		return refreshTokenRepository.findByToken(token);
@@ -35,9 +35,9 @@ public class RefreshTokenService {
 
 	public RefreshToken createRefreshToken(Long idPessoa) {
 		RefreshToken refreshToken = new RefreshToken();
-		Usuario u = usuarioRepository.findById(idPessoa).orElseGet(Usuario::new);
+		User u = usuarioRepository.findById(idPessoa).orElseGet(User::new);
 
-		refreshToken.setPessoa(u);
+		refreshToken.setPerson(u);
 		refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
 		refreshToken.setToken(UUID.randomUUID().toString());
 		if(validRefreshTokenByPessoa(u))
@@ -54,8 +54,8 @@ public class RefreshTokenService {
 
 		return token;
 	}
-	public boolean validRefreshTokenByPessoa(Pessoa pessoa) {
-		Optional<RefreshToken> rT=refreshTokenRepository.findByPessoa(pessoa);
+	public boolean validRefreshTokenByPessoa(Person pessoa) {
+		Optional<RefreshToken> rT=refreshTokenRepository.findByPerson(pessoa);
 		if(rT.isPresent() ){
 			refreshTokenRepository.delete(rT.get());
 		}
@@ -64,8 +64,8 @@ public class RefreshTokenService {
 
 	@Transactional
 	public int deleteByUsuarioId(Long usuarioId) {
-		Usuario u = usuarioRepository.findById(usuarioId).orElseGet(Usuario::new);
-		return refreshTokenRepository.deleteByPessoa(u);
+		User u = usuarioRepository.findById(usuarioId).orElseGet(User::new);
+		return refreshTokenRepository.deleteByPerson(u);
 	}
 
 }

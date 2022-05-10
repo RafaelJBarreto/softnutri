@@ -11,37 +11,37 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.softnutri.dominio.Modulo;
-import br.com.softnutri.dominio.ModuloPapel;
-import br.com.softnutri.dominio.Nutricionista;
-import br.com.softnutri.dominio.Papel;
-import br.com.softnutri.dominio.Pessoa;
-import br.com.softnutri.dominio.Sexo;
-import br.com.softnutri.dominio.TipoUsuario;
-import br.com.softnutri.dominio.Usuario;
-import br.com.softnutri.repository.ModuloPapelRepository;
-import br.com.softnutri.repository.ModuloRepository;
-import br.com.softnutri.repository.PapelRepository;
-import br.com.softnutri.repository.PessoaRepository;
-import br.com.softnutri.repository.UsuarioRepository;
+import br.com.softnutri.domain.Gender;
+import br.com.softnutri.domain.Module;
+import br.com.softnutri.domain.ModuleRole;
+import br.com.softnutri.domain.Nutritionist;
+import br.com.softnutri.domain.Paper;
+import br.com.softnutri.domain.Person;
+import br.com.softnutri.domain.User;
+import br.com.softnutri.domain.UserType;
+import br.com.softnutri.repository.ModuleRoleRepository;
+import br.com.softnutri.repository.ModuleRepository;
+import br.com.softnutri.repository.PaperRepository;
+import br.com.softnutri.repository.PersonRepository;
+import br.com.softnutri.repository.UserRepository;
 import br.com.softnutri.util.Criptografia;
 
 @SpringBootTest
 class SoftnutriApplicationTests {
 
-	private final PessoaRepository pessoaRepository;
+	private final PersonRepository pessoaRepository;
 
-	private final UsuarioRepository usuarioRepository;
+	private final UserRepository usuarioRepository;
 
-	private final PapelRepository papelRepository;
+	private final PaperRepository papelRepository;
 	
-	private final ModuloRepository moduloRepository;
+	private final ModuleRepository moduloRepository;
 	
-	private final ModuloPapelRepository moduloPapelRepository;
+	private final ModuleRoleRepository moduloPapelRepository;
 
 	@Autowired
-	public SoftnutriApplicationTests(PessoaRepository pessoaRepository, UsuarioRepository usuarioRepository,
-			PapelRepository papelRepository, ModuloRepository moduloRepository, ModuloPapelRepository moduloPapelRepository) {
+	public SoftnutriApplicationTests(PersonRepository pessoaRepository, UserRepository usuarioRepository,
+			PaperRepository papelRepository, ModuleRepository moduloRepository, ModuleRoleRepository moduloPapelRepository) {
 		this.pessoaRepository = pessoaRepository;
 		this.usuarioRepository = usuarioRepository;
 		this.papelRepository = papelRepository;
@@ -52,20 +52,20 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroNutricionista() {
 
-		Nutricionista p = new Nutricionista();
+		Nutritionist p = new Nutritionist();
 		p.setCpf("18956896533");
-		p.setDataNascimento(LocalDate.now());
-		p.setEmail("ana_eliza1@outlook.com.br");
-		p.setEndereco("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
-		p.setNome("Ana Eliza");
-		p.setSexo(Sexo.F);
-		p.setSenha("123456");
-		p.setTipoUsuario(TipoUsuario.NUTRICIONISTA);
+		p.setBirthDate(LocalDate.now());
+		p.setEmail("ana@outlook.com.br");
+		p.setAddress("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
+		p.setName("Ana Eliza");
+		p.setGender(Gender.F);
+		p.setPassword("12345");
+		p.setUserType(UserType.NUTRITIONIST);
 		p.setCrn("123456789");
-		p.setAnuidade(true);
-		p.setIdioma("pt-Br");
+		p.setAnnuity(true);
+		p.setLanguage("pt-Br");
 
-		Usuario nc = usuarioRepository.save(p);
+		User nc = usuarioRepository.save(p);
 
 		assertEquals(p.getEmail(), nc.getEmail());
 
@@ -74,14 +74,14 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroPessoa() {
 
-		Pessoa p = new Pessoa();
+		Person p = new Person();
 		p.setCpf("10490376690");
-		p.setDataNascimento(LocalDate.now());
+		p.setBirthDate(LocalDate.now());
 		p.setEmail("rola@outlook.com.br");
-		p.setEndereco("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
-		p.setNome("Rafael");
-		p.setSexo(Sexo.M);
-		Pessoa pessoaCadastrada = pessoaRepository.save(p);
+		p.setAddress("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
+		p.setName("Rafael");
+		p.setGender(Gender.M);
+		Person pessoaCadastrada = pessoaRepository.save(p);
 
 		assertEquals(p.getEmail(), pessoaCadastrada.getEmail());
 	}
@@ -89,18 +89,18 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroRecepcao() {
 
-		Usuario p = new Usuario();
+		User p = new User();
 		p.setCpf("18956896533");
-		p.setDataNascimento(LocalDate.now());
+		p.setBirthDate(LocalDate.now());
 		p.setEmail("picadura1@outlook.com.br");
-		p.setEndereco("Rua da preguiça, Barbacena-MG");
-		p.setNome("Xuxu baitola");
-		p.setSexo(Sexo.F);
-		p.setSenha("123456");
-		p.setTipoUsuario(TipoUsuario.RECEPCIONISTA);
-		p.setIdioma("pt-Br");
+		p.setAddress("Rua da preguiça, Barbacena-MG");
+		p.setName("Xuxu baitola");
+		p.setGender(Gender.F);
+		p.setPassword("123456");
+		p.setUserType(UserType.RECEPTIONIST);
+		p.setLanguage("pt-Br");
 
-		Usuario nc = usuarioRepository.save(p);
+		User nc = usuarioRepository.save(p);
 
 		assertEquals(p.getEmail(), nc.getEmail());
 
@@ -109,52 +109,52 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCriarPapel() {
 
-		Papel p = new Papel();
-		p.setDescricao("Usuario");
+		Paper p = new Paper();
+		p.setDescription("Usuario");
 
-		Papel nc = papelRepository.save(p);
+		Paper nc = papelRepository.save(p);
 
-		assertNotNull(nc.getIdPapel());
+		assertNotNull(nc.getIdPaper());
 
 	}
 
 	@Test
 	void testaCriarModulo() {
 
-		Modulo m = new Modulo();
-		m.setNome("Cadastro");
-		m.setOrdem(1);
+		Module m = new Module();
+		m.setName("Cadastro");
+		m.setOrders(1);
 		m.setPathBase("app/cadastro");
 		m.setIcon(null);
 
-		Modulo nc = moduloRepository.save(m);
+		Module nc = moduloRepository.save(m);
 
-		assertNotNull(nc.getIdModulo());
+		assertNotNull(nc.getIdModule());
 
 	}
 
 	@Test
 	void testaAssociacaoPapelModulo() {
 
-		ModuloPapel mp = new ModuloPapel();
-		mp.setModulo(moduloRepository.findById(1L).get());
-		mp.setPapel(papelRepository.findById(1L).get());
+		ModuleRole mp = new ModuleRole();
+		mp.setModule(moduloRepository.findById(1L).get());
+		mp.setPaper(papelRepository.findById(1L).get());
 		
-		ModuloPapel nc = moduloPapelRepository.save(mp);
+		ModuleRole nc = moduloPapelRepository.save(mp);
 
-		assertNotNull(nc.getIdModuloPapel());
+		assertNotNull(nc.getIdModuleRole());
 
 	}
 	
 	@Test
 	void testaAssociacaoUsuarioPapel() {
 
-		Usuario u = usuarioRepository.findByEmail(Criptografia.encode("ana_eliza1@outlook.com.br")).get();
-		 Set<Papel> papel = new HashSet<Papel>() ;
+		User u = usuarioRepository.findByEmail(Criptografia.encode("ana@outlook.com.br")).get();
+		 Set<Paper> papel = new HashSet<Paper>() ;
 		 papel.add(papelRepository.findById(1L).get());
 		u.setPapel(papel);
 		
-		Usuario nc = usuarioRepository.save(u);
+		User nc = usuarioRepository.save(u);
 
 		assertNotNull(nc.getPapel());
 
