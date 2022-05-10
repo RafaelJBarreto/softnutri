@@ -2,6 +2,7 @@ package br.com.softnutri.domain;
 
 import java.time.LocalDate;
 
+import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +36,7 @@ public class User extends Person {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password =  Criptografia.encoderSecurity(password);
 	}
 
 	public String getLanguage() {

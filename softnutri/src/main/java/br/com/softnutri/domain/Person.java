@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -90,7 +91,7 @@ public class Person {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = Criptografia.encode(name);
 	}
 
 	public String getEmail() {
@@ -98,7 +99,7 @@ public class Person {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = Criptografia.encode(email);
 	}
 
 	public String getCpf() {
@@ -106,7 +107,7 @@ public class Person {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		this.cpf = Criptografia.encode(cpf);
 	}
 
 	public LocalDate getBirthDate() {
@@ -122,7 +123,7 @@ public class Person {
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.address = Criptografia.encode(address);
 	}
 
 	public Gender getGender() {

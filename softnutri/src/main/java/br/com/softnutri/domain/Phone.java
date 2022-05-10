@@ -1,5 +1,6 @@
 package br.com.softnutri.domain;
 
+import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +39,7 @@ public class Phone {
 	}
 
 	public void setNumber(String number) {
-		this.number = number;
+		this.number = Criptografia.encode(number);
 	}
 
 	public Person getPerson() {
