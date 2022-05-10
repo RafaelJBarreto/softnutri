@@ -1,0 +1,15 @@
+<form class="form" [formGroup]="form" (ngSubmit)="login()">
+    <mat-form-field class="form__input">
+      <input matInput placeholder="Email" type="email" formControlName="email">
+    </mat-form-field>
+  
+    <mat-form-field class="form__input">
+      <input matInput placeholder="Senha" type="password" formControlName="password">
+    </mat-form-field>
+  
+    <div class="form-actions">
+      <button class="form-actions__login" mat-raised-button color="primary" type="submit">Login</button>
+      <button class="form-actions__forget" mat-button>Esqueci minha senha!</button>
+    </div>
+  </form>
+  

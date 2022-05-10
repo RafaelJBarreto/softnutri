@@ -1,0 +1,14 @@
+<form class="form" [formGroup]="formSearch" >  
+    <mat-form-field class="form__input">
+      <input matInput placeholder="Email" type="email" formControlName="emailCad">
+    </mat-form-field>
+  
+    <mat-form-field class="form__input">
+      <input matInput placeholder="Password" type="password" formControlName="passwordCad">
+    </mat-form-field>
+  
+    <div class="form-actions">
+      <button class="form-actions__create" mat-raised-button color="primary" type="submit">Buscar</button>
+    </div>
+  </form>
+  
