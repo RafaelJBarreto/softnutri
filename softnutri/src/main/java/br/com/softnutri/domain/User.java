@@ -2,6 +2,7 @@ package br.com.softnutri.domain;
 
 import java.time.LocalDate;
 
+import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;

@@ -7,5 +7,7 @@ import br.com.softnutri.domain.Module;
 
 @Repository
 public interface ModuleRepository extends JpaRepository<Module, Long>{
+	
+	Module findByName(String name);
 
 }

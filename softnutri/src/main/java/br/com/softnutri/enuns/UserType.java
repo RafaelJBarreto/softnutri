@@ -1,4 +1,4 @@
-package br.com.softnutri.domain;
+package br.com.softnutri.enuns;
 
 public enum UserType {
 

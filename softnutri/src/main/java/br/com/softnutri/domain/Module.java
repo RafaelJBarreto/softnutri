@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "module")
@@ -29,14 +28,25 @@ public class Module {
 
 	@Lob
 	@Column(name = "icon", nullable = true)
-	@XmlTransient
-	private byte[] icon;
+	private String icon;
 
 	@Column(name = "orders", nullable = false)
 	private Integer orders;
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "module", fetch = FetchType.LAZY)
 	private List<ModuleRole> moduleRole;
+
+	public Module() {
+	}
+
+	public Module(Long idModule, String name, String pathBase, String icon, Integer orders) {
+		super();
+		this.idModule = idModule;
+		this.name = name;
+		this.pathBase = pathBase;
+		this.icon = icon;
+		this.orders = orders;
+	}
 
 	public Long getIdModule() {
 		return idModule;
@@ -62,11 +72,11 @@ public class Module {
 		this.pathBase = pathBase;
 	}
 
-	public byte[] getIcon() {
+	public String getIcon() {
 		return icon;
 	}
 
-	public void setIcon(byte[] icon) {
+	public void setIcon(String icon) {
 		this.icon = icon;
 	}
 
