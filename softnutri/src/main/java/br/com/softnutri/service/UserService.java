@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.jwt.JwtUtils;
-import br.com.softnutri.config.security.payload.request.LogOutRequest;
 import br.com.softnutri.config.security.payload.request.LoginRequest;
 import br.com.softnutri.config.security.payload.request.SignupRequest;
 import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
@@ -40,7 +39,7 @@ public class UserService{
 
 	static final String ROLENOTFOUND = "Error: Papel is not found.";
 	
-	private final UserRepository usuarioRepository;
+	private final UserRepository userRepository;
 
 	private final AuthenticationManager authenticationManager;
 
@@ -53,10 +52,10 @@ public class UserService{
 	private final UtilsServiceImpl utils;
 
 	@Autowired
-	public UserService(UserRepository usuarioRepository, AuthenticationManager authenticationManager,
+	public UserService(UserRepository userRepository, AuthenticationManager authenticationManager,
 			JwtUtils jwtUtils, RefreshTokenService refreshTokenService, UtilsServiceImpl utils,
 			ModelMapper modelMapper) {
-		this.usuarioRepository = usuarioRepository;
+		this.userRepository = userRepository;
 		this.authenticationManager = authenticationManager;
 		this.jwtUtils = jwtUtils;
 		this.refreshTokenService = refreshTokenService;
@@ -66,15 +65,15 @@ public class UserService{
 
 	public User updateUsuario(User usuario) {
 		if (usuario.getPassword().isBlank()) {
-			String password = this.usuarioRepository.getSenhaByIdPessoa(usuario.getIdPerson());
+			String password = this.userRepository.getSenhaByIdPessoa(usuario.getIdPerson());
 			usuario.setPassword(password);
 		}
-		return this.usuarioRepository.save(usuario);
+		return this.userRepository.save(usuario);
 	}
 
 	public ResponseEntity<MessageResponse> save(SignupRequest signUpRequest) {
 
-		if (usuarioRepository.existsByEmail(signUpRequest.getEmail())) {
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("GLOBAL_WORD.MSG_EMAIL_ALREADY"));
 		}
 
@@ -93,7 +92,7 @@ public class UserService{
 		}
 
 		usuario.setPapel(papels);
-		this.usuarioRepository.save(usuario);
+		this.userRepository.save(usuario);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL_WORD.MSG_USER_CREATE_SUCCESS"));
 	}
 
@@ -142,15 +141,15 @@ public class UserService{
 
 	
 	public String getLanguageUsuario(Long idPessoa) {
-		return this.usuarioRepository.findIdiomaByIdPessoa(idPessoa);
+		return this.userRepository.findIdiomaByIdPessoa(idPessoa);
 	}
 
 	/**
 	 * @param logOutRequest
 	 * @return
 	 */
-	public ResponseEntity<MessageResponse> logOut(LogOutRequest logOutRequest) {
-		refreshTokenService.deleteByUsuarioId(logOutRequest.getUserId());
+	public ResponseEntity<MessageResponse> logOut(User u) {
+		refreshTokenService.deleteByUsuarioId(u);
 		return ResponseEntity.ok(new MessageResponse("Log out successful!"));
 	}
 
@@ -162,7 +161,7 @@ public class UserService{
 	public ResponseEntity<UserDTO> findById(Long idUsuario) {
 		UserDTO resultDto = null;
 		try {
-			resultDto = modelMapper.map(this.usuarioRepository.findById(idUsuario), UserDTO.class);
+			resultDto = modelMapper.map(this.userRepository.findById(idUsuario), UserDTO.class);
 
 			if (resultDto != null) {
 				return new ResponseEntity<>(resultDto, HttpStatus.OK);
@@ -196,5 +195,10 @@ public class UserService{
 			return new ResponseEntity<>(resultDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
- 
+
+	public User getUserLogged() {
+		Authentication principal = SecurityContextHolder.getContext().getAuthentication();  
+		User user = this.userRepository.findByEmail(principal.getName()).get();
+			return user; 
+	}
 }

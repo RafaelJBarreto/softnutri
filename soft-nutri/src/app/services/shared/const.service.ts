@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { JwtResponse } from 'src/app/model';
 import { environment as e } from '../../../environments/environment';
 
@@ -21,8 +21,8 @@ type redirect = {
 @Injectable({
     providedIn: 'root'
 })
-export class ConstService {
-    jwtResponse: JwtResponse = new JwtResponse;
+export class ConstService implements OnChanges{
+   jwtResponse: JwtResponse = new JwtResponse;
 
     rest:rest= { 
         user: {
@@ -40,21 +40,29 @@ export class ConstService {
         DASHBOARD: '/dashboard',
         LOGIN: '/login',
     };
-    constructor() { 
-    }
+    constructor() {
+        var valid = localStorage.getItem('safe');
+        if(valid !=null)
+        this.jwtResponse=JSON.parse(atob(valid)); 
+    } 
 
+    ngOnChanges(): void {
+        localStorage.setItem('safe',btoa(JSON.stringify(this.jwtResponse)));
+    }  
 
-    
     setTypeVar(type: string) {
+        this.ngOnChanges();
         this.jwtResponse.type = type;
     }
-    setTokenVar(token: string) {
+    setTokenVar(token: string) { 
+        this.ngOnChanges();
         this.jwtResponse._token = token;
     }
-    getTokenVar(): string {
+    getTokenVar(): string { 
         return this.jwtResponse._token;
     }
     setRefreshTokenVar(refreshToken: string) {
+        this.ngOnChanges();
         this.jwtResponse.refreshToken = refreshToken;
     }
     getRefreshTokenVar(): string {
@@ -64,18 +72,21 @@ export class ConstService {
         return this.jwtResponse.type;
     }
     setLanguageVar(language: string) {
+        this.ngOnChanges();
         this.jwtResponse.language = language;
     }
     getLanguageVar(): string {
         return this.jwtResponse.language;
     }
     setRolesVar(roles: string[]) {
+        this.ngOnChanges();
         this.jwtResponse.roles = roles;
     }
     getRolesVar(): string[] {
         return this.jwtResponse.roles;
     }
     setExpirationVar(expiration: Date) {
+        this.ngOnChanges();
         this.jwtResponse.expiration = expiration;
     }
     getExpirationVar(): Date {

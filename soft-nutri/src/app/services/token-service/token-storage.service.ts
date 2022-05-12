@@ -22,8 +22,7 @@ export class TokenStorageService {
   ) { }
 
   public signOut(): void {
-    let logOutRequest: LogOutRequest = {userId: this.getUser().id};
-    this.userService.logoutUser(logOutRequest).subscribe({
+    this.userService.logoutUser().subscribe({
       error: err => {
         this.snackBar.open(err.menssage, 'Ok', {
           horizontalPosition: 'center',

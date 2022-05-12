@@ -24,8 +24,8 @@ export class UserService {
 //     return this.http.put(e.AUTH_API + e.USER_CONTROLLER + '/updateUser', user );
 //   }
 
-  logoutUser(logOutRequest: LogOutRequest): Observable<any> {
-    return this.http.post(this.api.rest.user.logout, logOutRequest);
+  logoutUser(): Observable<any> {
+    return this.http.delete(this.api.rest.user.logout);
   }
   
 }

@@ -34,7 +34,7 @@ export class AuthService {
     }, httpOptions);
   }
   public signOut(): void {
-    localStorage.clear();
+    this.tokenStorageService.signOut();
   }
   public isAuthenticated(): boolean {
     const token = this.tokenStorageService.getToken();

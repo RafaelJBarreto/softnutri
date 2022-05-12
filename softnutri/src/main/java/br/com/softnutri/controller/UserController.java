@@ -3,6 +3,7 @@ package br.com.softnutri.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.softnutri.config.security.payload.request.LogOutRequest;
 import br.com.softnutri.config.security.payload.request.LoginRequest;
 import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
 import br.com.softnutri.config.security.payload.response.JwtResponse;
@@ -52,9 +52,9 @@ public class UserController {
 		return userService.refreshToken(request);
 	}
 
-	@PostMapping("/auth/logout")
-	public ResponseEntity<MessageResponse> logoutUsuario(@Valid @RequestBody LogOutRequest logOutRequest) {
-		return userService.logOut(logOutRequest);
+	@DeleteMapping("/auth/logout")
+	public ResponseEntity<MessageResponse> logoutUsuario() {
+		return userService.logOut(userService.getUserLogged());
 	}
 
 }
