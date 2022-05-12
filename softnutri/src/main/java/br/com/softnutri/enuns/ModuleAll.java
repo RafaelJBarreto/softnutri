@@ -2,15 +2,14 @@ package br.com.softnutri.enuns;
 
 public enum ModuleAll {
 
-	PERSON_MODULE("list_person", getPerson(), getPerson(), 1), 
-	FOOD_MODULE("list_food", "food", "fastfood", 2),
-	MENU_MODULE("list_menu", "menu", "restaurant_menu", 3);
+	PERSON_MODULE("list_person", "/person", "person", 1), 
+	FOOD_MODULE("list_food", "/food", "fastfood", 2),
+	MENU_MODULE("list_menu", "/menu", "restaurant_menu", 3);
 
 	private String name;
 	private String pathBase;
 	private String icon;
 	private Integer orders;
-	private static final String PERSON = "person";
 
 	private ModuleAll(String name, String pathBase, String icon, Integer orders) {
 		this.name = name;
@@ -33,9 +32,5 @@ public enum ModuleAll {
 
 	public Integer getOrders() {
 		return orders;
-	}
-
-	public static String getPerson() {
-		return PERSON;
 	}
 }
