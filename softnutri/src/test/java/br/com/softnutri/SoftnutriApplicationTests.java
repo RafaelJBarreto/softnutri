@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.softnutri.domain.Gender;
 import br.com.softnutri.domain.Module;
 import br.com.softnutri.domain.ModuleRole;
 import br.com.softnutri.domain.Nutritionist;
 import br.com.softnutri.domain.Paper;
 import br.com.softnutri.domain.Person;
 import br.com.softnutri.domain.User;
-import br.com.softnutri.domain.UserType;
+import br.com.softnutri.enuns.Gender;
+import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.repository.ModuleRoleRepository;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.PaperRepository;
