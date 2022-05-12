@@ -27,7 +27,7 @@ public class RefreshTokenService {
 	private RefreshTokenRepository refreshTokenRepository;
 
 	@Autowired
-	private UserRepository usuarioRepository;
+	private UserRepository userRepository;
 
 	public Optional<RefreshToken> findByToken(String token) {
 		return refreshTokenRepository.findByToken(token);
@@ -35,7 +35,7 @@ public class RefreshTokenService {
 
 	public RefreshToken createRefreshToken(Long idPessoa) {
 		RefreshToken refreshToken = new RefreshToken();
-		User u = usuarioRepository.findById(idPessoa).orElseGet(User::new);
+		User u = userRepository.findById(idPessoa).orElseGet(User::new);
 
 		refreshToken.setPerson(u);
 		refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
@@ -63,8 +63,7 @@ public class RefreshTokenService {
 	}
 
 	@Transactional
-	public int deleteByUsuarioId(Long usuarioId) {
-		User u = usuarioRepository.findById(usuarioId).orElseGet(User::new);
+	public int deleteByUsuarioId(User u) { 
 		return refreshTokenRepository.deleteByPerson(u);
 	}
 

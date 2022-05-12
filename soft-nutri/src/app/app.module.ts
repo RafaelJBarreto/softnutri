@@ -16,6 +16,7 @@ import { authInterceptorProviders } from './interceptor/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FoodsComponent } from './components/foods/foods.component';
+import { ConstService } from './services/shared/const.service';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -28,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     NotFoundComponent,
-    FoodsComponent
+    FoodsComponent 
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     MatSnackBarModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,ConstService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
