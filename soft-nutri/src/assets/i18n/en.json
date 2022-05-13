@@ -2,6 +2,7 @@
     "pt-br": "Portuguese - Brazil",
     "en": "English",
     "GLOBAL": {
+        "GLOBAL_SELECT": "Select",
         "WORD_SAVE": "Save",
         "WORD_REQUERID_MASCULINE": "requerid",
         "WORD_REQUERID_FEMALE": "requerid",
@@ -9,11 +10,12 @@
         "WORD_MSG_ALTER_SUCCESS": "Change made successfully",
         "MSG_USERNAME_ALREADY": "Username is already taken!",
         "MSG_EMAIL_ALREADY": "Email is already in use!",
-        "MSG_USER_CREATE_SUCCESS": "User registered successfully",
+        "MSG_USER_CREATE_SUCCESS": "User registered successfully", 
         "OPTIONS": "Options",
         "MSG_REMOVE": "Successfully removed",
         "MSG_EDIT": "Edited successfully",
         "MSG_CREATE": "Create successfully",
+        "MSG_CREATE_SUCCESS": "Create successfully",
         "WORD_MSG_LIBERATE_SUCCESS": "Restaurant successfully released",
         "WORD_MSG_NO_USER": "User does not exist",
         "WORD_MSG_FORBIDDEN": "User does not have access to this restaurant",
@@ -34,7 +36,7 @@
         "LAST_PAGE_LABEL": "Last page",
         "RANGE_PAGE_LABEL_1": "0 of {{length}}",
         "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}"
-    } ,
+    },
     "LOGIN": {
         "BTN_CREATE_USER": "Create user",
         "BTN_LOGIN": "Logar",
@@ -61,5 +63,19 @@
         "LABEL_NAME": "Name",
         "LABEL_PHONE": "Phone",
         "LABEL_BUSINESSTITLE": "Organization"
+    },
+    "FOOD": {
+        "FOOD_IDFOOD": "Idfood",
+        "FOOD_IDFOOD_GROUP":"IdFoodGroup",
+        "FOOD_DESCRIPTION": "Description",
+        "FOOD_CALORIES": "Calories",
+        "FOOD_PROTEIN": "Protein",
+        "FOOD_LIPIDS": "Lipids",
+        "FOOD_CARBOHYDRATE": "Carbohydrate",
+        "FOOD_EXEMPLE_FILTER": "Ex. Rice",
+        "FOOD_NEW_FOOD": "New food",
+        "FOOD_NEW_FOOD_GROUP": "New food group",
+        "FOOD_FOOD_GROUP": "Food Group",
+        "FOOD_TITLE": "Foods"
     }
 }

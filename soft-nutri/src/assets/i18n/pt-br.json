@@ -2,6 +2,7 @@
     "pt-br": "Português Brasil",
     "en": "Inglês",
     "GLOBAL": {
+        "GLOBAL_SELECT": "Selecione",
         "WORD_SAVE": "Salvar",
         "WORD_REQUERID_MASCULINE": "obrigatório",
         "WORD_REQUERID_FEMALE": "obrigatória",
@@ -14,6 +15,7 @@
         "MSG_REMOVE": "Removido com sucesso",
         "MSG_EDIT": "Editado com sucesso",
         "MSG_CREATE": "Cadastrado com sucesso",
+        "MSG_CREATE_SUCCESS": "Cadastrado com sucesso",
         "WORD_MSG_LIBERATE_SUCCESS": "Restaurante liberado com sucesso",
         "WORD_MSG_NO_USER": "Usuário não existe",
         "WORD_MSG_FORBIDDEN": "Usuário não tem acesso a este restaurante",
@@ -34,7 +36,7 @@
         "LAST_PAGE_LABEL": "Última página",
         "RANGE_PAGE_LABEL_1": "0 de {{length}}",
         "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} de {{length}}"
-    }, 
+    },
     "LOGIN": {
         "BTN_CREATE_USER": "Criar usuário",
         "BTN_LOGIN": "Logar",
@@ -61,5 +63,19 @@
         "LABEL_NAME": "Nome",
         "LABEL_PHONE": "Telefone",
         "LABEL_BUSINESSTITLE": "Organização"
-    } 
+    },
+    "FOOD": {
+        "FOOD_IDFOOD": "IdFood",
+        "FOOD_IDFOOD_GROUP":"IdFoodGroup",
+        "FOOD_DESCRIPTION": "Descrição",
+        "FOOD_CALORIES": "Calorias",
+        "FOOD_PROTEIN": "Proteina",
+        "FOOD_LIPIDS": "Lipidios",
+        "FOOD_CARBOHYDRATE": "Carboidrato",
+        "FOOD_EXEMPLE_FILTER": "Ex. Arroz",
+        "FOOD_NEW_FOOD": "Novo Alimento",
+        "FOOD_NEW_FOOD_GROUP": "Novo Grupo de Alimento",
+        "FOOD_FOOD_GROUP": "Grupo de Alimento",
+        "FOOD_TITLE": "Alimentos"
+    }
 }

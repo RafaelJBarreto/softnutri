@@ -1,0 +1,19 @@
+<form class="form" [formGroup]="form" (ngSubmit)="send()">
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{'FOOD.FOOD_FOOD_GROUP' | translate}}</mat-label>
+        <mat-select formControlName="idFoodGroup" required>
+          <mat-option>{{'GLOBAL.GLOBAL_SELECT' | translate}}</mat-option>
+          <mat-option *ngFor="let fG of foodGroups" [value]="fG.idFoodGroup">
+            {{fG.description}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.hasError('required')">{{'GLOBAL.GLOBAL_SELECT' | translate}}</mat-error>
+        <mat-hint>{{form.value?.sound}}</mat-hint>
+      </mat-form-field>
+ 
+      <div class="form-actions" style="float:right">
+        <button class="form-actions__login" mat-raised-button color="primary" type="submit">{{'GLOBAL.WORD_SAVE' | translate}}</button> 
+      </div>
+    </form>
+    

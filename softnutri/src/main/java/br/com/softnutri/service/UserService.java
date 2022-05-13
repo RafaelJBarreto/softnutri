@@ -74,7 +74,7 @@ public class UserService{
 	public ResponseEntity<MessageResponse> save(SignupRequest signUpRequest) {
 
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("GLOBAL_WORD.MSG_EMAIL_ALREADY"));
+			return ResponseEntity.badRequest().body(new MessageResponse("GLOBAL.MSG_EMAIL_ALREADY"));
 		}
 
 		User usuario = new User();
@@ -93,7 +93,7 @@ public class UserService{
 
 		usuario.setPapel(papels);
 		this.userRepository.save(usuario);
-		return ResponseEntity.ok(new MessageResponse("GLOBAL_WORD.MSG_USER_CREATE_SUCCESS"));
+		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 
 	public ResponseEntity<JwtResponse> autenticacao(LoginRequest loginRequest) {

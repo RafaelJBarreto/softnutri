@@ -35,3 +35,15 @@ $shadow-grey: #B2B2B21A;
 $shadow-dark-grey: #9A9A9A1A;
 
 $background-color: #F6F7FF;
+
+::ng-deep .warning {
+    background: orange !important;
+}
+
+::ng-deep .success {
+    background: green !important;
+}
+
+::ng-deep .error {
+    background: red !important;
+}

@@ -1,6 +1,6 @@
 <form class="form" [formGroup]="form" (ngSubmit)="send()">
-  <mat-form-field class="form__input" appearance="fill">
-    <input matInput placeholder="idFood" type="number" formControlName="idFood" >
+  <mat-form-field class="form__input" appearance="fill" disable>
+    <input matInput placeholder="idFood" type="number" formControlName="idFood" readonly >
   </mat-form-field> 
   <mat-form-field class="form__input" appearance="fill">
     <input matInput placeholder="description" type="text" formControlName="description" >

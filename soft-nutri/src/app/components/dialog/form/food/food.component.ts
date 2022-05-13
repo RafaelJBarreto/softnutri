@@ -7,6 +7,7 @@ import { Food } from 'src/app/model/food/food';
 import { throwIfEmpty } from 'rxjs';
 import { FoodService } from 'src/app/services/food/food.service'; 
 import { NutritionalDataComponent } from 'src/app/components/shared/nutrional-data/nutritional-data.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-food',
@@ -16,16 +17,18 @@ import { NutritionalDataComponent } from 'src/app/components/shared/nutrional-da
 export class FoodComponent implements OnInit { 
   public form!: FormGroup;
   food: Food = new Food; 
-  nutritionalData:NutritionalData = new NutritionalData;
-  snackBar: any;
+  nutritionalData:NutritionalData = new NutritionalData; 
   errorMessage: any;
   @ViewChild(NutritionalDataComponent)
   private nutritionalDataComponent!: NutritionalDataComponent;
+
+  
   constructor(  
     public dialogRef: MatDialogRef<FoodComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Food,
     public service:FoodService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private snackBar: MatSnackBar
   ) {}
 
   public ngOnInit(): void {
@@ -53,19 +56,21 @@ export class FoodComponent implements OnInit {
       this.food.idFood = (this.form.controls['idFood'].value != 0 ? this.form.controls['idFood'].value : null); 
       this.service.save(this.food).subscribe({
         next: data => {  
-          this.snackBar.open(this.translate.instant(data), '', {
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-            duration: 10000
+          this.snackBar.open(this.translate.instant(data.message), '', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: ['success']
           });
           this.dialogRef.close();
         },
         error: err => { 
           this.errorMessage = err.message; 
           this.snackBar.open('Erro ao cadastrar', '', {
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-            duration: 10000
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: ['error']
           });
         }
       });

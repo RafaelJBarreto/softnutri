@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment as e } from 'src/environments/environment'; 
 import { ConstService } from '../shared/const.service';
-import { Food } from 'src/app/model';
+import { Food, FoodGroup, FoodGroupAssociation } from 'src/app/model';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class FoodService {
+export class FoodService { 
 
   constructor(
     private http: HttpClient,
@@ -20,9 +20,18 @@ export class FoodService {
   ) { }
 
   listAll(): Observable<any> { 
-    return this.http.get(this.api.rest.people.listall);
+    return this.http.get(this.api.rest.food.listall);
   }
   save(obj:Food): Observable<any> {
         return this.http.post(this.api.rest.food.save, obj );
+  } 
+  saveFoodGroup(foodGroup: FoodGroup): Observable<any> {
+    return this.http.post(this.api.rest.foodgroup.save, foodGroup );
+  }
+  listAllFoodGroup(): Observable<any> { 
+    return this.http.get(this.api.rest.foodgroup.listall);
+  }
+  saveFoodGroupAssociation(foodGroupAssociation: FoodGroupAssociation): Observable<any> {
+    return this.http.post(this.api.rest.foodgroup.association, foodGroupAssociation );
   }
 }

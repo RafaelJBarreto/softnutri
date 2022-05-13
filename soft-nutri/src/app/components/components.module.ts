@@ -21,11 +21,17 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core'; 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorI18n } from '../services/shared/paginators/paginatorI18n';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { NutritionalDataComponent } from './shared/nutrional-data/nutritional-data.component';
+import { authInterceptorProviders } from '../interceptor/auth.interceptor';
+import { ConstService } from '../services/shared/const.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { FoodGroupComponent } from './dialog/form/food-group/food-group.component';
+import { FoodGroupAssociationComponent } from './dialog/form/food-group-association/food-group-association.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +46,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     SidebarComponent,
     FooterComponent,
     LayoutComponent,
-    NutritionalDataComponent],
+    NutritionalDataComponent,
+    FoodGroupComponent,
+    FoodGroupAssociationComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
@@ -68,7 +76,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
- 
+    MatPaginatorModule, 
+    MatCheckboxModule,
+    MatTableModule,
     AuthModule,
   ],
   exports: [
@@ -76,7 +86,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderModule,
     LayoutComponent
   ],
-  providers:[ 
+  providers:[ authInterceptorProviders,ConstService,
     {
       provide: MatPaginatorIntl, deps: [TranslateService],
       useFactory: (translateService: TranslateService) => new PaginatorI18n(translateService).getPaginatorIntl()

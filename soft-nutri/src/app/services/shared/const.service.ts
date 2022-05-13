@@ -15,6 +15,12 @@ people: {
 };
 food:{
     save:string,
+    listall:string,
+};
+foodgroup:{ 
+    save:string,
+    listall:string,
+    association:string,
 }
 };
 
@@ -41,7 +47,14 @@ export class ConstService implements OnChanges{
             listall: e.rota + "people/",
         },
         food: {
-            save: e.rota + "food/save"
+            save: e.rota + "food/save",
+            listall: e.rota + "food/",
+
+        },
+        foodgroup:{
+            save: e.rota + "foodGroup/save",
+            listall: e.rota + "foodGroup/", 
+            association: e.rota + "foodGroup/association/", 
         }
     }; 
     redirect:redirect= {

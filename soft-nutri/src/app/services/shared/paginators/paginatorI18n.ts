@@ -12,11 +12,11 @@ export class PaginatorI18n {
     getPaginatorIntl(): MatPaginatorIntl {
         const paginatorIntl = new MatPaginatorIntl();
 
-        paginatorIntl.itemsPerPageLabel = this.translate.instant('GLOBAL_WORD.ITEMS_PER_PAGE_LABEL');
-        paginatorIntl.nextPageLabel = this.translate.instant('GLOBAL_WORD.NEXT_PAGE_LABEL');
-        paginatorIntl.previousPageLabel = this.translate.instant('GLOBAL_WORD.PREVIOUS_PAGE_LABEL');
-        paginatorIntl.firstPageLabel = this.translate.instant('GLOBAL_WORD.FIRST_PAGE_LABEL');
-        paginatorIntl.lastPageLabel = this.translate.instant('GLOBAL_WORD.LAST_PAGE_LABEL');
+        paginatorIntl.itemsPerPageLabel = this.translate.instant('GLOBAL.ITEMS_PER_PAGE_LABEL');
+        paginatorIntl.nextPageLabel = this.translate.instant('GLOBAL.NEXT_PAGE_LABEL');
+        paginatorIntl.previousPageLabel = this.translate.instant('GLOBAL.PREVIOUS_PAGE_LABEL');
+        paginatorIntl.firstPageLabel = this.translate.instant('GLOBAL.FIRST_PAGE_LABEL');
+        paginatorIntl.lastPageLabel = this.translate.instant('GLOBAL.LAST_PAGE_LABEL');
         paginatorIntl.getRangeLabel = this.getRangeLabel.bind(this);
         
         return paginatorIntl;
@@ -24,11 +24,11 @@ export class PaginatorI18n {
 
     private getRangeLabel(page: number, pageSize: number, length: number): string {
         if (length === 0 || pageSize === 0) {
-            return this.translate.instant('GLOBAL_WORD.RANGE_PAGE_LABEL_1', { length });
+            return this.translate.instant('GLOBAL.RANGE_PAGE_LABEL_1', { length });
         }
         length = Math.max(length, 0);
         const startIndex = page * pageSize;
         const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-        return this.translate.instant('GLOBAL_WORD.RANGE_PAGE_LABEL_2', { startIndex: startIndex + 1, endIndex, length });
+        return this.translate.instant('GLOBAL.RANGE_PAGE_LABEL_2', { startIndex: startIndex + 1, endIndex, length });
     }
 }

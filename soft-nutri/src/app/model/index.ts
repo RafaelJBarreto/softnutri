@@ -11,3 +11,5 @@ export * from './user/UserSimple';
 
 export * from './food/food';
 export * from './food/nutritional-data';
+export * from './food/food-group' 
+export * from './food/food-group-association'
