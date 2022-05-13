@@ -104,19 +104,17 @@ class SoftnutriPermissionTests {
 		Optional<User> user = usuarioRepository.findByEmail(Criptografia.encode("ana@outlook.com.br"));
 		
 		if(user.isPresent()) {
+			
 			User userO = user.get();
 			List<Paper> papers = papelRepository.findAll();
 			Set<Paper> papel = new HashSet<Paper>() ;
 			for (Paper paper : papers) {
-				Paper p = userO.getPapel().stream().filter(x -> paper.getDescription().equals(x.getDescription())).findAny().orElse(null);
-				if(p == null) {
-					papel.add(paper);
-				}
+				papel.add(paper);
 
 			}
 			if(!papel.isEmpty()) {
 				userO.setPapel(papel);
-				User nc = usuarioRepository.save(user.get());
+				User nc = usuarioRepository.save(userO);
 				assertNotNull(nc.getPapel());
 			}
 		}

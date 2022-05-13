@@ -5,15 +5,17 @@ import java.util.List;
 
 public enum ModuleAll {
 
-	PERSON_MODULE(getPerson(), "/person", getPerson(), 1, getPapers(getPerson().toUpperCase())),
-	FOOD_MODULE(getFood(), "/food", "fastfood", 2, getPapers(getFood().toUpperCase())),
-	MENU_MODULE(getMenu(), "/menu", "restaurant_menu", 3, getPapers(getMenu().toUpperCase()));
+	HOME(getHomePage(), "/home", getHomePage(), 1, getPapers(getHomePage().toUpperCase())),
+	PERSON_MODULE(getPerson(), "/person", getPerson(), 2, getPapers(getPerson().toUpperCase())),
+	FOOD_MODULE(getFood(), "/food", "fastfood", 3, getPapers(getFood().toUpperCase())),
+	MENU_MODULE(getMenu(), "/menu", "restaurant_menu", 4, getPapers(getMenu().toUpperCase()));
 
 	private String name;
 	private String pathBase;
 	private String icon;
 	private Integer orders;
 	private List<PaperAll> listPapers;
+	private static final String HOME_PAGE = "home";
 	private static final String PERSON = "person";
 	private static final String FOOD = "food";
 	private static final String MENU = "menu";
@@ -52,6 +54,10 @@ public enum ModuleAll {
 
 	public static String getMenu() {
 		return MENU;
+	}
+
+	public static String getHomePage() {
+		return HOME_PAGE;
 	}
 
 	public List<PaperAll> getListPapers() {
