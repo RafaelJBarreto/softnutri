@@ -3,6 +3,8 @@ package br.com.softnutri.config.security.payload.response;
 import java.util.Date;
 import java.util.List;
 
+import br.com.softnutri.dto.ModuleDTO;
+
 public class JwtResponse {
 
 	private String token;
@@ -11,15 +13,17 @@ public class JwtResponse {
 	private String language;
 	private Date expiration;
 	private List<String> roles;
+	private List<ModuleDTO> modules;
 
 	public JwtResponse(String token, String type, String refreshToken, String language, Date expiration,
-			List<String> roles) {
+			List<String> roles, List<ModuleDTO> modules) {
 		this.token = token;
 		this.type = type;
 		this.refreshToken = refreshToken;
 		this.language = language;
 		this.expiration = expiration;
 		this.roles = roles;
+		this.modules = modules;
 	}
 
 	public JwtResponse() {
@@ -71,6 +75,14 @@ public class JwtResponse {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public List<ModuleDTO> getModules() {
+		return modules;
+	}
+
+	public void setModules(List<ModuleDTO> modules) {
+		this.modules = modules;
 	}
 
 }

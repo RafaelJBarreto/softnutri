@@ -151,12 +151,4 @@ public class Person {
 		this.bodyHistory = bodyHistory;
 	}
 
-	public Set<Paper> getPaper() {
-		return paper;
-	}
-
-	public void setPaper(Set<Paper> paper) {
-		this.paper = paper;
-	}
-
 }

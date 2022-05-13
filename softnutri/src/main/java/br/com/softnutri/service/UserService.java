@@ -25,12 +25,15 @@ import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.config.security.services.RefreshTokenService;
 import br.com.softnutri.config.security.services.UserDetailsImpl;
 import br.com.softnutri.config.security.services.UtilsServiceImpl;
+import br.com.softnutri.domain.Module;
 import br.com.softnutri.domain.Paper;
 import br.com.softnutri.domain.Person;
 import br.com.softnutri.domain.RefreshToken;
 import br.com.softnutri.domain.User;
+import br.com.softnutri.dto.ModuleDTO;
 import br.com.softnutri.dto.UserDTO;
 import br.com.softnutri.exception.TokenRefreshException;
+import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.UserRepository;
 import br.com.softnutri.util.Criptografia;
 
@@ -50,17 +53,20 @@ public class UserService{
 	private final ModelMapper modelMapper;
 
 	private final UtilsServiceImpl utils;
+	
+	private final ModuleRepository moduleRepository;
 
 	@Autowired
 	public UserService(UserRepository userRepository, AuthenticationManager authenticationManager,
 			JwtUtils jwtUtils, RefreshTokenService refreshTokenService, UtilsServiceImpl utils,
-			ModelMapper modelMapper) {
+			ModelMapper modelMapper, ModuleRepository moduleRepository) {
 		this.userRepository = userRepository;
 		this.authenticationManager = authenticationManager;
 		this.jwtUtils = jwtUtils;
 		this.refreshTokenService = refreshTokenService;
 		this.modelMapper = modelMapper;
 		this.utils = utils;
+        this.moduleRepository = moduleRepository;
 	}
 
 	public User updateUsuario(User usuario) {
@@ -132,10 +138,13 @@ public class UserService{
 		JwtResponse jwt = jwtUtils.generateToken(authentication);
 		List<String> papels = usuarioDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
 				.toList();
+		List<Module> modules = moduleRepository.findModuleByIdPessoa(usuarioDetails.getId());
+				
 		RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
 		jwt.setLanguage(languageUsuario);
 		jwt.setRefreshToken(refreshToken.getToken());
 		jwt.setRoles(papels);
+		jwt.setModules(ModuleDTO.converter(modules));
 		return jwt;
 	}
 
