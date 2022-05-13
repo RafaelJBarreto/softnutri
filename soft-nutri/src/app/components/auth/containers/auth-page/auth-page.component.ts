@@ -34,7 +34,7 @@ export class AuthPageComponent {
         this.global.setRolesVar(data['roles']);
         this.global.setLanguageVar(data['language']);
         this.global.setExpirationVar(data['expiration']);   
-        this.router.navigate([this.global.redirect.DASHBOARD]).then();
+        this.router.navigate([this.global.redirect.FOOD]).then();
       },
       error: err => { 
         this.errorMessage = err.message; 
@@ -51,6 +51,6 @@ export class AuthPageComponent {
   public sendSignForm(): void {
     //this.service.sign();
 
-    this.router.navigate([this.global.redirect.DASHBOARD]).then();
+    this.router.navigate([this.global.redirect.FOOD]).then();
   }
 }

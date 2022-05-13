@@ -1,15 +1,8 @@
-package br.com.softnutri.domain;
+package br.com.softnutri.dto;
 
-import java.io.Serializable;
+public class NutritionalDataDTO {
 
-import jakarta.persistence.Embeddable;
-
-@Embeddable
-public class NutritionalData implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	private float calories = 0;
+	private float calories;
 	private float protein = 0;
 	private float lipids = 0;
 	private float carbohydrate = 0;

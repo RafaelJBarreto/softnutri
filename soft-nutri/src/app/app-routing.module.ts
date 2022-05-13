@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { FoodsComponent } from './components/foods/foods.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LayoutComponent } from './components/shared/layout/layout.component';
 import { AuthGuardService as AuthGuard  } from './services';
@@ -10,6 +11,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: LayoutComponent
+  },
+  {
+    path: 'food',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: FoodsComponent
   },
   {
     path: 'login',

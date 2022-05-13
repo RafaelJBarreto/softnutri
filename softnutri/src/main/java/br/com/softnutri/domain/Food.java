@@ -38,7 +38,11 @@ public class Food {
 
 	public Food(String description, float calories, float protein, float lipids, float carbohydrate) {
 		this.description = description;
-		this.nutritionalData = new NutritionalData(calories, protein, lipids, carbohydrate);
+		this.nutritionalData = new NutritionalData();
+		this.nutritionalData.setCalories(calories);
+		this.nutritionalData.setCarbohydrate(carbohydrate);
+		this.nutritionalData.setLipids(lipids);
+		this.nutritionalData.setProtein(protein);
 	}
 
 	public Long getIdFood() {

@@ -12,10 +12,15 @@ user: {
 people: {
     people: string,
     listall: string,
-}};
+};
+food:{
+    save:string,
+}
+};
 
 type redirect = {
     DASHBOARD: string,
+    FOOD:string,
     LOGIN: string,
 };
 @Injectable({
@@ -24,20 +29,24 @@ type redirect = {
 export class ConstService implements OnChanges{
    jwtResponse: JwtResponse = new JwtResponse;
 
-    rest:rest= { 
+    rest:rest= {
         user: {
-            user:e.rota+ "user",
-            signin:e.rota+ "user/auth/signin",
-            refreshtoken: e.rota+"user/auth/refreshtoken",
-            logout: e.rota+"user/auth/logout",
+            user: e.rota + "user",
+            signin: e.rota + "user/auth/signin",
+            refreshtoken: e.rota + "user/auth/refreshtoken",
+            logout: e.rota + "user/auth/logout",
         },
         people: {
-            people: e.rota+"people",
-            listall: e.rota+"people/",
+            people: e.rota + "people",
+            listall: e.rota + "people/",
         },
-    } ; 
+        food: {
+            save: e.rota + "food/save"
+        }
+    }; 
     redirect:redirect= {
         DASHBOARD: '/dashboard',
+        FOOD: '/food',
         LOGIN: '/login',
     };
     constructor() {

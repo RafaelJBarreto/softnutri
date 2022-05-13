@@ -33,7 +33,7 @@ public class MenuPerson {
 	private LocalDateTime dateTimeRegistration = LocalDateTime.now();
 
 	public MenuPerson(Food food, float amount, float calorias, float proteina, float lipideos, float carboidrato) {
-		this.dadosNutricionais = new NutritionalData(calorias, proteina, lipideos, carboidrato);
+		//this.dadosNutricionais = new NutritionalData(calorias, proteina, lipideos, carboidrato);
 		this.food = food;
 		this.amount = amount;
 		this.dateTimeRegistration = LocalDateTime.now();
