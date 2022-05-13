@@ -77,5 +77,11 @@
         "FOOD_NEW_FOOD_GROUP": "New food group",
         "FOOD_FOOD_GROUP": "Food Group",
         "FOOD_TITLE": "Foods"
+    },
+    "MENU": {
+        "HOME": "Home",
+        "PERSON":"Person",
+        "FOOD": "Food",
+        "MENU": "Menu"
     }
 }

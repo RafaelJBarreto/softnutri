@@ -1,4 +1,5 @@
 import { Injectable, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { JwtResponse } from 'src/app/model';
 import { ModuleUser } from 'src/app/model/module/module';
 import { environment as e } from '../../../environments/environment';
@@ -35,6 +36,7 @@ type redirect = {
 })
 export class ConstService implements OnChanges{
    jwtResponse: JwtResponse = new JwtResponse;
+   translate!: TranslateService;
 
     rest:rest= {
         user: {

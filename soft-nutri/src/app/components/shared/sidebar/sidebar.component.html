@@ -1,6 +1,6 @@
 <mat-list>
-    <mat-list-item *ngFor="let mod of modulesUser" routerLink="{{mod.pathBase}}" routerLinkActive="active">
-      <mat-icon>{{mod.icon}}</mat-icon> {{mod.name}}
+    <mat-list-item   *ngFor="let item of modulesUser" routerLink="{{item.pathBase}}" routerLinkActive="active">
+      <mat-icon>{{item.icon}}</mat-icon>{{item.name}}
     </mat-list-item>
   </mat-list>
   
