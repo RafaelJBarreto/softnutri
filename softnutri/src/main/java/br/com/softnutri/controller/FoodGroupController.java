@@ -25,12 +25,16 @@ public class FoodGroupController {
 	private FoodGroupService foodGroupService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> logoutUsuario(@RequestBody FoodGroupDTO dto) {
+	public ResponseEntity<MessageResponse> saveData(@RequestBody FoodGroupDTO dto) {
 		return this.foodGroupService.save(dto);
 	}
-	
-	@GetMapping("/association/")
-	public ResponseEntity<List<FoodGroupDTO>> findAll(@RequestBody FoodGroupAssociationDTO dto){
+
+	@GetMapping("/")
+	public ResponseEntity<List<FoodGroupDTO>> findAll(){
 		return this.foodGroupService.listAll(); 
 	}
+	@PostMapping("/association/")
+	public ResponseEntity<List<FoodGroupDTO>> associationFood(@RequestBody FoodGroupAssociationDTO dto) {
+		return null; //this.foodGroupService.save(dto);
+	} 
 }
