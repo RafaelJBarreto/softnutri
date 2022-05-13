@@ -26,6 +26,16 @@ public class ModuleRole {
 	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private Module module;
 
+	public ModuleRole() {
+
+	}
+
+	public ModuleRole(Paper paper, Module module) {
+		super();
+		this.paper = paper;
+		this.module = module;
+	}
+
 	public Long getIdModuleRole() {
 		return idModuleRole;
 	}

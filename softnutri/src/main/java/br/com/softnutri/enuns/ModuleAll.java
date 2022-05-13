@@ -1,21 +1,29 @@
 package br.com.softnutri.enuns;
 
+import java.util.EnumSet;
+import java.util.List;
+
 public enum ModuleAll {
 
-	PERSON_MODULE("list_person", "/person", "person", 1), 
-	FOOD_MODULE("list_food", "/food", "fastfood", 2),
-	MENU_MODULE("list_menu", "/menu", "restaurant_menu", 3);
+	PERSON_MODULE(getPerson(), "/person", getPerson(), 1, getPapers(getPerson().toUpperCase())),
+	FOOD_MODULE(getFood(), "/food", "fastfood", 2, getPapers(getFood().toUpperCase())),
+	MENU_MODULE(getMenu(), "/menu", "restaurant_menu", 3, getPapers(getMenu().toUpperCase()));
 
 	private String name;
 	private String pathBase;
 	private String icon;
 	private Integer orders;
+	private List<PaperAll> listPapers;
+	private static final String PERSON = "person";
+	private static final String FOOD = "food";
+	private static final String MENU = "menu";
 
-	private ModuleAll(String name, String pathBase, String icon, Integer orders) {
+	private ModuleAll(String name, String pathBase, String icon, Integer orders, List<PaperAll> listPapers) {
 		this.name = name;
 		this.pathBase = pathBase;
 		this.icon = icon;
 		this.orders = orders;
+		this.listPapers = listPapers;
 	}
 
 	public String getName() {
@@ -33,4 +41,30 @@ public enum ModuleAll {
 	public Integer getOrders() {
 		return orders;
 	}
+
+	public static String getPerson() {
+		return PERSON;
+	}
+
+	public static String getFood() {
+		return FOOD;
+	}
+
+	public static String getMenu() {
+		return MENU;
+	}
+
+	public List<PaperAll> getListPapers() {
+		return listPapers;
+	}
+
+	private static EnumSet<PaperAll> listPapers() {
+		return EnumSet.allOf(PaperAll.class);
+	}
+
+	private static List<PaperAll> getPapers(String name) {
+		EnumSet<PaperAll> list = listPapers();
+		return list.stream().filter(c -> c.name().contains(name.toUpperCase())).toList();
+	}
+
 }

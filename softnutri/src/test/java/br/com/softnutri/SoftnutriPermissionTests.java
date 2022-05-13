@@ -3,12 +3,15 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.EnumSet;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.event.annotation.AfterTestExecution;
 
 import br.com.softnutri.domain.Module;
+import br.com.softnutri.domain.ModuleRole;
 import br.com.softnutri.domain.Paper;
 import br.com.softnutri.enuns.ModuleAll;
 import br.com.softnutri.enuns.PaperAll;
@@ -35,11 +38,10 @@ class SoftnutriPermissionTests {
 
 	@Test
 	void testaCriarPapel() {
-		
 		EnumSet<PaperAll> listPapers = listPapers();
-		
+		List<Paper> papers = papelRepository.findAll();
 		for (PaperAll p : listPapers) {
-			Paper paper = papelRepository.findByDescription(p.name());
+			Paper paper = papers.stream().filter(x -> p.name().equals(x.getDescription())).findAny().orElse(null);
 			if(paper == null) {
 				Paper nc = papelRepository.save(new Paper(null, p.name()));
 				assertNotNull(nc.getIdPaper());
@@ -50,11 +52,10 @@ class SoftnutriPermissionTests {
 
 	@Test
 	void testaCriarModulo() {
-		
 		EnumSet<ModuleAll> listModules = listModules();
-		
+		List<Module> modules = moduloRepository.findAll();
 		for (ModuleAll mod : listModules) {
-			Module module = moduloRepository.findByName(mod.getName());
+			Module module = modules.stream().filter(x -> mod.name().equals(x.getName())).findAny().orElse(null);
 			if(module == null) {
 				Module m = moduloRepository.save(new Module(null, mod.getName(), mod.getPathBase(), mod.getIcon(), mod.getOrders()));
 				assertNotNull(m.getIdModule());
@@ -63,18 +64,32 @@ class SoftnutriPermissionTests {
 	}
 
 	@Test
+	@AfterTestExecution
 	void testaAssociacaoPapelModulo() {
-
-		/*
-		 * ModuleRole mp = new ModuleRole();
-		 * mp.setModule(moduloRepository.findById(1L).get());
-		 * mp.setPaper(papelRepository.findById(1L).get());
-		 * 
-		 * ModuleRole nc = moduloPapelRepository.save(mp);
-		 * 
-		 * assertNotNull(nc.getIdModuleRole());
-		 */
-
+		List<Module> modules = moduloRepository.findAll();
+		List<Paper> papers = papelRepository.findAll();
+		List<ModuleRole> moduleRoles = moduloPapelRepository.findAll();
+		
+		EnumSet<ModuleAll> listModules = listModules();
+		for (ModuleAll mod : listModules) {
+			
+			Module module = modules.stream().filter(x -> mod.getName().equals(x.getName())).findAny().orElse(null);
+			if(module != null) {
+				ModuleRole moduleRole = moduleRoles.stream().filter(x -> module.getName().equals(x.getModule().getName())).findAny().orElse(null);
+				if(moduleRole == null) {					
+					for (PaperAll paperAll : mod.getListPapers()) {
+						Paper paper = papers.stream().filter(x -> paperAll.name().equals(x.getDescription())).findAny().orElse(null);
+						if(paper != null) {
+							ModuleRole nc = moduloPapelRepository.save(new ModuleRole(paper, module));
+							assertNotNull(nc.getIdModuleRole());
+						}
+					}
+					
+				}
+			}
+			
+		}
+		
 	}
 
 	public EnumSet<PaperAll> listPapers() {
