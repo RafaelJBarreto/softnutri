@@ -28,12 +28,16 @@ public class MenuPerson {
 	private float amount;
 
 	@Embedded
-	private NutritionalData dadosNutricionais;
+	private NutritionalData nutritionalData;
 
 	private LocalDateTime dateTimeRegistration = LocalDateTime.now();
 
-	public MenuPerson(Food food, float amount, float calorias, float proteina, float lipideos, float carboidrato) {
-		//this.dadosNutricionais = new NutritionalData(calorias, proteina, lipideos, carboidrato);
+	public MenuPerson(Food food, float amount, float calories, float protein, float lipids, float carbohydrate) {
+		this.nutritionalData = new NutritionalData();
+		this.nutritionalData.setCalories(calories);
+		this.nutritionalData.setCarbohydrate(carbohydrate);
+		this.nutritionalData.setLipids(lipids);
+		this.nutritionalData.setProtein(protein);
 		this.food = food;
 		this.amount = amount;
 		this.dateTimeRegistration = LocalDateTime.now();
@@ -63,12 +67,12 @@ public class MenuPerson {
 		this.amount = amount;
 	}
 
-	public NutritionalData getDadosNutricionais() {
-		return dadosNutricionais;
+	public NutritionalData getNutritionalData() {
+		return nutritionalData;
 	}
 
-	public void setDadosNutricionais(NutritionalData dadosNutricionais) {
-		this.dadosNutricionais = dadosNutricionais;
+	public void setNutritionalData(NutritionalData nutritionalData) {
+		this.nutritionalData = nutritionalData;
 	}
 
 	public LocalDateTime getDateTimeRegistration() {
