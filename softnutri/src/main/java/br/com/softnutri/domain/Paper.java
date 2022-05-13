@@ -26,6 +26,14 @@ public class Paper {
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "paper", fetch = FetchType.LAZY)
 	private List<ModuleRole> modulesRoles;
 
+	public Paper() {
+	}
+
+	public Paper(Long idPaper, String description) {
+		this.idPaper = idPaper;
+		this.description = description;
+	}
+
 	public Long getIdPaper() {
 		return idPaper;
 	}

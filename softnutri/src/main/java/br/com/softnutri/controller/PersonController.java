@@ -12,30 +12,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.softnutri.domain.Person;
 import br.com.softnutri.dto.PersonDTO;
-import br.com.softnutri.repository.PersonRepository;
+import br.com.softnutri.service.PersonService;
 import jakarta.transaction.Transactional;
 
 @RestController
-@RequestMapping("/pessoas")
+@RequestMapping("/person")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PersonController {
-	
+
+	private PersonService personService;
+
 	@Autowired
-	private PersonRepository pessoaRepository;
+	public PersonController(PersonService personService) {
+		this.personService = personService;
+	}
 
 	@GetMapping
-	public List<PersonDTO> lista(String nome) {
-		if (nome == null) {
-			List<Person> pessoas = pessoaRepository.findAll();
-			return PersonDTO.converter(pessoas);
-		} else {
-			List<Person> pessoas = pessoaRepository.findByName(nome);
-			return PersonDTO.converter(pessoas);
-		}
+	public List<PersonDTO> getPersons(String name) {
+		return personService.getPersons(name);
 	}
-	
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PersonDTO> cadastrar(@RequestBody PersonDTO form, UriComponentsBuilder uriBuilder) {
