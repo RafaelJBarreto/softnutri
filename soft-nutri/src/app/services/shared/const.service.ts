@@ -15,7 +15,7 @@ people: {
 }};
 
 type redirect = {
-    DASHBOARD: string,
+    HOME: string,
     LOGIN: string,
 };
 @Injectable({
@@ -37,7 +37,7 @@ export class ConstService implements OnChanges{
         },
     } ; 
     redirect:redirect= {
-        DASHBOARD: '/dashboard',
+        HOME: '/home',
         LOGIN: '/login',
     };
     constructor() {

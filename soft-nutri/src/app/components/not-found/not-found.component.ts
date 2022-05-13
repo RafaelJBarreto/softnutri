@@ -10,5 +10,5 @@ export class NotFoundComponent{
   public rota: any;
   constructor( 
     private global:ConstService
-  ) {this.rota=this.global.redirect.DASHBOARD }
+  ) {this.rota=this.global.redirect.HOME }
 }

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomePageComponent } from './components/home/home-page/home-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { LayoutComponent } from './components/shared/layout/layout.component';
 import { AuthGuardService as AuthGuard  } from './services';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'home',
     pathMatch: 'full',
     canActivate: [AuthGuard],
-    component: LayoutComponent
+    component: HomePageComponent
   },
   {
     path: 'login',

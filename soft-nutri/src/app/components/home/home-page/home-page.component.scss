@@ -1,0 +1,31 @@
+@import 'src/app/styles/variables';
+
+.card-wrapper {
+  display: flex;
+  margin: 0 8px;
+
+  @media (max-width: $normal) {
+    flex-wrap: wrap;
+  }
+}
+
+.title-home{
+    font-weight: 400;
+    font-size: 28.4px;
+    color: #b9b9b9;
+    line-height: 1;
+    letter-spacing: -.2186px;
+}
+
+.card-dica {
+  width: 100%;
+  margin: 2px 8px 10px 0px;
+
+  @media (max-width: $normal) {
+    width: 50%;
+  }
+
+  @media (max-width: $small) {
+    width: 100%;
+  }
+}

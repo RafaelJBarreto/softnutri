@@ -15,8 +15,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { authInterceptorProviders } from './interceptor/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { FoodsComponent } from './components/foods/foods.component';
 import { ConstService } from './services/shared/const.service';
+import { HomeModule } from './components/home/home.module';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -29,7 +29,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     NotFoundComponent,
-    FoodsComponent 
   ],
   imports: [
     BrowserModule,
@@ -49,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     HttpClientModule,
     MatSnackBarModule,
+    HomeModule
   ],
   providers: [authInterceptorProviders,ConstService],
   bootstrap: [AppComponent]
