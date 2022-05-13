@@ -1,30 +1,7 @@
 <mat-list>
-    <mat-list-item routerLink=" " routerLinkActive="active">
-      <mat-icon>home</mat-icon> Dashboard
+    <mat-list-item *ngFor="let mod of modulesUser" routerLink="{{mod.pathBase}}" routerLinkActive="active">
+      <mat-icon>{{mod.icon}}</mat-icon> {{mod.name}}
     </mat-list-item>
-    <mat-list-item routerLink="/food" routerLinkActive="active">
-      <mat-icon>text_fields</mat-icon> Food
-    </mat-list-item>
-    <mat-list-item routerLink=" " routerLinkActive="active">
-      <mat-icon>border_all</mat-icon> Tables
-    </mat-list-item>
-    <mat-list-item routerLink=" " routerLinkActive="active">
-      <mat-icon>notifications_none</mat-icon> Notification
-    </mat-list-item>
-    <mat-list-item (click)="openUiElements()">
-      <mat-icon>filter_none</mat-icon> UI Elements
-    </mat-list-item>
-      <div>
-        <mat-list-item class="ui-element" routerLink=" " routerLinkActive="active">
-          <div class="circle"></div>Icons
-        </mat-list-item>
-        <mat-list-item class="ui-element" routerLink=" " routerLinkActive="active">
-          <div class="circle"></div>Charts
-        </mat-list-item>
-        <mat-list-item class="ui-element" routerLink=" " routerLinkActive="active">
-          <div class="circle"></div>Map
-        </mat-list-item>
-      </div>
   </mat-list>
   
   

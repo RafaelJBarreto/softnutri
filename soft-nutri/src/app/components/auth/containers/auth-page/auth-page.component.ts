@@ -33,6 +33,7 @@ export class AuthPageComponent {
         this.global.setRolesVar(data['roles']);
         this.global.setLanguageVar(data['language']);
         this.global.setExpirationVar(data['expiration']);
+        this.global.setModuleList(data['modules']);
         this.router.navigate([this.global.redirect.FOOD]).then();
       },
       error: err => {

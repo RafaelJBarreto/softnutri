@@ -1,5 +1,6 @@
 import { Injectable, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { JwtResponse } from 'src/app/model';
+import { ModuleUser } from 'src/app/model/module/module';
 import { environment as e } from '../../../environments/environment';
 
 type rest = { 
@@ -115,9 +116,12 @@ export class ConstService implements OnChanges{
         return this.jwtResponse.expiration;
     }
 
+    setModuleList(modules: ModuleUser[]){
+        this.jwtResponse.modules = modules;
+        
+    }
 
-
-
-
-
+    getModuleList(): ModuleUser[]{
+        return this.jwtResponse.modules;
+    }
 }

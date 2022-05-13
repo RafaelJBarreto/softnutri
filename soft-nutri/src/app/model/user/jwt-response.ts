@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ModuleUser } from "../module/module";
 
 @Injectable({
     providedIn: 'root',
@@ -10,6 +11,5 @@ export class JwtResponse {
     public roles!: string[];
     public language!: string;
     public expiration!: Date;
-
-
+    public modules!: ModuleUser[];
 }

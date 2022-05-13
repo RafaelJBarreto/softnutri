@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ModuleUser } from 'src/app/model/module/module';
+import { ConstService } from 'src/app/services/shared/const.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent{
- 
-  public isOpenUiElements = false;
 
-  public openUiElements() {
-    this.isOpenUiElements = !this.isOpenUiElements;
-  }
+  modulesUser: ModuleUser[] = this.global.getModuleList();
+
+  constructor(
+    private global: ConstService
+  ) { }
+
 }
