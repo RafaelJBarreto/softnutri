@@ -144,7 +144,7 @@ public class UserService{
 		jwt.setLanguage(languageUsuario);
 		jwt.setRefreshToken(refreshToken.getToken());
 		jwt.setRoles(papels);
-		jwt.setModules(new ModuleDTO().converter(modules));
+		jwt.setModules(ModuleDTO.converter(modules));
 		return jwt;
 	}
 

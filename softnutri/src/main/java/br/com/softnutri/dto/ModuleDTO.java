@@ -48,7 +48,7 @@ public class ModuleDTO {
 		return orders;
 	}
 
-	public List<ModuleDTO> converter(List<Module> modules) {
+	public static List<ModuleDTO> converter(List<Module> modules) {
 		return modules.stream().map(ModuleDTO::new).toList();
 	}
 
