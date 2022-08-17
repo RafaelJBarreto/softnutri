@@ -1,12 +1,13 @@
 package br.com.softnutri.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Person;
-import br.com.softnutri.dto.PersonDTO;
 import br.com.softnutri.repository.PersonRepository;
 
 @Service(value = "personService")
@@ -19,15 +20,14 @@ public class PersonService {
 		this.personRepository = personRepository;
 	}
 
-	public List<PersonDTO> getPersons(String name) {
-		if (name == null) {
-			List<Person> pessoas = personRepository.findAll();
-			return PersonDTO.converter(pessoas);
+	public ResponseEntity<MessageResponse> delete(Long idPerson) {
+		Optional<Person> person = this.personRepository.findById(idPerson);
+		if (person.isPresent()) {
+			personRepository.delete(person.get());
+			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
 		} else {
-			List<Person> pessoas = personRepository.findByName(name);
-			return PersonDTO.converter(pessoas);
+			return null;
 		}
-
 	}
 
 }

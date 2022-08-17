@@ -1,21 +1,39 @@
 package br.com.softnutri.dto;
 
 import br.com.softnutri.domain.Phone;
+import br.com.softnutri.util.Criptografia;
 
 public class PhoneDTO {
 
-	private String number;
+	private Long idPhone;
+	private String numero;
+
+	public PhoneDTO() {
+	}
 
 	public PhoneDTO(Phone phone) {
-		this.number = (phone.getNumber());
+		this.idPhone = phone.getIdPhone();
+		this.numero = Criptografia.decode(phone.getNumber());
+	}
+	
+	public PhoneDTO(String numero) {
+		super();
+		this.numero = numero;
 	}
 
-	public String getNumber() {
-		return number;
+	public long getIdPhone() {
+		return idPhone;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setIdPhone(long idPhone) {
+		this.idPhone = idPhone;
 	}
 
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 }

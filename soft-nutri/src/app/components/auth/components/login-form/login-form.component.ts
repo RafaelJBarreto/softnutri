@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { SignIn } from 'src/app/model';
 
 @Component({
@@ -9,13 +9,13 @@ import { SignIn } from 'src/app/model';
 })
 export class LoginFormComponent implements OnInit {
   @Output() sendLoginForm = new EventEmitter<SignIn>();
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   loginUser!: SignIn;
 
   public ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl('ana@outlook.com.br', [Validators.required, Validators.email]),
-      password: new FormControl('12345', [Validators.required])
+    this.form = new UntypedFormGroup({
+      email: new UntypedFormControl('ana@outlook.com.br', [Validators.required, Validators.email]),
+      password: new UntypedFormControl('12345', [Validators.required])
     });
   }
 

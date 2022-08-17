@@ -1,5 +1,4 @@
-import { Injectable, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Injectable, OnChanges} from '@angular/core';
 import { JwtResponse } from 'src/app/model';
 import { ModuleUser } from 'src/app/model/module/module';
 import { environment as e } from '../../../environments/environment';
@@ -11,9 +10,13 @@ user: {
     refreshtoken: string,
     logout: string,
 };
-people: {
-    people: string,
+patient: {
+    patient: string,
     listall: string,
+    patientaction:string,
+    save:string,
+    get:string,
+    delete:string,
 };
 food:{
     save:string,
@@ -36,7 +39,6 @@ type redirect = {
 })
 export class ConstService implements OnChanges{
    jwtResponse: JwtResponse = new JwtResponse;
-   translate!: TranslateService;
 
     rest:rest= {
         user: {
@@ -45,9 +47,14 @@ export class ConstService implements OnChanges{
             refreshtoken: e.rota + "user/auth/refreshtoken",
             logout: e.rota + "user/auth/logout",
         },
-        people: {
-            people: e.rota + "people",
-            listall: e.rota + "people/",
+        patient: {
+            patient: "/patient",
+            listall: e.rota + "patient/",
+            patientaction: "/patientaction",
+            save: e.rota + "patient/save",
+            get: e.rota + "patient/get/",
+            delete: e.rota + "patient/delete/",
+
         },
         food: {
             save: e.rota + "food/save",

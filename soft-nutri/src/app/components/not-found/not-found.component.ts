@@ -8,7 +8,8 @@ import { ConstService } from 'src/app/services/shared/const.service';
 })
 export class NotFoundComponent{
   public rota: any;
-  constructor( 
-    private global:ConstService
-  ) {this.rota=this.global.redirect.DASHBOARD }
+  constructor( private global:ConstService
+  ) {
+    this.rota=this.global.redirect.DASHBOARD
+  }
 }

@@ -2,8 +2,7 @@
 @import "src/app/styles/font";
 
 .form {
-    width: 100%;
-  
+    width: 100%;  
     &__input {
       width: 100%;
       margin-top: 6px;
@@ -22,7 +21,10 @@
     &__forget {
       font-size: 12px;
       font-weight: $fw-lighter;
-      color: $blue;
+      color: #536DFE;
     }
   }
+
+ 
+
  

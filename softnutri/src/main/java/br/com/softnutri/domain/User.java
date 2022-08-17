@@ -7,37 +7,38 @@ import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
 public class User extends Person {
 
-	@Basic(optional = false)
-	@Column(name = "password", nullable = false)
+	@Basic(optional = true)
+	@Column(name = "password", nullable = true)
 	private String password;
 
-	@Basic(optional = false)
-	@Column(name = "language", nullable = false)
+	@Basic(optional = true)
+	@Column(name = "language", nullable = true)
 	private String language;
 
-	@Enumerated(EnumType.STRING)
 	@Basic(optional = false)
-	@Column(name = "userType", nullable = false, length = 15)
+	@Column(name = "userType", nullable = false, length = 30)
 	private UserType userType;
 
 	@Basic(optional = false)
 	@Column(name = "dateRegister", nullable = false)
 	private LocalDate dateRegister = LocalDate.now();
+	
+	public User() {
+		super();
+	}
 
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password =  Criptografia.encoderSecurity(password);
+		this.password =  password != null ? Criptografia.encoderSecurity(password) : password;
 	}
 
 	public String getLanguage() {

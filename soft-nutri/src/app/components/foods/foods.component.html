@@ -1,75 +1,82 @@
 <app-layout>
 
-    <h2>{{'FOOD.FOOD_TITLE' | translate | uppercase}}</h2>
- 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>list</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openDialog(1)">{{'FOOD.FOOD_NEW_FOOD' | translate | uppercase}}</button>
-        <button mat-menu-item (click)="openDialog(2)">{{'FOOD.FOOD_NEW_FOOD_GROUP' | translate | uppercase}}</button>
-    </mat-menu>
+    <mat-card class="table-table-wrapper" style="margin-bottom: 100px;">
+        <mat-toolbar color="white">
+            <span class="table-table-wrapper__title">{{'FOOD.FOOD_TITLE' | translate}}</span>
+            <span class="header-spacer"></span>
+            <button mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>list</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openDialog(1)">{{'FOOD.FOOD_NEW_FOOD' | translate | uppercase}}</button>
+                <button mat-menu-item (click)="openDialog(2)">{{'FOOD.FOOD_NEW_FOOD_GROUP' | translate |
+                    uppercase}}</button>
+            </mat-menu>
+        </mat-toolbar>
 
+        <mat-form-field appearance="standard">
+            <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="{{'FOOD_EXEMPLE_FILTER' | translate}}" #input>
+        </mat-form-field>
 
-    <mat-form-field appearance="standard">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="{{'FOOD_EXEMPLE_FILTER' | translate}}" #input>
-    </mat-form-field>
+        <mat-card-content class="table-table__content style-mat-card-contet">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
 
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-            </td>
-        </ng-container>
+                <!-- Position Column -->
+                <ng-container matColumnDef="idFood">
+                    <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_IDFOOD' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.idFood}} </td>
+                </ng-container>
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="idFood">
-            <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_IDFOOD' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.idFood}} </td>
-        </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_DESCRIPTION' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_DESCRIPTION' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="calories">
+                    <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_CALORIES' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nutritionalData.calories}} </td>
+                </ng-container>
+                <ng-container matColumnDef="protein">
+                    <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_PROTEIN' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nutritionalData.protein}} </td>
+                </ng-container>
+                <ng-container matColumnDef="lipids">
+                    <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_LIPIDS' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nutritionalData.lipids}} </td>
+                </ng-container>
+                <ng-container matColumnDef="carbohydrate">
+                    <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_CARBOHYDRATE' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nutritionalData.carbohydrate}} </td>
+                </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="calories">
-            <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_CALORIES' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.nutritionalData.calories}} </td>
-        </ng-container>
-        <ng-container matColumnDef="protein">
-            <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_PROTEIN' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.nutritionalData.protein}} </td>
-        </ng-container>
-        <ng-container matColumnDef="lipids">
-            <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_LIPIDS' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.nutritionalData.lipids}} </td>
-        </ng-container>
-        <ng-container matColumnDef="carbohydrate">
-            <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_CARBOHYDRATE' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.nutritionalData.carbohydrate}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-        </tr>
-    </table>
-
-
-    <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page"></mat-paginator>
-
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+                </tr>
+            </table>
+        </mat-card-content>
+        <div class="pagination">
+            <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page"></mat-paginator>
+        </div>
+    </mat-card>
     <app-food-group-association class="footer"></app-food-group-association>
 </app-layout>

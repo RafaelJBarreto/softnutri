@@ -40,7 +40,8 @@ export class FoodsComponent implements OnInit {
       next: data => {
         this.food = data;
         this.dataSource = new MatTableDataSource(this.food);
-        console.log(this.dataSource);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error: err => {
         this.errorMessage = err.message;
@@ -84,16 +85,11 @@ export class FoodsComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource != undefined ? this.dataSource.data.length : 0;
+      return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */

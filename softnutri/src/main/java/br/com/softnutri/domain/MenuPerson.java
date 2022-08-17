@@ -31,6 +31,10 @@ public class MenuPerson {
 	private NutritionalData nutritionalData;
 
 	private LocalDateTime dateTimeRegistration = LocalDateTime.now();
+	
+	public MenuPerson() {
+		super();
+	}
 
 	public MenuPerson(Food food, float amount, float calories, float protein, float lipids, float carbohydrate) {
 		this.nutritionalData = new NutritionalData();

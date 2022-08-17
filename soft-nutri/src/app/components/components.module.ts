@@ -15,6 +15,7 @@ import { HeaderModule } from './shared/header/containers/header/header.module';
 import { AuthModule } from './auth/auth.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component'; 
@@ -23,7 +24,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorI18n } from '../services/shared/paginators/paginatorI18n';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { NutritionalDataComponent } from './shared/nutrional-data/nutritional-data.component';
 import { authInterceptorProviders } from '../interceptor/auth.interceptor';
@@ -32,6 +33,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { FoodGroupComponent } from './dialog/form/food-group/food-group.component';
 import { FoodGroupAssociationComponent } from './dialog/form/food-group-association/food-group-association.component';
+import { PersonComponent } from './person/person.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { PersonActionComponent } from './person/person-action/person-action.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { PersonDeleteComponent } from './person/person-delete/person-delete.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,13 +58,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutComponent,
     NutritionalDataComponent,
     FoodGroupComponent,
-    FoodGroupAssociationComponent],
+    FoodGroupAssociationComponent,
+    PersonComponent,
+    PersonActionComponent,
+    PersonDeleteComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
       loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] },
       isolate: true,
-      defaultLanguage: 'en'
+      defaultLanguage: 'pt-BR'
     }),
     MatIconModule,
     RouterModule,
@@ -79,7 +92,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatPaginatorModule, 
     MatCheckboxModule,
     MatTableModule,
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
     AuthModule,
+    MatGridListModule,
+    NgxMaskModule
   ],
   exports: [
     SidebarComponent,

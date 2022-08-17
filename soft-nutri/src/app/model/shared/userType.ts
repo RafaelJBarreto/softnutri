@@ -1,0 +1,3 @@
+export enum UserType {
+  RECEPTIONIST, PATIENT, NUTRITIONIST
+};

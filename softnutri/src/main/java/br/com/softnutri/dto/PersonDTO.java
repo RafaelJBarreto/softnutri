@@ -1,29 +1,45 @@
 package br.com.softnutri.dto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.softnutri.domain.Person;
-import br.com.softnutri.util.Criptografia;
+import br.com.softnutri.enuns.Gender;
 
 public class PersonDTO {
 
-	private String name;
-	private String email;
-	private String cpf;
-	private LocalDate birthDate;
-	private String address;
-	private List<PhoneDTO> phones;
+	protected Long idPerson;
+	protected String name;
+	protected String email;
+	protected String cpf;
+	protected LocalDate birthDate;
+	protected String address;
+	protected List<PhoneDTO> phones;
+	protected Gender gender;
+	
+	public PersonDTO() {
+	}
+	
+	public PersonDTO(List<PhoneDTO> phones) {
+		this.phones = phones;
+	}
 
-	public PersonDTO(Person pessoa) {
-		this.name = Criptografia.decode(pessoa.getName());
-		this.email = Criptografia.decode(pessoa.getEmail());
-		this.cpf = Criptografia.decode(pessoa.getCpf());
-		this.birthDate = pessoa.getBirthDate();
-		this.address = Criptografia.decode(pessoa.getAddress());
-		this.phones = new ArrayList<>();
-		this.phones.addAll(pessoa.getPhones().stream().map(PhoneDTO::new).toList());
+	public PersonDTO(Long idPerson, String name, String email, String cpf, LocalDate birthDate, String address,
+			Gender gender) {
+		this.idPerson = idPerson;
+		this.name = name;
+		this.email = email;
+		this.cpf = cpf;
+		this.birthDate = birthDate;
+		this.address = address;
+		this.gender = gender;
+	}
+
+	public Long getIdPerson() {
+		return idPerson;
+	}
+
+	public void setIdPerson(Long idPerson) {
+		this.idPerson = idPerson;
 	}
 
 	public String getName() {
@@ -74,7 +90,11 @@ public class PersonDTO {
 		this.phones = phones;
 	}
 
-	public static List<PersonDTO> converter(List<Person> pessoas) {
-		return pessoas.stream().map(PersonDTO::new).toList();
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 }

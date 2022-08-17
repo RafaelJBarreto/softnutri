@@ -1,8 +1,8 @@
 <form class="form" [formGroup]="form" (ngSubmit)="send()">
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"  class="style_mat_form">
         <mat-label>{{'FOOD.FOOD_FOOD_GROUP' | translate}}</mat-label>
-        <mat-select formControlName="idFoodGroup" required>
+        <mat-select formControlName="idFoodGroup" required >
           <mat-option>{{'GLOBAL.GLOBAL_SELECT' | translate}}</mat-option>
           <mat-option *ngFor="let fG of foodGroups" [value]="fG.idFoodGroup">
             {{fG.description}}

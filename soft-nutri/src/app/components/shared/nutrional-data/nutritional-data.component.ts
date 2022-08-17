@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { NutritionalData } from 'src/app/model';
 
 @Component({
@@ -10,27 +10,27 @@ import { NutritionalData } from 'src/app/model';
 export class NutritionalDataComponent implements OnInit  {
   @Input() sendNutritionalData!: NutritionalData;
   @Output() sendNutritionalForm = new EventEmitter<NutritionalData>();
-  public formNutritional!: FormGroup;
+  public formNutritional!: UntypedFormGroup;
   nutritionalData!: NutritionalData; 
   changeLog: any;
    
   public ngOnInit(): void {
-    this.formNutritional = new FormGroup({ 
-      calories: new FormControl(0, [Validators.required]),
-      protein: new FormControl(0, [Validators.required]),
-      lipids: new FormControl(0, [Validators.required]),
-      carbohydrate: new FormControl(0, [Validators.required])
+    this.formNutritional = new UntypedFormGroup({ 
+      calories: new UntypedFormControl(0, [Validators.required]),
+      protein: new UntypedFormControl(0, [Validators.required]),
+      lipids: new UntypedFormControl(0, [Validators.required]),
+      carbohydrate: new UntypedFormControl(0, [Validators.required])
     });
     this.verifyEdit();
   }
 
   verifyEdit(){
     if(this.sendNutritionalData.calories != null){
-      this.formNutritional = new FormGroup({
-        calories: new FormControl(this.nutritionalData.calories, [Validators.required]),
-        protein: new FormControl(this.nutritionalData.protein, [Validators.required]),
-        lipids: new FormControl(this.nutritionalData.lipids, [Validators.required]),
-        carbohydrate: new FormControl(this.nutritionalData.carbohydrate, [Validators.required])
+      this.formNutritional = new UntypedFormGroup({
+        calories: new UntypedFormControl(this.nutritionalData.calories, [Validators.required]),
+        protein: new UntypedFormControl(this.nutritionalData.protein, [Validators.required]),
+        lipids: new UntypedFormControl(this.nutritionalData.lipids, [Validators.required]),
+        carbohydrate: new UntypedFormControl(this.nutritionalData.carbohydrate, [Validators.required])
       });  
     }
   } 

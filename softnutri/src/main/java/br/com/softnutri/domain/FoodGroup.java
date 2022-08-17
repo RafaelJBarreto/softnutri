@@ -2,6 +2,7 @@ package br.com.softnutri.domain;
 
 import java.util.Set;
 
+import br.com.softnutri.dto.FoodGroupDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,6 +32,15 @@ public class FoodGroup {
 	@JoinTable(name = "food_group_food", joinColumns = { @JoinColumn(name = "idFoodGroup") }, inverseJoinColumns = {
 			@JoinColumn(name = "idFood") })
 	private Set<Food> food;
+
+	public FoodGroup() {
+		super();
+	}
+
+	public FoodGroup(FoodGroupDTO foodGroupDTO) {
+		this.idFoodGroup = foodGroupDTO.getIdFoodGroup();
+		this.description = foodGroupDTO.getDescription();
+	}
 
 	public Set<Food> getFood() {
 		return food;

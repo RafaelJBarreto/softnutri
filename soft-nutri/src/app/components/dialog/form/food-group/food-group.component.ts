@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { FoodService } from 'src/app/services/food/food.service';
 })
 export class FoodGroupComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   foodGroup: FoodGroup = new FoodGroup;  
   errorMessage: any; 
 
@@ -27,24 +27,24 @@ export class FoodGroupComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.form = new FormGroup({
-      idFoodGroup: new FormControl(''),
-      description: new FormControl('', [Validators.required]) 
+    this.form = new UntypedFormGroup({
+      idFoodGroup: new UntypedFormControl(''),
+      description: new UntypedFormControl('', [Validators.required]) 
     }); 
     this.verifyEdit();
   }
 
   verifyEdit(){
     if(this.data != null){
-      this.form = new FormGroup({
-        idFoodGroup: new FormControl(this.data.idFoodGroup),
-        description: new FormControl(this.data.description, [Validators.required]) 
+      this.form = new UntypedFormGroup({
+        idFoodGroup: new UntypedFormControl(this.data.idFoodGroup),
+        description: new UntypedFormControl(this.data.description, [Validators.required]) 
       });  
     }
   }
+  
 
   public send(): void {
-    console.log(this.form.controls);
     if (this.form.valid) { 
       this.foodGroup.description =this.form.controls['description'].value;
       this.foodGroup.idFoodGroup = (this.form.controls['idFoodGroup'].value != 0 ? this.form.controls['idFoodGroup'].value : null); 

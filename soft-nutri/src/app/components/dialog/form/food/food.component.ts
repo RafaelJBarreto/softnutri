@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NutritionalData } from 'src/app/model';
@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./food.component.scss']
 })
 export class FoodComponent implements OnInit { 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   food: Food = new Food; 
   nutritionalData:NutritionalData = new NutritionalData; 
   errorMessage: any;
@@ -32,18 +32,18 @@ export class FoodComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.form = new FormGroup({
-      idFood: new FormControl(''),
-      description: new FormControl('', [Validators.required]) 
+    this.form = new UntypedFormGroup({
+      idFood: new UntypedFormControl(''),
+      description: new UntypedFormControl('', [Validators.required]) 
     }); 
     this.verifyEdit();
   }
 
   verifyEdit(){
     if(this.data != null){
-      this.form = new FormGroup({
-        idFood: new FormControl(this.data.idFood),
-        description: new FormControl(this.data.description, [Validators.required]) 
+      this.form = new UntypedFormGroup({
+        idFood: new UntypedFormControl(this.data.idFood),
+        description: new UntypedFormControl(this.data.description, [Validators.required]) 
       }); 
       this.nutritionalData = this.data.nutritionalData
     }

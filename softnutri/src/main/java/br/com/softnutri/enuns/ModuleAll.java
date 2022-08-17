@@ -6,7 +6,7 @@ import java.util.List;
 public enum ModuleAll {
 
 	HOME(getHomePage(), "/home", getHomePage(), 1, getPapers(getHomePage().toUpperCase())),
-	PERSON_MODULE(getPerson(), "/person", getPerson(), 2, getPapers(getPerson().toUpperCase())),
+	PERSON_MODULE(getPatient(), "/patient", "person", 2, getPapers(getPatient().toUpperCase())),
 	FOOD_MODULE(getFood(), "/food", "fastfood", 3, getPapers(getFood().toUpperCase())),
 	MENU_MODULE(getMenu(), "/menu", "restaurant_menu", 4, getPapers(getMenu().toUpperCase()));
 
@@ -16,7 +16,7 @@ public enum ModuleAll {
 	private Integer orders;
 	private List<PaperAll> listPapers;
 	private static final String HOME_PAGE = "home";
-	private static final String PERSON = "person";
+	private static final String PATIENT = "patient";
 	private static final String FOOD = "food";
 	private static final String MENU = "menu";
 
@@ -44,8 +44,8 @@ public enum ModuleAll {
 		return orders;
 	}
 
-	public static String getPerson() {
-		return PERSON;
+	public static String getPatient() {
+		return PATIENT;
 	}
 
 	public static String getFood() {

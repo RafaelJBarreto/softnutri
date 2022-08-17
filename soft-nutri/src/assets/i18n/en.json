@@ -1,5 +1,5 @@
 {
-    "pt-br": "Portuguese - Brazil",
+    "pt-BR": "Portuguese - Brazil",
     "en": "English",
     "GLOBAL": {
         "GLOBAL_SELECT": "Select",
@@ -35,7 +35,9 @@
         "FIRST_PAGE_LABEL": "First page",
         "LAST_PAGE_LABEL": "Last page",
         "RANGE_PAGE_LABEL_1": "0 of {{length}}",
-        "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}"
+        "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}",
+        "NEW": "New",
+        "FILTER": "Search"
     },
     "LOGIN": {
         "BTN_CREATE_USER": "Create user",
@@ -80,8 +82,20 @@
     },
     "MENU": {
         "HOME": "Home",
-        "PERSON":"Person",
+        "PERSON":"Patient",
         "FOOD": "Food",
         "MENU": "Menu"
+    } ,
+    "PERSON": {
+        "PERSON_TITLE": "Persons",
+        "PERSON_IDPERSON": "Id Person",
+        "PERSON_NAME": "Name",
+        "PERSON_EMAIL": "Email",
+        "PERSON_CPF": "Cpf",
+        "PERSON_BIRTHDATE": "Birth Date",
+        "PERSON_ADDRESS": "Address"
+    },
+    "PATIENT": {
+        "PATIENT_TITLE": "Patient"
     }
 }

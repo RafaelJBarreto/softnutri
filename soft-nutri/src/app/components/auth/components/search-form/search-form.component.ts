@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-form',
@@ -8,12 +8,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SearchFormComponent implements OnInit {
   @Output() sendSignForm = new EventEmitter<void>();
-  public formSearch!: FormGroup;
+  public formSearch!: UntypedFormGroup;
 
   public ngOnInit(): void {
-    this.formSearch = new FormGroup({
-      emailCad: new FormControl('', [Validators.required, Validators.email]),
-      passwordCad: new FormControl('', [Validators.required])
+    this.formSearch = new UntypedFormGroup({
+      emailCad: new UntypedFormControl('', [Validators.required, Validators.email]),
+      passwordCad: new UntypedFormControl('', [Validators.required])
     });
   }
 

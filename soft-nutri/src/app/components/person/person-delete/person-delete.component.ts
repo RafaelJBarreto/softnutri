@@ -1,0 +1,48 @@
+import { Component, OnInit, Inject, Optional } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { PersonService } from 'src/app/services';
+import { ConstService } from 'src/app/services/shared/const.service';
+
+@Component({
+  selector: 'app-person-delete',
+  templateUrl: './person-delete.component.html',
+  styleUrls: ['./person-delete.component.scss']
+})
+export class PersonDeleteComponent {
+  public action: any;
+
+  constructor(
+    @Optional() public dialogRef: MatDialogRef<PersonDeleteComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private service: PersonService,
+    public translate: TranslateService,
+    private snackBar: MatSnackBar
+  ) {
+  }
+
+  onClickDelete(): void {
+    this.service.delete(this.data.id).subscribe({
+      next: data => {
+        this.snackBar.open(this.translate.instant(data.message), '', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: ['success']
+        });
+      },
+      error: err => {
+        this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: ['error']
+        });
+      }
+    });
+    this.dialogRef.close();
+  }
+
+}

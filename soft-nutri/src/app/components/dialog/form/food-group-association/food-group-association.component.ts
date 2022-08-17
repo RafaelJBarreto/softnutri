@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { FoodService } from 'src/app/services/food/food.service';
 })
 export class FoodGroupAssociationComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   foodGroup: FoodGroup = new FoodGroup;  
   foodGroups: FoodGroup[] = [];
   errorMessage: any; 
@@ -26,8 +26,8 @@ export class FoodGroupAssociationComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.form = new FormGroup({
-      idFoodGroup: new FormControl('', [Validators.required]) 
+    this.form = new UntypedFormGroup({
+      idFoodGroup: new UntypedFormControl('', [Validators.required]) 
     });  
     this.service.listAllFoodGroup().subscribe({
       next: data => {  

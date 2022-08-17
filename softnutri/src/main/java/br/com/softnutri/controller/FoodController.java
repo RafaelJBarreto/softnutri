@@ -23,7 +23,7 @@ public class FoodController {
 	private FoodService foodService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> logoutUsuario(@RequestBody FoodDTO dto) {
+	public ResponseEntity<MessageResponse> salvar(@RequestBody FoodDTO dto) {
 		return this.foodService.save(dto);
 	}
 	
