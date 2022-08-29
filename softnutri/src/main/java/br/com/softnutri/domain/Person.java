@@ -3,7 +3,6 @@ package br.com.softnutri.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import br.com.softnutri.enuns.Gender;
 import br.com.softnutri.util.Criptografia;
@@ -17,16 +16,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person {
+public class Person{
 
 	@Id
 	@Column
@@ -60,21 +56,8 @@ public class Person {
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	protected List<Phone> phones = new ArrayList<>();
 
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	protected List<BodyHistory> bodyHistory = new ArrayList<>();
-
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "personPaper", joinColumns = { @JoinColumn(name = "idPerson") }, inverseJoinColumns = {
-			@JoinColumn(name = "idPaper") })
-	private Set<Paper> paper;
-
-	public Set<Paper> getPapel() {
-		return paper;
-	}
-
-	public void setPapel(Set<Paper> paper) {
-		this.paper = paper;
-	}
 
 	public Long getIdPerson() {
 		return idPerson;

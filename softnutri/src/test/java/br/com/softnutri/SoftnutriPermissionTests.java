@@ -113,9 +113,9 @@ class SoftnutriPermissionTests {
 
 			}
 			if(!papel.isEmpty()) {
-				userO.setPapel(papel);
+				userO.setPaper(papel);
 				User nc = usuarioRepository.save(userO);
-				assertNotNull(nc.getPapel());
+				assertNotNull(nc.getPaper());
 			}
 		}
 		

@@ -8,23 +8,23 @@
 
         <mat-card-content class="table-table__content style-mat-card-contet">
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_NAME' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_NAME' | translate}}</mat-label>
                 <input matInput type="text" formControlName="name" required>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_EMAIL' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_EMAIL' | translate}}</mat-label>
                 <input matInput placeholder="pat@example.com"  type="email" formControlName="email" required>
                 <mat-error></mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_CPF' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_CPF' | translate}}</mat-label>
                 <input matInput type="text" formControlName="cpf" required mask="000-000-000.00">
             </mat-form-field>
         </mat-card-content>
 
         <mat-card-content>
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_BIRTHDATE' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_BIRTHDATE' | translate}}</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
                 <mat-hint>DD/MM/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker">
@@ -34,26 +34,26 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_ADDRESS' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_ADDRESS' | translate}}</mat-label>
                 <input matInput required type="text" formControlName="address">
             </mat-form-field>
 
-            <label style="padding-right: 20px; padding-left: 10px;">{{'PATIENT.PATIENT_GENDER' | translate}}</label>
+            <label style="padding-right: 20px; padding-left: 10px;">{{'PERSON.PERSON_GENDER' | translate}}</label>
             <mat-radio-group formControlName="gender" required>
-                <mat-radio-button value="M" required>{{'PATIENT.PATIENT_MALE' | translate}}</mat-radio-button>
-                <mat-radio-button value="F" required>{{'PATIENT.PATIENT_FEMINISM' | translate}}</mat-radio-button>
+                <mat-radio-button value="M" required>{{'PERSON.PERSON_MALE' | translate}}</mat-radio-button>
+                <mat-radio-button value="F" required>{{'PERSON.PERSON_FEMINISM' | translate}}</mat-radio-button>
             </mat-radio-group>
         </mat-card-content>
 
         <mat-card-content class="table-table__content style-mat-card-contet">
             <input matInput [hidden]="true" type="number" formControlName="idPhone">
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_CELULAR' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_CELULAR' | translate}}</mat-label>
                 <input matInput type="text" formControlName="celular" mask="(00) 00000-0000">
             </mat-form-field>
             <input matInput [hidden]="true" type="number" formControlName="idPhone2">
             <mat-form-field appearance="fill">
-                <mat-label>{{'PATIENT.PATIENT_CELULAR2' | translate}}</mat-label>
+                <mat-label>{{'PERSON.PERSON_CELULAR2' | translate}}</mat-label>
                 <input matInput type="text" formControlName="celular2" mask="(00) 00000-0000">
             </mat-form-field>
         </mat-card-content>
@@ -61,10 +61,10 @@
         <mat-divider></mat-divider>
         <section>
             <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
-                <mat-icon>cancel</mat-icon>{{'GLOBAL.CANCEL' | translate}}
+                <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
             </button>
             <button mat-flat-button class="button-color" type="submit">
-                <mat-icon>save</mat-icon>{{'GLOBAL.WORD_SAVE' | translate}}
+                <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
             </button>
         </section>
     </mat-card>

@@ -28,8 +28,7 @@ export class PersonActionComponent implements OnInit {
     public translate: TranslateService,
     private snackBar: MatSnackBar,
     private global:ConstService,
-    private router: Router,
-
+    private router: Router
   ) {
     this.back= this.global.rest.patient.patient
   }
@@ -52,11 +51,13 @@ export class PersonActionComponent implements OnInit {
           });
           if(this.isEdit){
             this.router.navigate([this.back]);
+          }else{
+            this.clearForm();
           }
         },
         error: err => { 
           this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant('ERROR_SAVE_PACIENTE'), '', {
+          this.snackBar.open(this.translate.instant('PATIENT.ERROR_SAVE_PATIENT'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000,
@@ -86,7 +87,7 @@ export class PersonActionComponent implements OnInit {
           },
           error: err => { 
             this.errorMessage = err.message; 
-            this.snackBar.open(this.translate.instant('GLOBAL.ERROR_DADO_PACIENTE'), '', {
+            this.snackBar.open(this.translate.instant('PATIENT.ERROR_DADO_PATIENT'), '', {
               horizontalPosition: 'center',
               verticalPosition: 'top',
               duration: 3000,
@@ -103,7 +104,7 @@ export class PersonActionComponent implements OnInit {
       this.form = new UntypedFormGroup({
         idPerson: new UntypedFormControl(''),
         name: new UntypedFormControl('', [Validators.required]),
-        email: new UntypedFormControl('', [Validators.required]),
+        email: new UntypedFormControl('', [Validators.required,  Validators.email]),
         cpf: new UntypedFormControl('', [Validators.required]),
         address: new UntypedFormControl('', [Validators.required]),
         birthDate: new UntypedFormControl('', [Validators.required]),
@@ -150,6 +151,10 @@ export class PersonActionComponent implements OnInit {
       phones.push(new Phone(this.form.controls['idPhone2'].value, this.form.controls['celular2'].value));
     }
     this.user.phones = phones;
+  }
+
+  public clearForm(): void{
+    this.form.reset();
   }
 
 }

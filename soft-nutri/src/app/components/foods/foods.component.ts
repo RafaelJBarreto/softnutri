@@ -71,6 +71,7 @@ export class FoodsComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => { 
+        this.listData();
       });
 
     }

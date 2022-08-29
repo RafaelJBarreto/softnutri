@@ -6,8 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Person } from 'src/app/model/person/person';
+import { Phone } from 'src/app/model/phone/phone';
 import { PersonService } from 'src/app/services/patient/patient.service';
 import { ConstService } from 'src/app/services/shared/const.service';
+import { PhoneDetailComponent } from '../phone-detail/phone-detail.component';
 import { PersonDeleteComponent } from './person-delete/person-delete.component';
 
 @Component({
@@ -44,7 +46,7 @@ export class PersonComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('GLOBAL.ERROR_LIST_PATIENT'), '', {
+        this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000,
@@ -68,6 +70,13 @@ export class PersonComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.listData();
+    });
+  }
+
+  getPhone(phones: Array<Phone>) {
+    const dialogRef = this.dialog.open(PhoneDetailComponent, {
+      width: '300px',
+      data: phones,
     });
   }
 

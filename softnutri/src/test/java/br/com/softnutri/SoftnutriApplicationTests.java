@@ -3,18 +3,19 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.com.softnutri.domain.Nutritionist;
 import br.com.softnutri.domain.Person;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.enuns.Gender;
 import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.repository.PersonRepository;
 import br.com.softnutri.repository.UserRepository;
+import br.com.softnutri.util.Criptografia;
 
 @SpringBootTest
 class SoftnutriApplicationTests {
@@ -32,7 +33,7 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroNutricionista() {
 
-		Nutritionist p = new Nutritionist();
+		User p = new User();
 		p.setCpf("18956896533");
 		p.setBirthDate(LocalDate.now());
 		p.setEmail("ana@outlook.com.br");
@@ -42,7 +43,6 @@ class SoftnutriApplicationTests {
 		p.setPassword("12345");
 		p.setUserType(UserType.NUTRITIONIST);
 		p.setCrn("123456789");
-		p.setAnnuity(true);
 		p.setLanguage("pt-Br");
 
 		User nc = usuarioRepository.save(p);
@@ -68,21 +68,44 @@ class SoftnutriApplicationTests {
 
 	@Test
 	void testaCadastroRecepcao() {
+        
+		Optional<User> userAux = usuarioRepository.findByEmail(Criptografia.encode("picadura1@outlook.com.br"));
+		if(userAux.isPresent()) {
+			User p = new User();
+			p.setIdPerson(userAux.get().getIdPerson());
+			p.setDateRegister(userAux.get().getDateRegister());
+			p.setCpf("18956896533");
+			p.setBirthDate(LocalDate.now());
+			p.setEmail("picadura1@outlook.com.br");
+			p.setAddress("Rua da preguiça, Barbacena-MG");
+			p.setName("Xuxu baitola");
+			p.setGender(Gender.M);
+			p.setPassword("123456");
+			p.setLanguage("pt-Br");
+			p.setUserType(UserType.NUTRITIONIST);
+			p.setCrn("123456789");
+			User nc = usuarioRepository.save(p);
 
-		User p = new User();
-		p.setCpf("18956896533");
-		p.setBirthDate(LocalDate.now());
-		p.setEmail("picadura1@outlook.com.br");
-		p.setAddress("Rua da preguiça, Barbacena-MG");
-		p.setName("Xuxu baitola");
-		p.setGender(Gender.F);
-		p.setPassword("123456");
-		p.setUserType(UserType.RECEPTIONIST);
-		p.setLanguage("pt-Br");
+			assertEquals(Criptografia.decode(p.getEmail()), Criptografia.decode(nc.getEmail()));
+		}else {
+			User p = new User();
+			p.setUserType(UserType.RECEPTIONIST);
+			p.setCpf("18956896533");
+			p.setBirthDate(LocalDate.now());
+			p.setEmail("picadura1@outlook.com.br");
+			p.setAddress("Rua da preguiça, Barbacena-MG");
+			p.setName("Xuxu baitola");
+			p.setGender(Gender.F);
+			p.setPassword("123456");
+			p.setLanguage("pt-Br");
+			User nc = usuarioRepository.save(p);
 
-		User nc = usuarioRepository.save(p);
+			assertEquals(p.getEmail(), nc.getEmail());
+		}
+		
+	
 
-		assertEquals(p.getEmail(), nc.getEmail());
+	
 
 	}	
 }

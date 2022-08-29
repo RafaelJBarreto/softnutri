@@ -1,16 +1,24 @@
 package br.com.softnutri.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends Person {
 
 	@Basic(optional = true)
@@ -27,18 +35,21 @@ public class User extends Person {
 
 	@Basic(optional = false)
 	@Column(name = "dateRegister", nullable = false)
-	private LocalDate dateRegister = LocalDate.now();
+	private LocalDateTime dateRegister = LocalDateTime.now();
+
+	private String crn;
 	
-	public User() {
-		super();
-	}
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "personPaper", joinColumns = { @JoinColumn(name = "idPerson") }, inverseJoinColumns = {
+			@JoinColumn(name = "idPaper") })
+	private Set<Paper> paper;
 
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password =  password != null ? Criptografia.encoderSecurity(password) : password;
+		this.password = password != null ? Criptografia.encoderSecurity(password) : password;
 	}
 
 	public String getLanguage() {
@@ -57,12 +68,27 @@ public class User extends Person {
 		this.userType = userType;
 	}
 
-	public LocalDate getDateRegister() {
+	public LocalDateTime getDateRegister() {
 		return dateRegister;
 	}
 
-	public void setDateRegister(LocalDate dateRegister) {
+	public void setDateRegister(LocalDateTime dateRegister) {
 		this.dateRegister = dateRegister;
 	}
 
+	public Set<Paper> getPaper() {
+		return paper;
+	}
+
+	public void setPaper(Set<Paper> paper) {
+		this.paper = paper;
+	}
+
+	public String getCrn() {
+		return crn;
+	}
+
+	public void setCrn(String crn) {
+		this.crn = crn;
+	}
 }

@@ -5,10 +5,12 @@ import java.util.List;
 
 public enum ModuleAll {
 
-	HOME(getHomePage(), "/home", getHomePage(), 1, getPapers(getHomePage().toUpperCase())),
-	PERSON_MODULE(getPatient(), "/patient", "person", 2, getPapers(getPatient().toUpperCase())),
-	FOOD_MODULE(getFood(), "/food", "fastfood", 3, getPapers(getFood().toUpperCase())),
-	MENU_MODULE(getMenu(), "/menu", "restaurant_menu", 4, getPapers(getMenu().toUpperCase()));
+	HOME(getHomePage(), "/home", "fa-solid fa-house-user", 1, getPapers(getHomePage().toUpperCase())),
+	PERSON_MODULE(getPatient(), "/patient", "fa-solid fa-user-nurse", 2, getPapers(getPatient().toUpperCase())),
+	PROFESSIONAL_MODULE(getProfessional(), "/professional", "fa-solid fa-user", 3, getPapers(getProfessional().toUpperCase())),
+	FOOD_MODULE(getFood(), "/food", "fa-solid fa-apple-whole", 4, getPapers(getFood().toUpperCase())),
+	MENU_MODULE(getMenu(), "/menu", "fa-solid fa-utensils", 5, getPapers(getMenu().toUpperCase())),
+	PERMISSION_MODULE(getPermission(), "/permission", "fa-solid fa-screwdriver-wrench", 5, getPapers(getPermission().toUpperCase()));
 
 	private String name;
 	private String pathBase;
@@ -19,6 +21,8 @@ public enum ModuleAll {
 	private static final String PATIENT = "patient";
 	private static final String FOOD = "food";
 	private static final String MENU = "menu";
+	private static final String PROFESSIONAL = "professional";
+	private static final String PERMISSION = "permission";
 
 	private ModuleAll(String name, String pathBase, String icon, Integer orders, List<PaperAll> listPapers) {
 		this.name = name;
@@ -59,6 +63,10 @@ public enum ModuleAll {
 	public static String getHomePage() {
 		return HOME_PAGE;
 	}
+	
+	public static String getProfessional() {
+		return PROFESSIONAL;
+	}
 
 	public List<PaperAll> getListPapers() {
 		return listPapers;
@@ -66,6 +74,10 @@ public enum ModuleAll {
 
 	private static EnumSet<PaperAll> listPapers() {
 		return EnumSet.allOf(PaperAll.class);
+	}
+
+	public static String getPermission() {
+		return PERMISSION;
 	}
 
 	private static List<PaperAll> getPapers(String name) {

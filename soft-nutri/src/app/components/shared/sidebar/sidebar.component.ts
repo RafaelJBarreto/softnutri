@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { ModuleUser } from 'src/app/model/module/module';
 import { ConstService } from 'src/app/services/shared/const.service';
 

@@ -3,6 +3,7 @@ package br.com.softnutri.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,8 +35,9 @@ public class PatientController {
 	}
 
 	@GetMapping("/")
-	public List<UserDTO> getPersons(String name) {
-		return userService.getUsers(name);
+	@Cacheable("patients")
+	public List<UserDTO> getPatients() {
+		return userService.getPatients();
 	}
 
 	@GetMapping(value = "/get/{id}")
@@ -46,7 +48,7 @@ public class PatientController {
 	@PostMapping("/save")
 	@Transactional
 	public ResponseEntity<MessageResponse> cadastrar(@RequestBody UserDTO form) {
-		return this.userService.save(UserDTO.converterToDomain(form));
+		return this.userService.save(UserDTO.converterToDomain(form, userService));
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")

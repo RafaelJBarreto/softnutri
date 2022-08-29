@@ -6,7 +6,7 @@
       <span class="table-table-wrapper__title">{{'PATIENT.PATIENT_TITLE' | translate}}</span>
       <span class="header-spacer"></span>
       <button mat-flat-button class="button-color" [routerLink]="action" routerLinkActive="active">
-        <mat-icon>add</mat-icon>{{'GLOBAL.NEW' | translate}}
+        <i class="fa-solid fa-plus"></i>{{'GLOBAL.NEW' | translate}}
       </button>
     </mat-toolbar>
     <mat-card-content class="table-table__content style-mat-card-contet">
@@ -24,28 +24,28 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> {{'PATIENT.PATIENT_NAME' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'PERSON.PERSON_NAME' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> {{'PATIENT.PATIENT_EMAIL' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'PERSON.PERSON_EMAIL' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.email}} </td>
         </ng-container>
 
         <ng-container matColumnDef="cpf">
-          <th mat-header-cell *matHeaderCellDef> {{'PATIENT.PATIENT_CPF' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'PERSON.PERSON_CPF' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.cpf | mask:"000-000-000.00"}} </td>
         </ng-container>
 
 
         <ng-container matColumnDef="birthDate">
-          <th mat-header-cell *matHeaderCellDef> {{'PATIENT.PATIENT_BIRTHDATE' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'PERSON.PERSON_BIRTHDATE' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.birthDate | date: 'dd/MM/yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="address">
-          <th mat-header-cell *matHeaderCellDef> {{'PATIENT.PATIENT_ADDRESS' | translate}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{'PERSON.PERSON_ADDRESS' | translate}} </th>
           <td mat-cell *matCellDef="let element"> {{element.address}} </td>
         </ng-container>
         
@@ -53,8 +53,9 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let element">
             <div class="button">
-              <button mat-button (click)="edit(element.idPerson)"><mat-icon>edit</mat-icon></button>
-              <button mat-button (click)="delete(element.idPerson)"><mat-icon class="button-delete">delete_forever</mat-icon></button>
+              <button mat-button (click)="getPhone(element.phones)"><i class="fa-solid fa-square-phone" *ngIf="element.phones.length > 0"></i> </button>
+              <button mat-button (click)="edit(element.idPerson)"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button mat-button (click)="delete(element.idPerson)"><i class="fa-solid fa-trash"></i></button>
             </div>
           </td>
         </ng-container>

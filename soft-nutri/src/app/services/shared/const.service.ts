@@ -18,6 +18,14 @@ patient: {
     get:string,
     delete:string,
 };
+professional: {
+    professional: string,
+    listall: string,
+    professionalaction:string,
+    save:string,
+    get:string,
+    delete:string,
+};
 food:{
     save:string,
     listall:string,
@@ -30,7 +38,7 @@ foodgroup:{
 };
 
 type redirect = {
-    DASHBOARD: string,
+    HOME: string,
     FOOD:string,
     LOGIN: string,
 };
@@ -56,6 +64,15 @@ export class ConstService implements OnChanges{
             delete: e.rota + "patient/delete/",
 
         },
+        professional: {
+            professional: "/professional",
+            listall: e.rota + "professional/",
+            professionalaction: "/professionalaction",
+            save: e.rota + "professional/save",
+            get: e.rota + "professional/get/",
+            delete: e.rota + "professional/delete/",
+
+        },
         food: {
             save: e.rota + "food/save",
             listall: e.rota + "food/",
@@ -68,7 +85,7 @@ export class ConstService implements OnChanges{
         }
     }; 
     redirect:redirect= {
-        DASHBOARD: '/dashboard',
+        HOME: '/home',
         FOOD: '/food',
         LOGIN: '/login',
     };

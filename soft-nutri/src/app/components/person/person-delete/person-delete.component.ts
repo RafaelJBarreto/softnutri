@@ -1,10 +1,8 @@
 import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PersonService } from 'src/app/services';
-import { ConstService } from 'src/app/services/shared/const.service';
 
 @Component({
   selector: 'app-person-delete',

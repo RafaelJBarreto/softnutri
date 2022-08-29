@@ -38,9 +38,8 @@
         "BACK": "Voltar",
         "CANCEL": "Cancelar",
         "ERROR_FORM": "Por favor, preencha todos os campos obrigatórios (*).",
-        "ERROR_DADO_PACIENTE": "Paciente não existe.",
-        "ERROR_SAVE_PACIENTE": "Erro ao tentar cadastrar paciente.",
-        "REMOVE": "Remover"
+        "REMOVE": "Remover",
+        "PHONES_CONTACT": "Telefone(s) para contato"
         },
     "LOGIN": {
         "BTN_CREATE_USER": "Criar usuário",
@@ -87,23 +86,42 @@
         "HOME": "Home",
         "PATIENT":"Pacientes",
         "FOOD": "Alimentos",
-        "MENU": "Cardápio"
+        "MENU": "Cardápio",
+        "PROFESSIONAL": "Profissional",
+        "PERMISSION": "Permissões"
     } ,
     "PATIENT": {
         "PATIENT_NEW": "Cadastro de Pacientes",
         "PATIENT_TITLE": "Pacientes",
         "PATIENT_IDPATIENT": "Id Paciente",
-        "PATIENT_NAME": "Nome",
-        "PATIENT_EMAIL": "Email",
-        "PATIENT_CPF": "Cpf",
-        "PATIENT_BIRTHDATE": "Data de nascimento",
-        "PATIENT_ADDRESS": "Endereço",
-        "PATIENT_GENDER": "Sexo* :",
-        "PATIENT_MALE": "Masculino",
-        "PATIENT_FEMINISM": "Feminimo",
         "ERROR_LIST_PATIENT": "Erro ao listar pacientes.",
         "ERROR_DELETE_PATIENT": "Erro ao tentar deletar paciente.",
-        "PATIENT_CELULAR": "Celular",
-        "PATIENT_CELULAR2": "Celular auxiliar"
+        "ERROR_DADO_PATIENT": "Paciente não existe.",
+        "ERROR_SAVE_PATIENT": "Erro ao tentar cadastrar paciente."
+    },
+    "PROFESSIONAL": {
+        "PROFESSIONAL_NEW": "Cadastro de Profissionais",
+        "PROFESSIONAL_TITLE": "Profissionais",
+        "PROFESSIONAL_PROFESSION": "Profissão",
+        "PROFESSIONAL_IDPROFESSIONAL": "Id Profissional",
+        "ERROR_LIST_PROFESSIONAL": "Erro ao listar profissionais.",
+        "ERROR_DELETE_PROFESSIONAL": "Erro ao tentar deletar profissional.",
+        "RECEPTIONIST": "Recepcionista",
+        "NUTRITIONIST": "Nutricionista",
+        "PROFESSIONAL_CRN": "CRN",
+        "ERROR_DADO_PROFESSIONAL": "Profissional não existe.",
+        "ERROR_SAVE_PROFESSIONAL": "Erro ao tentar cadastrar profissional."
+    },
+    "PERSON": {
+        "PERSON_NAME": "Nome",
+        "PERSON_EMAIL": "Email",
+        "PERSON_CPF": "Cpf",
+        "PERSON_BIRTHDATE": "Data de nascimento",
+        "PERSON_ADDRESS": "Endereço",
+        "PERSON_GENDER": "Sexo* :",
+        "PERSON_MALE": "Masculino",
+        "PERSON_FEMINISM": "Feminimo",
+        "PERSON_CELULAR": "Celular",
+        "PERSON_CELULAR2": "Celular auxiliar"
     }
 }

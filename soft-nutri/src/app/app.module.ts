@@ -15,6 +15,7 @@ import { PaginatorI18n } from './services/shared/paginators/paginatorI18n';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { ComponentsModule } from './components/components.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -39,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] },
       isolate: true,
-      defaultLanguage: 'pt-BR'
+      defaultLanguage: 'pt-Br'
     }),
     JwtModule.forRoot({
       config: {
@@ -52,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    FontAwesomeModule,
   ],
   providers: [authInterceptorProviders,ConstService, 
     {

@@ -1,0 +1,11 @@
+<p>
+    <span matBadge="{{data.length}}" matBadgeOverlap="false">{{'GLOBAL.PHONES_CONTACT' | translate}}</span>
+  </p>
+<div mat-dialog-content>
+    <mat-divider></mat-divider>
+
+    <mat-list role="list" *ngFor="let item of data">
+        <mat-list-item role="listitem"><i class="fa-solid fa-phone-volume"></i> {{item.numero | mask:"(00)-00000-0000"}}
+        </mat-list-item>
+    </mat-list>
+</div>

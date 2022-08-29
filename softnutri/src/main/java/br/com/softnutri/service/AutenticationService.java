@@ -91,7 +91,7 @@ public class AutenticationService {
 			papels.add(usuarioPapel);
 		}
 
-		usuario.setPapel(papels);
+		usuario.setPaper(papels);
 		this.userRepository.save(usuario);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
@@ -164,7 +164,7 @@ public class AutenticationService {
 		UserDTO resultDTO = null;
 		try {
 			if (utils.verifyUserLogged(usuario.getEmail())) {
-				User usuarioParam =  UserDTO.converterToDomain(usuario);
+				User usuarioParam =  UserDTO.converterToDomain(usuario, null);
 				if (!usuarioParam.getPassword().isBlank()) {
 					usuarioParam.setPassword(usuarioParam.getPassword());
 				}

@@ -22,7 +22,7 @@ export class AppComponent {
     if(this.global.getLanguageVar() != undefined && this.global.getLanguageVar() != "") {
       this.translate.use(this.global.getLanguageVar());
     } else if (browserLang != undefined){
-      this.translate.use(browserLang.match(/pt-BR|en/) ? browserLang : 'pt-BR');
+      this.translate.use(browserLang.match(/pt-Br|en/) ? browserLang : 'pt-Br');
     }
   }
 }

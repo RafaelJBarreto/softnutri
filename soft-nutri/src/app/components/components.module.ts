@@ -42,6 +42,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { PersonDeleteComponent } from './person/person-delete/person-delete.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatBadgeModule} from '@angular/material/badge';
+import { ProfessionalComponent } from './professional/professional.component';
+import { ProfessionalActionComponent } from './professional/professional-action/professional-action.component';
+import { HomeComponent } from './home/home.component';
+import { ProfessionalDeleteComponent } from './professional/professional-delete/professional-delete.component';
+import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,7 +68,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     FoodGroupAssociationComponent,
     PersonComponent,
     PersonActionComponent,
-    PersonDeleteComponent],
+    PersonDeleteComponent,
+    ProfessionalComponent,
+    ProfessionalActionComponent,
+    HomeComponent,
+    PhoneDetailComponent,
+    ProfessionalDeleteComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
@@ -101,7 +113,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatRadioModule,
     AuthModule,
     MatGridListModule,
-    NgxMaskModule
+    NgxMaskModule,
+    FontAwesomeModule,
+    MatBadgeModule
   ],
   exports: [
     SidebarComponent,

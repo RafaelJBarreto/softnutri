@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FoodsComponent } from './components/foods/foods.component';
+import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PersonActionComponent } from './components/person/person-action/person-action.component';
 import { PersonComponent } from './components/person/person.component';
-import { LayoutComponent } from './components/shared/layout/layout.component';
+import { ProfessionalActionComponent } from './components/professional/professional-action/professional-action.component';
+import { ProfessionalComponent } from './components/professional/professional.component';
 import { AuthGuardService as AuthGuard  } from './services';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'home',
     pathMatch: 'full',
     canActivate: [AuthGuard],
-    component: LayoutComponent
+    component: HomeComponent
   },
   {
     path: 'food',
@@ -36,6 +38,24 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: PersonActionComponent
+  },
+  {
+    path: 'professional',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: ProfessionalComponent
+  },
+  {
+    path: 'professionalaction',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: ProfessionalActionComponent
+  },
+  {
+    path: 'professionalaction/:id',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: ProfessionalActionComponent
   },
   {
     path: 'login',

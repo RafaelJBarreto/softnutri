@@ -15,6 +15,7 @@ import br.com.softnutri.config.security.services.RefreshTokenService;
 import br.com.softnutri.config.security.services.UtilsServiceImpl;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.UserDTO;
+import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.UserRepository;
 
@@ -55,11 +56,20 @@ public class UserService extends AutenticationService {
 			return ResponseEntity.ok(new MessageResponse(e.getMessage()));
 		}
 	}
-
+	
 	public UserDTO getUser(Long idPerson) {
 		Optional<User> user = this.userRepository.findById(idPerson);
 		if (user.isPresent()) {
 			return UserDTO.converter(user.get());
+		} else {
+			return null;
+		}
+	}
+	
+	public User getUserById(Long idPerson) {
+		Optional<User> user = this.userRepository.findById(idPerson);
+		if (user.isPresent()) {
+			return user.get();
 		} else {
 			return null;
 		}
@@ -71,6 +81,18 @@ public class UserService extends AutenticationService {
 			return UserDTO.converter(users);
 		}
 		return Collections.emptyList();
+
+	}
+	
+	public List<UserDTO> getPatients() {
+		List<User> users = userRepository.findByUserType(UserType.PATIENT);
+		return UserDTO.converter(users);
+
+	}
+	
+	public List<UserDTO> getProfessional() {
+		List<User> users = userRepository.getProfessional(UserType.PATIENT);
+		return UserDTO.converter(users);
 
 	}
 }

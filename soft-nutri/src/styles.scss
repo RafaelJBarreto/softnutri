@@ -37,3 +37,8 @@ $soft-nutri-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "fontawesome-free-6.1.2-web/scss/fontawesome.scss";
+@import "fontawesome-free-6.1.2-web/scss/solid.scss";
+@import "fontawesome-free-6.1.2-web/scss/regular.scss";
+

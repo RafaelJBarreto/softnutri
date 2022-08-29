@@ -17,7 +17,7 @@
 
         <mat-form-field appearance="standard">
             <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="{{'FOOD_EXEMPLE_FILTER' | translate}}" #input>
+            <input matInput (keyup)="applyFilter($event)" #input>
         </mat-form-field>
 
         <mat-card-content class="table-table__content style-mat-card-contet">
