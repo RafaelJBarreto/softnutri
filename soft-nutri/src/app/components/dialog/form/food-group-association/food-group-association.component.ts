@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { FoodGroup } from 'src/app/model';
-import { FoodService } from 'src/app/services/food/food.service';
+import { Subscription } from 'rxjs';
+import { Bunch, Food, FoodBunch } from 'src/app/model';
+import { BunchService } from 'src/app/services/bunch/bunch.service';
+import { DataFoodService } from 'src/app/services/food/dataFood.service';
+import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
+import { Update } from 'src/app/services/shared/updated/updated.service';
 
 @Component({
   selector: 'app-food-group-association',
@@ -12,50 +16,82 @@ import { FoodService } from 'src/app/services/food/food.service';
   styleUrls: ['./food-group-association.component.scss']
 })
 export class FoodGroupAssociationComponent implements OnInit {
-
   public form!: UntypedFormGroup;
-  foodGroup: FoodGroup = new FoodGroup;  
-  foodGroups: FoodGroup[] = [];
+  bunch: Bunch = new Bunch;  
+  bunchs: Bunch[] = [];
   errorMessage: any; 
+  selectedsFoods!: Array<Food>;
+  selectedFoods!: Food;
+  foodBunch: FoodBunch = new FoodBunch;  
+  reloadForm!: boolean;
 
-  
   constructor(   
-    public service:FoodService,
+    public service:BunchService,
+    public serviceFoodBunch:FoodBunchService,
     public translate: TranslateService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private dataFood: DataFoodService,
+    private update: Update
+  ) {
+    debugger;
+    this.update.alteracaoData.subscribe(reloadForm => this.reloadForm = reloadForm);
+  }
 
   public ngOnInit(): void {
     this.form = new UntypedFormGroup({
       idFoodGroup: new UntypedFormControl('', [Validators.required]) 
     });  
-    this.service.listAllFoodGroup().subscribe({
-      next: data => {  
-        this.foodGroups = data;
-      },
-      error: err => { 
-        this.errorMessage = err.message; 
-        this.snackBar.open('Erro ao cadastrar', '', {
+    this.update.updatForm(true);
+  } 
+
+  public sendFoodBunch(): void { 
+    this.getValuesFood();
+    if( this.selectedsFoods.length == 0){
+        this.snackBar.open(this.translate.instant('FOOD.ERROR_FOOD_EMPTY'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000,
           panelClass: ['error']
         });
-      }
-    });
-  } 
-
-  public send(): void { 
+        return;
+    }
     if (this.form.valid) {  
-      this.foodGroup.idFoodGroup = (this.form.controls['idFoodGroup'].value != 0 ? this.form.controls['idFoodGroup'].value : null); 
-      this.service.listAllFoodGroup().subscribe({
+      this.bunch = (this.form.controls['idFoodGroup'].value != 0 ? this.form.controls['idFoodGroup'].value : null); 
+      this.foodBunch.bunch = this.bunch;
+      this.foodBunch.foods = this.selectedsFoods;
+      this.serviceFoodBunch.saveFoodBunch(this.foodBunch).subscribe({
         next: data => {  
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
             duration: 3000,
             panelClass: ['success']
-          }); 
+          });
+          this.dataFood.reset(); 
+        },
+        error: err => { 
+          this.errorMessage = err.message; 
+          this.snackBar.open(this.translate.instant('FOOD.ERROR_FOOD_BUNCH'), '', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: ['error']
+          });
+        }
+      });
+    }
+  } 
+
+  public getValuesFood():void{
+    this.selectedsFoods = this.dataFood.getSelectedFoods();
+  }
+
+  public getBunchs(): void{
+    this.update.alteracaoData.subscribe(reloadForm => this.reloadForm = reloadForm);
+    if(this.reloadForm){
+      this.service.listAllBunch().subscribe({
+        next: data => {  
+          this.bunchs = data;
         },
         error: err => { 
           this.errorMessage = err.message; 
@@ -68,6 +104,6 @@ export class FoodGroupAssociationComponent implements OnInit {
         }
       });
     }
-  } 
+  }
  
 }  

@@ -1,10 +1,10 @@
-<form class="form" [formGroup]="form" (ngSubmit)="send()">
+<form class="form" [formGroup]="form" (ngSubmit)="sendFoodBunch()">
 
-    <mat-form-field appearance="fill"  class="style_mat_form">
+    <mat-form-field appearance="fill" class="style_mat_form" (click)="getBunchs()">
         <mat-label>{{'FOOD.FOOD_FOOD_GROUP' | translate}}</mat-label>
-        <mat-select formControlName="idFoodGroup" required >
+        <mat-select formControlName="idFoodGroup" required (click)="getBunchs()">
           <mat-option>{{'GLOBAL.GLOBAL_SELECT' | translate}}</mat-option>
-          <mat-option *ngFor="let fG of foodGroups" [value]="fG.idFoodGroup">
+          <mat-option *ngFor="let fG of bunchs" [value]="fG">
             {{fG.description}}
           </mat-option>
         </mat-select>
@@ -13,7 +13,7 @@
       </mat-form-field>
  
       <div class="form-actions" style="float:right">
-        <button class="form-actions__login" mat-raised-button color="primary" type="submit"><i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}</button> 
+        <button class="form-actions__login" mat-raised-button color="primary" type="submit" ><i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}</button> 
       </div>
     </form>
     

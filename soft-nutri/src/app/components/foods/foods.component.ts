@@ -10,6 +10,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FoodGroupComponent } from '../dialog/form/food-group/food-group.component';
+import { DataFoodService } from 'src/app/services/food/dataFood.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 
 @Component({
   selector: 'app-foods',
@@ -17,28 +20,33 @@ import { FoodGroupComponent } from '../dialog/form/food-group/food-group.compone
   styleUrls: ['./foods.component.scss']
 })
 export class FoodsComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'idFood', 'description', 'calories', 'protein', 'lipids', 'carbohydrate'];
+  displayedColumns: string[] = ['select', 'bunch', 'description', 'calories', 'protein', 'lipids', 'carbohydrate'];
   dataSource!: MatTableDataSource<Food>;
   selection = new SelectionModel<Food>(true, []);
   food: Food[] = []; 
   errorMessage: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-
+  selectedFoods!: Food;
+  
   constructor(public dialog: MatDialog,
     public service: FoodService,
+    public serviceFoodBunch: FoodBunchService,
     public translate: TranslateService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private dataFood: DataFoodService) { 
+    }
 
   ngOnInit(): void {
     this.listData();
+    this.dataFood.foodsData.subscribe(food=> this.selectedFoods);
   }
 
   private listData() {
-    this.service.listAll().subscribe({
+    this.serviceFoodBunch.listAll().subscribe({
       next: data => {
         this.food = data;
+        debugger;
         this.dataSource = new MatTableDataSource(this.food);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -62,16 +70,15 @@ export class FoodsComponent implements OnInit {
         width: '500px'
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.listData(); 
+      dialogRef.afterClosed().subscribe(_result => {
+        this.listData();
       });
     } else if (number == 2) {
       const dialogRef = this.dialog.open(FoodGroupComponent, {
         width: '300px'
       });
 
-      dialogRef.afterClosed().subscribe(result => { 
-        this.listData();
+      dialogRef.afterClosed().subscribe(_result => { 
       });
 
     }
@@ -79,6 +86,7 @@ export class FoodsComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    debugger;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -99,7 +107,6 @@ export class FoodsComponent implements OnInit {
       this.selection.clear();
       return;
     }
-
     this.selection.select(...this.dataSource.data);
   }
 
@@ -110,5 +117,10 @@ export class FoodsComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.idFood + 1}`;
   }
+
+  public getSelected(event: MatCheckboxChange, row: Food): void{
+    this.dataFood.updateFoodSelected(row, event.checked);
+  }
+
 }
 

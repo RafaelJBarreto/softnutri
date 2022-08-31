@@ -3,8 +3,9 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { FoodGroup } from 'src/app/model';
-import { FoodService } from 'src/app/services/food/food.service';
+import { Bunch } from 'src/app/model';
+import { BunchService } from 'src/app/services/bunch/bunch.service';
+import { Update } from 'src/app/services/shared/updated/updated.service';
 
 @Component({
   selector: 'app-food-group',
@@ -14,30 +15,32 @@ import { FoodService } from 'src/app/services/food/food.service';
 export class FoodGroupComponent implements OnInit {
 
   public form!: UntypedFormGroup;
-  foodGroup: FoodGroup = new FoodGroup;  
+  bunch: Bunch = new Bunch;  
   errorMessage: any; 
+  reloadForm!: boolean;
 
-  
   constructor(  
     public dialogRef: MatDialogRef<FoodGroupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FoodGroup,
-    public service:FoodService,
+    @Inject(MAT_DIALOG_DATA) public data: Bunch,
+    public service:BunchService,
     public translate: TranslateService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private update: Update
   ) {}
 
   public ngOnInit(): void {
     this.form = new UntypedFormGroup({
-      idFoodGroup: new UntypedFormControl(''),
+      idBunch: new UntypedFormControl(''),
       description: new UntypedFormControl('', [Validators.required]) 
     }); 
     this.verifyEdit();
+    this.update.alteracaoData.subscribe(reloadForm => this.reloadForm = reloadForm);
   }
 
   verifyEdit(){
     if(this.data != null){
       this.form = new UntypedFormGroup({
-        idFoodGroup: new UntypedFormControl(this.data.idFoodGroup),
+        idBunch: new UntypedFormControl(this.data.idBunch),
         description: new UntypedFormControl(this.data.description, [Validators.required]) 
       });  
     }
@@ -46,9 +49,9 @@ export class FoodGroupComponent implements OnInit {
 
   public send(): void {
     if (this.form.valid) { 
-      this.foodGroup.description =this.form.controls['description'].value;
-      this.foodGroup.idFoodGroup = (this.form.controls['idFoodGroup'].value != 0 ? this.form.controls['idFoodGroup'].value : null); 
-      this.service.saveFoodGroup(this.foodGroup).subscribe({
+      this.bunch.description = this.form.controls['description'].value;
+      this.bunch.idBunch = (this.form.controls['idBunch'].value != 0 ? this.form.controls['idBunch'].value : null); 
+      this.service.saveBunch(this.bunch).subscribe({
         next: data => {  
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'right',
@@ -56,6 +59,7 @@ export class FoodGroupComponent implements OnInit {
             duration: 3000,
             panelClass: ['success']
           });
+          this.update.updatForm(true);
           this.dialogRef.close();
         },
         error: err => { 

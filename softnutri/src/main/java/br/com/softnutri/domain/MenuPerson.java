@@ -21,7 +21,7 @@ public class MenuPerson {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idMenuPerson;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private Food food;
 
 	@Column(nullable = false)

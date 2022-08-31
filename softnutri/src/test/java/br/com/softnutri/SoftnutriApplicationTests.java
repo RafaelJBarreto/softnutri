@@ -68,44 +68,26 @@ class SoftnutriApplicationTests {
 
 	@Test
 	void testaCadastroRecepcao() {
-        
+
 		Optional<User> userAux = usuarioRepository.findByEmail(Criptografia.encode("picadura1@outlook.com.br"));
-		if(userAux.isPresent()) {
-			User p = new User();
-			p.setIdPerson(userAux.get().getIdPerson());
-			p.setDateRegister(userAux.get().getDateRegister());
-			p.setCpf("18956896533");
-			p.setBirthDate(LocalDate.now());
-			p.setEmail("picadura1@outlook.com.br");
-			p.setAddress("Rua da preguiça, Barbacena-MG");
-			p.setName("Xuxu baitola");
-			p.setGender(Gender.M);
-			p.setPassword("123456");
-			p.setLanguage("pt-Br");
+		User p = new User();
+		p.setIdPerson(userAux.get().getIdPerson());
+		p.setDateRegister(userAux.get().getDateRegister());
+		p.setCpf("18956896533");
+		p.setBirthDate(LocalDate.now());
+		p.setEmail("picadura1@outlook.com.br");
+		p.setAddress("Rua da preguiça, Barbacena-MG");
+		p.setName("Xuxu baitola");
+		p.setGender(Gender.M);
+		p.setPassword("123456");
+		p.setLanguage("pt-Br");
+		if (userAux.isPresent()) {
 			p.setUserType(UserType.NUTRITIONIST);
 			p.setCrn("123456789");
-			User nc = usuarioRepository.save(p);
-
-			assertEquals(Criptografia.decode(p.getEmail()), Criptografia.decode(nc.getEmail()));
-		}else {
-			User p = new User();
-			p.setUserType(UserType.RECEPTIONIST);
-			p.setCpf("18956896533");
-			p.setBirthDate(LocalDate.now());
-			p.setEmail("picadura1@outlook.com.br");
-			p.setAddress("Rua da preguiça, Barbacena-MG");
-			p.setName("Xuxu baitola");
-			p.setGender(Gender.F);
-			p.setPassword("123456");
-			p.setLanguage("pt-Br");
-			User nc = usuarioRepository.save(p);
-
-			assertEquals(p.getEmail(), nc.getEmail());
 		}
-		
-	
+		User nc = usuarioRepository.save(p);
 
-	
+		assertEquals(p.getEmail(), nc.getEmail());
 
-	}	
+	}
 }

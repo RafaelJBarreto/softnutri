@@ -16,6 +16,8 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { ComponentsModule } from './components/components.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DataFoodService } from './services/food/dataFood.service';
+import { Update } from './services/shared/updated/updated.service';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -56,7 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ComponentsModule,
     FontAwesomeModule,
   ],
-  providers: [authInterceptorProviders,ConstService, 
+  providers: [authInterceptorProviders, ConstService, DataFoodService, Update,
     {
       provide: MatPaginatorIntl, deps: [TranslateService],
       useFactory: (translateService: TranslateService) => new PaginatorI18n(translateService).getPaginatorIntl()

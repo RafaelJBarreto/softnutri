@@ -32,9 +32,23 @@ public class Food {
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "food", fetch = FetchType.LAZY)
 	private List<MenuPerson> menuPerson = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "food", fetch = FetchType.EAGER)
+	private List<FoodBunch> foodBunch;
 
 	public Food() {
 	}
+	
+	public Food(Long idFood, String description, float calories, float protein, float lipids, float carbohydrate) {
+		this.idFood = idFood;
+		this.description = description;
+		this.nutritionalData = new NutritionalData();
+		this.nutritionalData.setCalories(calories);
+		this.nutritionalData.setCarbohydrate(carbohydrate);
+		this.nutritionalData.setLipids(lipids);
+		this.nutritionalData.setProtein(protein);
+	}
+
 
 	public Food(String description, float calories, float protein, float lipids, float carbohydrate) {
 		this.description = description;

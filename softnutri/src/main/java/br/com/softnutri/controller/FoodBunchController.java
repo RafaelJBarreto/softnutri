@@ -12,29 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.dto.FoodGroupAssociationDTO;
-import br.com.softnutri.dto.FoodGroupDTO;
-import br.com.softnutri.service.FoodGroupService;
+import br.com.softnutri.dto.FoodBunchDTO;
+import br.com.softnutri.service.FoodBunchService;
 
 @RestController
-@RequestMapping("/foodGroup")
+@RequestMapping("/foodBunch")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class FoodGroupController {
+public class FoodBunchController {
 
 	@Autowired
-	private FoodGroupService foodGroupService;
+	private FoodBunchService foodBunchService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody FoodGroupDTO dto) {
-		return this.foodGroupService.save(dto);
+	public ResponseEntity<MessageResponse> saveData(@RequestBody FoodBunchDTO dto) {
+		return foodBunchService.save(dto);
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<FoodGroupDTO>> findAll(){
-		return this.foodGroupService.listAll(); 
+	public ResponseEntity<List<FoodBunchDTO>> findAll(){
+		return foodBunchService.getAll();
 	}
-	@PostMapping("/association/")
-	public ResponseEntity<List<FoodGroupDTO>> associationFood(@RequestBody FoodGroupAssociationDTO dto) {
-		return null; //this.foodGroupService.save(dto);
-	} 
 }
