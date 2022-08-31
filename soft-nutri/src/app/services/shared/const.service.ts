@@ -30,10 +30,13 @@ food:{
     save:string,
     listall:string,
 };
-foodgroup:{ 
+bunch:{ 
     save:string,
     listall:string,
-    association:string,
+};
+foodbunch:{ 
+    save:string,
+    listall:string
 }
 };
 
@@ -78,10 +81,13 @@ export class ConstService implements OnChanges{
             listall: e.rota + "food/",
 
         },
-        foodgroup:{
-            save: e.rota + "foodGroup/save",
-            listall: e.rota + "foodGroup/", 
-            association: e.rota + "foodGroup/association/", 
+        bunch:{
+            save: e.rota + "bunch/save",
+            listall: e.rota + "bunch/", 
+        },
+        foodbunch:{
+            save: e.rota + "foodBunch/save",
+            listall: e.rota + "foodBunch/"
         }
     }; 
     redirect:redirect= {

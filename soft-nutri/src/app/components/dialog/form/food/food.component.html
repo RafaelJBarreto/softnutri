@@ -1,14 +1,17 @@
 <form class="form" [formGroup]="form" (ngSubmit)="send()">
-  <mat-form-field class="form__input" appearance="fill" disable>
-    <input matInput placeholder="idFood" type="number" formControlName="idFood" readonly >
-  </mat-form-field> 
+  <div [hidden]="true">
+    <mat-form-field class="form__input" appearance="fill" disable>
+      <input matInput placeholder="idFood" type="number" formControlName="idFood" readonly>
+    </mat-form-field>
+  </div>
   <mat-form-field class="form__input" appearance="fill">
-    <input matInput placeholder="description" type="text" formControlName="description" >
-  </mat-form-field> 
-  
-  <app-nutritional-data [sendNutritionalData]="nutritionalData" (sendNutritionalForm)="updateNutritionalData($event)"></app-nutritional-data>
-    <div class="form-actions">
-      <button class="form-actions__login" mat-raised-button color="primary" type="submit"><i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}</button> 
-    </div>
-  </form>
-  
+    <input matInput placeholder="description" type="text" formControlName="description">
+  </mat-form-field>
+
+  <app-nutritional-data [sendNutritionalData]="nutritionalData" (sendNutritionalForm)="updateNutritionalData($event)">
+  </app-nutritional-data>
+  <div class="form-actions">
+    <button class="form-actions__login" mat-raised-button color="primary" type="submit"><i
+        class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}</button>
+  </div>
+</form>

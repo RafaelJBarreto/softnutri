@@ -80,7 +80,9 @@
         "FOOD_NEW_FOOD": "Novo Alimento",
         "FOOD_NEW_FOOD_GROUP": "Novo Grupo de Alimento",
         "FOOD_FOOD_GROUP": "Grupo de Alimento",
-        "FOOD_TITLE": "Alimentos"
+        "FOOD_TITLE": "Alimentos",
+        "ERROR_FOOD_BUNCH": "Erro ao tentar cadastrar grupo de alimento.",
+        "ERROR_FOOD_EMPTY": "Você precisa selecionar pelo menos um alimento."
     },
     "MENU": {
         "HOME": "Home",
@@ -123,5 +125,8 @@
         "PERSON_FEMINISM": "Feminimo",
         "PERSON_CELULAR": "Celular",
         "PERSON_CELULAR2": "Celular auxiliar"
+    },
+    "BUNCH":{
+        "BUNCH_NAME": "Grupo"
     }
 }
