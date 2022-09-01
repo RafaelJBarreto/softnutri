@@ -29,14 +29,20 @@ professional: {
 food:{
     save:string,
     listall:string,
+    get:string,
+    delete:string,
 };
 bunch:{ 
     save:string,
     listall:string,
+    get:string,
+    delete:string,
 };
 foodbunch:{ 
     save:string,
-    listall:string
+    listall:string,
+    get:string,
+    delete:string,
 }
 };
 
@@ -79,15 +85,21 @@ export class ConstService implements OnChanges{
         food: {
             save: e.rota + "food/save",
             listall: e.rota + "food/",
+            get: e.rota + "food/get/",
+            delete: e.rota + "food/delete/",
 
         },
         bunch:{
             save: e.rota + "bunch/save",
             listall: e.rota + "bunch/", 
+            get: e.rota + "bunch/get/",
+            delete: e.rota + "bunch/delete/",
         },
         foodbunch:{
             save: e.rota + "foodBunch/save",
-            listall: e.rota + "foodBunch/"
+            listall: e.rota + "foodBunch/",
+            get: e.rota + "foodBunch/get/",
+            delete: e.rota + "foodBunch/delete/",
         }
     }; 
     redirect:redirect= {

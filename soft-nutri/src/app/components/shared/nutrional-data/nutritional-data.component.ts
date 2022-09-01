@@ -27,10 +27,10 @@ export class NutritionalDataComponent implements OnInit  {
   verifyEdit(){
     if(this.sendNutritionalData.calories != null){
       this.formNutritional = new UntypedFormGroup({
-        calories: new UntypedFormControl(this.nutritionalData.calories, [Validators.required]),
-        protein: new UntypedFormControl(this.nutritionalData.protein, [Validators.required]),
-        lipids: new UntypedFormControl(this.nutritionalData.lipids, [Validators.required]),
-        carbohydrate: new UntypedFormControl(this.nutritionalData.carbohydrate, [Validators.required])
+        calories: new UntypedFormControl(this.sendNutritionalData.calories, [Validators.required]),
+        protein: new UntypedFormControl(this.sendNutritionalData.protein, [Validators.required]),
+        lipids: new UntypedFormControl(this.sendNutritionalData.lipids, [Validators.required]),
+        carbohydrate: new UntypedFormControl(this.sendNutritionalData.carbohydrate, [Validators.required])
       });  
     }
   } 

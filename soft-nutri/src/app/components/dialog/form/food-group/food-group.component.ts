@@ -21,7 +21,7 @@ export class FoodGroupComponent implements OnInit {
 
   constructor(  
     public dialogRef: MatDialogRef<FoodGroupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Bunch,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public service:BunchService,
     public translate: TranslateService,
     private snackBar: MatSnackBar,
@@ -40,8 +40,8 @@ export class FoodGroupComponent implements OnInit {
   verifyEdit(){
     if(this.data != null){
       this.form = new UntypedFormGroup({
-        idBunch: new UntypedFormControl(this.data.idBunch),
-        description: new UntypedFormControl(this.data.description, [Validators.required]) 
+        idBunch: new UntypedFormControl(this.data.bunch.idBunch),
+        description: new UntypedFormControl(this.data.bunch.description, [Validators.required]) 
       });  
     }
   }

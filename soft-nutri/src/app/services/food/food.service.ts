@@ -24,4 +24,8 @@ export class FoodService {
   save(obj:Food): Observable<any> {
         return this.http.post(this.api.rest.food.save, obj );
   }
+
+  delete(id:any): Observable<any> {
+    return this.http.delete(this.api.rest.food.delete + id );
+  } 
 }

@@ -18,6 +18,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DataFoodService } from './services/food/dataFood.service';
 import { Update } from './services/shared/updated/updated.service';
+import { FoodsComponent } from './components/foods/foods.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {

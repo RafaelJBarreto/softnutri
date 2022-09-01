@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NutritionalData } from 'src/app/model';
 import { Food } from 'src/app/model/food/food';
-import { throwIfEmpty } from 'rxjs';
 import { FoodService } from 'src/app/services/food/food.service'; 
 import { NutritionalDataComponent } from 'src/app/components/shared/nutrional-data/nutritional-data.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,11 +20,10 @@ export class FoodComponent implements OnInit {
   errorMessage: any;
   @ViewChild(NutritionalDataComponent)
   private nutritionalDataComponent!: NutritionalDataComponent;
-
   
   constructor(  
     public dialogRef: MatDialogRef<FoodComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Food,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public service:FoodService,
     public translate: TranslateService,
     private snackBar: MatSnackBar
@@ -42,10 +40,10 @@ export class FoodComponent implements OnInit {
   verifyEdit(){
     if(this.data != null){
       this.form = new UntypedFormGroup({
-        idFood: new UntypedFormControl(this.data.idFood),
-        description: new UntypedFormControl(this.data.description, [Validators.required]) 
+        idFood: new UntypedFormControl(this.data.food.idFood),
+        description: new UntypedFormControl(this.data.food.description, [Validators.required]) 
       }); 
-      this.nutritionalData = this.data.nutritionalData
+      this.nutritionalData = this.data.food.nutritionalData
     }
   }
 

@@ -24,7 +24,12 @@ export class FoodBunchService {
   saveFoodBunch(foodBunch: FoodBunch): Observable<any> {
     return this.http.post(this.api.rest.foodbunch.save, foodBunch );
   }
+
   listAllBunch(): Observable<any> { 
     return this.http.get(this.api.rest.foodbunch.listall);
   }
+
+  delete(id:any): Observable<any> {
+    return this.http.delete(this.api.rest.foodbunch.delete + id );
+  } 
 }

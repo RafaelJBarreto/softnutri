@@ -27,4 +27,8 @@ export class BunchService {
   listAllBunch(): Observable<any> { 
     return this.http.get(this.api.rest.bunch.listall);
   }
+
+  delete(id:any): Observable<any> {
+    return this.http.delete(this.api.rest.bunch.delete + id );
+  } 
 }
