@@ -1,6 +1,7 @@
 package br.com.softnutri.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,16 @@ public class FoodBunchService {
 	
 	public ResponseEntity<List<FoodBunchDTO>> getAll() {
 		return ResponseEntity.ok(FoodBunchDTO.converter(this.foodBunchRepository.getAll()));
+	}
+	
+	public ResponseEntity<MessageResponse> delete(Long id) {
+		Optional<FoodBunch> foodBunch = this.foodBunchRepository.findById(id);
+		if (foodBunch.isPresent()) {
+			foodBunchRepository.delete(foodBunch.get());
+			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
+		} else {
+			return null;
+		}
 	}
 	 
 }

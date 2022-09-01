@@ -82,7 +82,10 @@
         "FOOD_FOOD_GROUP": "Grupo de Alimento",
         "FOOD_TITLE": "Alimentos",
         "ERROR_FOOD_BUNCH": "Erro ao tentar cadastrar grupo de alimento.",
-        "ERROR_FOOD_EMPTY": "Você precisa selecionar pelo menos um alimento."
+        "ERROR_FOOD_EMPTY": "Você precisa selecionar pelo menos um alimento.",
+        "FOOD_EDIT": "Editar alimento",
+        "FOOD_REMOVE": "Remover alimento",
+        "DESCRIPTION_REMOVE": "Deseja remover o alimento?"
     },
     "MENU": {
         "HOME": "Home",
@@ -127,6 +130,11 @@
         "PERSON_CELULAR2": "Celular auxiliar"
     },
     "BUNCH":{
-        "BUNCH_NAME": "Grupo"
+        "BUNCH_NAME": "Grupo",
+        "BUNCH_EDIT": "Editar grupo",
+        "BUNCH_REMOVE": "Remover grupo",
+        "FOOD_BUNCH_REMOVE": "Remover alimento do grupo",
+        "DESCRIPTION_REMOVE_BUNCH": "Deseja remover o grupo?",
+        "DESCRIPTION_REMOVE_FOODBUNCH": "Deseja remover o alimento do grupo?"
     }
 }

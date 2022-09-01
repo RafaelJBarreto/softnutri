@@ -49,6 +49,8 @@ import { ProfessionalActionComponent } from './professional/professional-action/
 import { HomeComponent } from './home/home.component';
 import { ProfessionalDeleteComponent } from './professional/professional-delete/professional-delete.component';
 import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { RemoveDialogComponent } from './dialog/form/remove-dialog/remove-dialog.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -73,7 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfessionalActionComponent,
     HomeComponent,
     PhoneDetailComponent,
-    ProfessionalDeleteComponent],
+    ProfessionalDeleteComponent,
+    RemoveDialogComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
@@ -115,7 +118,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatGridListModule,
     NgxMaskModule,
     FontAwesomeModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
   exports: [
     SidebarComponent,

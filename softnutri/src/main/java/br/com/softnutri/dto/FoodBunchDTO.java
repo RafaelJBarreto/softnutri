@@ -6,6 +6,7 @@ import br.com.softnutri.util.FoodBunchReturn;
 
 public class FoodBunchDTO {
 
+	private Long idFoodBunch;
 	private BunchDTO bunch;
 	private FoodDTO food;
 	private List<FoodDTO> foods;
@@ -14,9 +15,18 @@ public class FoodBunchDTO {
 	}
 
 	public FoodBunchDTO(FoodBunchReturn foodBunch) {
+		this.idFoodBunch = foodBunch.getIdFoodBunch();
 		this.bunch = new BunchDTO(foodBunch.getIdBunch(), foodBunch.getDescription());
 		this.food = new FoodDTO(foodBunch.getIdFood(), foodBunch.getDescriptionFood(), foodBunch.getCalories(),
 				foodBunch.getProtein(), foodBunch.getLipids(), foodBunch.getCarbohydrate());
+	}
+
+	public Long getIdFoodBunch() {
+		return idFoodBunch;
+	}
+
+	public void setIdFoodBunch(Long idFoodBunch) {
+		this.idFoodBunch = idFoodBunch;
 	}
 
 	public BunchDTO getBunch() {

@@ -1,12 +1,14 @@
 package br.com.softnutri.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
+import br.com.softnutri.domain.Bunch;
 import br.com.softnutri.dto.BunchDTO;
 import br.com.softnutri.repository.BunchRepository;
 
@@ -27,6 +29,16 @@ public class BunchService {
 	
 	public ResponseEntity<List<BunchDTO>> listAll() { 
 		return ResponseEntity.ok(BunchDTO.converter(this.bunchRepository.findAll()));
+	}
+	
+	public ResponseEntity<MessageResponse> delete(Long id) {
+		Optional<Bunch> bunch = this.bunchRepository.findById(id);
+		if (bunch.isPresent()) {
+			bunchRepository.delete(bunch.get());
+			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
+		} else {
+			return null;
+		}
 	}
 	 
 }
