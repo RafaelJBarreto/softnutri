@@ -51,6 +51,7 @@ import { ProfessionalDeleteComponent } from './professional/professional-delete/
 import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { RemoveDialogComponent } from './dialog/form/remove-dialog/remove-dialog.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -76,7 +77,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     PhoneDetailComponent,
     ProfessionalDeleteComponent,
-    RemoveDialogComponent],
+    RemoveDialogComponent,
+    CalendarComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({

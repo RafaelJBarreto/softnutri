@@ -5,23 +5,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Person } from 'src/app/model/person/person';
-import { Phone } from 'src/app/model/phone/phone';
+import { Calendar } from 'src/app/model/calendar/calendar';
 import { PersonService } from 'src/app/services/patient/patient.service';
 import { ConstService } from 'src/app/services/shared/const.service';
-import { PhoneDetailComponent } from '../phone-detail/phone-detail.component';
-import { PersonDeleteComponent } from './person-delete/person-delete.component';
 
 @Component({
-  selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.scss']
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.scss']
 })
-export class PersonComponent implements OnInit {
+export class CalendarComponent implements OnInit {
+
   public action: any;
-  displayedColumns: string[] = ['idPatient', 'name', 'email', 'cpf', 'birthDate', 'address', "actions"];
-  dataSource!: MatTableDataSource<Person>;
-  person: Person[] = [];
+  displayedColumns: string[] = ['idCalendar', 'professional', 'patient', 'dateOfDay', 'hourOfDay', 'note', 'completed', 'cancel', 'actions'];
+  dataSource!: MatTableDataSource<Calendar>;
+  calendar: Calendar[] = [];
   errorMessage: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -41,8 +39,8 @@ export class PersonComponent implements OnInit {
   private listData() {
     this.service.listAll().subscribe({
       next: data => {
-        this.person = data;
-        this.dataSource = new MatTableDataSource(this.person);
+        this.calendar = data;
+        this.dataSource = new MatTableDataSource(this.calendar);
       },
       error: err => {
         this.errorMessage = err.message;
@@ -61,27 +59,6 @@ export class PersonComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-  delete(idPerson: any) {
-    const dialogRef = this.dialog.open(PersonDeleteComponent, {
-      width: '250px',
-      data: { id: idPerson },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.listData();
-    });
-  }
-
-  getPhone(phones: Array<Phone>) {
-    const dialogRef = this.dialog.open(PhoneDetailComponent, {
-      width: '300px',
-      data: phones,
-    });
-  }
-
-  edit(idPerson: any) {
-    this.router.navigate([this.action, idPerson]);
-  }
-
 }
+
+

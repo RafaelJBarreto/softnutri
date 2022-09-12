@@ -93,7 +93,8 @@
         "FOOD": "Alimentos",
         "MENU": "Cardápio",
         "PROFESSIONAL": "Profissional",
-        "PERMISSION": "Permissões"
+        "PERMISSION": "Permissões",
+        "CALENDAR": "Agenda"
     } ,
     "PATIENT": {
         "PATIENT_NEW": "Cadastro de Pacientes",
@@ -136,5 +137,16 @@
         "FOOD_BUNCH_REMOVE": "Remover alimento do grupo",
         "DESCRIPTION_REMOVE_BUNCH": "Deseja remover o grupo?",
         "DESCRIPTION_REMOVE_FOODBUNCH": "Deseja remover o alimento do grupo?"
+    },
+    "CALENDAR":{
+        "CALENDAR_TITLE": "Agenda",
+        "CALENDAR_IDCALENDAR": "Id Agenda",
+        "CALENDAR_PROFESSIONAL": "Profissional",
+        "CALENDAR_PATIENT": "Paciente",
+        "CALENDAR_DATEOFDAY": "Dia",
+        "CALENDAR_HOUROFDAY": "Hora",
+        "CALENDAR_NOTE": "Observação",
+        "CALENDAR_COMPLETED": "Finalizada",
+        "CALENDAR_CANCEL": "Cancelada"
     }
 }
