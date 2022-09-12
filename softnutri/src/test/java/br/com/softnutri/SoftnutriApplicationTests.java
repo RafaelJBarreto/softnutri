@@ -57,7 +57,7 @@ class SoftnutriApplicationTests {
 		Person p = new Person();
 		p.setCpf("10490376690");
 		p.setBirthDate(LocalDate.now());
-		p.setEmail("rola@outlook.com.br");
+		p.setEmail("teste@outlook.com.br");
 		p.setAddress("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
 		p.setName("Rafael");
 		p.setGender(Gender.M);
@@ -69,21 +69,21 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroRecepcao() {
 
-		Optional<User> userAux = usuarioRepository.findByEmail(Criptografia.encode("picadura1@outlook.com.br"));
+		Optional<User> userAux = usuarioRepository.findByEmail(Criptografia.encode("teste2@outlook.com.br"));
 		User p = new User();
-		p.setIdPerson(userAux.get().getIdPerson());
-		p.setDateRegister(userAux.get().getDateRegister());
 		p.setCpf("18956896533");
 		p.setBirthDate(LocalDate.now());
-		p.setEmail("picadura1@outlook.com.br");
+		p.setEmail("teste2@outlook.com.br");
 		p.setAddress("Rua da preguiça, Barbacena-MG");
-		p.setName("Xuxu baitola");
+		p.setName("Teste");
 		p.setGender(Gender.M);
 		p.setPassword("123456");
 		p.setLanguage("pt-Br");
 		if (userAux.isPresent()) {
 			p.setUserType(UserType.NUTRITIONIST);
 			p.setCrn("123456789");
+			p.setIdPerson(userAux.get().getIdPerson());
+			p.setDateRegister(userAux.get().getDateRegister());
 		}
 		User nc = usuarioRepository.save(p);
 

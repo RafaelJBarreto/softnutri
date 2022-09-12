@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -58,6 +59,12 @@ const routes: Routes = [
     component: ProfessionalActionComponent
   },
   {
+    path: 'calendar',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: CalendarComponent
+  },
+  {
     path: 'login',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
   },
@@ -67,7 +74,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '404'
+    component: NotFoundComponent
   }
 ];
 @NgModule({

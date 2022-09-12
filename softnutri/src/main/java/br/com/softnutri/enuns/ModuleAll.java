@@ -10,7 +10,8 @@ public enum ModuleAll {
 	PROFESSIONAL_MODULE(getProfessional(), "/professional", "fa-solid fa-user", 3, getPapers(getProfessional().toUpperCase())),
 	FOOD_MODULE(getFood(), "/food", "fa-solid fa-apple-whole", 4, getPapers(getFood().toUpperCase())),
 	MENU_MODULE(getMenu(), "/menu", "fa-solid fa-utensils", 5, getPapers(getMenu().toUpperCase())),
-	PERMISSION_MODULE(getPermission(), "/permission", "fa-solid fa-screwdriver-wrench", 5, getPapers(getPermission().toUpperCase()));
+	PERMISSION_MODULE(getPermission(), "/permission", "fa-solid fa-screwdriver-wrench", 5, getPapers(getPermission().toUpperCase())),
+	CALENDAR_MODULE(getCalendar(), "/calendar", "fa-solid fa-calendar-days", 6, getPapers(getCalendar().toUpperCase()));;
 
 	private String name;
 	private String pathBase;
@@ -23,6 +24,7 @@ public enum ModuleAll {
 	private static final String MENU = "menu";
 	private static final String PROFESSIONAL = "professional";
 	private static final String PERMISSION = "permission";
+	private static final String CALENDAR = "calendar";
 
 	private ModuleAll(String name, String pathBase, String icon, Integer orders, List<PaperAll> listPapers) {
 		this.name = name;
@@ -67,6 +69,14 @@ public enum ModuleAll {
 	public static String getProfessional() {
 		return PROFESSIONAL;
 	}
+	
+	public static String getPermission() {
+		return PERMISSION;
+	}
+
+	public static String getCalendar() {
+		return CALENDAR;
+	}
 
 	public List<PaperAll> getListPapers() {
 		return listPapers;
@@ -74,10 +84,6 @@ public enum ModuleAll {
 
 	private static EnumSet<PaperAll> listPapers() {
 		return EnumSet.allOf(PaperAll.class);
-	}
-
-	public static String getPermission() {
-		return PERMISSION;
 	}
 
 	private static List<PaperAll> getPapers(String name) {

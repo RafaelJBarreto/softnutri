@@ -1,17 +1,20 @@
 package br.com.softnutri.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,11 +39,20 @@ public class User extends Person {
 
 	private String crn;
 	
+	@OneToMany(mappedBy = "professional", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Calendar> calendarProfessional;
+	
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Calendar> calendarPatient;
+	
+	@OneToMany(mappedBy = "receptionist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Calendar> calendarReceptionist;
+		
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "personPaper", joinColumns = { @JoinColumn(name = "idPerson") }, inverseJoinColumns = {
 			@JoinColumn(name = "idPaper") })
 	private Set<Paper> paper;
-
+		
 	public String getPassword() {
 		return password;
 	}
