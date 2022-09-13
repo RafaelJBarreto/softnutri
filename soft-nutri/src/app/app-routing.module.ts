@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { CalendaractionComponent } from './components/calendar/calendaraction/calendaraction.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -63,6 +64,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: CalendarComponent
+  },
+  {
+    path: 'calendaraction',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: CalendaractionComponent
   },
   {
     path: 'login',

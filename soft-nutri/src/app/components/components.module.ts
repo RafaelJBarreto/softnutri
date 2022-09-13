@@ -52,6 +52,9 @@ import { PhoneDetailComponent } from './phone-detail/phone-detail.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { RemoveDialogComponent } from './dialog/form/remove-dialog/remove-dialog.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CalendaractionComponent } from './calendar/calendaraction/calendaraction.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -78,7 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PhoneDetailComponent,
     ProfessionalDeleteComponent,
     RemoveDialogComponent,
-    CalendarComponent],
+    CalendarComponent,
+    CalendaractionComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
@@ -121,7 +125,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxMaskModule,
     FontAwesomeModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatAutocompleteModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
   ],
   exports: [
     SidebarComponent,

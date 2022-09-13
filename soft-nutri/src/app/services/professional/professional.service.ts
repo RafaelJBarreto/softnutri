@@ -34,4 +34,8 @@ export class ProfessionalService {
     return this.http.delete(this.api.rest.professional.delete + idPerson );
   } 
 
+  getNutritionist(): Observable<any> { 
+    return this.http.get(this.api.rest.professional.nutritionist);
+  }
+
 }

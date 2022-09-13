@@ -1,8 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component'; 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +16,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DataFoodService } from './services/food/dataFood.service';
 import { Update } from './services/shared/updated/updated.service';
-import { FoodsComponent } from './components/foods/foods.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {

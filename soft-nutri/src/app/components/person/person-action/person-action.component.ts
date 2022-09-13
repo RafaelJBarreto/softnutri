@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { UserType } from 'src/app/model/shared/userType';
 import { User } from 'src/app/model/user/user';
 import { PersonService } from 'src/app/services';
 import { ConstService } from 'src/app/services/shared/const.service';
+
 
 @Component({
   selector: 'app-person-action',
