@@ -37,8 +37,6 @@ public class Calendar {
 	@Column(name = "hourOfDay", nullable = false)
 	private LocalTime hourOfDay;
 
-	@Basic(optional = false)
-	@Column(name = "note", nullable = false)
 	private String note;
 
 	@Basic(optional = false)

@@ -103,7 +103,8 @@
         "ERROR_LIST_PATIENT": "Erro ao listar pacientes.",
         "ERROR_DELETE_PATIENT": "Erro ao tentar deletar paciente.",
         "ERROR_DADO_PATIENT": "Paciente não existe.",
-        "ERROR_SAVE_PATIENT": "Erro ao tentar cadastrar paciente."
+        "ERROR_SAVE_PATIENT": "Erro ao tentar cadastrar paciente.",
+        "PATIENT": "Paciente"
     },
     "PROFESSIONAL": {
         "PROFESSIONAL_NEW": "Cadastro de Profissionais",
@@ -116,7 +117,8 @@
         "NUTRITIONIST": "Nutricionista",
         "PROFESSIONAL_CRN": "CRN",
         "ERROR_DADO_PROFESSIONAL": "Profissional não existe.",
-        "ERROR_SAVE_PROFESSIONAL": "Erro ao tentar cadastrar profissional."
+        "ERROR_SAVE_PROFESSIONAL": "Erro ao tentar cadastrar profissional.",
+        "PROFESSIONAL": "Profissional"
     },
     "PERSON": {
         "PERSON_NAME": "Nome",
@@ -139,7 +141,7 @@
         "DESCRIPTION_REMOVE_FOODBUNCH": "Deseja remover o alimento do grupo?"
     },
     "CALENDAR":{
-        "CALENDAR_TITLE": "Agenda",
+        "CALENDAR_TITLE": "Agendamentos",
         "CALENDAR_IDCALENDAR": "Id Agenda",
         "CALENDAR_PROFESSIONAL": "Profissional",
         "CALENDAR_PATIENT": "Paciente",
@@ -147,6 +149,8 @@
         "CALENDAR_HOUROFDAY": "Hora",
         "CALENDAR_NOTE": "Observação",
         "CALENDAR_COMPLETED": "Finalizada",
-        "CALENDAR_CANCEL": "Cancelada"
+        "CALENDAR_CANCEL": "Cancelada",
+        "ERROR_LIST_CALENDAR": "Erro ao listar agendamentos.",
+        "CALENDAR_NEW": "Novo Agendamento"
     }
 }

@@ -3,16 +3,21 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.event.annotation.AfterTestExecution;
 
+import br.com.softnutri.domain.Calendar;
 import br.com.softnutri.domain.Person;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.enuns.Gender;
 import br.com.softnutri.enuns.UserType;
+import br.com.softnutri.repository.CalendarRepository;
 import br.com.softnutri.repository.PersonRepository;
 import br.com.softnutri.repository.UserRepository;
 import br.com.softnutri.util.Criptografia;
@@ -21,13 +26,14 @@ import br.com.softnutri.util.Criptografia;
 class SoftnutriApplicationTests {
 
 	private final PersonRepository pessoaRepository;
-
 	private final UserRepository usuarioRepository;
+	private final CalendarRepository calendarRepository;
 
 	@Autowired
-	public SoftnutriApplicationTests(PersonRepository pessoaRepository, UserRepository usuarioRepository) {
+	public SoftnutriApplicationTests(PersonRepository pessoaRepository, UserRepository usuarioRepository, CalendarRepository calendarRepository) {
 		this.pessoaRepository = pessoaRepository;
 		this.usuarioRepository = usuarioRepository;
+		this.calendarRepository = calendarRepository;
 	}
 
 	@Test
@@ -88,6 +94,39 @@ class SoftnutriApplicationTests {
 		User nc = usuarioRepository.save(p);
 
 		assertEquals(p.getEmail(), nc.getEmail());
+
+	}
+	
+	@Test
+	@AfterTestExecution
+	void testaCadastroAgenda() {
+
+		List<User> professional = usuarioRepository.findByUserType(UserType.NUTRITIONIST);
+		List<User> receptionist = usuarioRepository.findByUserType(UserType.RECEPTIONIST);
+		List<User> patient = usuarioRepository.findByUserType(UserType.PATIENT);
+		
+		Calendar calendar = new Calendar();
+		
+		calendar.setCancel(true);
+		calendar.setCompleted(false);
+		calendar.setDateOfDay(LocalDate.now() );
+		calendar.setHourOfDay(LocalTime.now());
+		calendar.setNote("teste 2");
+		if(!professional.isEmpty()) {
+			calendar.setProfessional(professional.get(0));
+		}
+		if(!receptionist.isEmpty()) {
+			calendar.setReceptionist(receptionist.get(0));
+		}
+		
+		if(!patient.isEmpty()) {
+			calendar.setPatient(patient.get(0));
+		}
+		
+		
+		Calendar nc = calendarRepository.save(calendar);
+
+		assertEquals(calendar.getDateOfDay(), nc.getDateOfDay());
 
 	}
 }

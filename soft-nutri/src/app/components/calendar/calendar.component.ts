@@ -3,10 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Calendar } from 'src/app/model/calendar/calendar';
-import { PersonService } from 'src/app/services/patient/patient.service';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { ConstService } from 'src/app/services/shared/const.service';
 
 @Component({
@@ -24,12 +23,11 @@ export class CalendarComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public dialog: MatDialog,
-    public service: PersonService,
+    public service: CalendarService,
     public translate: TranslateService,
     private snackBar: MatSnackBar,
-    private global: ConstService,
-    private router: Router) {
-    this.action = this.global.rest.patient.patientaction;
+    private global: ConstService) {
+    this.action = this.global.rest.calendar.calendaraction;
   }
 
   ngOnInit(): void {
@@ -44,7 +42,7 @@ export class CalendarComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
+        this.snackBar.open(this.translate.instant('CALENDAR.ERROR_LIST_CALENDAR'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000,

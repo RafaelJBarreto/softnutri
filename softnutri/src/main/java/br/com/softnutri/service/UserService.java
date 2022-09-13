@@ -95,4 +95,10 @@ public class UserService extends AutenticationService {
 		return UserDTO.converter(users);
 
 	}
+	
+	public List<UserDTO> getNutritionist() {
+		List<User> users = userRepository.getNutritionist(UserType.NUTRITIONIST);
+		return UserDTO.converter(users);
+
+	}
 }

@@ -25,6 +25,7 @@ professional: {
     save:string,
     get:string,
     delete:string,
+    nutritionist: string,
 };
 food:{
     save:string,
@@ -43,6 +44,13 @@ foodbunch:{
     listall:string,
     get:string,
     delete:string,
+};
+calendar:{ 
+    calendar:string,
+    save:string,
+    listall:string,
+    get:string,
+    calendaraction:string,
 }
 };
 
@@ -80,6 +88,7 @@ export class ConstService implements OnChanges{
             save: e.rota + "professional/save",
             get: e.rota + "professional/get/",
             delete: e.rota + "professional/delete/",
+            nutritionist: e.rota + "professional/nutritionist"
 
         },
         food: {
@@ -100,6 +109,13 @@ export class ConstService implements OnChanges{
             listall: e.rota + "foodBunch/",
             get: e.rota + "foodBunch/get/",
             delete: e.rota + "foodBunch/delete/",
+        },
+        calendar:{
+            calendar: "/calendar",
+            save: e.rota + "calendar/save",
+            listall: e.rota + "calendar/",
+            get: e.rota + "calendar/get/",
+            calendaraction: "/calendaraction",
         }
     }; 
     redirect:redirect= {

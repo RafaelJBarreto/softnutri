@@ -55,5 +55,11 @@ public class ProfessionalController {
 	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
 		return personService.delete(id);
 	}
+	
+	@GetMapping("/nutritionist")
+	@Cacheable("nutritionist")
+	public List<UserDTO> getNutritionist() {
+		return userService.getNutritionist();
+	}
 
 }
