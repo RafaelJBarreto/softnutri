@@ -54,7 +54,9 @@ import { RemoveDialogComponent } from './dialog/form/remove-dialog/remove-dialog
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendaractionComponent } from './calendar/calendaraction/calendaraction.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -127,9 +129,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatBadgeModule,
     MatTooltipModule,
     MatAutocompleteModule,
-    NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    NgxMatNativeDateModule,
+    MatSlideToggleModule,
+    FlexLayoutModule
   ],
   exports: [
     SidebarComponent,

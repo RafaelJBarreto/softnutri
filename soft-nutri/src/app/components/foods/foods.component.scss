@@ -2,6 +2,15 @@
 @import "src/app/styles/variables";
 @import "src/app/styles/font";
 
+.position_menu{
+  float: right;
+}
+
+i{
+  font-size: 15px;
+  padding-left: 5px;
+}
+
 ::ng-deep .mat-checkbox-checked.mat-accent {
   .mat-checkbox-ripple .mat-ripple-element {
       background-color: $blue !important;

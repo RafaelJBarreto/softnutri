@@ -10,7 +10,6 @@ import { ConstService } from 'src/app/services/shared/const.service';
 import { map, startWith } from 'rxjs/operators';
 import { Calendar } from 'src/app/model/calendar/calendar';
 import { ProfessionalService } from 'src/app/services/professional/professional.service';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendaraction',
@@ -32,18 +31,7 @@ export class CalendaractionComponent implements OnInit {
   nutritionistControl = new FormControl('');
   filteredOptionsNutritionist: Observable<User[]>  = new Observable;
 
-  public date!: moment.Moment;
-  public disabled = false;
-  public showSpinners = true;
-  public showSeconds = false;
-  public touchUi = false;
-  public enableMeridian = false;
-  public minDate!: moment.Moment;
-  public maxDate!: moment.Moment;
-  public stepHour = 1;
-  public stepMinute = 1;
-  public stepSecond = 1;
-
+  time: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -128,7 +116,11 @@ export class CalendaractionComponent implements OnInit {
     this.isEdit = isEdit;
     if (!isEdit) {
       this.form = new UntypedFormGroup({
-        idCalendar: new UntypedFormControl('')
+        idCalendar: new UntypedFormControl(''),
+        cancel: new UntypedFormControl(''),
+        hourofday: new UntypedFormControl('',  [Validators.required]),
+        dateofday: new UntypedFormControl('',  [Validators.required]),
+        note: new UntypedFormControl('')
 
       });
     } else {

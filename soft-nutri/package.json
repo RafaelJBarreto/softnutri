@@ -16,6 +16,7 @@
     "@angular/common": "^14.2.1",
     "@angular/compiler": "^14.2.1",
     "@angular/core": "^14.2.1",
+    "@angular/flex-layout": "^14.0.0-beta.40",
     "@angular/forms": "^14.2.1",
     "@angular/material": "^14.2.1",
     "@angular/platform-browser": "^14.2.1",
@@ -28,7 +29,9 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "moment": "^2.29.4",
+    "ngx-daterangepicker-material": "^6.0.2",
     "ngx-mask": "^14.2.2",
+    "ngx-mat-timepicker": "^14.0.2",
     "rxjs": "~7.5.6",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.8"

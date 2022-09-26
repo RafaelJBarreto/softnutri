@@ -151,6 +151,10 @@
         "CALENDAR_COMPLETED": "Finalizada",
         "CALENDAR_CANCEL": "Cancelada",
         "ERROR_LIST_CALENDAR": "Erro ao listar agendamentos.",
-        "CALENDAR_NEW": "Novo Agendamento"
+        "CALENDAR_NEW": "Novo Agendamento",
+        "CALENDAR_CANCEL_": "Cancelar agendamento"
+    },
+    "INTERVAL":{
+        "INTERVAL_CALENDAR": "Intervalo entre agendas"
     }
 }

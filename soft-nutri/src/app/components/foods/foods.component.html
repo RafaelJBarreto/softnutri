@@ -1,18 +1,19 @@
 <app-layout>
     <mat-card class="table-table-wrapper" style="margin-bottom: 100px;">
-        <mat-toolbar color="white">
-            <span class="table-table-wrapper__title">{{'FOOD.FOOD_TITLE' | translate}}</span>
-            <span class="header-spacer"></span>
-            <button mat-icon-button [matMenuTriggerFor]="menu"
-                aria-label="Example icon button with a vertical three dot icon">
-                <mat-icon>list</mat-icon>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="position_menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog(1)">
+              <span><i class="fa-solid fa-carrot"></i> {{'FOOD.FOOD_NEW_FOOD' | translate}}</span>
             </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="openDialog(1)">{{'FOOD.FOOD_NEW_FOOD' | translate | uppercase}}</button>
-                <button mat-menu-item (click)="openDialog(2)">{{'FOOD.FOOD_NEW_FOOD_GROUP' | translate |
-                    uppercase}}</button>
-            </mat-menu>
-        </mat-toolbar>
+            <button mat-menu-item (click)="openDialog(2)">
+              <span><i class="fa-solid fa-layer-group"></i> {{'FOOD.FOOD_NEW_FOOD_GROUP' | translate}}</span>
+            </button>
+          </mat-menu>
+
+       
 
         <mat-form-field appearance="standard">
             <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>

@@ -3,9 +3,17 @@
         <mat-toolbar color="white">
             <span class="table-table-wrapper__title">{{'CALENDAR.CALENDAR_TITLE' | translate}}</span>
             <span class="header-spacer"></span>
-            <button mat-flat-button class="button-color" [routerLink]="action" routerLinkActive="active">
-              <i class="fa-solid fa-plus"></i>{{'GLOBAL.NEW' | translate}}
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="position_menu">
+              <i class="fa-solid fa-bars"></i>
             </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="action" routerLinkActive="active">
+                <span><i class="fa-regular fa-calendar-plus"></i> {{'CALENDAR.CALENDAR_NEW' | translate}}</span>
+              </button>
+              <button mat-menu-item>
+                <span><i class="fa-solid fa-hourglass-start"></i> {{'INTERVAL.INTERVAL_CALENDAR' | translate}}</span>
+              </button>
+            </mat-menu>
         </mat-toolbar>
 
         <mat-card-content class="table-table__content style-mat-card-contet">

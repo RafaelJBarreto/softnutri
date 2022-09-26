@@ -55,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RouterModule,
     AppRoutingModule,
     ComponentsModule,
-    FontAwesomeModule,
+    FontAwesomeModule
   ],
   providers: [authInterceptorProviders, ConstService, DataFoodService, Update,
     {

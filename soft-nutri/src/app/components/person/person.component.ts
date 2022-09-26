@@ -19,7 +19,7 @@ import { PersonDeleteComponent } from './person-delete/person-delete.component';
 })
 export class PersonComponent implements OnInit {
   public action: any;
-  displayedColumns: string[] = ['idPatient', 'name', 'email', 'cpf', 'birthDate', 'address', "actions"];
+  displayedColumns: string[] = ['name', 'email', 'cpf', 'birthDate', 'address', "actions"];
   dataSource!: MatTableDataSource<Person>;
   person: Person[] = [];
   errorMessage: any;

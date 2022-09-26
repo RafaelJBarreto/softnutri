@@ -21,7 +21,7 @@ import { ProfessionalDeleteComponent } from './professional-delete/professional-
 export class ProfessionalComponent implements OnInit {
 
   public action: any;
-  displayedColumns: string[] = ['idPatient', 'name', 'email', 'cpf', 'birthDate', 'address', 'profession', "actions"];
+  displayedColumns: string[] = ['name', 'email', 'cpf', 'birthDate', 'address', 'profession', "actions"];
   dataSource!: MatTableDataSource<User>;
   person: User[] = [];
   errorMessage: any;

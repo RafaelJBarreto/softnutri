@@ -1,56 +1,67 @@
 <app-layout>
-    <form class="form" [formGroup]="form" (ngSubmit)="send()">
-        <mat-card class="table-table-wrapper">
+  <form class="form" [formGroup]="form" (ngSubmit)="send()">
+    <mat-card class="table-table-wrapper">
 
-            <mat-toolbar color="white">
-                <span class="table-table-wrapper__title">{{'CALENDAR.CALENDAR_NEW' | translate}}</span>
-            </mat-toolbar>
+      <mat-toolbar color="white">
+        <span class="table-table-wrapper__title">{{'CALENDAR.CALENDAR_NEW' | translate}}</span>
+      </mat-toolbar>
 
-            <mat-card-content class="table-table__content style-mat-card-contet">
-                <mat-form-field class="example-full-width">
-                    <mat-label>{{'PROFESSIONAL.PROFESSIONAL' | translate}}</mat-label>
-                    <input type="text" matInput [formControl]="nutritionistControl" [matAutocomplete]="autoNutritionist" required>
-                    <mat-autocomplete #autoNutritionist="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptionsNutritionist | async" [value]="option.name">
-                        {{option.name}}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+        <mat-form-field fxFlex>
+          <mat-label>{{'PROFESSIONAL.PROFESSIONAL' | translate}}</mat-label>
+          <input type="text" matInput [formControl]="nutritionistControl" [matAutocomplete]="autoNutritionist" required>
+          <mat-autocomplete #autoNutritionist="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsNutritionist | async" [value]="option.name">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <mat-label>{{'PATIENT.PATIENT' | translate}}</mat-label>
-                    <input type="text" matInput [formControl]="patientControl" [matAutocomplete]="autoPatient" required>
-                    <mat-autocomplete #autoPatient="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptionsPatient | async" [value]="option.name">
-                        {{option.name}}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
-
-                  <mat-form-field>
-                    <input matInput placeholder="Choose a date"
-                    [hidden]="true">
-                    <ngx-mat-timepicker 
-                    [(ngModel)]="date" [disabled]="disabled" 
-                    [showSpinners]="showSpinners"
-                    [stepHour]="stepHour" [stepMinute]="stepMinute" 
-                    [stepSecond]="stepSecond" 
-                    [showSeconds]="showSeconds">
-        </ngx-mat-timepicker>
-                  </mat-form-field>
-
-            </mat-card-content>
+        <mat-form-field fxFlex>
+          <mat-label>{{'PATIENT.PATIENT' | translate}}</mat-label>
+          <input type="text" matInput [formControl]="patientControl" [matAutocomplete]="autoPatient" required>
+          <mat-autocomplete #autoPatient="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsPatient | async" [value]="option.name">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
 
-            <mat-divider></mat-divider>
-            <section>
-                <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
-                    <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
-                </button>
-                <button mat-flat-button class="button-color" type="submit">
-                    <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
-                </button>
-            </section>
-        </mat-card>
-    </form>
+      </div>
+
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+        <mat-slide-toggle fxFlex="35%" class="padding_slider" formControlName="cancel">{{'CALENDAR.CALENDAR_CANCEL_' | translate }}
+        </mat-slide-toggle>
+        <mat-form-field fxFlex="35%">
+          <mat-label>{{'CALENDAR.CALENDAR_DATEOFDAY' | translate}}</mat-label>
+          <input matInput [matDatepicker]="pickerDate" required formControlName="dateofday">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="30%">
+          <mat-label>{{'CALENDAR.CALENDAR_HOUROFDAY' | translate}}</mat-label>
+          <input matInput [ngxMatTimepicker]="picker" required formControlName="hourofday">
+          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+        <mat-form-field class="example-full-width" fxFlex>
+          <mat-label>{{'CALENDAR.CALENDAR_NOTE' | translate}}</mat-label>
+          <textarea matInput formControlName="note"></textarea>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+      <section>
+        <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
+          <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
+        </button>
+        <button mat-flat-button class="button-color" type="submit">
+          <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
+        </button>
+      </section>
+    </mat-card>
+  </form>
 </app-layout>

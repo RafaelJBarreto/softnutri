@@ -1,72 +1,73 @@
 <app-layout>
     <form class="form" [formGroup]="form" (ngSubmit)="send()">
-    <mat-card class="table-table-wrapper">
+        <mat-card class="table-table-wrapper">
 
-        <mat-toolbar color="white">
-            <span class="table-table-wrapper__title">{{'PATIENT.PATIENT_NEW' | translate}}</span>
-        </mat-toolbar>
+            <mat-toolbar color="white">
+                <span class="table-table-wrapper__title">{{'PATIENT.PATIENT_NEW' | translate}}</span>
+            </mat-toolbar>
 
-        <mat-card-content class="table-table__content style-mat-card-contet">
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_NAME' | translate}}</mat-label>
-                <input matInput type="text" formControlName="name" required>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_EMAIL' | translate}}</mat-label>
-                <input matInput placeholder="pat@example.com"  type="email" formControlName="email" required>
-                <mat-error></mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_CPF' | translate}}</mat-label>
-                <input matInput type="text" formControlName="cpf" required mask="000-000-000.00">
-            </mat-form-field>
-        </mat-card-content>
+            <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+                <mat-form-field fxFlex>
+                    <mat-label>{{'PERSON.PERSON_NAME' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="name" required>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <mat-label>{{'PERSON.PERSON_EMAIL' | translate}}</mat-label>
+                    <input matInput placeholder="pat@example.com" type="email" formControlName="email" required>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <mat-label>{{'PERSON.PERSON_CPF' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="cpf" required mask="000-000-000.00">
+                </mat-form-field>
+            </div>
 
-        <mat-card-content>
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_BIRTHDATE' | translate}}</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
-                <mat-hint>DD/MM/YYYY</mat-hint>
-                <mat-datepicker-toggle matSuffix [for]="picker">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+            <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+                <mat-form-field fxFlex="25%">
+                    <mat-label>{{'PERSON.PERSON_BIRTHDATE' | translate}}</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_ADDRESS' | translate}}</mat-label>
-                <input matInput required type="text" formControlName="address">
-            </mat-form-field>
+                <mat-form-field fxFlex>
+                    <mat-label>{{'PERSON.PERSON_ADDRESS' | translate}}</mat-label>
+                    <input matInput required type="text" formControlName="address">
+                </mat-form-field>
+            </div>
 
-            <label style="padding-right: 20px; padding-left: 10px;">{{'PERSON.PERSON_GENDER' | translate}}</label>
-            <mat-radio-group formControlName="gender" required>
-                <mat-radio-button value="M" required>{{'PERSON.PERSON_MALE' | translate}}</mat-radio-button>
-                <mat-radio-button value="F" required>{{'PERSON.PERSON_FEMINISM' | translate}}</mat-radio-button>
-            </mat-radio-group>
-        </mat-card-content>
+            <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+                <div fxFlex="25%">
+                    <label>{{'PERSON.PERSON_GENDER' | translate}}</label>
+                    <mat-radio-group fxFlex formControlName="gender" required>
+                        <mat-radio-button value="M" required>{{'PERSON.PERSON_MALE' | translate}}</mat-radio-button>
+                        <mat-radio-button value="F" required>{{'PERSON.PERSON_FEMINISM' | translate}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <input matInput [hidden]="true" type="number" formControlName="idPhone">
+                <mat-form-field fxFlex>
+                    <mat-label>{{'PERSON.PERSON_CELULAR' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="celular" mask="(00) 00000-0000">
+                </mat-form-field>
+                <input matInput [hidden]="true" type="number" formControlName="idPhone2">
+                <mat-form-field fxFlex>
+                    <mat-label>{{'PERSON.PERSON_CELULAR2' | translate}}</mat-label>
+                    <input matInput type="text" formControlName="celular2" mask="(00) 00000-0000">
+                </mat-form-field>
+            </div>
 
-        <mat-card-content class="table-table__content style-mat-card-contet">
-            <input matInput [hidden]="true" type="number" formControlName="idPhone">
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_CELULAR' | translate}}</mat-label>
-                <input matInput type="text" formControlName="celular" mask="(00) 00000-0000">
-            </mat-form-field>
-            <input matInput [hidden]="true" type="number" formControlName="idPhone2">
-            <mat-form-field appearance="fill">
-                <mat-label>{{'PERSON.PERSON_CELULAR2' | translate}}</mat-label>
-                <input matInput type="text" formControlName="celular2" mask="(00) 00000-0000">
-            </mat-form-field>
-        </mat-card-content>
-
-        <mat-divider></mat-divider>
-        <section>
-            <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
-                <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
-            </button>
-            <button mat-flat-button class="button-color" type="submit">
-                <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
-            </button>
-        </section>
-    </mat-card>
-</form>
+            <mat-divider></mat-divider>
+            <section>
+                <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
+                    <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
+                </button>
+                <button mat-flat-button class="button-color" type="submit">
+                    <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
+                </button>
+            </section>
+        </mat-card>
+    </form>
 </app-layout>

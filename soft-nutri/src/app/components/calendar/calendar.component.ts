@@ -16,7 +16,7 @@ import { ConstService } from 'src/app/services/shared/const.service';
 export class CalendarComponent implements OnInit {
 
   public action: any;
-  displayedColumns: string[] = ['idCalendar', 'professional', 'patient', 'dateOfDay', 'hourOfDay', 'note', 'completed', 'cancel', 'actions'];
+  displayedColumns: string[] = ['professional', 'patient', 'dateOfDay', 'hourOfDay', 'note', 'completed', 'cancel', 'actions'];
   dataSource!: MatTableDataSource<Calendar>;
   calendar: Calendar[] = [];
   errorMessage: any;
