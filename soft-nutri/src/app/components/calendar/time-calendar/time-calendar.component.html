@@ -1,0 +1,24 @@
+<form class="form" class="form" [formGroup]="form" (ngSubmit)="send()">
+    <div mat-dialog-content>
+      <mat-label>{{'INTERVAL.TIME_INFO' | translate}}</mat-label>
+        <div [hidden]="true">
+            <mat-form-field class="form__input" appearance="fill">
+              <input matInput type="number" formControlName="idIntermission" readonly>
+            </mat-form-field>
+          </div>
+
+      <mat-form-field class="example-full-width">
+        <button
+          matPrefix
+          mat-icon-button
+        >
+        <i class="fa-solid fa-clock"></i>
+        </button>
+        <input matInput type="number" formControlName="time"/>
+      </mat-form-field>
+    </div>
+    <div class="form-actions">
+        <button class="form-actions__login" mat-raised-button color="primary" type="submit"><i
+            class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}</button>
+      </div>
+  </form>

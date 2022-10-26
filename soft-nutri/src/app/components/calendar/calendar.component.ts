@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Calendar } from 'src/app/model/calendar/calendar';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { ConstService } from 'src/app/services/shared/const.service';
+import { TimeCalendarComponent } from './time-calendar/time-calendar.component';
 
 @Component({
   selector: 'app-calendar',
@@ -56,6 +57,16 @@ export class CalendarComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
+  openDialog(): void {
+
+      const dialogRef = this.dialog.open(TimeCalendarComponent, {
+        width: '350px'
+      });
+
+      dialogRef.afterClosed().subscribe(_result => {
+      });
   }
 }
 

@@ -57,6 +57,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TimeCalendarComponent } from './calendar/time-calendar/time-calendar.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -84,7 +85,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfessionalDeleteComponent,
     RemoveDialogComponent,
     CalendarComponent,
-    CalendaractionComponent],
+    CalendaractionComponent,
+    TimeCalendarComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({

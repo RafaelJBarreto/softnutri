@@ -9,21 +9,13 @@ import br.com.softnutri.domain.Calendar;
 public class CalendarDTO {
 
 	private Long idCalendar;
-
 	private UserDTO professional;
-
 	private UserDTO patient;
-
 	private UserDTO receptionist;
-
 	private LocalDate dateOfDay;
-
 	private LocalTime hourOfDay;
-
 	private String note;
-
 	private boolean completed;
-
 	private boolean cancel;
 	
 

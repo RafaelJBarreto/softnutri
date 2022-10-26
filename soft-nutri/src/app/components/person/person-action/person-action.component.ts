@@ -75,6 +75,7 @@ export class PersonActionComponent implements OnInit {
       });
     }
   } 
+  
   public edit(): void {
       this.activatedroute.paramMap.subscribe(params => { 
         let id = params.get('id');
