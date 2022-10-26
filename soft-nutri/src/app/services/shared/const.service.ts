@@ -51,6 +51,10 @@ calendar:{
     listall:string,
     get:string,
     calendaraction:string,
+};
+intermission:{ 
+    save:string,
+    get:string,
 }
 };
 
@@ -116,6 +120,10 @@ export class ConstService implements OnChanges{
             listall: e.rota + "calendar/",
             get: e.rota + "calendar/get/",
             calendaraction: "/calendaraction",
+        },
+        intermission:{
+            save: e.rota + "intermission/save",
+            get: e.rota + "intermission/get",
         }
     }; 
     redirect:redirect= {

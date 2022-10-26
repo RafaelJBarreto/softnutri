@@ -155,6 +155,8 @@
         "CALENDAR_CANCEL_": "Cancelar agendamento"
     },
     "INTERVAL":{
-        "INTERVAL_CALENDAR": "Intervalo entre agendas"
+        "INTERVAL_CALENDAR": "Intervalo entre agendas",
+        "TIME_INFO": "Informe o tempo de intervalo em minutos.",
+        "INTERVAL": "Intervalo"
     }
 }
