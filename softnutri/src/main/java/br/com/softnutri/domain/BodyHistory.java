@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "bodyHistory")
 public class BodyHistory {
@@ -56,101 +58,5 @@ public class BodyHistory {
 
 	@ManyToOne
 	private Person person;
-
-	public Long getIdBodyHistory() {
-		return idBodyHistory;
-	}
-
-	public void setIdBodyHistory(Long idBodyHistory) {
-		this.idBodyHistory = idBodyHistory;
-	}
-
-	public LocalDateTime getData() {
-		return data;
-	}
-
-	public void setData(LocalDateTime data) {
-		this.data = data;
-	}
-
-	public BigDecimal getWeight() {
-		return weight;
-	}
-
-	public void setWeight(BigDecimal weight) {
-		this.weight = weight;
-	}
-
-	public BigDecimal getHeight() {
-		return height;
-	}
-
-	public void setHeight(BigDecimal height) {
-		this.height = height;
-	}
-
-	public BigDecimal getImc() {
-		return imc;
-	}
-
-	public void setImc(BigDecimal imc) {
-		this.imc = imc;
-	}
-
-	public BigDecimal getWaist() {
-		return waist;
-	}
-
-	public void setWaist(BigDecimal waist) {
-		this.waist = waist;
-	}
-
-	public BigDecimal getHip() {
-		return hip;
-	}
-
-	public void setHip(BigDecimal hip) {
-		this.hip = hip;
-	}
-
-	public BigDecimal getRcq() {
-		return rcq;
-	}
-
-	public void setRcq(BigDecimal rcq) {
-		this.rcq = rcq;
-	}
-
-	public BigDecimal getCb() {
-		return cb;
-	}
-
-	public void setCb(BigDecimal cb) {
-		this.cb = cb;
-	}
-
-	public BigDecimal getDct() {
-		return dct;
-	}
-
-	public void setDct(BigDecimal dct) {
-		this.dct = dct;
-	}
-
-	public BigDecimal getAmb() {
-		return amb;
-	}
-
-	public void setAmb(BigDecimal amb) {
-		this.amb = amb;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
 
 }

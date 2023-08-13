@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "calendar")
 public class Calendar {
@@ -46,77 +48,4 @@ public class Calendar {
 	@Basic(optional = false)
 	@Column(name = "cancel", nullable = false)
 	private boolean cancel;
-
-	public Long getIdCalendar() {
-		return idCalendar;
-	}
-
-	public void setIdCalendar(Long idCalendar) {
-		this.idCalendar = idCalendar;
-	}
-
-	public User getProfessional() {
-		return professional;
-	}
-
-	public void setProfessional(User professional) {
-		this.professional = professional;
-	}
-
-	public User getPatient() {
-		return patient;
-	}
-
-	public void setPatient(User patient) {
-		this.patient = patient;
-	}
-
-	public LocalDate getDateOfDay() {
-		return dateOfDay;
-	}
-
-	public void setDateOfDay(LocalDate dateOfDay) {
-		this.dateOfDay = dateOfDay;
-	}
-
-	public LocalTime getHourOfDay() {
-		return hourOfDay;
-	}
-
-	public void setHourOfDay(LocalTime hourOfDay) {
-		this.hourOfDay = hourOfDay;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-	public User getReceptionist() {
-		return receptionist;
-	}
-
-	public void setReceptionist(User receptionist) {
-		this.receptionist = receptionist;
-	}
-
-	public boolean isCancel() {
-		return cancel;
-	}
-
-	public void setCancel(boolean cancel) {
-		this.cancel = cancel;
-	}
-
 }

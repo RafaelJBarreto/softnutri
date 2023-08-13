@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.Data;
 
+@Data
 @Entity(name = "refreshToken")
 public class RefreshToken {
 
@@ -34,38 +36,6 @@ public class RefreshToken {
 		this.id = id;
 		this.person = person;
 		this.token = token;
-		this.expiryDate = expiryDate;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public Instant getExpiryDate() {
-		return expiryDate;
-	}
-
-	public void setExpiryDate(Instant expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 

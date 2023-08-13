@@ -7,7 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "intermission")
 public class Intermission {
@@ -19,21 +21,5 @@ public class Intermission {
 	@Basic(optional = true)
 	@Column(name = "time", nullable = true)
 	private int time;
-
-	public Long getIdIntermission() {
-		return idIntermission;
-	}
-
-	public void setIdIntermission(Long idIntermission) {
-		this.idIntermission = idIntermission;
-	}
-
-	public int getTime() {
-		return time;
-	}
-
-	public void setTime(int time) {
-		this.time = time;
-	}
 
 }

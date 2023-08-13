@@ -1,11 +1,16 @@
 package br.com.softnutri.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 import br.com.softnutri.domain.Calendar;
+import br.com.softnutri.domain.User;
+import br.com.softnutri.service.AutenticationService;
+import lombok.Data;
 
+@Data
 public class CalendarDTO {
 
 	private Long idCalendar;
@@ -14,16 +19,19 @@ public class CalendarDTO {
 	private UserDTO receptionist;
 	private LocalDate dateOfDay;
 	private LocalTime hourOfDay;
+	private LocalDateTime hourOfDayAux;
 	private String note;
 	private boolean completed;
 	private boolean cancel;
-	
+
+	public CalendarDTO() {
+	}
 
 	public CalendarDTO(Calendar calendar) {
 		this.idCalendar = calendar.getIdCalendar();
 		this.professional = new UserDTO(calendar.getProfessional());
-		this.patient  = new UserDTO(calendar.getPatient());
-		this.receptionist  = new UserDTO(calendar.getReceptionist());
+		this.patient = new UserDTO(calendar.getPatient());
+		this.receptionist = new UserDTO(calendar.getReceptionist());
 		this.dateOfDay = calendar.getDateOfDay();
 		this.hourOfDay = calendar.getHourOfDay();
 		this.note = calendar.getNote();
@@ -31,82 +39,26 @@ public class CalendarDTO {
 		this.cancel = calendar.isCancel();
 	}
 
-	public Long getIdCalendar() {
-		return idCalendar;
+	
+	public static CalendarDTO converter(Calendar calendar) {
+		return new CalendarDTO(calendar);
 	}
-
-	public void setIdCalendar(Long idCalendar) {
-		this.idCalendar = idCalendar;
-	}
-
-	public UserDTO getProfessional() {
-		return professional;
-	}
-
-	public void setProfessional(UserDTO professional) {
-		this.professional = professional;
-	}
-
-	public UserDTO getPatient() {
-		return patient;
-	}
-
-	public void setPatient(UserDTO patient) {
-		this.patient = patient;
-	}
-
-	public UserDTO getReceptionist() {
-		return receptionist;
-	}
-
-	public void setReceptionist(UserDTO receptionist) {
-		this.receptionist = receptionist;
-	}
-
-	public LocalDate getDateOfDay() {
-		return dateOfDay;
-	}
-
-	public void setDateOfDay(LocalDate dateOfDay) {
-		this.dateOfDay = dateOfDay;
-	}
-
-	public LocalTime getHourOfDay() {
-		return hourOfDay;
-	}
-
-	public void setHourOfDay(LocalTime hourOfDay) {
-		this.hourOfDay = hourOfDay;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-	public boolean isCancel() {
-		return cancel;
-	}
-
-	public void setCancel(boolean cancel) {
-		this.cancel = cancel;
+	
+	public static Calendar converterToDomain(CalendarDTO dto, AutenticationService autenticationService) {
+		Calendar calendar = new Calendar();
+		calendar.setIdCalendar(dto.getIdCalendar());
+		calendar.setCancel(dto.isCancel());
+		calendar.setCompleted(false);
+		calendar.setDateOfDay(dto.getDateOfDay());
+		calendar.setHourOfDay(LocalTime.of(dto.getHourOfDayAux().getHour(), dto.getHourOfDayAux().getMinute()));
+		calendar.setNote(dto.getNote());
+		calendar.setPatient(new User(dto.getPatient().getIdPerson()));
+		calendar.setProfessional(new User(dto.getProfessional().getIdPerson()));
+		calendar.setReceptionist(autenticationService.getUserLogged());
+		return calendar;
 	}
 
 	public static List<CalendarDTO> converter(List<Calendar> calendar) {
 		return calendar.stream().map(CalendarDTO::new).toList();
 	}
-	
-	
-	
 }

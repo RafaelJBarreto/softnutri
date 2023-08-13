@@ -31,4 +31,12 @@ export class CalendarService {
     return this.http.get(this.api.rest.calendar.get + idCalendar );
   } 
 
+  cancel(idCalendar:any): Observable<any> {
+    return this.http.get(this.api.rest.calendar.cancel + idCalendar );
+  } 
+
+  listCalendarProfessional(): Observable<any> { 
+    return this.http.get(this.api.rest.calendar.professional);
+  }
+
 }

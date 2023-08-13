@@ -10,8 +10,8 @@
         <mat-form-field fxFlex>
           <mat-label>{{'PROFESSIONAL.PROFESSIONAL' | translate}}</mat-label>
           <input type="text" matInput [formControl]="nutritionistControl" [matAutocomplete]="autoNutritionist" required>
-          <mat-autocomplete #autoNutritionist="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptionsNutritionist | async" [value]="option.name">
+          <mat-autocomplete #autoNutritionist="matAutocomplete" [displayWith]="autoCompleteDisplayProfessional" (optionSelected)="onProfessionalSelected($event.option)">
+            <mat-option *ngFor="let option of filteredOptionsNutritionist | async" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-autocomplete>
@@ -20,8 +20,8 @@
         <mat-form-field fxFlex>
           <mat-label>{{'PATIENT.PATIENT' | translate}}</mat-label>
           <input type="text" matInput [formControl]="patientControl" [matAutocomplete]="autoPatient" required>
-          <mat-autocomplete #autoPatient="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptionsPatient | async" [value]="option.name">
+          <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="autoCompleteDisplayPatient" (optionSelected)="onPatientSelected($event.option)">
+            <mat-option *ngFor="let option of filteredOptionsPatient | async" [value]="option">
               {{option.name}}
             </mat-option>
           </mat-autocomplete>

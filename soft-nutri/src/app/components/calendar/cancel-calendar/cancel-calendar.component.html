@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <p>{{'CALENDAR.CALENDAR_CANCEL_' | translate}}?</p>
+  </div>
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="warn" [mat-dialog-close]>{{'GLOBAL.CLOSE' | translate}}</button>
+    <button mat-stroked-button color="primary" (click)="onClickCancel()">{{'GLOBAL.CANCEL' | translate}}</button>
+  </div>

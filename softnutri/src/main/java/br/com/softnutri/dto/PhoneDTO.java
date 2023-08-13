@@ -2,7 +2,9 @@ package br.com.softnutri.dto;
 
 import br.com.softnutri.domain.Phone;
 import br.com.softnutri.util.Criptografia;
+import lombok.Data;
 
+@Data
 public class PhoneDTO {
 
 	private Long idPhone;
@@ -18,22 +20,6 @@ public class PhoneDTO {
 	
 	public PhoneDTO(String numero) {
 		super();
-		this.numero = numero;
-	}
-
-	public long getIdPhone() {
-		return idPhone;
-	}
-
-	public void setIdPhone(long idPhone) {
-		this.idPhone = idPhone;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 }

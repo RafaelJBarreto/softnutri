@@ -3,7 +3,9 @@ package br.com.softnutri.dto;
 import java.util.List;
 
 import br.com.softnutri.domain.Module;
+import lombok.Data;
 
+@Data
 public class ModuleDTO {
 	private Long idModule;
 
@@ -26,26 +28,6 @@ public class ModuleDTO {
 		this.icon = module.getIcon();
 		this.orders = module.getOrders();
 
-	}
-
-	public Long getIdModule() {
-		return idModule;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getPathBase() {
-		return pathBase;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public Integer getOrders() {
-		return orders;
 	}
 
 	public static List<ModuleDTO> converter(List<Module> modules) {

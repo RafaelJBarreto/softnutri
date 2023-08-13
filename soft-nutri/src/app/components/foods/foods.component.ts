@@ -136,6 +136,7 @@ export class FoodsComponent implements OnInit, OnChanges{
       || String(data.food.nutritionalData.protein).toLowerCase().includes(filter);
   }
 
+  
   public removeFoodbunch(idFoodbunch: any):void{
     const dialogRef = this.dialog.open(RemoveDialogComponent, {
       width: '250px',

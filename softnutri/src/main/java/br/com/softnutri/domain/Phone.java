@@ -1,6 +1,5 @@
 package br.com.softnutri.domain;
 
-import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "phone")
 public class Phone {
@@ -25,29 +26,5 @@ public class Phone {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Person person;
-
-	public Long getIdPhone() {
-		return idPhone;
-	}
-
-	public void setIdPhone(Long idPhone) {
-		this.idPhone = idPhone;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = Criptografia.encode(number);
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
 
 }

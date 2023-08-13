@@ -12,7 +12,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "module")
 public class Module {
@@ -47,53 +49,4 @@ public class Module {
 		this.icon = icon;
 		this.orders = orders;
 	}
-
-	public Long getIdModule() {
-		return idModule;
-	}
-
-	public void setIdModule(Long idModule) {
-		this.idModule = idModule;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPathBase() {
-		return pathBase;
-	}
-
-	public void setPathBase(String pathBase) {
-		this.pathBase = pathBase;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public Integer getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Integer orders) {
-		this.orders = orders;
-	}
-
-	public List<ModuleRole> getModuleRole() {
-		return moduleRole;
-	}
-
-	public void setModuleRole(List<ModuleRole> moduleRole) {
-		this.moduleRole = moduleRole;
-	}
-
 }

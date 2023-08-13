@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.softnutri.enuns.Gender;
-import br.com.softnutri.util.Criptografia;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,11 +17,13 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person{
+@Data
+public class Person {
 
 	@Id
 	@Column
@@ -58,77 +59,11 @@ public class Person{
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	protected List<BodyHistory> bodyHistory = new ArrayList<>();
-		
-	public Long getIdPerson() {
-		return idPerson;
+
+	public Person() {
 	}
 
-	public void setIdPerson(Long idPerson) {
+	public Person(Long idPerson) {
 		this.idPerson = idPerson;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = Criptografia.encode(name);
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = Criptografia.encode(email);
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = Criptografia.encode(cpf);
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = Criptografia.encode(address);
-	}
-
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
-	public List<Phone> getPhones() {
-		return phones;
-	}
-
-	public void setPhones(List<Phone> phones) {
-		this.phones = phones;
-	}
-
-	public List<BodyHistory> getBodyHistory() {
-		return bodyHistory;
-	}
-
-	public void setBodyHistory(List<BodyHistory> bodyHistory) {
-		this.bodyHistory = bodyHistory;
-	}
-
 }

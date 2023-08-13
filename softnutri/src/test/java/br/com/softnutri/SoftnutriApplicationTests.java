@@ -40,11 +40,11 @@ class SoftnutriApplicationTests {
 	void testaCadastroNutricionista() {
 
 		User p = new User();
-		p.setCpf("18956896533");
+		p.setCpf(Criptografia.encode("18956896533"));
 		p.setBirthDate(LocalDate.now());
-		p.setEmail("ana@outlook.com.br");
-		p.setAddress("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
-		p.setName("Ana Eliza");
+		p.setEmail(Criptografia.encode("ana@outlook.com.br"));
+		p.setAddress(Criptografia.encode("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG"));
+		p.setName(Criptografia.encode("Ana Eliza"));
 		p.setGender(Gender.F);
 		p.setPassword("12345");
 		p.setUserType(UserType.NUTRITIONIST);
@@ -61,11 +61,11 @@ class SoftnutriApplicationTests {
 	void testaCadastroPessoa() {
 
 		Person p = new Person();
-		p.setCpf("10490376690");
+		p.setCpf(Criptografia.encode("10490376690"));
 		p.setBirthDate(LocalDate.now());
-		p.setEmail("teste@outlook.com.br");
-		p.setAddress("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG");
-		p.setName("Rafael");
+		p.setEmail(Criptografia.encode("teste@outlook.com.br"));
+		p.setAddress(Criptografia.encode("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG"));
+		p.setName(Criptografia.encode("Rafael"));
 		p.setGender(Gender.M);
 		Person pessoaCadastrada = pessoaRepository.save(p);
 
@@ -77,11 +77,11 @@ class SoftnutriApplicationTests {
 
 		Optional<User> userAux = usuarioRepository.findByEmail(Criptografia.encode("teste2@outlook.com.br"));
 		User p = new User();
-		p.setCpf("18956896533");
+		p.setCpf(Criptografia.encode("18956896533"));
 		p.setBirthDate(LocalDate.now());
-		p.setEmail("teste2@outlook.com.br");
-		p.setAddress("Rua da preguiça, Barbacena-MG");
-		p.setName("Teste");
+		p.setEmail(Criptografia.encode("teste2@outlook.com.br"));
+		p.setAddress(Criptografia.encode("Rua da preguiça, Barbacena-MG"));
+		p.setName(Criptografia.encode("Teste"));
 		p.setGender(Gender.M);
 		p.setPassword("123456");
 		p.setLanguage("pt-Br");

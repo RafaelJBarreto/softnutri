@@ -39,7 +39,7 @@
 
                 <ng-container matColumnDef="bunch">
                     <th mat-header-cell *matHeaderCellDef> {{'BUNCH.BUNCH_NAME' | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.bunch.description}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.bunch.description | translate}} </td>
                 </ng-container>
                 
                 <ng-container matColumnDef="description">

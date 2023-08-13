@@ -3,7 +3,9 @@ package br.com.softnutri.dto;
 import java.util.List;
 
 import br.com.softnutri.domain.Food;
+import lombok.Data;
 
+@Data
 public class FoodDTO {
 
 	private Long idFood;
@@ -29,29 +31,6 @@ public class FoodDTO {
 		this.nutritionalData = new NutritionalDataDTO(food.getNutritionalData());
 	}
 
-	public Long getIdFood() {
-		return idFood;
-	}
-
-	public void setIdFood(Long idFood) {
-		this.idFood = idFood;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public NutritionalDataDTO getNutritionalData() {
-		return nutritionalData;
-	}
-
-	public void setNutritionalData(NutritionalDataDTO nutritionalData) {
-		this.nutritionalData = nutritionalData;
-	}
 	
 	public static Food converterToDomain(FoodDTO foodDTO) {
 		return new Food(foodDTO.getIdFood(), foodDTO.getDescription(), foodDTO.getNutritionalData().getCalories(), foodDTO.getNutritionalData().getProtein(), 

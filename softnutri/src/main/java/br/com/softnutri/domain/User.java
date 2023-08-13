@@ -16,7 +16,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name = "user")
 public class User extends Person {
@@ -53,51 +57,14 @@ public class User extends Person {
 			@JoinColumn(name = "idPaper") })
 	private Set<Paper> paper;
 		
-	public String getPassword() {
-		return password;
+	public User() {
+	}
+
+	public User(Long idPerson) {
+		super(idPerson);
 	}
 
 	public void setPassword(String password) {
 		this.password = password != null ? Criptografia.encoderSecurity(password) : password;
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	public UserType getUserType() {
-		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-
-	public LocalDateTime getDateRegister() {
-		return dateRegister;
-	}
-
-	public void setDateRegister(LocalDateTime dateRegister) {
-		this.dateRegister = dateRegister;
-	}
-
-	public Set<Paper> getPaper() {
-		return paper;
-	}
-
-	public void setPaper(Set<Paper> paper) {
-		this.paper = paper;
-	}
-
-	public String getCrn() {
-		return crn;
-	}
-
-	public void setCrn(String crn) {
-		this.crn = crn;
 	}
 }

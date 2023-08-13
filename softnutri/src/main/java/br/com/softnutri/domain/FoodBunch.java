@@ -9,7 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "foodBunch")
 public class FoodBunch {
@@ -40,28 +42,5 @@ public class FoodBunch {
 		this.bunch = bunch;
 	}
 
-	public Long getIdFoodBunch() {
-		return idFoodBunch;
-	}
-
-	public void setIdFoodBunch(Long idFoodBunch) {
-		this.idFoodBunch = idFoodBunch;
-	}
-
-	public Food getFood() {
-		return food;
-	}
-
-	public void setFood(Food food) {
-		this.food = food;
-	}
-
-	public Bunch getBunch() {
-		return bunch;
-	}
-
-	public void setBunch(Bunch bunch) {
-		this.bunch = bunch;
-	}
 
 }

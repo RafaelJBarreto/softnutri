@@ -51,6 +51,8 @@ calendar:{
     listall:string,
     get:string,
     calendaraction:string,
+    cancel:string,
+    professional: string
 };
 intermission:{ 
     save:string,
@@ -120,6 +122,8 @@ export class ConstService implements OnChanges{
             listall: e.rota + "calendar/",
             get: e.rota + "calendar/get/",
             calendaraction: "/calendaraction",
+            cancel: e.rota + "calendar/cancel/",
+            professional: e.rota + "calendar/professional",
         },
         intermission:{
             save: e.rota + "intermission/save",

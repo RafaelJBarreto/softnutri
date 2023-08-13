@@ -52,7 +52,7 @@ export class TimeCalendarComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
+        this.snackBar.open(this.translate.instant('INTERVAL.INTERVAL_ERROR'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000,
@@ -81,7 +81,7 @@ export class TimeCalendarComponent implements OnInit {
         },
         error: err => { 
           this.errorMessage = err.message; 
-          this.snackBar.open('Erro ao cadastrar', '', {
+          this.snackBar.open(this.translate.instant('INTERVAL.ERROR_SAVE_INTERVAL'), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
             duration: 3000,

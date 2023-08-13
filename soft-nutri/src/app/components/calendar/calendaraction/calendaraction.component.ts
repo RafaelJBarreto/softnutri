@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,9 @@ import { ConstService } from 'src/app/services/shared/const.service';
 import { map, startWith } from 'rxjs/operators';
 import { Calendar } from 'src/app/model/calendar/calendar';
 import { ProfessionalService } from 'src/app/services/professional/professional.service';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { MatOption } from '@angular/material/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendaraction',
@@ -26,16 +29,18 @@ export class CalendaractionComponent implements OnInit {
   patient: User[] = [];
   nutritionist: User[] = [];
   calendar: Calendar = new Calendar();
-  patientControl = new FormControl('');
+  patientControl = new FormControl();
   filteredOptionsPatient: Observable<User[]> = new Observable;
-  nutritionistControl = new FormControl('');
+  nutritionistControl = new FormControl();
   filteredOptionsNutritionist: Observable<User[]>  = new Observable;
-
+  professional: User = new User;
+  patientSelected: User = new User;
   time: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
     public service: PersonService,
+    public serviceCalendar: CalendarService,
     public professionalService: ProfessionalService,
     public translate: TranslateService,
     private snackBar: MatSnackBar,
@@ -52,10 +57,32 @@ export class CalendaractionComponent implements OnInit {
     this.listNutritionist();
   }
 
+  onProfessionalSelected(option: MatOption) {
+    this.professional = option.value;
+  }
+
+  onPatientSelected(option: MatOption) {
+    this.patientSelected = option.value;
+  }
+
+  autoCompleteDisplayProfessional(item: any): string {
+    if (item == undefined || item == "") { 
+      return '';
+    }
+    return item.name;
+  }
+
+  autoCompleteDisplayPatient(item: any): string {
+    if (item == undefined || item == "") { 
+      return '';
+    }
+    return item.name;
+  }
+
   public send(): void {
     if (this.form.valid) {
       this.setObject();
-      this.service.save(this.user).subscribe({
+      this.serviceCalendar.save(this.calendar).subscribe({
         next: data => {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
@@ -94,9 +121,9 @@ export class CalendaractionComponent implements OnInit {
       if (id === null) {
         return;
       }
-      this.service.get(id).subscribe({
+      this.serviceCalendar.get(id).subscribe({
         next: data => {
-          this.user = data;
+          this.calendar = data;
           this.validaForm(true);
         },
         error: err => {
@@ -125,14 +152,30 @@ export class CalendaractionComponent implements OnInit {
       });
     } else {
       this.form.controls['idCalendar'].setValue(this.calendar.idCalendar);
-      this.form.controls['patient'].setValue(this.calendar.patient);
+      this.form.controls['dateofday'].setValue(this.calendar.dateOfDay);
+      this.form.controls['hourofday'].setValue(this.calendar.hourOfDay.toLocaleString().slice(0, -3));
+      this.form.controls['note'].setValue(this.calendar.note);
+      this.form.controls['cancel'].setValue(this.calendar.cancel);
+      this.patientSelected = this.calendar.patient;
+      this.professional = this.calendar.professional;
+      this.patientControl.setValue(this.patientSelected);
+      this.nutritionistControl.setValue(this.calendar.professional);
     }
   }
-  public setObject(): void {
 
+  public setObject(): void{
+    this.calendar.idCalendar = this.form.controls['idCalendar'].value;
+    this.calendar.professional = this.professional;
+    this.calendar.patient = this.patientSelected;
+    this.calendar.dateOfDay = this.form.controls['dateofday'].value; 
+    let hourOfDay = moment(this.form.controls['hourofday'].value,'HH:mm').toDate();
+    var userTimezoneOffset = hourOfDay.getTimezoneOffset() * 60000;
+    this.calendar.hourOfDayAux =  new Date(hourOfDay.getTime() - userTimezoneOffset);
+    this.calendar.note = this.form.controls['note'].value; 
+    this.calendar.cancel = this.form.controls['cancel'].value; 
   }
 
-  public clearForm(): void {
+  public clearForm(): void{
     this.form.reset();
   }
 
@@ -140,7 +183,6 @@ export class CalendaractionComponent implements OnInit {
     this.service.listAll().subscribe({
       next: data => {
         this.patient = data;
-        console.log(this.patient);
         this.filteredOptionsPatient = this.patientControl.valueChanges
           .pipe(
             startWith(''),
@@ -160,11 +202,11 @@ export class CalendaractionComponent implements OnInit {
     });
   }
 
+
   private listNutritionist() {
     this.professionalService.getNutritionist().subscribe({
       next: data => {
         this.nutritionist = data;
-        console.log(this.nutritionist);
         this.filteredOptionsNutritionist = this.nutritionistControl.valueChanges
           .pipe(
             startWith(''),
@@ -189,7 +231,7 @@ export class CalendaractionComponent implements OnInit {
     if (typeof value === "string") {
       filterValue = value.toLowerCase();
     } else {
-      filterValue = value.description.toLowerCase();
+      filterValue = value.name.toLowerCase();
     }
 
     return this.patient.filter(
@@ -202,7 +244,7 @@ export class CalendaractionComponent implements OnInit {
     if (typeof value === "string") {
       filterValue = value.toLowerCase();
     } else {
-      filterValue = value.description.toLowerCase();
+      filterValue = value.name.toLowerCase();
     }
 
     return this.nutritionist.filter(

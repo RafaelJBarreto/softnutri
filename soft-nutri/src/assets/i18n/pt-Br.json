@@ -39,7 +39,24 @@
         "CANCEL": "Cancelar",
         "ERROR_FORM": "Por favor, preencha todos os campos obrigatórios (*).",
         "REMOVE": "Remover",
-        "PHONES_CONTACT": "Telefone(s) para contato"
+        "PHONES_CONTACT": "Telefone(s) para contato",
+        "CLOSE": "Fechar",
+        "HISTORIC": "Histórico",
+        "ATTENDANCE": "Atendimento",
+        "BREAKFAST": "Café da manhã", 
+        "LUNCH": "Almoço",
+        "THROW": "Lanche",
+        "DINNER": "Jantar",
+        "SUPPER": "Ceia",
+        "MSG_ATTENDANCE": "Alimente-se como um rei pela manhã.",
+        "MSG_LUNCH": "Alimente-se como um príncipe no almoço.",
+        "MSG_THROW": "Faça pequenas refeições durante o dia.",
+        "MSG_DINNER": "Alimente-se como um mendigo no jantar.",
+        "MSG_SUPPER": "Durma oito horas diárias.",
+        "NEXT": "Próximo",
+        "PREVIOUS": "Anterior",
+        "WITHOUTGROUP": "Sem grupo",
+        "QUANTITY": "Quantidade"
         },
     "LOGIN": {
         "BTN_CREATE_USER": "Criar usuário",
@@ -152,11 +169,14 @@
         "CALENDAR_CANCEL": "Cancelada",
         "ERROR_LIST_CALENDAR": "Erro ao listar agendamentos.",
         "CALENDAR_NEW": "Novo Agendamento",
-        "CALENDAR_CANCEL_": "Cancelar agendamento"
+        "CALENDAR_CANCEL_": "Cancelar agendamento",
+        "MSG_CANCEL": "Agenda cancelada com sucesso!"
     },
     "INTERVAL":{
         "INTERVAL_CALENDAR": "Intervalo entre agendas",
         "TIME_INFO": "Informe o tempo de intervalo em minutos.",
-        "INTERVAL": "Intervalo"
+        "INTERVAL": "Intervalo",
+        "INTERVAL_ERROR": "Erro ao listar intervalo",
+        "ERROR_SAVE_INTERVAL": "Erro ao tentar cadastrar intervalo."
     }
 }

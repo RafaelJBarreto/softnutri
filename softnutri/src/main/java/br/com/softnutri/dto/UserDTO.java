@@ -10,7 +10,11 @@ import br.com.softnutri.domain.User;
 import br.com.softnutri.enuns.UserType;
 import br.com.softnutri.service.UserService;
 import br.com.softnutri.util.Criptografia;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class UserDTO extends PersonDTO {
 
 	private String password;
@@ -35,54 +39,6 @@ public class UserDTO extends PersonDTO {
 		this.dateRegister = user.getDateRegister();
 	}
 
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	public List<PaperDTO> getPaper() {
-		return paper;
-	}
-
-	public void setPaper(List<PaperDTO> paper) {
-		this.paper = paper;
-	}
-
-	public UserType getUserType() {
-		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getCrn() {
-		return crn;
-	}
-
-	public void setCrn(String crn) {
-		this.crn = crn;
-	}
-	
-	public LocalDateTime getDateRegister() {
-		return dateRegister;
-	}
-
-	public void setDateRegister(LocalDateTime dateRegister) {
-		this.dateRegister = dateRegister;
-	}
-
 	public static List<UserDTO> converter(List<User> users) {
 		return users.stream().map(UserDTO::new).toList();
 	}
@@ -95,11 +51,11 @@ public class UserDTO extends PersonDTO {
 		User user = new User();
 		User userAux = null;
 		user.setIdPerson(userDTO.getIdPerson());
-		user.setCpf(userDTO.getCpf());
+		user.setCpf(Criptografia.encode(userDTO.getCpf()));
 		user.setBirthDate(LocalDate.now());
-		user.setEmail(userDTO.getEmail());
-		user.setAddress(userDTO.getAddress());
-		user.setName(userDTO.getName());
+		user.setEmail(Criptografia.encode(userDTO.getEmail()));
+		user.setAddress(Criptografia.encode(userDTO.getAddress()));
+		user.setName(Criptografia.encode(userDTO.getName()));
 		user.setGender(userDTO.getGender());
 		user.setLanguage(userDTO.getLanguage());
 		user.setUserType(userDTO.getUserType());

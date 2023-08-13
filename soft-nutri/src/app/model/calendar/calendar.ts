@@ -6,7 +6,9 @@ export class Calendar {
     professional: User = new User;
     patient: User = new User;
     dateOfDay!: Date;
-    hourOfDay!: Time;
+    hourOfDayAux!: Date;
+    hourOfDay!: Date;
     note!: String;
     completed!: boolean;
+    cancel!: boolean;
 }

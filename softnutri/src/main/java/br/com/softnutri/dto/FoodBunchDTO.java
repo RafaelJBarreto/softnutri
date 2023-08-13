@@ -3,7 +3,9 @@ package br.com.softnutri.dto;
 import java.util.List;
 
 import br.com.softnutri.util.FoodBunchReturn;
+import lombok.Data;
 
+@Data
 public class FoodBunchDTO {
 
 	private Long idFoodBunch;
@@ -21,37 +23,6 @@ public class FoodBunchDTO {
 				foodBunch.getProtein(), foodBunch.getLipids(), foodBunch.getCarbohydrate());
 	}
 
-	public Long getIdFoodBunch() {
-		return idFoodBunch;
-	}
-
-	public void setIdFoodBunch(Long idFoodBunch) {
-		this.idFoodBunch = idFoodBunch;
-	}
-
-	public BunchDTO getBunch() {
-		return bunch;
-	}
-
-	public void setBunch(BunchDTO bunch) {
-		this.bunch = bunch;
-	}
-
-	public FoodDTO getFood() {
-		return food;
-	}
-
-	public void setFood(FoodDTO food) {
-		this.food = food;
-	}
-
-	public List<FoodDTO> getFoods() {
-		return foods;
-	}
-
-	public void setFoods(List<FoodDTO> foods) {
-		this.foods = foods;
-	}
 
 	public static List<FoodBunchDTO> converter(List<FoodBunchReturn> foods) {
 		return foods.stream().map(FoodBunchDTO::new).toList();

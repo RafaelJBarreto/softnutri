@@ -39,6 +39,7 @@ export class PersonComponent implements OnInit {
   }
 
   private listData() {
+    debugger;
     this.service.listAll().subscribe({
       next: data => {
         this.person = data;

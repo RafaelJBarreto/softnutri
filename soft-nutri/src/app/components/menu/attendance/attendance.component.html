@@ -1,0 +1,100 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'GLOBAL.BREAKFAST' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'GLOBAL.MSG_ATTENDANCE' | translate}}
+          <i class="size-icon-tab fa-solid fa-mug-hot"></i>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <button mat-icon-button (click)="setFoodBreakFast()">
+        <i class="fa-regular fa-square-plus"></i>
+      </button>
+  
+      <div *ngFor="let o of listBreakFast">
+        <app-food-attendance></app-food-attendance>
+      </div>
+      <mat-action-row>
+       <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
+    </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'GLOBAL.LUNCH' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{'GLOBAL.MSG_LUNCH' | translate}}
+          <i class="size-icon-tab fa-solid fa-fish"></i>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <app-food-attendance></app-food-attendance>
+  
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
+        <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{'GLOBAL.THROW' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{'GLOBAL.MSG_THROW' | translate}}
+          <i class="size-icon-tab fa-solid fa-beer-mug-empty"></i>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <app-food-attendance></app-food-attendance>
+  
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
+        <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'GLOBAL.DINNER' | translate}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{'GLOBAL.MSG_DINNER' | translate}}
+            <i class="size-icon-tab  fa-solid fa-drumstick-bite"></i>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <app-food-attendance></app-food-attendance>
+    
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
+          <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'GLOBAL.SUPPER' | translate}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{'GLOBAL.MSG_SUPPER' | translate}}
+            <i class="size-icon-tab fa-solid fa-cheese"></i>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <app-food-attendance></app-food-attendance>
+    
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+  
+  </mat-accordion>
+  

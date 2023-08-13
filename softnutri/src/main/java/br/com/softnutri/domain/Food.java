@@ -14,7 +14,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "food")
 public class Food {
@@ -57,38 +59,6 @@ public class Food {
 		this.nutritionalData.setCarbohydrate(carbohydrate);
 		this.nutritionalData.setLipids(lipids);
 		this.nutritionalData.setProtein(protein);
-	}
-
-	public Long getIdFood() {
-		return idFood;
-	}
-
-	public void setIdFood(Long idFood) {
-		this.idFood = idFood;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public NutritionalData getNutritionalData() {
-		return nutritionalData;
-	}
-
-	public void setNutritionalData(NutritionalData nutritionalData) {
-		this.nutritionalData = nutritionalData;
-	}
-
-	public List<MenuPerson> getMenuPerson() {
-		return menuPerson;
-	}
-
-	public void setMenuPerson(List<MenuPerson> menuPerson) {
-		this.menuPerson = menuPerson;
 	}
 
 }

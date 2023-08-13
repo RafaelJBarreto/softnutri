@@ -12,7 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "bunch")
 public class Bunch {
@@ -30,22 +32,5 @@ public class Bunch {
 
 	public Bunch() {
 		super();
-	}
-
-	public Long getIdBunch() {
-		return idBunch;
-	}
-
-
-	public void setIdBunch(Long idBunch) {
-		this.idBunch = idBunch;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

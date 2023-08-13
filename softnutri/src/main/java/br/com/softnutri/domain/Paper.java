@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "paper")
 public class Paper {
@@ -32,30 +34,6 @@ public class Paper {
 	public Paper(Long idPaper, String description) {
 		this.idPaper = idPaper;
 		this.description = description;
-	}
-
-	public Long getIdPaper() {
-		return idPaper;
-	}
-
-	public void setIdPaper(Long idPaper) {
-		this.idPaper = idPaper;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<ModuleRole> getModulesRoles() {
-		return modulesRoles;
-	}
-
-	public void setModulesRoles(List<ModuleRole> modulesRoles) {
-		this.modulesRoles = modulesRoles;
 	}
 
 }

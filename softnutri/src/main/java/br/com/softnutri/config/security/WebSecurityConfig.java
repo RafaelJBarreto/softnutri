@@ -5,61 +5,62 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.SecurityFilterChain;
 
-import br.com.softnutri.config.security.jwt.AuthEntryPointJwt;
-import br.com.softnutri.config.security.jwt.AuthTokenFilter;
 import br.com.softnutri.config.security.services.UserDetailsServiceImpl;
 
-@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-		// securedEnabled = true,
-		// jsr250Enabled = true,
-		prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsServiceImpl;
-
-	AuthEntryPointJwt unauthorizedHandler;
-
-	@Bean
-	public AuthTokenFilter authenticationJwtTokenFilter() {
-		return new AuthTokenFilter();
-	}
-
-	@Override
-	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
-	}
-
-	@Override
-	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+	private UserDetailsServiceImpl userDetailsService;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/user/auth/**").permitAll().anyRequest().authenticated();
-
-		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
 	}
 
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		AuthenticationManagerBuilder authenticationManagerBuilder = http
+				.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
+		AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
+
+		http.authorizeHttpRequests().requestMatchers("/user/auth/**").anonymous()
+		.requestMatchers("/patient/").permitAll()
+		.requestMatchers("/patient/save").permitAll()
+		.requestMatchers("/patient/get/**").permitAll()
+		.requestMatchers("/patient/delete/**").permitAll()
+		.requestMatchers("/professional/").permitAll()
+		.requestMatchers("/professional/save").permitAll()
+		.requestMatchers("/professional/get/**").permitAll()
+		.requestMatchers("/professional/delete/**").permitAll()
+		.requestMatchers("/food/").permitAll()
+		.requestMatchers("/food/save").permitAll()
+		.requestMatchers("/food/delete/**").permitAll()
+		.requestMatchers("/foodBunch/").permitAll()
+		.requestMatchers("/foodBunch/save").permitAll()
+		.requestMatchers("/foodBunch/delete/**").permitAll()
+		.requestMatchers("/bunch/").permitAll()
+		.requestMatchers("/bunch/save").permitAll()
+		.requestMatchers("/bunch/delete/**").permitAll()
+		.anyRequest().authenticated().and().authenticationManager(authenticationManager)
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic().and().formLogin().and().logout().and().csrf().disable();
+		return http.build();
+	}
 }

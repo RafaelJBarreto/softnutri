@@ -1,7 +1,9 @@
 package br.com.softnutri.dto;
 
 import br.com.softnutri.domain.NutritionalData;
+import lombok.Data;
 
+@Data
 public class NutritionalDataDTO {
 
 	private float calories;
@@ -18,37 +20,4 @@ public class NutritionalDataDTO {
 		this.lipids = nutritionalData.getLipids();
 		this.carbohydrate = nutritionalData.getCarbohydrate();
 	}
-
-	public float getCalories() {
-		return calories;
-	}
-
-	public void setCalories(float calories) {
-		this.calories = calories;
-	}
-
-	public float getProtein() {
-		return protein;
-	}
-
-	public void setProtein(float protein) {
-		this.protein = protein;
-	}
-
-	public float getLipids() {
-		return lipids;
-	}
-
-	public void setLipids(float lipids) {
-		this.lipids = lipids;
-	}
-
-	public float getCarbohydrate() {
-		return carbohydrate;
-	}
-
-	public void setCarbohydrate(float carbohydrate) {
-		this.carbohydrate = carbohydrate;
-	}
-
 }

@@ -9,7 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "moduleRole")
 public class ModuleRole {
@@ -33,30 +35,6 @@ public class ModuleRole {
 	public ModuleRole(Paper paper, Module module) {
 		super();
 		this.paper = paper;
-		this.module = module;
-	}
-
-	public Long getIdModuleRole() {
-		return idModuleRole;
-	}
-
-	public void setIdModuleRole(Long idModuleRole) {
-		this.idModuleRole = idModuleRole;
-	}
-
-	public Paper getPaper() {
-		return paper;
-	}
-
-	public void setPaper(Paper paper) {
-		this.paper = paper;
-	}
-
-	public Module getModule() {
-		return module;
-	}
-
-	public void setModule(Module module) {
 		this.module = module;
 	}
 

@@ -3,7 +3,9 @@ package br.com.softnutri.dto;
 import java.util.List;
 
 import br.com.softnutri.domain.Intermission;
+import lombok.Data;
 
+@Data
 public class IntermissionDTO {
 
 	private Long idIntermission;
@@ -21,22 +23,6 @@ public class IntermissionDTO {
 	public IntermissionDTO(Intermission intermission) {
 		this.idIntermission = intermission.getIdIntermission();
 		this.time = intermission.getTime();
-	}
-
-	public Long getIdIntermission() {
-		return idIntermission;
-	}
-
-	public void setIdIntermission(Long idIntermission) {
-		this.idIntermission = idIntermission;
-	}
-
-	public int getTime() {
-		return time;
-	}
-
-	public void setTime(int time) {
-		this.time = time;
 	}
 	
 	public static IntermissionDTO converter(Intermission intermission) {
