@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,6 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroRecepcao() {
 
-		Optional<User> userAux = usuarioRepository.findByEmail(Criptografia.encode("teste2@outlook.com.br"));
 		User p = new User();
 		p.setCpf(Criptografia.encode("18956896533"));
 		p.setBirthDate(LocalDate.now());
@@ -85,12 +83,7 @@ class SoftnutriApplicationTests {
 		p.setGender(Gender.M);
 		p.setPassword("123456");
 		p.setLanguage("pt-Br");
-		if (userAux.isPresent()) {
-			p.setUserType(UserType.NUTRITIONIST);
-			p.setCrn("123456789");
-			p.setIdPerson(userAux.get().getIdPerson());
-			p.setDateRegister(userAux.get().getDateRegister());
-		}
+		p.setUserType(UserType.NUTRITIONIST);
 		User nc = usuarioRepository.save(p);
 
 		assertEquals(p.getEmail(), nc.getEmail());
@@ -102,7 +95,7 @@ class SoftnutriApplicationTests {
 	void testaCadastroAgenda() {
 
 		List<User> professional = usuarioRepository.findByUserType(UserType.NUTRITIONIST);
-		List<User> receptionist = usuarioRepository.findByUserType(UserType.RECEPTIONIST);
+		List<User> receptionist = usuarioRepository.findByUserType(UserType.NUTRITIONIST);
 		List<User> patient = usuarioRepository.findByUserType(UserType.PATIENT);
 		
 		Calendar calendar = new Calendar();

@@ -2,6 +2,9 @@ package br.com.softnutri.advice;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class ErrorMessage {
 
 	private int statusCode;
@@ -14,22 +17,6 @@ public class ErrorMessage {
 		this.timestamp = timestamp;
 		this.message = message;
 		this.description = description;
-	}
-
-	public int getStatusCode() {
-		return statusCode;
-	}
-
-	public Date getTimestamp() {
-		return timestamp;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 }

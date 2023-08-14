@@ -65,8 +65,7 @@ public class AutenticationService {
 	
 	public User updateUsuario(User usuario) {
 		if (usuario.getPassword().isBlank()) {
-			String password = this.userRepository.getSenhaByIdPessoa(usuario.getIdPerson());
-			usuario.setPassword(password);
+			usuario.setPassword(this.userRepository.getSenhaByIdPessoa(usuario.getIdPerson()));
 		}
 		return this.userRepository.save(usuario);
 	}

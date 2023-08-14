@@ -4,11 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -22,13 +25,16 @@ public class Calendar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCalendar;
 
-	@ManyToOne
+	@JoinColumn(nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private User professional;
 
-	@ManyToOne
+	@JoinColumn(nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private User patient;
 
-	@ManyToOne
+	@JoinColumn(nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private User receptionist;
 
 	@Basic(optional = false)

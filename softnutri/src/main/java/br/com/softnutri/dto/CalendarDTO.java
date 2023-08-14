@@ -54,7 +54,7 @@ public class CalendarDTO {
 		calendar.setNote(dto.getNote());
 		calendar.setPatient(new User(dto.getPatient().getIdPerson()));
 		calendar.setProfessional(new User(dto.getProfessional().getIdPerson()));
-		calendar.setReceptionist(autenticationService.getUserLogged());
+		calendar.setReceptionist(new User(autenticationService.getUserLogged().getIdPerson()));
 		return calendar;
 	}
 
