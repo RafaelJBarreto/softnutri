@@ -187,6 +187,10 @@
         "DELETAR": "Deletar",
         "ALTERAR": "Alterar",
         "ALL": "Permitir tudo",
-        "PERMISSION_ALL": "Permitir acesso em todas funcionalidades"
+        "PERMISSION_ALL": "Permitir acesso em todas funcionalidades",
+        "LIST_USER": "Erro ao listar usuários",
+        "ERROR_SAVE": "Erro ao salvar permissões",
+        "ERROR_USER": "Selecione um usuário para salvar",
+        "LIBERAR": "Permitir"
     }
 }

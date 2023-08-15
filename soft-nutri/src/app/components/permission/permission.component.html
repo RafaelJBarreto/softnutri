@@ -1,9 +1,12 @@
 <app-layout>
-    <form>
+    <form (ngSubmit)="save()">
         <mat-card class="mat-card mat-focus-indicator table-table-wrapper">
             <mat-toolbar color="white">
                 <span class="table-table-wrapper__title">{{'PERMISSION.PERMISSION_TITLE' | translate}}</span>
                 <span class="header-spacer"></span>
+                <button mat-flat-button class="button-color" type="submit" *ngIf="permission.length > 0"> 
+                    <i class="fa-solid fa-hand-sparkles" style="font-size: 18px;"></i>{{'PERMISSION.LIBERAR' | translate}}
+                  </button>
             </mat-toolbar>
 
             <mat-card-content class="table-table__content style-mat-card-contet">
@@ -38,26 +41,26 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-button-toggle-group name="roles" aria-label="roles" *ngFor="let paper of pe.paper" fxFlex>
-                        <mat-button-toggle fxFlex="25%" value="flour" [disabled]="paper.get == null" (change)="updatePaper(pe, paper, 1)">
+                        <mat-button-toggle fxFlex="25%" value="flour" [disabled]="paper.get == -1" (change)="updatePaper(pe, paper, 1)">
                             <i *ngIf="paper.get === 1" class="fa-solid fa-check" style="color: green;"></i>
                             <i *ngIf="paper.get === 0" class="fa-solid fa-xmark" style="color: red;"></i>
-                            <i *ngIf="paper.get == null" class="fa-solid fa-bug"></i>
+                            <i *ngIf="paper.get == -1" class="fa-solid fa-ban"></i>
                             {{'PERMISSION.ACESSAR' | translate}}
                         </mat-button-toggle>
-                        <mat-button-toggle  fxFlex="25%" value="flour" [disabled]="paper.post == null" (change)="updatePaper(pe, paper, 2)">
+                        <mat-button-toggle  fxFlex="25%" value="flour" [disabled]="paper.post == -1" (change)="updatePaper(pe, paper, 2)">
                             <i *ngIf="paper.post === 1" class="fa-solid fa-check" style="color: green;"></i>
                             <i *ngIf="paper.post === 0" class="fa-solid fa-xmark" style="color: red;"></i>
-                            <i *ngIf="paper.post == null" class="fa-solid fa-bug"></i>
+                            <i *ngIf="paper.post == -1" class="fa-solid fa-ban"></i>
                             {{'PERMISSION.INSERIR' | translate}}</mat-button-toggle>
-                        <mat-button-toggle fxFlex="25%" value="paper.put" [disabled]="paper.put == null" (change)="updatePaper(pe, paper, 3)">
+                        <mat-button-toggle fxFlex="25%" value="paper.put" [disabled]="paper.put == -1" (change)="updatePaper(pe, paper, 3)">
                             <i *ngIf="paper.put === 1" class="fa-solid fa-check" style="color: green;"></i>
                             <i *ngIf="paper.put === 0" class="fa-solid fa-xmark" style="color: red;"></i>
-                            <i *ngIf="paper.put == null" class="fa-solid fa-bug"></i>
+                            <i *ngIf="paper.put == -1" class="fa-solid fa-ban"></i>
                             {{'PERMISSION.ALTERAR' | translate}}</mat-button-toggle>
-                        <mat-button-toggle fxFlex="25%" value="flour" [disabled]="paper.delete == null" (change)="updatePaper(pe, paper, 4)">
+                        <mat-button-toggle fxFlex="25%" value="flour" [disabled]="paper.delete == -1" (change)="updatePaper(pe, paper, 4)">
                             <i *ngIf="paper.delete === 1" class="fa-solid fa-check" style="color: green;"></i>
                             <i *ngIf="paper.delete === 0" class="fa-solid fa-xmark" style="color: red;"></i>
-                            <i *ngIf="paper.delete == null" class="fa-solid fa-bug"></i>
+                            <i *ngIf="paper.delete == -1" class="fa-solid fa-ban"></i>
                             {{'PERMISSION.DELETAR' | translate}}</mat-button-toggle>
                     </mat-button-toggle-group>
                 </mat-expansion-panel>

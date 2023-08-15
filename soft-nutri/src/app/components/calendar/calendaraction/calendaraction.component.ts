@@ -20,6 +20,7 @@ import * as moment from 'moment';
   styleUrls: ['./calendaraction.component.scss']
 })
 export class CalendaractionComponent implements OnInit {
+  
   public back: any;
   public form!: UntypedFormGroup;
   user: User = new User;

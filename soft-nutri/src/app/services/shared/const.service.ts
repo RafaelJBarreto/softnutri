@@ -60,6 +60,7 @@ intermission:{
 };
 permission:{ 
     get:string,
+    save:string,
 };
 };
 
@@ -133,7 +134,8 @@ export class ConstService implements OnChanges{
             get: e.rota + "intermission/get",
         },
         permission:{
-            get: e.rota + "permission/find/"
+            get: e.rota + "permission/find/",
+            save: e.rota + "permission/save",
         }
     }; 
     redirect:redirect= {
