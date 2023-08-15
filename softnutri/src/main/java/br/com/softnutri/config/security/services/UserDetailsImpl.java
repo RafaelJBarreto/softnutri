@@ -2,13 +2,17 @@ package br.com.softnutri.config.security.services;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.softnutri.domain.PersonPaper;
 import br.com.softnutri.domain.User;
+import br.com.softnutri.util.Util;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -31,9 +35,9 @@ public class UserDetailsImpl implements UserDetails {
 	    this.authorities = authorities;
 	  }
 
-	  public static UserDetailsImpl build(User user) {
-	    List<SimpleGrantedAuthority> authorities = user.getPaper().stream()
-	        .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getDescription().toUpperCase()))
+	  public static UserDetailsImpl build(User user, Set<PersonPaper> paper) {
+	    List<SimpleGrantedAuthority> authorities = paper.stream()
+	        .map(role -> new SimpleGrantedAuthority(Util.getRole(role.getPaper())))
 	        .toList();
 
 	    return new UserDetailsImpl(

@@ -1,4 +1,4 @@
-package br.com.softnutri.util;
+package br.com.softnutri.interfaces;
 
 public interface FoodBunchReturn {
 

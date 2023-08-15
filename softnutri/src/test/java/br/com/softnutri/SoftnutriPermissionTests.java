@@ -3,10 +3,8 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +14,17 @@ import org.springframework.test.context.event.annotation.AfterTestExecution;
 import br.com.softnutri.domain.Module;
 import br.com.softnutri.domain.ModuleRole;
 import br.com.softnutri.domain.Paper;
+import br.com.softnutri.domain.PersonPaper;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.enuns.ModuleAll;
 import br.com.softnutri.enuns.PaperAll;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.ModuleRoleRepository;
 import br.com.softnutri.repository.PaperRepository;
+import br.com.softnutri.repository.PersonPaperRepository;
 import br.com.softnutri.repository.UserRepository;
 import br.com.softnutri.util.Criptografia;
+import br.com.softnutri.util.Util;
 
 @SpringBootTest
 class SoftnutriPermissionTests {
@@ -32,14 +33,16 @@ class SoftnutriPermissionTests {
 	private final ModuleRepository moduloRepository;
 	private final ModuleRoleRepository moduloPapelRepository;
 	private final UserRepository usuarioRepository;
+	private final PersonPaperRepository personPaperRepository;
 
 	@Autowired
 	public SoftnutriPermissionTests(PaperRepository papelRepository, ModuleRepository moduloRepository,
-			ModuleRoleRepository moduloPapelRepository, UserRepository usuarioRepository) {
+			ModuleRoleRepository moduloPapelRepository, UserRepository usuarioRepository, PersonPaperRepository personPaperRepository) {
 		this.papelRepository = papelRepository;
 		this.moduloRepository = moduloRepository;
 		this.moduloPapelRepository = moduloPapelRepository;
 		this.usuarioRepository = usuarioRepository;
+		this.personPaperRepository = personPaperRepository;
 	}
 
 	@Test
@@ -49,7 +52,7 @@ class SoftnutriPermissionTests {
 		for (PaperAll p : listPapers) {
 			Paper paper = papers.stream().filter(x -> p.name().equals(x.getDescription())).findAny().orElse(null);
 			if(paper == null) {
-				Paper nc = papelRepository.save(new Paper(null, p.name()));
+				Paper nc = papelRepository.save(new Paper(null, p.name(), p.getGet(), p.getPost(), p.getPut(), p.getDelete()));
 				assertNotNull(nc.getIdPaper());
 			}
 		}
@@ -61,7 +64,7 @@ class SoftnutriPermissionTests {
 		EnumSet<ModuleAll> listModules = listModules();
 		List<Module> modules = moduloRepository.findAll();
 		for (ModuleAll mod : listModules) {
-			Module module = modules.stream().filter(x -> mod.name().equals(x.getName())).findAny().orElse(null);
+			Module module = modules.stream().filter(x -> mod.getName().toUpperCase().contains(x.getName().toUpperCase())).findAny().orElse(null);
 			if(module == null) {
 				Module m = moduloRepository.save(new Module(null, mod.getName(), mod.getPathBase(), mod.getIcon(), mod.getOrders()));
 				assertNotNull(m.getIdModule());
@@ -107,16 +110,14 @@ class SoftnutriPermissionTests {
 			
 			User userO = user.get();
 			List<Paper> papers = papelRepository.findAll();
-			Set<Paper> papel = new HashSet<Paper>() ;
+			List<PersonPaper> permissions = this.personPaperRepository.findByUserIdPerson(userO.getIdPerson()).stream().toList();
 			for (Paper paper : papers) {
-				papel.add(paper);
-
+				PersonPaper personPaper = permissions.stream().filter(x -> paper.getIdPaper().equals(x.getPaper().getIdPaper())).findAny().orElse(null);
+				if(personPaper == null)
+					this.personPaperRepository.save(new PersonPaper(null, new User(userO.getIdPerson()), new Paper(paper.getIdPaper()), Util.getGet(paper.getGet()), Util.getPost(paper.getPost()), Util.getPut(paper.getPut()), Util.getDelete(paper.getDelete())));
 			}
-			if(!papel.isEmpty()) {
-				userO.setPaper(papel);
-				User nc = usuarioRepository.save(userO);
-				assertNotNull(nc.getPaper());
-			}
+			
+			assertNotNull(papers);
 		}
 		
 		

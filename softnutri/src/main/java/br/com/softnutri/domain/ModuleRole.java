@@ -33,7 +33,6 @@ public class ModuleRole {
 	}
 
 	public ModuleRole(Paper paper, Module module) {
-		super();
 		this.paper = paper;
 		this.module = module;
 	}

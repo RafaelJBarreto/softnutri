@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.softnutri.domain.FoodBunch;
-import br.com.softnutri.util.FoodBunchReturn;
+import br.com.softnutri.interfaces.FoodBunchReturn;
 
 @Repository
 public interface FoodBunchRepository extends JpaRepository<FoodBunch, Long>{

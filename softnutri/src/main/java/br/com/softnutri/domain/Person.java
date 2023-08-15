@@ -59,7 +59,7 @@ public class Person {
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	protected List<BodyHistory> bodyHistory = new ArrayList<>();
-
+	
 	public Person() {
 	}
 

@@ -39,14 +39,19 @@ public class Module {
 	private List<ModuleRole> moduleRole;
 
 	public Module() {
+		
 	}
-
+	
 	public Module(Long idModule, String name, String pathBase, String icon, Integer orders) {
-		super();
 		this.idModule = idModule;
 		this.name = name;
 		this.pathBase = pathBase;
 		this.icon = icon;
 		this.orders = orders;
+	}
+
+	public Module(Long idModule, String name) {
+		this.idModule = idModule;
+		this.name = name;
 	}
 }

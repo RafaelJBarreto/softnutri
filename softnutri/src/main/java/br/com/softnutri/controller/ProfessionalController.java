@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class ProfessionalController {
 
 	@GetMapping("/")
 	@Cacheable("professional")
+	@PreAuthorize("hasRole('ROLE_PROFESSIONAL_GET')")
 	public List<UserDTO> getProfessional() {
 		return userService.getProfessional();
 	}

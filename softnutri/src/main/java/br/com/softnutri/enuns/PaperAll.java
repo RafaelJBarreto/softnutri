@@ -1,11 +1,37 @@
 package br.com.softnutri.enuns;
 
 public enum PaperAll {
-	FOOD_GET, FOOD_POST, FOOD_DELET, FOOD_PUT,
-	PATIENT_GET, PATIENT_POST, PATIENT_DELET, PATIENT_PUT,
-	PROFESSIONAL_GET, PROFESSIONAL_POST, PROFESSIONAL_DELET, PROFESSIONAL_PUT,
-	MENU_GET, MENU_POST, MENU_DELET, MENU_PUT,
-	PERMISSION_GET, PERMISSION_POST, PERMISSION_DELET, PERMISSION_PUT,
-	CALENDAR_GET, CALENDAR_POST, CALENDAR_DELET, CALENDAR_PUT,
-	HOME_GET;
+	FOOD("get", "post", "put", "delete"),
+	PATIENT("get", "post", "put", "delete"),
+	PROFESSIONAL("get", "post", "put", "delete"),
+	MENU("get", "post", "put", "delete"),
+	PERMISSION("get", "post", "put", "delete"),
+	CALENDAR("get", "post", "put", "delete"),
+	HOME("get", null, null, null);
+	
+	private String get;
+	private String post;
+	private String put;
+	private String delete;
+	
+	private PaperAll(String get, String post, String put, String delete) {
+		this.get = get;
+		this.post = post;
+		this.put = put;
+		this.delete = delete;
+	}
+	public String getGet() {
+		return get;
+	}
+	public String getPost() {
+		return post;
+	}
+	public String getPut() {
+		return put;
+	}
+	public String getDelete() {
+		return delete;
+	}
+	
+	
 }

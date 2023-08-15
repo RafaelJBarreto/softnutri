@@ -2,7 +2,7 @@ package br.com.softnutri.dto;
 
 import java.util.List;
 
-import br.com.softnutri.util.FoodBunchReturn;
+import br.com.softnutri.interfaces.FoodBunchReturn;
 import lombok.Data;
 
 @Data

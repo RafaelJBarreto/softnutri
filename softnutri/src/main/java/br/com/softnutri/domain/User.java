@@ -11,9 +11,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -51,12 +48,10 @@ public class User extends Person {
 	
 	@OneToMany(mappedBy = "receptionist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Calendar> calendarReceptionist;
-		
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "personPaper", joinColumns = { @JoinColumn(name = "idPerson") }, inverseJoinColumns = {
-			@JoinColumn(name = "idPaper") })
-	private Set<Paper> paper;
-		
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<PersonPaper> paper;
+	
 	public User() {
 	}
 

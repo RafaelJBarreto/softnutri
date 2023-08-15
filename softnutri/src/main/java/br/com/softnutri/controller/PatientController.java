@@ -37,26 +37,26 @@ public class PatientController {
 
 	@GetMapping("/")
 	@Cacheable("patients")
-	@PreAuthorize("hasRole('ROLE_REGISTER_PATIENT_GET')")
+	@PreAuthorize("hasRole('ROLE_PATIENT_GET')")
 	public List<UserDTO> getPatients() {
 		return userService.getPatients();
 	}
 
 	@GetMapping(value = "/get/{id}")
-	@PreAuthorize("hasRole('ROLE_REGISTER_PATIENT_GET')")
+	@PreAuthorize("hasRole('ROLE_PATIENT_GET')")
 	public UserDTO getPerson(@PathVariable(value = "id") Long id) {
 		return userService.getUser(id);
 	}
 
 	@PostMapping("/save")
 	@Transactional
-	@PreAuthorize("hasRole('ROLE_REGISTER_PATIENT_POST')")
+	@PreAuthorize("hasRole('ROLE_PATIENT_POST')")
 	public ResponseEntity<MessageResponse> cadastrar(@RequestBody UserDTO form) {
 		return this.userService.save(UserDTO.converterToDomain(form, userService));
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	@PreAuthorize("hasRole('ROLE_REGISTER_PATIENT_DELETE')")
+	@PreAuthorize("hasRole('ROLE_PATIENT_DELETE')")
 	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
 		return personService.delete(id);
 	}

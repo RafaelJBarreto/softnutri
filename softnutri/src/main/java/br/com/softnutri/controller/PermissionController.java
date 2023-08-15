@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.BunchDTO;
 import br.com.softnutri.dto.PermissionDTO;
+import br.com.softnutri.dto.PersonPaperDTO;
 import br.com.softnutri.service.BunchService;
 import br.com.softnutri.service.PermissionService;
 
@@ -35,8 +36,8 @@ public class PermissionController {
 	}
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody BunchDTO dto) {
-		return this.bunchService.save(dto);
+	public ResponseEntity<MessageResponse> saveData(@RequestBody PersonPaperDTO dto) {
+		return this.permissionService.save(dto);
 	}
 
 	@GetMapping("/")

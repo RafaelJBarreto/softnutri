@@ -90,7 +90,7 @@ public class AutenticationService {
 			papels.add(usuarioPapel);
 		}
 
-		usuario.setPaper(papels);
+		//usuario.setPaper(papels);
 		this.userRepository.save(usuario);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
