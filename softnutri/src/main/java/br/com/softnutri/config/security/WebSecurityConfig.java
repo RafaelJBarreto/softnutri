@@ -62,6 +62,8 @@ public class WebSecurityConfig {
 		.requestMatchers("/calendar/cancel/**").permitAll()
 		.requestMatchers("/calendar/get/**").permitAll()
 		.requestMatchers("/calendar/professional").permitAll()
+		.requestMatchers("/permission/find/**").permitAll()
+		.requestMatchers("/permission/save").permitAll()
         .anyRequest().authenticated();
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 		return http.build();

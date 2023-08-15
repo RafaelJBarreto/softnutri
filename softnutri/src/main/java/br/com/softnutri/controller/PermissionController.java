@@ -15,15 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.BunchDTO;
+import br.com.softnutri.dto.PermissionDTO;
 import br.com.softnutri.service.BunchService;
+import br.com.softnutri.service.PermissionService;
 
 @RestController
 @RequestMapping("/permission")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PermissionController {
 
+	
+	private final BunchService bunchService;
+	private final PermissionService permissionService;
+	
 	@Autowired
-	private BunchService bunchService;
+	public PermissionController(BunchService bunchService, PermissionService permissionService) {
+		this.bunchService = bunchService;
+		this.permissionService = permissionService;
+	}
 
 	@PostMapping("/save")
 	public ResponseEntity<MessageResponse> saveData(@RequestBody BunchDTO dto) {
@@ -38,5 +47,10 @@ public class PermissionController {
 	@DeleteMapping(value = "/delete/{id}")
 	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
 		return this.bunchService.delete(id);
+	}
+	
+	@GetMapping("/find/{id}")
+	public List<PermissionDTO> getFindById(@PathVariable(value = "id")  Long idUsuario) {
+		return permissionService.getPermission(idUsuario);
 	}
 }

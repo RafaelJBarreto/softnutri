@@ -178,5 +178,15 @@
         "INTERVAL": "Intervalo",
         "INTERVAL_ERROR": "Erro ao listar intervalo",
         "ERROR_SAVE_INTERVAL": "Erro ao tentar cadastrar intervalo."
+    },
+    "PERMISSION": {
+        "PERMISSION_TITLE": "Permissões",
+        "PERMISSION_USER": "Usuário",
+        "INSERIR": "Inserir",
+        "ACESSAR": "Acessar",
+        "DELETAR": "Deletar",
+        "ALTERAR": "Alterar",
+        "ALL": "Permitir tudo",
+        "PERMISSION_ALL": "Permitir acesso em todas funcionalidades"
     }
 }

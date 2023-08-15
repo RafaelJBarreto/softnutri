@@ -67,6 +67,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { FoodAttendanceComponent } from './menu/attendance/food-attendance/food-attendance.component';
 import { StepAttendanceComponent } from './menu/attendance/step-attendance/step-attendance.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { PermissionComponent } from './permission/permission.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -100,7 +103,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalendarProfessionalComponent,
     AttendanceComponent,
     FoodAttendanceComponent,
-    StepAttendanceComponent],
+    StepAttendanceComponent,
+    PermissionComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
@@ -150,6 +154,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlexLayoutModule,
     MatTabsModule,
     MatExpansionModule, 
+    MatChipsModule,
+    MatButtonToggleModule
   ],
   exports: [
     SidebarComponent,

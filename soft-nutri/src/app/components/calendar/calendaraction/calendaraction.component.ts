@@ -20,7 +20,6 @@ import * as moment from 'moment';
   styleUrls: ['./calendaraction.component.scss']
 })
 export class CalendaractionComponent implements OnInit {
-
   public back: any;
   public form!: UntypedFormGroup;
   user: User = new User;
@@ -80,6 +79,7 @@ export class CalendaractionComponent implements OnInit {
   }
 
   public send(): void {
+    debugger;
     if (this.form.valid) {
       this.setObject();
       this.serviceCalendar.save(this.calendar).subscribe({

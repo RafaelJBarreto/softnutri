@@ -67,8 +67,8 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                     <td mat-cell *matCellDef="let element">
                       <div class="button">
-                        <button (click)="removeFoodbunch(element.idFoodBunch)" mat-button matTooltip="{{'BUNCH.FOOD_BUNCH_REMOVE' | translate}}"><i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);" class="fa-solid fa-ban"></i></button>
-                        <button (click)="editBunch(element.bunch)" mat-button matTooltip="{{'BUNCH.BUNCH_EDIT' | translate}}"><i *ngIf="element.bunch.description != null" class="fa-solid fa-file-circle-question"></i></button>
+                        <button [disabled]="element.bunch.idBunch == null" (click)="removeFoodbunch(element.idFoodBunch)" mat-button matTooltip="{{'BUNCH.FOOD_BUNCH_REMOVE' | translate}}"><i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);" class="fa-solid fa-ban"></i></button>
+                        <button [disabled]="element.bunch.idBunch == null" (click)="editBunch(element.bunch)" mat-button matTooltip="{{'BUNCH.BUNCH_EDIT' | translate}}"><i *ngIf="element.bunch.description != null" class="fa-solid fa-file-circle-question"></i></button>
                         <button (click)="removeBunch(element.bunch.idBunch)" mat-button matTooltip="{{'BUNCH.BUNCH_REMOVE' | translate}}"><i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);" class="fa-solid fa-trash-can-arrow-up"></i></button>
                         <button (click)="editFood(element.food)" mat-button matTooltip="{{'FOOD.FOOD_EDIT' | translate}}"><i class="fa-solid fa-apple-whole"></i></button>
                         <button (click)="removeFood(element.food.idFood)" mat-button matTooltip="{{'FOOD.FOOD_REMOVE' | translate}}"><i style="color: rgb(119, 119, 34);" class="fa-solid fa-recycle"></i></button>

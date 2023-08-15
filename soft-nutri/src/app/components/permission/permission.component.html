@@ -1,0 +1,71 @@
+<app-layout>
+    <form>
+        <mat-card class="mat-card mat-focus-indicator table-table-wrapper">
+            <mat-toolbar color="white">
+                <span class="table-table-wrapper__title">{{'PERMISSION.PERMISSION_TITLE' | translate}}</span>
+                <span class="header-spacer"></span>
+            </mat-toolbar>
+
+            <mat-card-content class="table-table__content style-mat-card-contet">
+                <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column"> 
+                <mat-form-field fxFlex="34%">
+                    <mat-label>{{'PERMISSION.PERMISSION_USER' | translate}}</mat-label>
+                    <input type="text" matInput [formControl]="userControl" [matAutocomplete]="autoUser"
+                        required>
+                    <mat-autocomplete #autoUser="matAutocomplete" [displayWith]="autoCompleteDisplayUser"
+                        (optionSelected)="onUserSelected($event.option)">
+                        <mat-option *ngFor="let option of filteredOptionsUser | async" [value]="option">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <div class="card-container" *ngIf="permission.length > 0">
+                    <mat-checkbox class="example-margin" [checked]="checkedAll" (change)="updateAll()">{{'PERMISSION.PERMISSION_ALL' | translate}}</mat-checkbox>
+                </div>
+                
+            </div>
+            </mat-card-content>
+
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let pe of permission">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{"MENU." + pe.description | uppercase | translate}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <mat-checkbox [checked]="pe.checked" (change)="updatePermission(pe)">{{'PERMISSION.ALL' | translate}} ({{"MENU." + pe.description | uppercase | translate}})</mat-checkbox>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-button-toggle-group name="roles" aria-label="roles" *ngFor="let paper of pe.paper" fxFlex>
+                        <mat-button-toggle fxFlex="25%" value="flour" [disabled]="paper.get == null" (change)="updatePaper(pe, paper, 1)">
+                            <i *ngIf="paper.get === 1" class="fa-solid fa-check" style="color: green;"></i>
+                            <i *ngIf="paper.get === 0" class="fa-solid fa-xmark" style="color: red;"></i>
+                            <i *ngIf="paper.get == null" class="fa-solid fa-bug"></i>
+                            {{'PERMISSION.ACESSAR' | translate}}
+                        </mat-button-toggle>
+                        <mat-button-toggle  fxFlex="25%" value="flour" [disabled]="paper.post == null" (change)="updatePaper(pe, paper, 2)">
+                            <i *ngIf="paper.post === 1" class="fa-solid fa-check" style="color: green;"></i>
+                            <i *ngIf="paper.post === 0" class="fa-solid fa-xmark" style="color: red;"></i>
+                            <i *ngIf="paper.post == null" class="fa-solid fa-bug"></i>
+                            {{'PERMISSION.INSERIR' | translate}}</mat-button-toggle>
+                        <mat-button-toggle fxFlex="25%" value="paper.put" [disabled]="paper.put == null" (change)="updatePaper(pe, paper, 3)">
+                            <i *ngIf="paper.put === 1" class="fa-solid fa-check" style="color: green;"></i>
+                            <i *ngIf="paper.put === 0" class="fa-solid fa-xmark" style="color: red;"></i>
+                            <i *ngIf="paper.put == null" class="fa-solid fa-bug"></i>
+                            {{'PERMISSION.ALTERAR' | translate}}</mat-button-toggle>
+                        <mat-button-toggle fxFlex="25%" value="flour" [disabled]="paper.delete == null" (change)="updatePaper(pe, paper, 4)">
+                            <i *ngIf="paper.delete === 1" class="fa-solid fa-check" style="color: green;"></i>
+                            <i *ngIf="paper.delete === 0" class="fa-solid fa-xmark" style="color: red;"></i>
+                            <i *ngIf="paper.delete == null" class="fa-solid fa-bug"></i>
+                            {{'PERMISSION.DELETAR' | translate}}</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </mat-expansion-panel>
+                
+            </mat-accordion>
+
+        </mat-card>
+
+
+    </form>
+</app-layout>

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import br.com.softnutri.domain.Paper;
 
 @Repository
-public interface PaperRepository  extends JpaRepository<Paper, Long>{
+public interface PaperRepository extends JpaRepository<Paper, Long>{
 
 	Paper findByDescription(String descricao);
-
+	
 }

@@ -11,6 +11,7 @@ import { PersonComponent } from './components/person/person.component';
 import { ProfessionalActionComponent } from './components/professional/professional-action/professional-action.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { AuthGuardService as AuthGuard  } from './services';
+import { PermissionComponent } from './components/permission/permission.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: CalendaractionComponent
+  }, 
+  {
+    path: 'permission',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: PermissionComponent
   },
   {
     path: 'login',

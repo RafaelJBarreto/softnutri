@@ -57,7 +57,10 @@ calendar:{
 intermission:{ 
     save:string,
     get:string,
-}
+};
+permission:{ 
+    get:string,
+};
 };
 
 type redirect = {
@@ -128,6 +131,9 @@ export class ConstService implements OnChanges{
         intermission:{
             save: e.rota + "intermission/save",
             get: e.rota + "intermission/get",
+        },
+        permission:{
+            get: e.rota + "permission/find/"
         }
     }; 
     redirect:redirect= {
