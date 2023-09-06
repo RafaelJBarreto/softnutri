@@ -3,7 +3,6 @@ package br.com.softnutri.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -22,12 +21,14 @@ import lombok.Data;
 public class Food {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idFood;
 
-	@Basic(optional = false)
 	@Column(name = "description", nullable = false, length = 150)
 	private String description;
+	
+	@Column(name = "descriptionPreparation", length = 150)
+	private String descriptionPreparation;
 
 	@Embedded
 	private NutritionalData nutritionalData;
@@ -41,9 +42,10 @@ public class Food {
 	public Food() {
 	}
 	
-	public Food(Long idFood, String description, float calories, float protein, float lipids, float carbohydrate) {
+	public Food(Long idFood, String description, String descriptionPreparation, float calories, float protein, float lipids, float carbohydrate) {
 		this.idFood = idFood;
 		this.description = description;
+		this.descriptionPreparation = descriptionPreparation;
 		this.nutritionalData = new NutritionalData();
 		this.nutritionalData.setCalories(calories);
 		this.nutritionalData.setCarbohydrate(carbohydrate);
@@ -52,8 +54,9 @@ public class Food {
 	}
 
 
-	public Food(String description, float calories, float protein, float lipids, float carbohydrate) {
+	public Food(String description, String descriptionPreparation, float calories, float protein, float lipids, float carbohydrate) {
 		this.description = description;
+		this.descriptionPreparation = descriptionPreparation;
 		this.nutritionalData = new NutritionalData();
 		this.nutritionalData.setCalories(calories);
 		this.nutritionalData.setCarbohydrate(carbohydrate);

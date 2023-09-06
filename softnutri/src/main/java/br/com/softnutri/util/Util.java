@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import br.com.softnutri.domain.Paper;
+import br.com.softnutri.domain.PersonPaper;
 
 public class Util {
 
@@ -46,22 +46,22 @@ public class Util {
 		
 	}
 
-	public static String getRole(Paper paper) {
+	public static String getRole(PersonPaper paper) {
 		StringBuilder permissoes = new StringBuilder();
-		if(getGet(paper.getGet()) > 0) {
-			permissoes.append("ROLE_" + paper.getDescription().toUpperCase() + "_GET");
+		if(paper.getGet() == 1) {
+			permissoes.append("ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_GET");
 		}
 		
-		if(getPost(paper.getPost()) > 0) {
-			permissoes.append(", ROLE_" + paper.getDescription().toUpperCase() + "_POST");
+		if(paper.getPost() == 1) {
+			permissoes.append(", ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_POST");
 		}
 		
-		if(getPut(paper.getPut()) > 0) {
-			permissoes.append(", ROLE_" + paper.getDescription().toUpperCase() + "_PUT");
+		if(paper.getPut() == 1) {
+			permissoes.append(", ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_PUT");
 		}
 		
-		if(getDelete(paper.getDelete()) > 0) {
-			permissoes.append(", ROLE_" + paper.getDescription().toUpperCase() + "_DELETE");
+		if(paper.getDelete() == 1) {
+			permissoes.append(", ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_DELETE");
 		}
 		
 		return permissoes.toString();

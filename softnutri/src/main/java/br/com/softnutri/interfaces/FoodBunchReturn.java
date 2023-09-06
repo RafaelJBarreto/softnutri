@@ -7,6 +7,7 @@ public interface FoodBunchReturn {
 	String getDescription();
 	Long getIdFood();
 	String getDescriptionFood();
+	String getDescriptionPreparation();
 	float getCalories();
 	float getProtein();
 	float getLipids();

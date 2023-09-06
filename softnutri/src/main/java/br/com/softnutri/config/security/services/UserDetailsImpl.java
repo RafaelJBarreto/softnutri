@@ -1,5 +1,6 @@
 package br.com.softnutri.config.security.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -36,15 +37,15 @@ public class UserDetailsImpl implements UserDetails {
 	  }
 
 	  public static UserDetailsImpl build(User user, Set<PersonPaper> paper) {
-	    List<SimpleGrantedAuthority> authorities = paper.stream()
-	        .map(role -> new SimpleGrantedAuthority(Util.getRole(role.getPaper())))
-	        .toList();
+		  List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		  for(PersonPaper pp: paper) {
+			  String roles = Util.getRole(pp);
+			  if(!roles.equals("")) {
+				  authorities.add(new SimpleGrantedAuthority(roles));
+			  }
+		  }
 
-	    return new UserDetailsImpl(
-	        user.getIdPerson(), 
-	        user.getEmail(), 
-	        user.getPassword(), 
-	        authorities);
+	    return new UserDetailsImpl(user.getIdPerson(), user.getEmail(),  user.getPassword(),  authorities);
 	  }
 
 	  @Override

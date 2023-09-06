@@ -12,7 +12,7 @@ import br.com.softnutri.interfaces.FoodBunchReturn;
 @Repository
 public interface FoodBunchRepository extends JpaRepository<FoodBunch, Long>{
 	
-	@Query(value = "select fb.id_food_bunch as idFoodBunch, b.id_bunch as idBunch, b.description, f.id_food as idFood, f.description as descriptionFood, f.calories, f.protein, f.lipids, f.carbohydrate  from food f left join food_bunch fb on fb.id_food = f.id_Food left join bunch b on b.id_bunch = fb.id_bunch", nativeQuery=true)
+	@Query(value = "select fb.id_food_bunch as idFoodBunch, b.id_bunch as idBunch, b.description, f.id_food as idFood, f.description as descriptionFood, f.calories, f.protein, f.lipids, f.carbohydrate, f.description_preparation as descriptionPreparation from food f left join food_bunch fb on fb.id_food = f.id_Food left join bunch b on b.id_bunch = fb.id_bunch", nativeQuery=true)
 	List<FoodBunchReturn> getAll();
 
 }

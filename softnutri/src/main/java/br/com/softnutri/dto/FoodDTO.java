@@ -10,14 +10,16 @@ public class FoodDTO {
 
 	private Long idFood;
 	private String description;
+	private String descriptionPreparation;
 	private NutritionalDataDTO nutritionalData;
 
 	public FoodDTO() {
 	}
 
-	public FoodDTO(Long idFood, String description, float calories, float protein, float lipids, float carbohydrate) {
+	public FoodDTO(Long idFood, String description, String descriptionPreparation, float calories, float protein, float lipids, float carbohydrate) {
 		this.idFood = idFood;
 		this.description = description;
+		this.descriptionPreparation = descriptionPreparation;
 		this.nutritionalData = new NutritionalDataDTO();
 		this.nutritionalData.setCalories(calories);
 		this.nutritionalData.setCarbohydrate(carbohydrate);
@@ -28,12 +30,13 @@ public class FoodDTO {
 	public FoodDTO(Food food) {
 		this.idFood = food.getIdFood();
 		this.description = food.getDescription();
+		this.descriptionPreparation = food.getDescriptionPreparation();
 		this.nutritionalData = new NutritionalDataDTO(food.getNutritionalData());
 	}
 
 	
 	public static Food converterToDomain(FoodDTO foodDTO) {
-		return new Food(foodDTO.getIdFood(), foodDTO.getDescription(), foodDTO.getNutritionalData().getCalories(), foodDTO.getNutritionalData().getProtein(), 
+		return new Food(foodDTO.getIdFood(), foodDTO.getDescription(), foodDTO.getDescriptionPreparation(), foodDTO.getNutritionalData().getCalories(), foodDTO.getNutritionalData().getProtein(), 
 				foodDTO.getNutritionalData().getLipids(), foodDTO.getNutritionalData().getCarbohydrate());
 	}
 

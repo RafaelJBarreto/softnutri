@@ -23,7 +23,7 @@ public class FoodService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(FoodDTO foodDTO) { 
-		this.foodRepository.save(new Food(foodDTO.getIdFood(), foodDTO.getDescription(),foodDTO.getNutritionalData().getCalories(),foodDTO.getNutritionalData().getProtein(),foodDTO.getNutritionalData().getLipids(),foodDTO.getNutritionalData().getCarbohydrate()));
+		this.foodRepository.save(new Food(foodDTO.getIdFood(), foodDTO.getDescription(), foodDTO.getDescriptionPreparation(), foodDTO.getNutritionalData().getCalories(),foodDTO.getNutritionalData().getProtein(),foodDTO.getNutritionalData().getLipids(),foodDTO.getNutritionalData().getCarbohydrate()));
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	public ResponseEntity<List<FoodDTO>> listAll() { 
