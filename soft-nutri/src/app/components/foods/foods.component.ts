@@ -22,7 +22,7 @@ import { Update } from 'src/app/services/shared/updated/updated.service';
   styleUrls: ['./foods.component.scss']
 })
 export class FoodsComponent implements OnInit, OnChanges{
-  displayedColumns: string[] = ['select', 'bunch', 'description', 'calories', 'protein', 'lipids', 'carbohydrate', 'actionsFood'];
+  displayedColumns: string[] = ['select', 'bunch', 'description', 'preparation', 'calories', 'protein', 'lipids', 'carbohydrate', 'actionsFood'];
   dataSource: MatTableDataSource<FoodBunch> = new MatTableDataSource;
   selection = new SelectionModel<FoodBunch>(true, []);
   food: FoodBunch[] = [];

@@ -59,17 +59,16 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TimeCalendarComponent } from './calendar/time-calendar/time-calendar.component';
 import { CancelCalendarComponent } from './calendar/cancel-calendar/cancel-calendar.component';
-import { MenuComponent } from './menu/menu.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import { CalendarProfessionalComponent } from './menu/calendar-professional/calendar-professional.component';
-import { AttendanceComponent } from './menu/attendance/attendance.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { FoodAttendanceComponent } from './menu/attendance/food-attendance/food-attendance.component';
-import { StepAttendanceComponent } from './menu/attendance/step-attendance/step-attendance.component';
-import {MatStepperModule} from '@angular/material/stepper';
 import { PermissionComponent } from './permission/permission.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { TreatmentComponent } from './treatment/treatment.component';
+import { CalendarProfessionalComponent } from './treatment/calendar-professional/calendar-professional.component';
+import { AttendanceComponent } from './treatment/attendance/attendance.component';
+import { FoodAttendanceComponent } from './treatment/attendance/food-attendance/food-attendance.component';
+import { StepAttendanceComponent } from './treatment/attendance/step-attendance/step-attendance.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -99,12 +98,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalendaractionComponent,
     TimeCalendarComponent,
     CancelCalendarComponent,
-    MenuComponent,
     CalendarProfessionalComponent,
     AttendanceComponent,
     FoodAttendanceComponent,
     StepAttendanceComponent,
-    PermissionComponent],
+    PermissionComponent,
+    TreatmentComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({
@@ -152,10 +151,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxMatTimepickerModule,
     MatSlideToggleModule,
     FlexLayoutModule,
-    MatTabsModule,
     MatExpansionModule, 
     MatChipsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTabsModule
   ],
   exports: [
     SidebarComponent,

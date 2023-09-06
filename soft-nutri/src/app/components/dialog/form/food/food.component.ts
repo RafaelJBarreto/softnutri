@@ -32,7 +32,8 @@ export class FoodComponent implements OnInit {
   public ngOnInit(): void {
     this.form = new UntypedFormGroup({
       idFood: new UntypedFormControl(''),
-      description: new UntypedFormControl('', [Validators.required]) 
+      description: new UntypedFormControl('', [Validators.required]) ,
+      descriptionPreparation: new UntypedFormControl('', [Validators.required]) 
     }); 
     this.verifyEdit();
   }
@@ -41,7 +42,8 @@ export class FoodComponent implements OnInit {
     if(this.data != null){
       this.form = new UntypedFormGroup({
         idFood: new UntypedFormControl(this.data.food.idFood),
-        description: new UntypedFormControl(this.data.food.description, [Validators.required]) 
+        description: new UntypedFormControl(this.data.food.description, [Validators.required]),
+        descriptionPreparation: new UntypedFormControl(this.data.food.descriptionPreparation, [Validators.required])
       }); 
       this.nutritionalData = this.data.food.nutritionalData
     }
@@ -51,6 +53,7 @@ export class FoodComponent implements OnInit {
     if (this.form.valid) {
       this.nutritionalDataComponent.send();
       this.food.description =this.form.controls['description'].value;
+      this.food.descriptionPreparation =this.form.controls['descriptionPreparation'].value;
       this.food.idFood = (this.form.controls['idFood'].value != 0 ? this.form.controls['idFood'].value : null); 
       this.service.save(this.food).subscribe({
         next: data => {  

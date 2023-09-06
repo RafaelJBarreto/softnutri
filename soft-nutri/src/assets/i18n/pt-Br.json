@@ -89,6 +89,7 @@
         "FOOD_IDFOOD": "IdFood",
         "FOOD_IDFOOD_GROUP":"IdFoodGroup",
         "FOOD_DESCRIPTION": "Descrição",
+        "FOOD_PREPARATION": "Preparação",
         "FOOD_CALORIES": "Calorias",
         "FOOD_PROTEIN": "Proteina",
         "FOOD_LIPIDS": "Lipidios",

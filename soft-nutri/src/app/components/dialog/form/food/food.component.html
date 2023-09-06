@@ -7,6 +7,9 @@
   <mat-form-field class="form__input" appearance="fill">
     <input matInput placeholder="description" type="text" formControlName="description">
   </mat-form-field>
+  <mat-form-field class="form__input" appearance="fill">
+    <input matInput placeholder="{{'FOOD.FOOD_PREPARATION' | translate}}" type="text" formControlName="descriptionPreparation">
+  </mat-form-field>
 
   <app-nutritional-data [sendNutritionalData]="nutritionalData" (sendNutritionalForm)="updateNutritionalData($event)">
   </app-nutritional-data>

@@ -4,7 +4,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CalendaractionComponent } from './components/calendar/calendaraction/calendaraction.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { HomeComponent } from './components/home/home.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PersonActionComponent } from './components/person/person-action/person-action.component';
 import { PersonComponent } from './components/person/person.component';
@@ -12,6 +11,7 @@ import { ProfessionalActionComponent } from './components/professional/professio
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { AuthGuardService as AuthGuard  } from './services';
 import { PermissionComponent } from './components/permission/permission.component';
+import { TreatmentComponent } from './components/treatment/treatment.component';
 
 const routes: Routes = [
   {
@@ -25,12 +25,6 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: FoodsComponent
-  },
-  {
-    path: 'menu',
-    pathMatch: 'full',
-    canActivate: [AuthGuard],
-    component: MenuComponent
   },
   {
     path: 'patient',
@@ -90,6 +84,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: PermissionComponent
+  },
+  {
+    path: 'menu',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: TreatmentComponent
   },
   {
     path: 'login',
