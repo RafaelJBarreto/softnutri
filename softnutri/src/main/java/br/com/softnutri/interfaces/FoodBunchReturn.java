@@ -12,4 +12,7 @@ public interface FoodBunchReturn {
 	float getProtein();
 	float getLipids();
 	float getCarbohydrate();
+	long getIdCompositionTable();
+	String getNameTable();
+	String getDescriptionTable();
 }

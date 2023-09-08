@@ -3,7 +3,6 @@ package br.com.softnutri.config.security.services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
 	    this.authorities = authorities;
 	  }
 
-	  public static UserDetailsImpl build(User user, Set<PersonPaper> paper) {
+	  public static UserDetailsImpl build(User user, List<PersonPaper> paper) {
 		  List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		  for(PersonPaper pp: paper) {
 			  String roles = Util.getRole(pp);

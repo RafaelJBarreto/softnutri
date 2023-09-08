@@ -11,7 +11,8 @@ public enum ModuleAll {
 	FOOD_MODULE(getFood(), "/food", "fa-solid fa-apple-whole", 4, getPapers(getFood().toUpperCase())),
 	MENU_MODULE(getMenu(), "/menu", "fa-solid fa-utensils", 5, getPapers(getMenu().toUpperCase())),
 	PERMISSION_MODULE(getPermission(), "/permission", "fa-solid fa-screwdriver-wrench", 5, getPapers(getPermission().toUpperCase())),
-	CALENDAR_MODULE(getCalendar(), "/calendar", "fa-solid fa-calendar-days", 6, getPapers(getCalendar().toUpperCase()));;
+	CALENDAR_MODULE(getCalendar(), "/calendar", "fa-solid fa-calendar-days", 6, getPapers(getCalendar().toUpperCase())),
+	TABLE_MODULE(getTable(), "/table", "fa-solid fa-table-list", 7, getPapers(getTable().toUpperCase()));
 
 	private String name;
 	private String pathBase;
@@ -25,6 +26,7 @@ public enum ModuleAll {
 	private static final String PROFESSIONAL = "professional";
 	private static final String PERMISSION = "permission";
 	private static final String CALENDAR = "calendar";
+	private static final String TABLE = "table";
 
 	private ModuleAll(String name, String pathBase, String icon, Integer orders, List<PaperAll> listPapers) {
 		this.name = name;
@@ -76,6 +78,10 @@ public enum ModuleAll {
 
 	public static String getCalendar() {
 		return CALENDAR;
+	}
+	
+	public static String getTable() {
+		return TABLE;
 	}
 
 	public List<PaperAll> getListPapers() {

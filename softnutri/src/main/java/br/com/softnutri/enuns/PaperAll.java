@@ -7,6 +7,7 @@ public enum PaperAll {
 	MENU("get", "post", "put", "delete"),
 	PERMISSION("get", "post", "put", "delete"),
 	CALENDAR("get", "post", "put", "delete"),
+	TABLE("get", "post", "put", "delete"),
 	HOME("get", null, null, null);
 	
 	private String get;

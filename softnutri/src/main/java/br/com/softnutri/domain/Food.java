@@ -11,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -32,6 +34,10 @@ public class Food {
 
 	@Embedded
 	private NutritionalData nutritionalData;
+	
+	@JoinColumn(name = "idCompositionTable", referencedColumnName = "idCompositionTable", nullable = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private CompositionTable compositionTable;
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "food", fetch = FetchType.LAZY)
 	private List<MenuPerson> menuPerson = new ArrayList<>();

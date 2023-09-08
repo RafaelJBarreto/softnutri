@@ -3,6 +3,7 @@ package br.com.softnutri.dto;
 import java.util.List;
 
 import br.com.softnutri.domain.Food;
+import br.com.softnutri.interfaces.FoodBunchReturn;
 import lombok.Data;
 
 @Data
@@ -11,20 +12,22 @@ public class FoodDTO {
 	private Long idFood;
 	private String description;
 	private String descriptionPreparation;
+	private CompositionTableDTO compositionTable;
 	private NutritionalDataDTO nutritionalData;
 
 	public FoodDTO() {
 	}
 
-	public FoodDTO(Long idFood, String description, String descriptionPreparation, float calories, float protein, float lipids, float carbohydrate) {
-		this.idFood = idFood;
-		this.description = description;
-		this.descriptionPreparation = descriptionPreparation;
+	public FoodDTO(FoodBunchReturn foodBunch) {
+		this.idFood = foodBunch.getIdFood();
+		this.description = foodBunch.getDescriptionFood();
+		this.descriptionPreparation = foodBunch.getDescriptionPreparation();
 		this.nutritionalData = new NutritionalDataDTO();
-		this.nutritionalData.setCalories(calories);
-		this.nutritionalData.setCarbohydrate(carbohydrate);
-		this.nutritionalData.setLipids(lipids);
-		this.nutritionalData.setProtein(protein);
+		this.nutritionalData.setCalories(foodBunch.getCalories());
+		this.nutritionalData.setCarbohydrate(foodBunch.getCarbohydrate());
+		this.nutritionalData.setLipids(foodBunch.getLipids());
+		this.nutritionalData.setProtein(foodBunch.getProtein());
+		this.compositionTable = new CompositionTableDTO (foodBunch.getIdCompositionTable(), foodBunch.getNameTable(), foodBunch.getDescriptionTable());
 	}
 	
 	public FoodDTO(Food food) {

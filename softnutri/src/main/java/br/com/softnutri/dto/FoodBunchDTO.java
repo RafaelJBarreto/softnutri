@@ -19,8 +19,7 @@ public class FoodBunchDTO {
 	public FoodBunchDTO(FoodBunchReturn foodBunch) {
 		this.idFoodBunch = foodBunch.getIdFoodBunch();
 		this.bunch = new BunchDTO(foodBunch.getIdBunch(), foodBunch.getDescription());
-		this.food = new FoodDTO(foodBunch.getIdFood(), foodBunch.getDescriptionFood(), foodBunch.getDescriptionPreparation(), foodBunch.getCalories(),
-				foodBunch.getProtein(), foodBunch.getLipids(), foodBunch.getCarbohydrate());
+		this.food = new FoodDTO(foodBunch);
 	}
 
 
