@@ -39,8 +39,7 @@ public class FoodDTO {
 
 	
 	public static Food converterToDomain(FoodDTO foodDTO) {
-		return new Food(foodDTO.getIdFood(), foodDTO.getDescription(), foodDTO.getDescriptionPreparation(), foodDTO.getNutritionalData().getCalories(), foodDTO.getNutritionalData().getProtein(), 
-				foodDTO.getNutritionalData().getLipids(), foodDTO.getNutritionalData().getCarbohydrate());
+		return new Food(foodDTO);
 	}
 
 
