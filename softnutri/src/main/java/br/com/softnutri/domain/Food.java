@@ -3,6 +3,7 @@ package br.com.softnutri.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.softnutri.dto.FoodDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -23,7 +24,7 @@ import lombok.Data;
 public class Food {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idFood;
 
 	@Column(name = "description", nullable = false, length = 150)
@@ -48,15 +49,16 @@ public class Food {
 	public Food() {
 	}
 	
-	public Food(Long idFood, String description, String descriptionPreparation, float calories, float protein, float lipids, float carbohydrate) {
-		this.idFood = idFood;
-		this.description = description;
-		this.descriptionPreparation = descriptionPreparation;
+	public Food(FoodDTO foodDTO) {
+		this.idFood = foodDTO.getIdFood();
+		this.description = foodDTO.getDescription();
+		this.descriptionPreparation = foodDTO.getDescriptionPreparation();
+		this.compositionTable = new CompositionTable(foodDTO.getCompositionTable().getIdCompositionTable(), foodDTO.getCompositionTable().getName(), foodDTO.getCompositionTable().getDescription());
 		this.nutritionalData = new NutritionalData();
-		this.nutritionalData.setCalories(calories);
-		this.nutritionalData.setCarbohydrate(carbohydrate);
-		this.nutritionalData.setLipids(lipids);
-		this.nutritionalData.setProtein(protein);
+		this.nutritionalData.setCalories(foodDTO.getNutritionalData().getCalories());
+		this.nutritionalData.setCarbohydrate(foodDTO.getNutritionalData().getCarbohydrate());
+		this.nutritionalData.setLipids(foodDTO.getNutritionalData().getLipids());
+		this.nutritionalData.setProtein(foodDTO.getNutritionalData().getProtein());
 	}
 
 

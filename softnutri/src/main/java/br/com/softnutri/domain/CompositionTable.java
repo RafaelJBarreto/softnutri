@@ -27,6 +27,13 @@ public class CompositionTable {
 	private String description;
 	
 	public CompositionTable() {
-		super();
 	}
+
+	public CompositionTable(Long idCompositionTable, String name, String description) {
+		this.idCompositionTable = idCompositionTable;
+		this.name = name;
+		this.description = description;
+	}
+	
+	
 }
