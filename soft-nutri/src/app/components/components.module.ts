@@ -69,6 +69,8 @@ import { AttendanceComponent } from './treatment/attendance/attendance.component
 import { FoodAttendanceComponent } from './treatment/attendance/food-attendance/food-attendance.component';
 import { StepAttendanceComponent } from './treatment/attendance/step-attendance/step-attendance.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { TableComponent } from './table/table.component';
+import { TableActionComponent } from './table/table-action/table-action.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -103,7 +105,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FoodAttendanceComponent,
     StepAttendanceComponent,
     PermissionComponent,
-    TreatmentComponent],
+    TreatmentComponent,
+    TableComponent,
+    TableActionComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({

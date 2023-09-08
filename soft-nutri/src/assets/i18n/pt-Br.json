@@ -112,7 +112,8 @@
         "MENU": "Cardápio",
         "PROFESSIONAL": "Profissional",
         "PERMISSION": "Permissões",
-        "CALENDAR": "Agenda"
+        "CALENDAR": "Agenda",
+        "TABLE": "Tabela"
     } ,
     "PATIENT": {
         "PATIENT_NEW": "Cadastro de Pacientes",
@@ -193,5 +194,18 @@
         "ERROR_SAVE": "Erro ao salvar permissões",
         "ERROR_USER": "Selecione um usuário para salvar",
         "LIBERAR": "Permitir"
+    },
+    "TABLE": {
+        "TABLE_NEW": "Cadastro de Tabelas",
+        "TABLE_TITLE": "Tabelas",
+        "TABLE_IDTABLE": "Id Tabela",
+        "ERROR_LIST_TABLE": "Erro ao listar tabelas.",
+        "ERROR_DELETE_TABLE": "Erro ao tentar deletar tabela.",
+        "ERROR_DADO_TABLE": "tabela não existe.",
+        "ERROR_SAVE_TABLE": "Erro ao tentar cadastrar tabela.",
+        "TABLE": "Tabela",
+        "TABLE_ALL": "Tabela de composição de alimentos",
+        "NAME": "Nome",
+        "DESCRIPTION": "Descrição"
     }
 }

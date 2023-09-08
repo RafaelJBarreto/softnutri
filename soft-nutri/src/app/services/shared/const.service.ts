@@ -62,6 +62,15 @@ permission:{
     get:string,
     save:string,
 };
+
+table: {
+    table: string,
+    listall: string,
+    save:string,
+    get:string,
+    tableaction:string,
+};
+
 };
 
 type redirect = {
@@ -136,6 +145,13 @@ export class ConstService implements OnChanges{
         permission:{
             get: e.rota + "permission/find/",
             save: e.rota + "permission/save",
+        },
+        table: {
+            table: "/table",
+            save: e.rota + "table/save",
+            listall: e.rota + "table/",
+            get: e.rota + "table/get/",
+            tableaction: "/tableaction",
         }
     }; 
     redirect:redirect= {

@@ -22,7 +22,7 @@ import { Update } from 'src/app/services/shared/updated/updated.service';
   styleUrls: ['./foods.component.scss']
 })
 export class FoodsComponent implements OnInit, OnChanges{
-  displayedColumns: string[] = ['select', 'bunch', 'description', 'preparation', 'calories', 'protein', 'lipids', 'carbohydrate', 'actionsFood'];
+  displayedColumns: string[] = ['select', 'bunch', 'table', 'description', 'preparation', 'calories', 'protein', 'lipids', 'carbohydrate', 'actionsFood'];
   dataSource: MatTableDataSource<FoodBunch> = new MatTableDataSource;
   selection = new SelectionModel<FoodBunch>(true, []);
   food: FoodBunch[] = [];
@@ -133,7 +133,9 @@ export class FoodsComponent implements OnInit, OnChanges{
       || String(data.food.nutritionalData.calories).toLowerCase().includes(filter)
       || String(data.food.nutritionalData.carbohydrate).toLowerCase().includes(filter)
       || String(data.food.nutritionalData.lipids).toLowerCase().includes(filter)
-      || String(data.food.nutritionalData.protein).toLowerCase().includes(filter);
+      || String(data.food.nutritionalData.protein).toLowerCase().includes(filter)
+      || String(data.food.descriptionPreparation).toLowerCase().includes(filter)
+      || String(data.food.compositionTable.name).toLowerCase().includes(filter);
   }
 
   

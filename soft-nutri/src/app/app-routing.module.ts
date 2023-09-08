@@ -12,6 +12,8 @@ import { ProfessionalComponent } from './components/professional/professional.co
 import { AuthGuardService as AuthGuard  } from './services';
 import { PermissionComponent } from './components/permission/permission.component';
 import { TreatmentComponent } from './components/treatment/treatment.component';
+import { TableComponent } from './components/table/table.component';
+import { TableActionComponent } from './components/table/table-action/table-action.component';
 
 const routes: Routes = [
   {
@@ -90,7 +92,24 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: TreatmentComponent
-  },
+  }, {
+    path: 'table',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: TableComponent
+  }, 
+  {
+    path: 'tableaction',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: TableActionComponent
+  }, 
+  {
+    path: 'tableaction/:id',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: TableActionComponent
+  }, 
   {
     path: 'login',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)

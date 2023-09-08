@@ -16,7 +16,6 @@ import { ConstService } from 'src/app/services/shared/const.service';
   styleUrls: ['./person-action.component.scss']
 })
 export class PersonActionComponent implements OnInit {
-
   public back: any;
   public form!: UntypedFormGroup;
   user: User = new User;  
