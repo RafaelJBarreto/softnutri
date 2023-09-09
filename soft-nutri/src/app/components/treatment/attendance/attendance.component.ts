@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component,  EventEmitter,  Input,  OnInit,  Output,  ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Table } from 'src/app/model/table/table';
@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, startWith } from 'rxjs/operators';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
-import { FoodBunch } from 'src/app/model';
 import { TableService } from 'src/app/services/table/table.service';
 
 
@@ -20,13 +19,12 @@ export class AttendanceComponent implements OnInit {
   errorMessage: any;
   tableControl = new FormControl();
   filteredOptionsTable: Observable<Table[]>  = new Observable;
-  tableSelected: Table = new Table;
-  table: Table[] = [];
-  @Input() foodListSend = new EventEmitter<FoodBunch[]>();
-  food: FoodBunch[] = [];
-
+  table: Table = new Table;
+  tables: Table[] = [];
+  idTable!: number;
   listBreakFast: Array<number> = new Array;
   step = 0;
+  loadingFoods: boolean = false;
   
 
   constructor(
@@ -45,11 +43,11 @@ export class AttendanceComponent implements OnInit {
   private listTable() {
     this.tableService.listAll().subscribe({
       next: data => {
-        this.table = data;
+        this.tables = data;
         this.filteredOptionsTable = this.tableControl.valueChanges
           .pipe(
             startWith(''),
-            map((name) => name ? this.filterTable(name) : this.table.slice())
+            map((name) => name ? this.filterTable(name) : this.tables.slice())
           );
       },
       error: err => {
@@ -73,14 +71,15 @@ export class AttendanceComponent implements OnInit {
       filterValue = value.name.toLowerCase();
     }
 
-    return this.table.filter(
+    return this.tables.filter(
       option => option.name.toLowerCase().indexOf(filterValue) === 0
     );
   }
 
   onTableSelected(option: MatOption) {
-    this.tableSelected = option.value;
-    this.listFood(option.value.idCompositionTable);
+    this.table = option.value;
+    this.idTable = this.table.idCompositionTable;
+    this.loadingFoods = true;
   }
 
   autoCompleteDisplayTable(item: any): string {
@@ -88,25 +87,6 @@ export class AttendanceComponent implements OnInit {
       return '';
     }
     return item.name;
-  }
-
-  private listFood(id: number) {
-    this.foodBunchService.getFoodTable(id).subscribe({
-      next: data => {
-        this.food = data;
-        debugger;
-        this.foodListSend.emit(this.food);
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('FOOD.ERROR_LIST_FOOD'), '', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
-
-        });
-      }
-    });
   }
 
   getValue(id: Number) {
@@ -129,6 +109,4 @@ export class AttendanceComponent implements OnInit {
   setFoodBreakFast() {
     this.listBreakFast.push(0);
   }
- 
-
 }

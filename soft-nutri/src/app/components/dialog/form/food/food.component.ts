@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Inject,  OnInit,  ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { NutritionalDataComponent } from 'src/app/components/shared/nutrional-da
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Table } from 'src/app/model/table/table';
 import { TableService } from 'src/app/services/table/table.service';
+
 
 @Component({
   selector: 'app-food',
@@ -64,7 +65,6 @@ export class FoodComponent implements OnInit {
   }
 
   verifyEdit(){
-    debugger;
     if(this.data != null){
       this.form.controls['idFood'].setValue(this.data.food.idFood);
       this.form.controls['description'].setValue(this.data.food.description);
@@ -107,10 +107,6 @@ export class FoodComponent implements OnInit {
   public updateNutritionalData(nutritionalData:NutritionalData):void{
     this.food.nutritionalData = nutritionalData;
   } 
-
-  compareTableObjects(object1: any, object2: any) {
-    return object1 && object2 && object1.id == object2.id;
-  }
 
   public getTable(idCompositionTable: number){
     for(let i = 0; i < this.table.length; i++){

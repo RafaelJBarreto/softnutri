@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable, startWith } from 'rxjs';
@@ -6,37 +6,36 @@ import { Food, FoodBunch } from 'src/app/model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 import { MatOption } from '@angular/material/core';
+import { Table } from 'src/app/model/table/table';
 
 @Component({
   selector: 'app-food-attendance',
   templateUrl: './food-attendance.component.html',
   styleUrls: ['./food-attendance.component.scss']
 })
-export class FoodAttendanceComponent implements OnInit, AfterViewInit {
+export class FoodAttendanceComponent implements OnInit, OnChanges {
 
   public form!: UntypedFormGroup;
   foodControl = new FormControl();
   filteredOptionsFood: Observable<FoodBunch[]>  = new Observable;
   foods: FoodBunch[] = [];
   foodSelected: FoodBunch = new FoodBunch;
-  @Input() foodList: FoodBunch[] = [];
-  @Output() foodListSend = new EventEmitter<FoodBunch[]>();
+  @Input() idTable!: number;
 
   constructor(
     public service: FoodBunchService,
     public translate: TranslateService,
     private snackBar: MatSnackBar
-  ) {  debugger;}
-
-
-  ngAfterViewInit(): void {
-    debugger;
-    this.foodList;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.setForm();
-    this.listFood();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['idTable'].currentValue != undefined){
+      this.listFood(changes['idTable'].currentValue);
+    }
   }
 
   setForm(): void{
@@ -92,8 +91,8 @@ export class FoodAttendanceComponent implements OnInit, AfterViewInit {
     return item.food.description;
   }
 
-  private listFood() {
-    this.service.getFoodTable(1).subscribe({
+  private listFood(idTable: number) {
+    this.service.getFoodTable(idTable).subscribe({
       next: data => {
         this.foods = data;
         this.filteredOptionsFood = this.foodControl.valueChanges

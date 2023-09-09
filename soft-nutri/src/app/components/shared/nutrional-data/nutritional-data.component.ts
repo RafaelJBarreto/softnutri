@@ -44,6 +44,5 @@ export class NutritionalDataComponent implements OnInit  {
       }
       this.sendNutritionalForm.emit(this.nutritionalData); 
   }
-
    
 }

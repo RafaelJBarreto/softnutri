@@ -7,7 +7,7 @@
       <input type="text" matInput [formControl]="tableControl" [matAutocomplete]="autoTable"
           required>
       <mat-autocomplete #autoTable="matAutocomplete" [displayWith]="autoCompleteDisplayTable"
-          (optionSelected)="onTableSelected($event.option)">
+          (optionSelected)="onTableSelected($event.option)" >
           <mat-option *ngFor="let option of filteredOptionsTable | async" [value]="option">
               {{option.name}}
           </mat-option>
@@ -16,7 +16,7 @@
 </div>
 </mat-card-content>
 
-<mat-accordion class="example-headers-align" *ngIf="">
+<mat-accordion class="example-headers-align" *ngIf="loadingFoods">
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -32,7 +32,7 @@
       </button>
   
       <div *ngFor="let o of listBreakFast">
-        <app-food-attendance  [foodList]="food"></app-food-attendance>
+        <app-food-attendance [idTable]="idTable"></app-food-attendance>
       </div>
       <mat-action-row>
        <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
@@ -50,7 +50,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <app-food-attendance [foodList]="food"></app-food-attendance>
+      <app-food-attendance [idTable]="idTable"></app-food-attendance>
   
       <mat-action-row>
         <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
@@ -69,7 +69,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <app-food-attendance [foodList]="food"></app-food-attendance>
+      <app-food-attendance [idTable]="idTable"></app-food-attendance>
   
       <mat-action-row>
         <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
@@ -88,7 +88,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
     
-        <app-food-attendance [foodList]="food"></app-food-attendance>
+        <app-food-attendance [idTable]="idTable"></app-food-attendance>
     
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
@@ -107,7 +107,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
     
-        <app-food-attendance [foodList]="food"></app-food-attendance>
+        <app-food-attendance [idTable]="idTable"></app-food-attendance>
     
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
