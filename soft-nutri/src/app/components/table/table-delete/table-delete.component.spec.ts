@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepAttendanceComponent } from './step-attendance.component';
+import { TableDeleteComponent } from './table-delete.component';
 
-describe('StepAttendanceComponent', () => {
-  let component: StepAttendanceComponent;
-  let fixture: ComponentFixture<StepAttendanceComponent>;
+describe('TableDeleteComponent', () => {
+  let component: TableDeleteComponent;
+  let fixture: ComponentFixture<TableDeleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StepAttendanceComponent ]
+      declarations: [ TableDeleteComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StepAttendanceComponent);
+    fixture = TestBed.createComponent(TableDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -204,6 +204,7 @@ export class PermissionComponent implements OnInit {
 
     this.validAll();
   }
+  
 
   updatePaper(per: Permission, option: Paper, value: number) {
     if(value == 1){

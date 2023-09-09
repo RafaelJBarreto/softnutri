@@ -42,8 +42,8 @@ export class TableActionComponent implements OnInit {
     if(!isEdit){
       this.form = new UntypedFormGroup({
         idCompositionTable: new UntypedFormControl(''),
-        name: new UntypedFormControl('', [Validators.required]),
-        description: new UntypedFormControl('', [Validators.required]),
+        name: new UntypedFormControl('', [Validators.required, Validators.maxLength(20)]),
+        description: new UntypedFormControl('', [Validators.required, Validators.maxLength(100)]),
 
       }); 
     }else{

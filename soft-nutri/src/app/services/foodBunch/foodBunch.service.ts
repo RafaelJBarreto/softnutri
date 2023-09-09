@@ -32,4 +32,8 @@ export class FoodBunchService {
   delete(id:any): Observable<any> {
     return this.http.delete(this.api.rest.foodbunch.delete + id );
   } 
+
+  getFoodTable(id:any): Observable<any> {
+    return this.http.get(this.api.rest.foodbunch.table + id );
+  } 
 }

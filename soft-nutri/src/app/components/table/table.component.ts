@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'src/app/model/table/table';
 import { ConstService } from 'src/app/services/shared/const.service';
 import { TableService } from 'src/app/services/table/table.service';
+import { TableDeleteComponent } from './table-delete/table-delete.component';
 
 @Component({
   selector: 'app-table',
@@ -62,6 +63,17 @@ export class TableComponent implements OnInit {
 
   edit(idCompositionTable: any) {
     this.router.navigate([this.action, idCompositionTable]);
+  }
+
+  delete(idCompositionTable: any) {
+    const dialogRef = this.dialog.open(TableDeleteComponent, {
+      width: '250px',
+      data: { id: idCompositionTable },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.listData();
+    });
   }
 
 }

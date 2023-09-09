@@ -67,10 +67,10 @@ import { TreatmentComponent } from './treatment/treatment.component';
 import { CalendarProfessionalComponent } from './treatment/calendar-professional/calendar-professional.component';
 import { AttendanceComponent } from './treatment/attendance/attendance.component';
 import { FoodAttendanceComponent } from './treatment/attendance/food-attendance/food-attendance.component';
-import { StepAttendanceComponent } from './treatment/attendance/step-attendance/step-attendance.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TableComponent } from './table/table.component';
 import { TableActionComponent } from './table/table-action/table-action.component';
+import { TableDeleteComponent } from './table/table-delete/table-delete.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -103,11 +103,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalendarProfessionalComponent,
     AttendanceComponent,
     FoodAttendanceComponent,
-    StepAttendanceComponent,
     PermissionComponent,
     TreatmentComponent,
     TableComponent,
-    TableActionComponent],
+    TableActionComponent,
+    TableDeleteComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({

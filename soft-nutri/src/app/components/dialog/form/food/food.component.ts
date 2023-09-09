@@ -108,6 +108,10 @@ export class FoodComponent implements OnInit {
     this.food.nutritionalData = nutritionalData;
   } 
 
+  compareTableObjects(object1: any, object2: any) {
+    return object1 && object2 && object1.id == object2.id;
+  }
+
   public getTable(idCompositionTable: number){
     for(let i = 0; i < this.table.length; i++){
       if(this.table[i].idCompositionTable === idCompositionTable){

@@ -30,4 +30,8 @@ export class TableService {
     return this.http.get(this.api.rest.table.get + idTable );
   } 
 
+  delete(idTable:any): Observable<any> {
+    return this.http.delete(this.api.rest.table.delete + idTable );
+  } 
+
 }

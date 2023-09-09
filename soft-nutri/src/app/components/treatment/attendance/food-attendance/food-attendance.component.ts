@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable, startWith } from 'rxjs';
@@ -12,19 +12,27 @@ import { MatOption } from '@angular/material/core';
   templateUrl: './food-attendance.component.html',
   styleUrls: ['./food-attendance.component.scss']
 })
-export class FoodAttendanceComponent implements OnInit {
+export class FoodAttendanceComponent implements OnInit, AfterViewInit {
 
   public form!: UntypedFormGroup;
   foodControl = new FormControl();
   filteredOptionsFood: Observable<FoodBunch[]>  = new Observable;
-  food: FoodBunch[] = [];
+  foods: FoodBunch[] = [];
   foodSelected: FoodBunch = new FoodBunch;
+  @Input() foodList: FoodBunch[] = [];
+  @Output() foodListSend = new EventEmitter<FoodBunch[]>();
 
   constructor(
     public service: FoodBunchService,
     public translate: TranslateService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {  debugger;}
+
+
+  ngAfterViewInit(): void {
+    debugger;
+    this.foodList;
+  }
 
   ngOnInit(): void {
     this.setForm();
@@ -85,13 +93,13 @@ export class FoodAttendanceComponent implements OnInit {
   }
 
   private listFood() {
-    this.service.listAll().subscribe({
+    this.service.getFoodTable(1).subscribe({
       next: data => {
-        this.food = data;
+        this.foods = data;
         this.filteredOptionsFood = this.foodControl.valueChanges
         .pipe(
           startWith(''),
-          map(name => name ? this.filterFood(name) : this.food.slice())
+          map(name => name ? this.filterFood(name) : this.foods.slice())
         )
       },
       error: err => {
@@ -114,7 +122,7 @@ export class FoodAttendanceComponent implements OnInit {
       filterValue = value.food.description.toLowerCase();
     }
 
-    return this.food.filter(
+    return this.foods.filter(
       option => option.food.description.toLowerCase().indexOf(filterValue) === 0 || this.translate.instant(option.bunch.description).toLowerCase().indexOf(filterValue) === 0
     );
   }

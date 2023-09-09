@@ -44,6 +44,7 @@ foodbunch:{
     listall:string,
     get:string,
     delete:string,
+    table:string,
 };
 calendar:{ 
     calendar:string,
@@ -69,6 +70,7 @@ table: {
     save:string,
     get:string,
     tableaction:string,
+    delete:string
 };
 
 };
@@ -126,6 +128,7 @@ export class ConstService implements OnChanges{
         foodbunch:{
             save: e.rota + "foodBunch/save",
             listall: e.rota + "foodBunch/",
+            table: e.rota + "foodBunch/table/",
             get: e.rota + "foodBunch/get/",
             delete: e.rota + "foodBunch/delete/",
         },
@@ -152,6 +155,7 @@ export class ConstService implements OnChanges{
             listall: e.rota + "table/",
             get: e.rota + "table/get/",
             tableaction: "/tableaction",
+            delete: e.rota + "table/delete/",
         }
     }; 
     redirect:redirect= {
