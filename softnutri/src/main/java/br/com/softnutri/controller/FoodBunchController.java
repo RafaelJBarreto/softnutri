@@ -39,4 +39,9 @@ public class FoodBunchController {
 	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
 		return this.foodBunchService.delete(id);
 	}
+	
+	@GetMapping(value = "/table/{id}")
+	public ResponseEntity<List<FoodBunchDTO>> getFoodTable(@PathVariable(value = "id") Long id) {
+		return this.foodBunchService.getFoodTable(id);
+	}
 }

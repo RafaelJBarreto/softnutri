@@ -39,5 +39,15 @@ public class TableService {
 			return null;
 		}
 	}
+	
+	public ResponseEntity<MessageResponse> delete(Long id) {
+		Optional<CompositionTable> ct = this.tableRepository.findById(id);
+		if (ct.isPresent()) {
+			this.tableRepository.delete(ct.get());
+			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
+		} else {
+			return null;
+		}
+	}
 		 
 }

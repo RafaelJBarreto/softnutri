@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +38,10 @@ public class TableController {
 	@GetMapping(value = "/get/{id}")
 	public CompositionTableDTO get(@PathVariable(value = "id") Long id) {
 		return this.tableService.get(id);
+	}
+	
+	@DeleteMapping(value = "/delete/{id}")
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+		return this.tableService.delete(id);
 	}
 }

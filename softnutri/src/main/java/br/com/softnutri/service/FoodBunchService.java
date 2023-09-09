@@ -52,5 +52,9 @@ public class FoodBunchService {
 			return null;
 		}
 	}
+	
+	public ResponseEntity<List<FoodBunchDTO>> getFoodTable(Long idCompositionTable) {
+		return ResponseEntity.ok(FoodBunchDTO.converter(this.foodBunchRepository.getFoodTable(idCompositionTable)));
+	}
 	 
 }
