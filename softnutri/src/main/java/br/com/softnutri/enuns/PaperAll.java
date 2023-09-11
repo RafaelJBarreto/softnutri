@@ -1,6 +1,7 @@
 package br.com.softnutri.enuns;
 
 public enum PaperAll {
+		
 	FOOD("get", "post", "put", "delete"),
 	PATIENT("get", "post", "put", "delete"),
 	PROFESSIONAL("get", "post", "put", "delete"),
@@ -8,6 +9,7 @@ public enum PaperAll {
 	PERMISSION("get", "post", "put", "delete"),
 	CALENDAR("get", "post", "put", "delete"),
 	TABLE("get", "post", "put", "delete"),
+	SNACK("get", "post", "put", "delete"),
 	HOME("get", null, null, null);
 	
 	private String get;
