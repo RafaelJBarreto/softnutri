@@ -61,7 +61,6 @@ import { TimeCalendarComponent } from './calendar/time-calendar/time-calendar.co
 import { CancelCalendarComponent } from './calendar/cancel-calendar/cancel-calendar.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PermissionComponent } from './permission/permission.component';
-import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { TreatmentComponent } from './treatment/treatment.component';
 import { CalendarProfessionalComponent } from './treatment/calendar-professional/calendar-professional.component';
@@ -74,6 +73,7 @@ import { TableDeleteComponent } from './table/table-delete/table-delete.componen
 import { SnackComponent } from './snack/snack.component';
 import { SnackActionComponent } from './snack/snack-action/snack-action.component';
 import { SnackDeleteComponent } from './snack/snack-delete/snack-delete.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -162,9 +162,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSlideToggleModule,
     FlexLayoutModule,
     MatExpansionModule, 
-    MatChipsModule,
     MatButtonToggleModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   exports: [
     SidebarComponent,

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component,  EventEmitter,  Input,  OnInit,  Output,  ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Table } from 'src/app/model/table/table';
@@ -15,6 +15,8 @@ import { TableService } from 'src/app/services/table/table.service';
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.scss']
 })
+
+
 export class AttendanceComponent implements OnInit {
   errorMessage: any;
   tableControl = new FormControl();
