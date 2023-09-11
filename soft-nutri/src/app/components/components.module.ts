@@ -71,6 +71,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { TableComponent } from './table/table.component';
 import { TableActionComponent } from './table/table-action/table-action.component';
 import { TableDeleteComponent } from './table/table-delete/table-delete.component';
+import { SnackComponent } from './snack/snack.component';
+import { SnackActionComponent } from './snack/snack-action/snack-action.component';
+import { SnackDeleteComponent } from './snack/snack-delete/snack-delete.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -107,7 +110,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TreatmentComponent,
     TableComponent,
     TableActionComponent,
-    TableDeleteComponent],
+    TableDeleteComponent,
+    SnackComponent,
+    SnackActionComponent,
+    SnackDeleteComponent],
   imports: [
     MatListModule,
     TranslateModule.forRoot({

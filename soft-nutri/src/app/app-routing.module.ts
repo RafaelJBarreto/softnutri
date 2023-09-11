@@ -14,6 +14,8 @@ import { PermissionComponent } from './components/permission/permission.componen
 import { TreatmentComponent } from './components/treatment/treatment.component';
 import { TableComponent } from './components/table/table.component';
 import { TableActionComponent } from './components/table/table-action/table-action.component';
+import { SnackComponent } from './components/snack/snack.component';
+import { SnackActionComponent } from './components/snack/snack-action/snack-action.component';
 
 const routes: Routes = [
   {
@@ -111,9 +113,28 @@ const routes: Routes = [
     component: TableActionComponent
   }, 
   {
+    path: 'snack',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: SnackComponent
+  },
+  {
+    path: 'snackaction',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: SnackActionComponent
+  }, 
+  {
+    path: 'snackaction/:id',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: SnackActionComponent
+  }, 
+  {
     path: 'login',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
   },
+
   {
     path: '404',
     component: NotFoundComponent

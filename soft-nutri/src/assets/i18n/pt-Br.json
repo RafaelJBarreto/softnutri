@@ -113,7 +113,8 @@
         "PROFESSIONAL": "Profissional",
         "PERMISSION": "Permissões",
         "CALENDAR": "Agenda",
-        "TABLE": "Tabela"
+        "TABLE": "Tabela",
+        "SNACK": "Refeição"
     } ,
     "PATIENT": {
         "PATIENT_NEW": "Cadastro de Pacientes",
@@ -205,6 +206,18 @@
         "ERROR_SAVE_TABLE": "Erro ao tentar cadastrar tabela.",
         "TABLE": "Tabela",
         "TABLE_ALL": "Tabela de composição de alimentos",
+        "NAME": "Nome",
+        "DESCRIPTION": "Descrição"
+    },
+    "SNACK": {
+        "SNACK_NEW": "Cadastro de Refeições",
+        "SNACK_TITLE": "Refeições",
+        "SNACK_IDSNACK": "Id Refeição",
+        "ERROR_LIST_SNACK": "Erro ao listar refeições.",
+        "ERROR_DELETE_SNACK": "Erro ao tentar deletar refeição.",
+        "ERROR_DADO_SNACK": "refeição não existe.",
+        "ERROR_SAVE_SNACK": "Erro ao tentar cadastrar refeição.",
+        "SNACK": "refeição",
         "NAME": "Nome",
         "DESCRIPTION": "Descrição"
     }

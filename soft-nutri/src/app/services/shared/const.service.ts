@@ -63,13 +63,20 @@ permission:{
     get:string,
     save:string,
 };
-
 table: {
     table: string,
     listall: string,
     save:string,
     get:string,
     tableaction:string,
+    delete:string
+};
+snack: {
+    snack: string,
+    listall: string,
+    save:string,
+    get:string,
+    snackaction:string,
     delete:string
 };
 
@@ -156,6 +163,14 @@ export class ConstService implements OnChanges{
             get: e.rota + "table/get/",
             tableaction: "/tableaction",
             delete: e.rota + "table/delete/",
+        },
+        snack: {
+            snack: "/snack",
+            save: e.rota + "snack/save",
+            listall: e.rota + "snack/",
+            get: e.rota + "snack/get/",
+            snackaction: "/snackaction",
+            delete: e.rota + "snack/delete/",
         }
     }; 
     redirect:redirect= {

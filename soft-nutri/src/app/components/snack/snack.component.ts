@@ -1,0 +1,83 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Table } from 'src/app/model/table/table';
+import { ConstService } from 'src/app/services/shared/const.service';
+import { TableService } from 'src/app/services/table/table.service';
+import { TableDeleteComponent } from '../table/table-delete/table-delete.component';
+import { SnackService } from 'src/app/services/snack/snack.service';
+import { Snack } from 'src/app/model/snack/snak';
+import { SnackDeleteComponent } from './snack-delete/snack-delete.component';
+
+@Component({
+  selector: 'app-snack',
+  templateUrl: './snack.component.html',
+  styleUrls: ['./snack.component.scss']
+})
+export class SnackComponent implements OnInit {
+
+  public action: any;
+  displayedColumns: string[] = ['name', 'description', "actions"];
+  dataSource!: MatTableDataSource<Snack>;
+  snack: Snack[] = [];
+  errorMessage: any;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(public dialog: MatDialog,
+    public service: SnackService,
+    public translate: TranslateService,
+    private snackBar: MatSnackBar,
+    private global: ConstService,
+    private router: Router) {
+    this.action = this.global.rest.snack.snackaction;
+  }
+
+  ngOnInit(): void {
+    this.listData();
+  }
+
+  private listData() {
+    this.service.listAll().subscribe({
+      next: data => {
+        this.snack = data;
+        this.dataSource = new MatTableDataSource(this.snack);
+      },
+      error: err => {
+        this.errorMessage = err.message;
+        this.snackBar.open(this.translate.instant('SNACK.ERROR_LIST_SNACK'), '', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: ['error']
+
+        });
+      }
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  edit(idSnack: any) {
+    this.router.navigate([this.action, idSnack]);
+  }
+
+  delete(idSnack: any) {
+    const dialogRef = this.dialog.open(SnackDeleteComponent, {
+      width: '250px',
+      data: { id: idSnack },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.listData();
+    });
+  }
+
+
+}
