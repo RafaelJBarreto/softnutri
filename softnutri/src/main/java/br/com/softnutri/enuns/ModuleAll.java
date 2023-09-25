@@ -7,11 +7,11 @@ public enum ModuleAll {
 
 	HOME(getHomePage(), "/home", "fa-solid fa-house-user", 1, getPapers(getHomePage().toUpperCase())),
 	PERSON_MODULE(getPatient(), "/patient", "fa-solid fa-user-nurse", 2, getPapers(getPatient().toUpperCase())),
-	PROFESSIONAL_MODULE(getProfessional(), "/professional", "fa-solid fa-user", 3, getPapers(getProfessional().toUpperCase())),
+	PROFESSIONAL_MODULE(getProfessional(), "/professional", "fa-solid fa-person-breastfeeding", 3, getPapers(getProfessional().toUpperCase())),
 	FOOD_MODULE(getFood(), "/food", "fa-solid fa-apple-whole", 4, getPapers(getFood().toUpperCase())),
 	MENU_MODULE(getMenu(), "/menu", "fa-solid fa-utensils", 5, getPapers(getMenu().toUpperCase())),
 	PERMISSION_MODULE(getPermission(), "/permission", "fa-solid fa-screwdriver-wrench", 5, getPapers(getPermission().toUpperCase())),
-	CALENDAR_MODULE(getCalendar(), "/calendar", "fa-solid fa-calendar-days", 6, getPapers(getCalendar().toUpperCase())),
+	CALENDAR_MODULE(getCalendar(), "/calendar", "fa-solid fa-address-book", 6, getPapers(getCalendar().toUpperCase())),
 	SNACK_MODULE(getSnack(), "/snack", "fa-solid fa-plate-wheat", 7, getPapers(getSnack().toUpperCase()));
 
 	private String name;

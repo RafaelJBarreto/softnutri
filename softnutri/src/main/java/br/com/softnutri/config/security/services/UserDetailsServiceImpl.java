@@ -15,10 +15,14 @@ import jakarta.transaction.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+	private final UserRepository usuarioRepository;
+	private final PersonPaperRepository personPaperRepository;
+
 	@Autowired
-	UserRepository usuarioRepository;
-	@Autowired
-	PersonPaperRepository personPaperRepository;
+	public UserDetailsServiceImpl(UserRepository usuarioRepository, PersonPaperRepository personPaperRepository) {
+		this.usuarioRepository = usuarioRepository;
+		this.personPaperRepository = personPaperRepository;
+	}
 
 	@Override
 	@Transactional

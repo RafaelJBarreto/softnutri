@@ -5,12 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
 import { Calendar } from 'src/app/model/calendar/calendar';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { ConstService } from 'src/app/services/shared/const.service';
 import { CancelCalendarComponent } from './cancel-calendar/cancel-calendar.component';
 import { TimeCalendarComponent } from './time-calendar/time-calendar.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendar',
