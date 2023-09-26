@@ -51,8 +51,7 @@ export class ProfessionalComponent implements OnInit {
         this.snackBar.open(this.translate.instant('PROFESSIONAL.ERROR_LIST_PROFESSIONAL'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

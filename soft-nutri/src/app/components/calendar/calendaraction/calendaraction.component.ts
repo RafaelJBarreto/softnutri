@@ -88,8 +88,7 @@ export class CalendaractionComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           if (this.isEdit) {
             this.router.navigate([this.back]);
@@ -102,8 +101,7 @@ export class CalendaractionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('PATIENT.ERROR_SAVE_PATIENT'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -111,8 +109,7 @@ export class CalendaractionComponent implements OnInit {
       this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
-        panelClass: ['error']
+        duration: 3000
       });
     }
   }
@@ -132,8 +129,7 @@ export class CalendaractionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('PATIENT.ERROR_DADO_PATIENT'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -195,8 +191,7 @@ export class CalendaractionComponent implements OnInit {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }
@@ -219,8 +214,7 @@ export class CalendaractionComponent implements OnInit {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

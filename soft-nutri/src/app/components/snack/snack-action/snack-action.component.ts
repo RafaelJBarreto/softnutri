@@ -62,8 +62,7 @@ export class SnackActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           if(this.isEdit){
             this.router.navigate([this.back]);
@@ -76,8 +75,7 @@ export class SnackActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('SNACK.ERROR_SAVE_SNACK'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -85,8 +83,7 @@ export class SnackActionComponent implements OnInit {
       this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
-        panelClass: ['error']
+        duration: 3000
       });
     }
   } 
@@ -117,8 +114,7 @@ export class SnackActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('SNACK.ERROR_DADO_SNACK'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });

@@ -49,16 +49,14 @@ export class RemoveDialogComponent{
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['success']
+          duration: 3000
         });
       },
       error: err => {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
         });
       }
     });
@@ -71,16 +69,14 @@ export class RemoveDialogComponent{
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['success']
+          duration: 3000
         });
       },
       error: err => {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
         });
       }
     });
@@ -93,16 +89,14 @@ export class RemoveDialogComponent{
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['success']
+          duration: 3000
         });
       },
       error: err => {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
         });
       }
     });

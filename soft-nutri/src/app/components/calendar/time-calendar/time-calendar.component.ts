@@ -55,8 +55,7 @@ export class TimeCalendarComponent implements OnInit {
         this.snackBar.open(this.translate.instant('INTERVAL.INTERVAL_ERROR'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }
@@ -74,8 +73,7 @@ export class TimeCalendarComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           this.dialogRef.close();
         },
@@ -84,8 +82,7 @@ export class TimeCalendarComponent implements OnInit {
           this.snackBar.open(this.translate.instant('INTERVAL.ERROR_SAVE_INTERVAL'), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });

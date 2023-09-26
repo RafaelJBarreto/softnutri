@@ -46,8 +46,7 @@ export class ProfessionalActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           if(this.isEdit){
             this.router.navigate([this.back]);
@@ -60,8 +59,7 @@ export class ProfessionalActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('PROFESSIONAL.ERROR_SAVE_PROFESSIONAL'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -85,8 +83,7 @@ export class ProfessionalActionComponent implements OnInit {
             this.snackBar.open(this.translate.instant('PROFESSIONAL.ERROR_DADO_PROFESSIONAL'), '', {
               horizontalPosition: 'center',
               verticalPosition: 'top',
-              duration: 3000,
-              panelClass: ['error']
+              duration: 3000
             });
           }
         });
@@ -178,8 +175,7 @@ export class ProfessionalActionComponent implements OnInit {
     this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      duration: 3000,
-      panelClass: ['error']
+      duration: 3000
     });
   }
 }

@@ -66,8 +66,7 @@ export class FoodsComponent implements OnInit, OnChanges{
         this.snackBar.open('Erro ao cadastrar', '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

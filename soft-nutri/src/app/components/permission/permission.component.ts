@@ -71,8 +71,7 @@ export class PermissionComponent implements OnInit {
         this.snackBar.open(this.translate.instant('PERMISSION.LIST_USER'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }
@@ -101,8 +100,7 @@ export class PermissionComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
         },
         error: err => { 
@@ -110,8 +108,7 @@ export class PermissionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('PERMISSION.ERROR_SAVE'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -119,8 +116,7 @@ export class PermissionComponent implements OnInit {
       this.snackBar.open(this.translate.instant('PERMISSION.ERROR_USER'), '', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
-        panelClass: ['error']
+        duration: 3000
       });
     }
   }
@@ -137,8 +133,7 @@ export class PermissionComponent implements OnInit {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

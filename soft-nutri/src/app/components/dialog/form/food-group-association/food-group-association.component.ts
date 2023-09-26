@@ -48,8 +48,7 @@ export class FoodGroupAssociationComponent implements OnInit {
         this.snackBar.open(this.translate.instant('FOOD.ERROR_FOOD_EMPTY'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
         });
         return;
     }
@@ -62,8 +61,7 @@ export class FoodGroupAssociationComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           this.dataFood.reset();
           this.update.updatForm(true);
@@ -73,8 +71,7 @@ export class FoodGroupAssociationComponent implements OnInit {
           this.snackBar.open(this.translate.instant('FOOD.ERROR_FOOD_BUNCH'), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -102,8 +99,7 @@ export class FoodGroupAssociationComponent implements OnInit {
         this.snackBar.open('Erro ao cadastrar', '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
         });
       }
     });

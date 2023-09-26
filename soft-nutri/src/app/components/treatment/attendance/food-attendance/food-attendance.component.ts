@@ -105,8 +105,7 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
         this.snackBar.open(this.translate.instant('FOOD.ERROR_LIST_FOOD'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

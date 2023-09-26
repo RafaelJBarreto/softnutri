@@ -49,8 +49,7 @@ export class PersonComponent implements OnInit {
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

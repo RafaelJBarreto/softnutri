@@ -61,8 +61,7 @@ export class TableActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           if(this.isEdit){
             this.router.navigate([this.back]);
@@ -75,8 +74,7 @@ export class TableActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('TABLE.ERROR_SAVE_TABLE'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
@@ -84,8 +82,7 @@ export class TableActionComponent implements OnInit {
       this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000,
-        panelClass: ['error']
+        duration: 3000
       });
     }
   } 
@@ -116,8 +113,7 @@ export class TableActionComponent implements OnInit {
           this.snackBar.open(this.translate.instant('TABLE.ERROR_DADO_TABLE'), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });

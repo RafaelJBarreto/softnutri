@@ -51,8 +51,7 @@ export class SnackComponent implements OnInit {
         this.snackBar.open(this.translate.instant('SNACK.ERROR_LIST_SNACK'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

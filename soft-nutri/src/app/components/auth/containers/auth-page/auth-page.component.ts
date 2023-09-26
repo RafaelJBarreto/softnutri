@@ -41,8 +41,7 @@ export class AuthPageComponent {
         this.snackBar.open('Login ou senha inválido', '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['warning']
+          duration: 3000
         });
       }
     });;

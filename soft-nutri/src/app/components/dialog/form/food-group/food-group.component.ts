@@ -56,8 +56,7 @@ export class FoodGroupComponent implements OnInit {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['success']
+            duration: 3000
           });
           this.update.updatForm(true);
           this.dialogRef.close();
@@ -67,8 +66,7 @@ export class FoodGroupComponent implements OnInit {
           this.snackBar.open('Erro ao cadastrar', '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 3000,
-            panelClass: ['error']
+            duration: 3000
           });
         }
       });
