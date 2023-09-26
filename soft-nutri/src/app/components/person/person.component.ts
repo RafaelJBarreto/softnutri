@@ -74,6 +74,7 @@ export class PersonComponent implements OnInit {
   }
 
   getPhone(phones: Array<Phone>) {
+    debugger;
     const dialogRef = this.dialog.open(PhoneDetailComponent, {
       width: '300px',
       data: phones,

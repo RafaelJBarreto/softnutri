@@ -75,7 +75,7 @@ export class CalendarComponent implements OnInit {
   
   openDialog(): void {
       const dialogRef = this.dialog.open(TimeCalendarComponent, {
-        width: '350px'
+        width: '300px'
       });
 
       dialogRef.afterClosed().subscribe(_result => {

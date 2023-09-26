@@ -50,7 +50,6 @@ export class AuthPageComponent {
   }
 
   public sendSignForm(): void {
-    //this.service.sign();
     this.router.navigate([this.global.redirect.HOME]).then();
   }
 }

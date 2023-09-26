@@ -1,24 +1,19 @@
-<form class="form" class="form" [formGroup]="form" (ngSubmit)="send()">
-    <div mat-dialog-content>
-      <mat-label>{{'INTERVAL.TIME_INFO' | translate}}</mat-label>
-        <div [hidden]="true">
-            <mat-form-field class="form__input" appearance="fill">
-              <input matInput type="number" formControlName="idIntermission" readonly>
-            </mat-form-field>
-          </div>
+  <form class="form" [formGroup]="form" (ngSubmit)="send()">
+    <h2 mat-dialog-title>{{'INTERVAL.TIME_INFO' | translate}}</h2>
+    <mat-dialog-content style="overflow: hidden;">
 
       <mat-form-field class="example-full-width">
-        <button
-          matPrefix
-          mat-icon-button
-        >
-        <i class="fa-solid fa-clock"></i>
-        </button>
-        <input matInput type="number" formControlName="time"/>
+        <input type="number" matInput formControlName="time">
+        <i matSuffix class="fa-solid fa-hourglass-start" style="font-size: 25px;"></i>
       </mat-form-field>
-    </div>
+      
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
     <div class="form-actions">
-        <button class="form-actions__login" mat-raised-button color="primary" type="submit"><i
-            class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}</button>
-      </div>
+      <button class="form-actions__login" mat-raised-button color="primary" type="submit">
+        {{'GLOBAL.WORD_SAVE' | translate}}</button>
+    </div>
+  </mat-dialog-actions>
   </form>
+

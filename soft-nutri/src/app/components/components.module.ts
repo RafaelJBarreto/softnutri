@@ -73,6 +73,7 @@ import { TableDeleteComponent } from './table/table-delete/table-delete.componen
 import { SnackComponent } from './snack/snack.component';
 import { SnackActionComponent } from './snack/snack-action/snack-action.component';
 import { SnackDeleteComponent } from './snack/snack-delete/snack-delete.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -164,6 +165,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatExpansionModule, 
     MatButtonToggleModule,
     MatTabsModule,
+    MatChipsModule
   ],
   exports: [
     SidebarComponent,
