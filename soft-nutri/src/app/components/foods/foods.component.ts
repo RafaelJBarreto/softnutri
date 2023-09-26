@@ -77,7 +77,7 @@ export class FoodsComponent implements OnInit, OnChanges{
   openDialog(number: number): void {
     if (number == 1) {
       const dialogRef = this.dialog.open(FoodComponent, {
-        width: '500px'
+        width: '600px'
       });
 
       dialogRef.afterClosed().subscribe(_result => {
@@ -85,7 +85,7 @@ export class FoodsComponent implements OnInit, OnChanges{
       });
     } else if (number == 2) {
       const dialogRef = this.dialog.open(FoodGroupComponent, {
-        width: '300px'
+        width: '450px'
       });
 
       dialogRef.afterClosed().subscribe(_result => {
@@ -176,7 +176,7 @@ export class FoodsComponent implements OnInit, OnChanges{
 
   public editFood(food: Food):void{
     const dialogRef = this.dialog.open(FoodComponent, {
-      width: '500px',
+      width: '600px',
       data: {food},
     });
 
@@ -187,7 +187,7 @@ export class FoodsComponent implements OnInit, OnChanges{
 
   public editBunch(bunch: Bunch):void{
     const dialogRef = this.dialog.open(FoodGroupComponent, {
-      width: '250px',
+      width: '400px',
       data: {bunch},
     });
 

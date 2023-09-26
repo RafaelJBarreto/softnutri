@@ -6,33 +6,34 @@
             <span class="header-spacer"></span>
             <button mat-icon-button [matMenuTriggerFor]="menu" class="position_menu">
                 <i class="fa-solid fa-bars"></i>
-              </button>
-              <mat-menu #menu="matMenu">
+            </button>
+            <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openDialog(1)">
-                  <span><i class="fa-solid fa-carrot"></i> {{'FOOD.FOOD_NEW_FOOD' | translate}}</span>
+                    <span><i class="fa-solid fa-carrot"></i> {{'FOOD.FOOD_NEW_FOOD' | translate}}</span>
                 </button>
                 <button mat-menu-item (click)="openDialog(2)">
-                  <span><i class="fa-solid fa-layer-group"></i> {{'FOOD.FOOD_NEW_FOOD_GROUP' | translate}}</span>
+                    <span><i class="fa-solid fa-layer-group"></i> {{'FOOD.FOOD_NEW_FOOD_GROUP' | translate}}</span>
                 </button>
-              </mat-menu>
+            </mat-menu>
         </mat-toolbar>
 
-        <mat-form-field appearance="standard">
-            <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
-            <input matInput (keyup)="applyFilter($event)" #input>
-        </mat-form-field>
-
+        <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+            <mat-form-field fxFlex="35%">
+                <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
         <mat-card-content class="table-table__content style-mat-card-contet">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="select">
                     <th mat-header-cell *matHeaderCellDef>
-                        
+
                     </th>
                     <td mat-cell *matCellDef="let row">
                         <mat-checkbox (click)="$event.stopPropagation();"
-                            (change)="$event ? selection.toggle(row) : null; getSelected($event, row.food)" [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)" >
+                            (change)="$event ? selection.toggle(row) : null; getSelected($event, row.food)"
+                            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
                         </mat-checkbox>
                     </td>
                 </ng-container>
@@ -46,7 +47,7 @@
                     <th mat-header-cell *matHeaderCellDef> {{'TABLE.TABLE' | translate}} </th>
                     <td mat-cell *matCellDef="let element"> {{element.food.compositionTable.name}} </td>
                 </ng-container>
-                
+
                 <ng-container matColumnDef="description">
                     <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_DESCRIPTION' | translate}} </th>
                     <td mat-cell *matCellDef="let element"> {{element.food.description}} </td>
@@ -57,33 +58,56 @@
                 </ng-container>
                 <ng-container matColumnDef="calories">
                     <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_CALORIES' | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.calories | number : '1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.calories | number : '1.2-2'}}
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="protein">
                     <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_PROTEIN' | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.protein | number : '1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.protein | number : '1.2-2'}}
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="lipids">
                     <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_LIPIDS' | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.lipids | number : '1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.lipids | number : '1.2-2'}}
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="carbohydrate">
                     <th mat-header-cell *matHeaderCellDef> {{'FOOD.FOOD_CARBOHYDRATE' | translate}} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.carbohydrate | number : '1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.food.nutritionalData.carbohydrate | number :
+                        '1.2-2'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actionsFood">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                     <td mat-cell *matCellDef="let element">
-                      <div class="button">
-                        <button [disabled]="element.bunch.idBunch == null" (click)="removeFoodbunch(element.idFoodBunch)" mat-button matTooltip="{{'BUNCH.FOOD_BUNCH_REMOVE' | translate}}"><i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);" class="fa-solid fa-ban"></i></button>
-                        <button [disabled]="element.bunch.idBunch == null" (click)="editBunch(element.bunch)" mat-button matTooltip="{{'BUNCH.BUNCH_EDIT' | translate}}"><i *ngIf="element.bunch.description != null" class="fa-solid fa-file-circle-question"></i></button>
-                        <button (click)="removeBunch(element.bunch.idBunch)" mat-button matTooltip="{{'BUNCH.BUNCH_REMOVE' | translate}}"><i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);" class="fa-solid fa-trash-can-arrow-up"></i></button>
-                        <button (click)="editFood(element.food)" mat-button matTooltip="{{'FOOD.FOOD_EDIT' | translate}}"><i class="fa-solid fa-apple-whole"></i></button>
-                        <button (click)="removeFood(element.food.idFood)" mat-button matTooltip="{{'FOOD.FOOD_REMOVE' | translate}}"><i style="color: rgb(119, 119, 34);" class="fa-solid fa-recycle"></i></button>
-                      </div>
+                        <mat-button-toggle-group #group="matButtonToggleGroup">
+                            <mat-button-toggle [disabled]="element.bunch.idBunch == null"
+                            (click)="removeFoodbunch(element.idFoodBunch)" matTooltip="{{'BUNCH.FOOD_BUNCH_REMOVE' | translate}}">
+                                <i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);"
+                                class="fa-solid fa-ban"></i>
+                            </mat-button-toggle>
+                            <mat-button-toggle [disabled]="element.bunch.idBunch == null" (click)="editBunch(element.bunch)"
+                              matTooltip="{{'BUNCH.BUNCH_EDIT' | translate}}">
+                                <i *ngIf="element.bunch.description != null"
+                                class="fa-solid fa-file-circle-question"></i>
+                            </mat-button-toggle>
+                            <mat-button-toggle (click)="removeBunch(element.bunch.idBunch)"
+                            matTooltip="{{'BUNCH.BUNCH_REMOVE' | translate}}">
+                                <i *ngIf="element.bunch.description != null" style="color: rgb(124, 4, 4);"
+                                class="fa-solid fa-trash-can-arrow-up"></i>
+                            </mat-button-toggle>
+                            <mat-button-toggle (click)="editFood(element.food)" mat-button
+                            matTooltip="{{'FOOD.FOOD_EDIT' | translate}}">
+                                <i class="fa-solid fa-apple-whole"></i>
+                            </mat-button-toggle>
+                            <mat-button-toggle (click)="removeFood(element.food.idFood)"
+                            matTooltip="{{'FOOD.FOOD_REMOVE' | translate}}">
+                                <i style="color: rgb(119, 119, 34);"
+                                    class="fa-solid fa-recycle"></i>
+                            </mat-button-toggle>
+                          </mat-button-toggle-group>
                     </td>
-                  </ng-container>
+                </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;">

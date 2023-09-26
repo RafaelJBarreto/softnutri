@@ -1,14 +1,14 @@
 <form class="form" [formGroup]="formNutritional" (ngSubmit)="send()">
-    <mat-form-field class="form__input">
+    <mat-form-field class="form__input" appearance="outline">
       <input matInput placeholder="{{'FOOD.FOOD_CALORIES' | translate}}" type="number" formControlName="calories">
     </mat-form-field>
-    <mat-form-field class="form__input">
+    <mat-form-field class="form__input" appearance="outline">
         <input matInput placeholder="{{'FOOD.FOOD_PROTEIN' | translate}}" type="number" formControlName="protein">
       </mat-form-field> 
-      <mat-form-field class="form__input">
+      <mat-form-field class="form__input" appearance="outline">
         <input matInput placeholder="{{'FOOD.FOOD_LIPIDS' | translate}}" type="number" formControlName="lipids">
       </mat-form-field>
-    <mat-form-field class="form__input">
+    <mat-form-field class="form__input" appearance="outline">
       <input matInput placeholder="{{'FOOD.FOOD_CARBOHYDRATE' | translate}}" type="number" formControlName="carbohydrate">
     </mat-form-field> 
   </form>

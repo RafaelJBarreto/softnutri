@@ -7,7 +7,7 @@
       </mat-toolbar>
 
       <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-        <mat-form-field fxFlex>
+        <mat-form-field fxFlex appearance="outline">
           <mat-label>{{'PROFESSIONAL.PROFESSIONAL' | translate}}</mat-label>
           <input type="text" matInput [formControl]="nutritionistControl" [matAutocomplete]="autoNutritionist" required>
           <mat-autocomplete #autoNutritionist="matAutocomplete" [displayWith]="autoCompleteDisplayProfessional" (optionSelected)="onProfessionalSelected($event.option)">
@@ -17,7 +17,7 @@
           </mat-autocomplete>
         </mat-form-field>
 
-        <mat-form-field fxFlex>
+        <mat-form-field fxFlex appearance="outline">
           <mat-label>{{'PATIENT.PATIENT' | translate}}</mat-label>
           <input type="text" matInput [formControl]="patientControl" [matAutocomplete]="autoPatient" required>
           <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="autoCompleteDisplayPatient" (optionSelected)="onPatientSelected($event.option)">
@@ -30,10 +30,8 @@
 
       </div>
 
-      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-        <mat-slide-toggle fxFlex="35%" class="padding_slider" formControlName="cancel">{{'CALENDAR.CALENDAR_CANCEL_' | translate }}
-        </mat-slide-toggle>
-        <mat-form-field fxFlex="35%">
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">        
+        <mat-form-field fxFlex="35%" appearance="outline">
           <mat-label>{{'CALENDAR.CALENDAR_DATEOFDAY' | translate}}</mat-label>
           <input matInput [matDatepicker]="pickerDate" required formControlName="dateofday">
           <mat-hint>DD/MM/YYYY</mat-hint>
@@ -41,25 +39,31 @@
           <mat-datepicker #pickerDate></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field fxFlex="30%">
+        <mat-form-field fxFlex="30%" appearance="outline">
           <mat-label>{{'CALENDAR.CALENDAR_HOUROFDAY' | translate}}</mat-label>
           <input matInput [ngxMatTimepicker]="picker" required formControlName="hourofday">
           <ngx-mat-timepicker #picker></ngx-mat-timepicker>
         </mat-form-field>
+
+        <div fxFlex="35%" style="text-align: center;">
+          <mat-slide-toggle  class="padding_slider" formControlName="cancel">{{'CALENDAR.CALENDAR_CANCEL_' | translate }}
+          </mat-slide-toggle>
+        </div>
+        
       </div>
       <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-        <mat-form-field class="example-full-width" fxFlex>
+        <mat-form-field class="example-full-width" fxFlex appearance="outline">
           <mat-label>{{'CALENDAR.CALENDAR_NOTE' | translate}}</mat-label>
           <textarea matInput formControlName="note"></textarea>
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>
       <section>
-        <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
-          <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
+        <button mat-raised-button color="warn" class="button-cancel" [routerLink]="back" routerLinkActive="active">
+          {{'GLOBAL.CANCEL' | translate}}
         </button>
         <button mat-flat-button class="button-color" type="submit">
-          <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
+          {{'GLOBAL.WORD_SAVE' | translate}}
         </button>
       </section>
     </mat-card>

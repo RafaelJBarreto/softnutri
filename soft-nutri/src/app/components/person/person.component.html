@@ -4,15 +4,17 @@
       <span class="table-table-wrapper__title">{{'PATIENT.PATIENT_TITLE' | translate}}</span>
       <span class="header-spacer"></span>
       <button mat-flat-button class="button-color" [routerLink]="action" routerLinkActive="active">
-        <i class="fa-solid fa-plus"></i>{{'GLOBAL.NEW' | translate}}
+        {{'GLOBAL.NEW' | translate}}
       </button>
     </mat-toolbar>
     <mat-card-content class="table-table__content style-mat-card-contet">
 
-      <mat-form-field appearance="standard">
-        <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
-      </mat-form-field>
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+        <mat-form-field fxFlex="35%">
+          <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+      </div>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -50,11 +52,18 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let element">
-            <div class="button">
-              <button mat-button (click)="getPhone(element.phones)"><i class="fa-solid fa-square-phone" *ngIf="element.phones.length > 0"></i> </button>
-              <button mat-button (click)="edit(element.idPerson)"><i class="fa-solid fa-pen-to-square"></i></button>
-              <button mat-button (click)="delete(element.idPerson)"><i class="fa-solid fa-trash"></i></button>
-            </div>
+
+            <mat-button-toggle-group #group="matButtonToggleGroup">
+              <mat-button-toggle *ngIf="element.phones.length > 0" (click)="getPhone(element.phones)">
+                <i class="fa-solid fa-square-phone" ></i>
+              </mat-button-toggle>
+              <mat-button-toggle  (click)="edit(element.idPerson)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </mat-button-toggle>
+              <mat-button-toggle  (click)="delete(element.idPerson)">
+                <i class="fa-solid fa-trash"></i>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
           </td>
         </ng-container>
 

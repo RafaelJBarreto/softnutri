@@ -1,68 +1,70 @@
+<mat-card style="margin-bottom: 100px;">
+  <mat-card-content class="table-table__content style-mat-card-contet">
 
-    <mat-card style="margin-bottom: 100px;">
-        <mat-card-content class="table-table__content style-mat-card-contet">
+    <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+      <mat-form-field fxFlex="35%">
+        <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-            <mat-form-field appearance="standard">
-              <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
-              <input matInput (keyup)="applyFilter($event)" #input>
-            </mat-form-field>
-      
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      
-              <ng-container matColumnDef="idCalendar">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_IDCALENDAR' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.idCalendar}} </td>
-              </ng-container>
-      
-              <ng-container matColumnDef="professional">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_PROFESSIONAL' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.professional.name}} </td>
-              </ng-container>
-      
-              <ng-container matColumnDef="patient">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_PATIENT' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.patient.name}} </td>
-              </ng-container>
-      
-              <ng-container matColumnDef="dateOfDay">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_DATEOFDAY' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.dateOfDay | date: 'dd/MM/yyyy'}} </td>
-              </ng-container>
-      
-      
-              <ng-container matColumnDef="hourOfDay">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_HOUROFDAY' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.hourOfDay | mask:"hh:mm"}} </td>
-              </ng-container>
-      
-              <ng-container matColumnDef="note">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_NOTE' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.note}} </td>
-              </ng-container>
-              <ng-container matColumnDef="completed">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_COMPLETED' | translate}} </th>
-                <td mat-cell *matCellDef="let element">  <i [ngClass]="element.completed ? 'fa-solid fa-check button-ok' : 'fa-solid fa-xmark button-nok'"></i>  </td>
-              </ng-container>
+      <ng-container matColumnDef="idCalendar">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_IDCALENDAR' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.idCalendar}} </td>
+      </ng-container>
 
-              <ng-container matColumnDef="cancel">
-                <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_CANCEL' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> <i [ngClass]="element.cancel ? 'fa-solid fa-check button-ok' : 'fa-solid fa-xmark button-nok'"></i> </td>
-              </ng-container>
-              
-              <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                <td mat-cell *matCellDef="let element">
-                  <div class="button">
-                    <button mat-button><i class="fa-solid fa-play"></i></button>
-                  </div>
-                </td>
-              </ng-container>
-      
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          </mat-card-content>
-          <div class="pagination">
-            <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
+      <ng-container matColumnDef="professional">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_PROFESSIONAL' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.professional.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="patient">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_PATIENT' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.patient.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfDay">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_DATEOFDAY' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateOfDay | date: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="hourOfDay">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_HOUROFDAY' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.hourOfDay | mask:"hh:mm"}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="note">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_NOTE' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+      </ng-container>
+      <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_COMPLETED' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> <i
+            [ngClass]="element.completed ? 'fa-solid fa-check button-ok' : 'fa-solid fa-xmark button-nok'"></i> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cancel">
+        <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_CANCEL' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> <i
+            [ngClass]="element.cancel ? 'fa-solid fa-check button-ok' : 'fa-solid fa-xmark button-nok'"></i> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="button">
+            <button mat-button><i class="fa-solid fa-play"></i></button>
           </div>
-    </mat-card>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <div class="pagination">
+    <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

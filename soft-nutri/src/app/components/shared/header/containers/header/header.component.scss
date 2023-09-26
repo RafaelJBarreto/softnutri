@@ -2,6 +2,10 @@
 @import 'src/app/styles/font';
 @import 'src/app/styles/variables';
 
+.item-color{
+ color: #757878;
+}
+
 .header {
   background-color: $header-background-color;
   display: flex;
@@ -13,6 +17,7 @@
   &__title {
     display: flex;
     align-items: center;
+    font-family: Mooli !important;
   }
 
   &__title-button {
@@ -33,6 +38,7 @@
   }
 
   &__title-text {
+    font-size: 25px;
     color: $header-title-font-color;
     margin-left: 32px;
     font-weight: $fw-lighter;

@@ -79,8 +79,8 @@ public class UserDTO extends PersonDTO {
 		List<Phone> phones = new ArrayList<>();
 		for (PhoneDTO phone : userDTO.getPhones()) {
 			Phone ph = new Phone();
-			ph.setIdPhone(phone.getIdPhone() > 0 ? phone.getIdPhone() : null);
-			ph.setNumber(phone.getNumero());
+			ph.setIdPhone(phone.getIdPhone());
+			ph.setNumber(Criptografia.encode(phone.getNumero()));
 			ph.setPerson(user);
 			phones.add(ph);
 		}

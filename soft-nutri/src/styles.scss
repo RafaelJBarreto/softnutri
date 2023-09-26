@@ -41,4 +41,433 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "fontawesome-free-6.1.2-web/scss/fontawesome.scss";
 @import "fontawesome-free-6.1.2-web/scss/solid.scss";
 @import "fontawesome-free-6.1.2-web/scss/regular.scss";
+@import 'src/app/styles/colors';
+@import 'src/app/styles/font';
+@import 'src/app/styles/variables';
+@import url('https://fonts.googleapis.com/css2?family=Mooli&display=swap');
 
+
+
+// animating icons
+// --------------------------
+
+.#{$fa-css-prefix}-beat {
+  animation-name: #{$fa-css-prefix}-beat;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, ease-in-out);
+}
+
+.#{$fa-css-prefix}-bounce {
+  animation-name: #{$fa-css-prefix}-bounce;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, cubic-bezier(0.280, 0.840, 0.420, 1));
+}
+
+.#{$fa-css-prefix}-fade {
+  animation-name: #{$fa-css-prefix}-fade;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, cubic-bezier(.4,0,.6,1));
+}
+
+.#{$fa-css-prefix}-beat-fade {
+  animation-name: #{$fa-css-prefix}-beat-fade;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, cubic-bezier(.4,0,.6,1));
+}
+
+.#{$fa-css-prefix}-flip {
+  animation-name: #{$fa-css-prefix}-flip;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, ease-in-out);
+}
+
+.#{$fa-css-prefix}-shake {
+  animation-name: #{$fa-css-prefix}-shake;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, linear);
+}
+
+.#{$fa-css-prefix}-spin {
+  animation-name: #{$fa-css-prefix}-spin;
+  animation-delay: var(--#{$fa-css-prefix}-animation-delay, 0);
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 2s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, linear);
+}
+
+.#{$fa-css-prefix}-spin-reverse {
+  --#{$fa-css-prefix}-animation-direction: reverse;
+}
+
+.#{$fa-css-prefix}-pulse,
+.#{$fa-css-prefix}-spin-pulse {
+  animation-name: #{$fa-css-prefix}-spin;
+  animation-direction: var(--#{$fa-css-prefix}-animation-direction, normal);
+  animation-duration: var(--#{$fa-css-prefix}-animation-duration, 1s);
+  animation-iteration-count: var(--#{$fa-css-prefix}-animation-iteration-count, infinite);
+  animation-timing-function: var(--#{$fa-css-prefix}-animation-timing, steps(8));
+}
+
+// if agent or operating system prefers reduced motion, disable animations
+// see: https://www.smashingmagazine.com/2020/09/design-reduced-motion-sensitivities/
+// see: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  .#{$fa-css-prefix}-beat,
+  .#{$fa-css-prefix}-bounce,
+  .#{$fa-css-prefix}-fade,
+  .#{$fa-css-prefix}-beat-fade,
+  .#{$fa-css-prefix}-flip,
+  .#{$fa-css-prefix}-pulse,
+  .#{$fa-css-prefix}-shake,
+  .#{$fa-css-prefix}-spin,
+  .#{$fa-css-prefix}-spin-pulse {
+    animation-delay: -1ms;
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+    transition-delay: 0s;
+    transition-duration: 0s;
+  }
+}
+
+@keyframes #{$fa-css-prefix}-beat {
+  0%, 90% { transform: scale(1); }
+  45% { transform: scale(var(--#{$fa-css-prefix}-beat-scale, 1.25)); }
+}
+
+@keyframes #{$fa-css-prefix}-bounce {
+  0%   { transform: scale(1,1) translateY(0); }
+  10%  { transform: scale(var(--#{$fa-css-prefix}-bounce-start-scale-x, 1.1),var(--#{$fa-css-prefix}-bounce-start-scale-y, 0.9)) translateY(0); }
+  30%  { transform: scale(var(--#{$fa-css-prefix}-bounce-jump-scale-x, 0.9),var(--#{$fa-css-prefix}-bounce-jump-scale-y, 1.1)) translateY(var(--#{$fa-css-prefix}-bounce-height, -0.5em)); }
+  50%  { transform: scale(var(--#{$fa-css-prefix}-bounce-land-scale-x, 1.05),var(--#{$fa-css-prefix}-bounce-land-scale-y, 0.95)) translateY(0); }
+  57%  { transform: scale(1,1) translateY(var(--#{$fa-css-prefix}-bounce-rebound, -0.125em)); }
+  64%  { transform: scale(1,1) translateY(0); }
+  100% { transform: scale(1,1) translateY(0); }
+}
+
+@keyframes #{$fa-css-prefix}-fade {
+  50% { opacity: var(--#{$fa-css-prefix}-fade-opacity, 0.4); }
+}
+
+@keyframes #{$fa-css-prefix}-beat-fade {
+  0%, 100% {
+    opacity: var(--#{$fa-css-prefix}-beat-fade-opacity, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(var(--#{$fa-css-prefix}-beat-fade-scale, 1.125));
+  }
+}
+
+@keyframes #{$fa-css-prefix}-flip {
+  50% {
+    transform: rotate3d(var(--#{$fa-css-prefix}-flip-x, 0), var(--#{$fa-css-prefix}-flip-y, 1), var(--#{$fa-css-prefix}-flip-z, 0), var(--#{$fa-css-prefix}-flip-angle, -180deg));
+  }
+}
+
+@keyframes #{$fa-css-prefix}-shake {
+  0% { transform: rotate(-15deg); }
+  4% { transform: rotate(15deg); }
+  8%, 24% { transform: rotate(-18deg); }
+  12%, 28% { transform: rotate(18deg); }
+  16% { transform: rotate(-22deg); }
+  20% { transform: rotate(22deg); }
+  32% { transform: rotate(-12deg); }
+  36% { transform: rotate(12deg); }
+  40%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes #{$fa-css-prefix}-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+td[mat-cell] {
+  padding: 10px 10px 10px 10px;
+  color: #626262;
+  font-family: Mooli !important;
+  font-size: 15px;
+}
+
+tr[mat-row] {
+  background: $white;
+  font-family: Mooli !important;
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: #858282 !important;
+}
+
+.mdc-data-table__header-cell {
+    font-family: Mooli !important;
+    font-size: 15px !important;
+    color: #626262 !important;
+    line-height: 1.4 !important;
+}
+
+.mat-mdc-card-content {
+  display: block !important;
+  padding: 10px 10px 10px 10px !important;
+}
+
+i{
+  padding: 5px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 30%;
+  padding: 10px;
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+table {
+  width: 100%;
+}
+
+.button-delete{
+  color: $red;
+}
+
+
+.table-table-wrapper {
+  margin: 16px 16px 32px 16px;
+  box-shadow: 0 3px 11px 0 $shadow-white, 0 3px 3px -2px $shadow-grey, 0 1px 8px 0 $shadow-dark-grey;
+
+  &__header {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $small) {
+      padding: 0 16px;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    color: #625f5f80;
+    font-family: Mooli !important;
+    font-weight: bold;
+    font-size: 20px;
+    font-style: inherit;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon-wrapper {
+    height: 46px;
+    width: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    color: inherit;
+  }
+
+  &__search-input {
+    font-size: $fs-normal;
+    height: 32px;
+    border: 0;
+    border-bottom: 1px solid $grey;
+    outline: none;
+
+    @media (max-width: $small) {
+      width: 150px;
+    }
+
+    &:focus {
+      border-bottom: 2px solid $blue;
+    }
+  }
+
+  &__button {
+    box-shadow: none;
+    background-color: inherit;
+    width: 46px;
+    height: 46px;
+    color: $grey;
+
+    &:hover {
+      background-color: $black-08;
+      color: $blue;
+    }
+  }
+}
+
+.table-table {
+  &__content {
+    @media (max-width: $small) {
+      overflow-x: scroll;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    box-shadow: none;
+
+    @media (max-width: $small) {
+      width: 200%;
+    }
+  }
+
+  &__table-checkbox {
+    width: 32px;
+    padding-left: 24px;
+  }
+
+  &__table-header {
+    padding: 1rem;
+    font-size: $fs-small;
+  }
+
+  &__table-body {
+    padding: 1rem;
+    font-size: $fs-small;
+  }
+}
+
+.button-color {
+  background-color: $blue !important;
+  color: $white !important;
+  font-family: Mooli !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+}
+
+.mdc-list-item__content {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  align-self: center;
+  flex: 1;
+  pointer-events: none;
+  font-family: 'Mooli' !important;
+}
+
+.mat-toolbar {
+  background: $cinza;
+}
+
+
+.mat-mdc-form-field {
+  --mat-mdc-form-field-floating-label-scale: 0.75;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: left;
+  padding: 5px !important;
+}
+
+
+.mat-accordion .mat-expansion-panel {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  font-family: 'Mooli' !important;
+}
+
+
+.mdc-button .mdc-button__label {
+  position: relative;
+  font-family: 'Mooli' !important;
+}
+
+.button-cancel {
+  background-color: $red !important;
+  color: $white !important;
+  font-family: Mooli !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+}
+
+i {
+  padding: 5px;
+  color: $cinza-escuro;
+}
+
+.mat-mdc-menu-item .mdc-list-item__primary-text {
+  white-space: normal;
+  color: $cinza-escuro;
+  font-family: Mooli !important;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  margin-bottom: 10px !important;
+}
+
+
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 30px !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  white-space: normal;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  text-decoration: inherit;
+  text-transform: inherit;
+  margin-right: auto;
+  color: $cinza-escuro !important;
+  font-family: Mooli !important;
+}
+
+
+.mat-mdc-tab-body.mat-mdc-tab-body-active {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden !important; 
+  z-index: 1;
+  flex-grow: 1;
+}
+
+.mat-mdc-tab-body-content {
+  height: 100%;
+  overflow: hidden !important; 
+}
+
+.mat-badge.mat-badge {
+  overflow: visible;
+  font-family: Mooli !important;
+}

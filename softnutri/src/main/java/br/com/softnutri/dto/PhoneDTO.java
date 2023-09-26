@@ -19,7 +19,6 @@ public class PhoneDTO {
 	}
 	
 	public PhoneDTO(String numero) {
-		super();
 		this.numero = numero;
 	}
 }

@@ -7,11 +7,11 @@
             </mat-toolbar>
 
             <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-                <mat-form-field fxFlex fxFlex="20%">
+                <mat-form-field fxFlex fxFlex="20%" appearance="outline">
                     <mat-label>{{'SNACK.NAME' | translate}}</mat-label>
                     <input matInput type="text" formControlName="name" required>
                 </mat-form-field>
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'SNACK.DESCRIPTION' | translate}}</mat-label>
                     <input matInput required type="text" formControlName="description">
                 </mat-form-field>
@@ -19,11 +19,11 @@
 
             <mat-divider></mat-divider>
             <section>
-                <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
-                    <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
+                <button mat-raised-button color="warn" class="button-cancel" [routerLink]="back" routerLinkActive="active">
+                    {{'GLOBAL.CANCEL' | translate}}
                 </button>
                 <button mat-flat-button class="button-color" type="submit">
-                    <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
+                    {{'GLOBAL.WORD_SAVE' | translate}}
                 </button>
             </section>
         </mat-card>

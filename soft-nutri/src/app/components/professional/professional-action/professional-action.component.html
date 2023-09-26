@@ -7,23 +7,28 @@
             </mat-toolbar>
 
             <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'PERSON.PERSON_NAME' | translate}}</mat-label>
                     <input matInput type="text" formControlName="name">
                 </mat-form-field>
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'PERSON.PERSON_EMAIL' | translate}}</mat-label>
                     <input matInput placeholder="pat@example.com" type="email" formControlName="email" required>
                     <mat-error></mat-error>
                 </mat-form-field>
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'PERSON.PERSON_CPF' | translate}}</mat-label>
                     <input matInput type="text" formControlName="cpf" required mask="000-000-000.00">
                 </mat-form-field>
             </div>
 
             <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-                <mat-form-field fxFlex="25%">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>{{'PERSON.PERSON_ADDRESS' | translate}}</mat-label>
+                    <input matInput required type="text" formControlName="address">
+                </mat-form-field>
+                
+                <mat-form-field fxFlex="25%" appearance="outline">
                     <mat-label>{{'PERSON.PERSON_BIRTHDATE' | translate}}</mat-label>
                     <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
                     <mat-hint>DD/MM/YYYY</mat-hint>
@@ -32,26 +37,24 @@
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-
-                <mat-form-field fxFlex>
-                    <mat-label>{{'PERSON.PERSON_ADDRESS' | translate}}</mat-label>
-                    <input matInput required type="text" formControlName="address">
-                </mat-form-field>
             </div>
 
             <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-                <label>{{'PERSON.PERSON_GENDER' | translate}}</label>
-                <mat-radio-group formControlName="gender" required>
-                    <mat-radio-button value="M" required>{{'PERSON.PERSON_MALE' | translate}}</mat-radio-button>
-                    <mat-radio-button value="F" required>{{'PERSON.PERSON_FEMINISM' | translate}}</mat-radio-button>
-                </mat-radio-group>
+
+                <div fxFlex="25%" appearance="outline" style="padding: 8px;">
+                    <mat-label>{{'PERSON.PERSON_GENDER' | translate}}</mat-label>
+                    <mat-chip-listbox formControlName="gender" aria-label="Fish selection" required>
+                        <mat-chip-option fxFlex="40%" value="M">{{'PERSON.PERSON_MALE' | translate}}</mat-chip-option>
+                        <mat-chip-option fxFlex="40%" value="F">{{'PERSON.PERSON_FEMINISM' | translate}}</mat-chip-option>
+                      </mat-chip-listbox>
+                </div>
                 <input matInput [hidden]="true" type="number" formControlName="idPhone">
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'PERSON.PERSON_CELULAR' | translate}}</mat-label>
                     <input matInput type="text" formControlName="celular" mask="(00) 00000-0000">
                 </mat-form-field>
                 <input matInput [hidden]="true" type="number" formControlName="idPhone2">
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'PERSON.PERSON_CELULAR2' | translate}}</mat-label>
                     <input matInput type="text" formControlName="celular2" mask="(00) 00000-0000">
                 </mat-form-field>
@@ -60,7 +63,7 @@
             </div>
 
             <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'PROFESSIONAL.PROFESSIONAL_PROFESSION' | translate}}</mat-label>
                     <mat-select formControlName="profession" required (ngModelChange)="isProfessionNutritinist()">
                         <mat-option value="RECEPTIONIST">
@@ -71,7 +74,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline">
                     <mat-label>{{'LOGIN.LABEL_PASSWORD' | translate}}</mat-label>
                     <input matInput type="password" formControlName="password">
                 </mat-form-field>
@@ -79,7 +82,7 @@
                     <mat-label>{{'PROFESSIONAL.PROFESSIONAL_CRN' | translate}}</mat-label>
                     <input matInput type="text" formControlName="crn">
                 </mat-form-field>
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex appearance="outline"> 
                     <mat-label>{{'PROFILE.LABEL_LANGUAGE' | translate}}</mat-label>
                     <mat-select formControlName="language" required>
                         <mat-option value="pt-Br">
@@ -94,11 +97,11 @@
 
             <mat-divider></mat-divider>
             <section>
-                <button mat-raised-button color="warn" [routerLink]="back" routerLinkActive="active">
-                    <i class="fa-solid fa-ban"></i>{{'GLOBAL.CANCEL' | translate}}
+                <button mat-raised-button color="warn" class="button-cancel" [routerLink]="back" routerLinkActive="active">
+                    {{'GLOBAL.CANCEL' | translate}}
                 </button>
                 <button mat-flat-button class="button-color" type="submit">
-                    <i class="fa-solid fa-floppy-disk"></i>{{'GLOBAL.WORD_SAVE' | translate}}
+                    {{'GLOBAL.WORD_SAVE' | translate}}
                 </button>
             </section>
         </mat-card>

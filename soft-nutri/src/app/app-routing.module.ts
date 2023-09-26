@@ -149,7 +149,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       useHash: true,
       preloadingStrategy: PreloadAllModules,
-      relativeLinkResolution: 'legacy'
     })
   ],
   exports: [RouterModule]
