@@ -471,3 +471,16 @@ button {
   overflow: visible;
   font-family: Mooli !important;
 }
+
+.timepicker__header {
+    background-color: $blue !important;
+}
+
+.clock-face__number > span.active {
+    background-color:  $blue !important;
+    color:  $white !important;
+}
+
+.timepicker-button{
+  color:  $blue !important;
+}

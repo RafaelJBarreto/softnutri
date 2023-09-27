@@ -57,8 +57,7 @@ export class AttendanceComponent implements OnInit {
         this.snackBar.open(this.translate.instant('TABLE.ERROR_LIST_TABLE'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000,
-          panelClass: ['error']
+          duration: 3000
 
         });
       }

@@ -34,15 +34,14 @@
         <mat-form-field fxFlex="35%" appearance="outline">
           <mat-label>{{'CALENDAR.CALENDAR_DATEOFDAY' | translate}}</mat-label>
           <input matInput [matDatepicker]="pickerDate" required formControlName="dateofday">
-          <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
           <mat-datepicker #pickerDate></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field fxFlex="30%" appearance="outline">
           <mat-label>{{'CALENDAR.CALENDAR_HOUROFDAY' | translate}}</mat-label>
-          <input matInput [ngxMatTimepicker]="picker" required formControlName="hourofday">
-          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+          <input matInput [ngxTimepicker]="fullTime" [format]="24"  readonly formControlName="hourofday">
+          <ngx-material-timepicker #fullTime [enableKeyboardInput]="true"></ngx-material-timepicker>
         </mat-form-field>
 
         <div fxFlex="35%" style="text-align: center;">
