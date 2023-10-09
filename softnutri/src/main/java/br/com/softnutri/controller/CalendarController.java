@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
+import br.com.softnutri.domain.Calendar;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.CalendarDTO;
 import br.com.softnutri.service.AutenticationService;
@@ -35,7 +36,7 @@ public class CalendarController {
 
 	@PostMapping("/save")
 	public ResponseEntity<MessageResponse> saveData(@RequestBody CalendarDTO dto) {
-		return calendarService.save(CalendarDTO.converterToDomain(dto, autenticationService));
+		return calendarService.save(new Calendar(dto, autenticationService.getUserLogged().getIdPerson()));
 	}
 
 	@GetMapping("/")

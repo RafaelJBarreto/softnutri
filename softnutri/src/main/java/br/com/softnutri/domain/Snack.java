@@ -1,5 +1,6 @@
 package br.com.softnutri.domain;
 
+import br.com.softnutri.dto.SnackDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,4 +27,13 @@ public class Snack {
 	@Column(name = "description", nullable = false, length = 100)
 	private String description;
 	
+	public Snack() {
+	}
+	
+	public Snack(SnackDTO sDTO) {
+		this.idSnack = sDTO.getIdSnack();
+		this.description = sDTO.getDescription();
+		this.name = sDTO.getName();
+	}
+
 }

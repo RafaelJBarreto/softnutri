@@ -23,7 +23,7 @@ public class BunchService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(BunchDTO groupDTO) { 
-		this.bunchRepository.save(BunchDTO.converterToDomain(groupDTO));
+		this.bunchRepository.save(new Bunch(groupDTO));
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	

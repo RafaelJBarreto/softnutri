@@ -6,8 +6,6 @@ import java.time.LocalTime;
 import java.util.List;
 
 import br.com.softnutri.domain.Calendar;
-import br.com.softnutri.domain.User;
-import br.com.softnutri.service.AutenticationService;
 import lombok.Data;
 
 @Data
@@ -44,20 +42,6 @@ public class CalendarDTO {
 		return new CalendarDTO(calendar);
 	}
 	
-	public static Calendar converterToDomain(CalendarDTO dto, AutenticationService autenticationService) {
-		Calendar calendar = new Calendar();
-		calendar.setIdCalendar(dto.getIdCalendar());
-		calendar.setCancel(dto.isCancel());
-		calendar.setCompleted(false);
-		calendar.setDateOfDay(dto.getDateOfDay());
-		calendar.setHourOfDay(LocalTime.of(dto.getHourOfDayAux().getHour(), dto.getHourOfDayAux().getMinute()));
-		calendar.setNote(dto.getNote());
-		calendar.setPatient(new User(dto.getPatient().getIdPerson()));
-		calendar.setProfessional(new User(dto.getProfessional().getIdPerson()));
-		calendar.setReceptionist(new User(autenticationService.getUserLogged().getIdPerson()));
-		return calendar;
-	}
-
 	public static List<CalendarDTO> converter(List<Calendar> calendar) {
 		return calendar.stream().map(CalendarDTO::new).toList();
 	}

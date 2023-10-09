@@ -1,5 +1,6 @@
 package br.com.softnutri.domain;
 
+import br.com.softnutri.dto.CompositionTableDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,5 +36,9 @@ public class CompositionTable {
 		this.description = description;
 	}
 	
-	
+	public CompositionTable(CompositionTableDTO compositionTableDTO) {
+		this.idCompositionTable = compositionTableDTO.getIdCompositionTable();
+		this.description = compositionTableDTO.getDescription();
+		this.name = compositionTableDTO.getName();
+	}
 }

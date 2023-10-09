@@ -22,7 +22,7 @@ public class IntermissionService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(IntermissionDTO intermissionDTO) { 
-		this.intermissionRepository.save(IntermissionDTO.converterToDomain(intermissionDTO));
+		this.intermissionRepository.save(new Intermission(intermissionDTO));
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	

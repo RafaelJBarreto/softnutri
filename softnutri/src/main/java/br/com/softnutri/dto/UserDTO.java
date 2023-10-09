@@ -1,14 +1,11 @@
 package br.com.softnutri.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.softnutri.domain.Phone;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.enuns.UserType;
-import br.com.softnutri.service.UserService;
 import br.com.softnutri.util.Criptografia;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,46 +42,5 @@ public class UserDTO extends PersonDTO {
 
 	public static UserDTO converter(User user) {
 		return new UserDTO(user);
-	}
-
-	public static User converterToDomain(UserDTO userDTO, UserService userService) {
-		User user = new User();
-		User userAux = null;
-		user.setIdPerson(userDTO.getIdPerson());
-		user.setCpf(Criptografia.encode(userDTO.getCpf()));
-		user.setBirthDate(LocalDate.now());
-		user.setEmail(Criptografia.encode(userDTO.getEmail()));
-		user.setAddress(Criptografia.encode(userDTO.getAddress()));
-		user.setName(Criptografia.encode(userDTO.getName()));
-		user.setGender(userDTO.getGender());
-		user.setLanguage(userDTO.getLanguage());
-		user.setUserType(userDTO.getUserType());
-		user.setCrn(userDTO.getCrn());
-		
-		if(userDTO.getIdPerson() != null) {
-			userAux = userService.getUserById(userDTO.getIdPerson());
-		}
-		
-		if(userAux != null) {
-			if(userDTO.getPassword() == null) {
-				user.setPassword(userAux.getPassword());
-			}else {
-				user.setPassword(userDTO.getPassword());
-			}
-			
-			user.setPaper(userAux.getPaper());
-			user.setDateRegister(userAux.getDateRegister());
-		}
-		
-		List<Phone> phones = new ArrayList<>();
-		for (PhoneDTO phone : userDTO.getPhones()) {
-			Phone ph = new Phone();
-			ph.setIdPhone(phone.getIdPhone());
-			ph.setNumber(Criptografia.encode(phone.getNumero()));
-			ph.setPerson(user);
-			phones.add(ph);
-		}
-		user.setPhones(phones);
-		return user;
 	}
 }

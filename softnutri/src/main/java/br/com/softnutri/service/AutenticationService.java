@@ -163,7 +163,7 @@ public class AutenticationService {
 		UserDTO resultDTO = null;
 		try {
 			if (utils.verifyUserLogged(usuario.getEmail())) {
-				User usuarioParam =  UserDTO.converterToDomain(usuario, null);
+				User usuarioParam =  new User(usuario, null);
 				if (!usuarioParam.getPassword().isBlank()) {
 					usuarioParam.setPassword(usuarioParam.getPassword());
 				}

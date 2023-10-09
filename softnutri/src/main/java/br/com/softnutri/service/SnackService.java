@@ -23,7 +23,7 @@ public class SnackService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(SnackDTO snackDTO) { 
-		this.snackRepository.save(SnackDTO.converterToDomain(snackDTO));
+		this.snackRepository.save(new Snack(snackDTO));
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	

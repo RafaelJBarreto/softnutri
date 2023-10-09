@@ -11,7 +11,6 @@ import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Bunch;
 import br.com.softnutri.domain.Food;
 import br.com.softnutri.domain.FoodBunch;
-import br.com.softnutri.dto.BunchDTO;
 import br.com.softnutri.dto.FoodBunchDTO;
 import br.com.softnutri.dto.FoodDTO;
 import br.com.softnutri.repository.FoodBunchRepository;
@@ -28,10 +27,10 @@ public class FoodBunchService {
 	
 	public ResponseEntity<MessageResponse> save(FoodBunchDTO foodBunchDTO) { 
 		List<FoodBunch> getAllFoodBunch = this.foodBunchRepository.findAll();
-		Bunch bunch = BunchDTO.converterToDomain(foodBunchDTO.getBunch());
+		Bunch bunch = new Bunch(foodBunchDTO.getBunch());
 		
 		for(FoodDTO foodDTO: foodBunchDTO.getFoods()) {
-			Food food = FoodDTO.converterToDomain(foodDTO);
+			Food food = new Food(foodDTO);
 			FoodBunch foodBunch = getAllFoodBunch.stream().filter(x -> food.getIdFood().equals(x.getFood().getIdFood())).findAny().orElse(null);
 			this.foodBunchRepository.save(new FoodBunch(foodBunch != null ? foodBunch.getIdFoodBunch() : null, food, bunch));
 		}

@@ -28,14 +28,6 @@ public class SnackDTO {
 		this.description = s.getDescription();
 	}
 
-	public static Snack converterToDomain(SnackDTO sDTO) {
-		Snack s = new Snack();
-		s.setIdSnack(sDTO.getIdSnack());
-		s.setDescription(sDTO.getDescription());
-		s.setName(sDTO.getName());
-		return s;
-	}
-
 	public static List<SnackDTO> converter(List<Snack> snacks) {
 		return snacks.stream().map(SnackDTO::new).toList();
 	}

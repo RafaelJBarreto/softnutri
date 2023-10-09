@@ -28,14 +28,6 @@ public class CompositionTableDTO {
 		this.description = compositionTable.getDescription();
 	}
 
-	public static CompositionTable converterToDomain(CompositionTableDTO compositionTableDTO) {
-		CompositionTable ct = new CompositionTable();
-		ct.setIdCompositionTable(compositionTableDTO.getIdCompositionTable());
-		ct.setDescription(compositionTableDTO.getDescription());
-		ct.setName(compositionTableDTO.getName());
-		return ct;
-	}
-
 	public static List<CompositionTableDTO> converter(List<CompositionTable> compositionTable) {
 		return compositionTable.stream().map(CompositionTableDTO::new).toList();
 	}

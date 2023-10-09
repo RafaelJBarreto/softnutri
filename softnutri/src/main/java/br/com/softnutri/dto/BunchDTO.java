@@ -24,13 +24,6 @@ public class BunchDTO {
 		this.description = group.getDescription();
 	}
 
-	public static Bunch converterToDomain(BunchDTO groupDTO) {
-		Bunch bunch = new Bunch();
-		bunch.setIdBunch(groupDTO.getIdBunch());
-		bunch.setDescription(groupDTO.getDescription());
-		return bunch;
-	}
-
 	public static List<BunchDTO> converter(List<Bunch> foodGroups) {
 		return foodGroups.stream().map(BunchDTO::new).toList();
 	}

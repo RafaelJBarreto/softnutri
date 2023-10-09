@@ -15,7 +15,6 @@ public class IntermissionDTO {
 	}
 
 	public IntermissionDTO(Long idIntermission, int time) {
-		super();
 		this.idIntermission = idIntermission;
 		this.time = time;
 	}
@@ -27,13 +26,6 @@ public class IntermissionDTO {
 	
 	public static IntermissionDTO converter(Intermission intermission) {
 		return new IntermissionDTO(intermission);
-	}
-
-	public static Intermission converterToDomain(IntermissionDTO intermissionDTO) {
-		Intermission intermission = new Intermission();
-		intermission.setIdIntermission(intermissionDTO.getIdIntermission());
-		intermission.setTime(intermissionDTO.getTime());
-		return intermission;
 	}
 
 	public static List<IntermissionDTO> converter(List<Intermission> intermission) {

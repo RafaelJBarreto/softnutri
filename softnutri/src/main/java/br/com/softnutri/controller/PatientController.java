@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
+import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.UserDTO;
 import br.com.softnutri.service.PersonService;
 import br.com.softnutri.service.UserService;
@@ -48,7 +49,7 @@ public class PatientController {
 	@PostMapping("/save")
 	@Transactional
 	public ResponseEntity<MessageResponse> cadastrar(@RequestBody UserDTO form) {
-		return this.userService.save(UserDTO.converterToDomain(form, userService));
+		return this.userService.save(new User(form, userService));
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")

@@ -2,6 +2,7 @@ package br.com.softnutri.domain;
 
 import java.util.List;
 
+import br.com.softnutri.dto.BunchDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,6 +32,11 @@ public class Bunch {
 	private List<FoodBunch> foodBunch;
 
 	public Bunch() {
-		super();
+
+	}
+	
+	public Bunch(BunchDTO groupDTO) {
+		this.idBunch = groupDTO.getIdBunch();
+		this.description = groupDTO.getDescription();
 	}
 }

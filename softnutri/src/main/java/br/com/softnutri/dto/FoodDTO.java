@@ -37,12 +37,6 @@ public class FoodDTO {
 		this.nutritionalData = new NutritionalDataDTO(food.getNutritionalData());
 	}
 
-	
-	public static Food converterToDomain(FoodDTO foodDTO) {
-		return new Food(foodDTO);
-	}
-
-
 	public static List<FoodDTO> converter(List<Food> foods) {
 		return foods.stream().map(FoodDTO::new).toList();
 	}

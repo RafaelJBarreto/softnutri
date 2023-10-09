@@ -23,7 +23,7 @@ public class TableService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(CompositionTableDTO compositionTableDTO) { 
-		this.tableRepository.save(CompositionTableDTO.converterToDomain(compositionTableDTO));
+		this.tableRepository.save(new CompositionTable(compositionTableDTO));
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	
