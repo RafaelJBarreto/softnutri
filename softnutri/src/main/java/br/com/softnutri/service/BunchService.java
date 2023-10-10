@@ -23,7 +23,9 @@ public class BunchService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(BunchDTO groupDTO) { 
-		this.bunchRepository.save(new Bunch(groupDTO));
+		this.bunchRepository.save(
+				Bunch.builder().idBunch(groupDTO.getIdBunch()).description(groupDTO.getDescription()).build()
+		);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	

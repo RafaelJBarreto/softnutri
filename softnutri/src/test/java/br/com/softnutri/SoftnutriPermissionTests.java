@@ -52,7 +52,7 @@ class SoftnutriPermissionTests {
 		for (PaperAll p : listPapers) {
 			Paper paper = papers.stream().filter(x -> p.name().equals(x.getDescription())).findAny().orElse(null);
 			if(paper == null) {
-				Paper nc = papelRepository.save(new Paper(null, p.name(), p.getGet(), p.getPost(), p.getPut(), p.getDelete()));
+				Paper nc = papelRepository.save(Paper.builder().idPaper(null).description(p.name()).get(p.getGet()).post(p.getPost()).put(p.getPut()).delete(p.getDelete()).build());
 				assertNotNull(nc.getIdPaper());
 			}
 		}
@@ -66,7 +66,7 @@ class SoftnutriPermissionTests {
 		for (ModuleAll mod : listModules) {
 			Module module = modules.stream().filter(x -> mod.getName().toUpperCase().contains(x.getName().toUpperCase())).findAny().orElse(null);
 			if(module == null) {
-				Module m = moduloRepository.save(new Module(null, mod.getName(), mod.getPathBase(), mod.getIcon(), mod.getOrders()));
+				Module m = moduloRepository.save(Module.builder().idModule(null).name(mod.getName()).pathBase(mod.getPathBase()).icon(mod.getIcon()).orders(mod.getOrders()).build());
 				assertNotNull(m.getIdModule());
 			}
 		}
@@ -89,7 +89,7 @@ class SoftnutriPermissionTests {
 					for (PaperAll paperAll : mod.getListPapers()) {
 						Paper paper = papers.stream().filter(x -> paperAll.name().equals(x.getDescription())).findAny().orElse(null);
 						if(paper != null) {
-							ModuleRole nc = moduloPapelRepository.save(new ModuleRole(paper, module));
+							ModuleRole nc = moduloPapelRepository.save(ModuleRole.builder().paper(paper).module(module).build());
 							assertNotNull(nc.getIdModuleRole());
 						}
 					}
@@ -114,7 +114,8 @@ class SoftnutriPermissionTests {
 			for (Paper paper : papers) {
 				PersonPaper personPaper = permissions.stream().filter(x -> paper.getIdPaper().equals(x.getPaper().getIdPaper())).findAny().orElse(null);
 				if(personPaper == null)
-					this.personPaperRepository.save(new PersonPaper(null, new User(userO.getIdPerson()), new Paper(paper.getIdPaper()), Util.getGet(paper.getGet()), Util.getPost(paper.getPost()), Util.getPut(paper.getPut()), Util.getDelete(paper.getDelete())));
+					this.personPaperRepository.save(PersonPaper.builder().idPersonPaper(null).user(User.builder().idPerson(userO.getIdPerson()).build()).paper(Paper.builder().idPaper(paper.getIdPaper()).build()).get(Util.getGet(paper.getGet()))
+							.post(Util.getPost(paper.getPost())).put(Util.getPut(paper.getPut())).delete(Util.getDelete(paper.getDelete())).build());
 			}
 			
 			assertNotNull(papers);

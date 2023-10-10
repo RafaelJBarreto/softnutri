@@ -12,9 +12,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "module")
 public class Module {
@@ -37,21 +45,4 @@ public class Module {
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "module", fetch = FetchType.LAZY)
 	private List<ModuleRole> moduleRole;
-
-	public Module() {
-		
-	}
-	
-	public Module(Long idModule, String name, String pathBase, String icon, Integer orders) {
-		this.idModule = idModule;
-		this.name = name;
-		this.pathBase = pathBase;
-		this.icon = icon;
-		this.orders = orders;
-	}
-
-	public Module(Long idModule, String name) {
-		this.idModule = idModule;
-		this.name = name;
-	}
 }

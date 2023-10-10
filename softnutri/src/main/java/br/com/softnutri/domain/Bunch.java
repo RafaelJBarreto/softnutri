@@ -2,7 +2,6 @@ package br.com.softnutri.domain;
 
 import java.util.List;
 
-import br.com.softnutri.dto.BunchDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,9 +12,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "bunch")
 public class Bunch {
@@ -31,12 +38,4 @@ public class Bunch {
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "bunch", fetch = FetchType.LAZY)
 	private List<FoodBunch> foodBunch;
 
-	public Bunch() {
-
-	}
-	
-	public Bunch(BunchDTO groupDTO) {
-		this.idBunch = groupDTO.getIdBunch();
-		this.description = groupDTO.getDescription();
-	}
 }

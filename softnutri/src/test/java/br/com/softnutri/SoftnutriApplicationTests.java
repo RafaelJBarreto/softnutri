@@ -59,7 +59,7 @@ class SoftnutriApplicationTests {
 	@Test
 	void testaCadastroPessoa() {
 
-		Person p = new Person();
+		User p = new User();
 		p.setCpf(Criptografia.encode("10490376690"));
 		p.setBirthDate(LocalDate.now());
 		p.setEmail(Criptografia.encode("teste@outlook.com.br"));

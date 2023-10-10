@@ -1,19 +1,23 @@
 package br.com.softnutri.domain;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Embeddable;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Embeddable
-public class NutritionalData implements Serializable {
+public class NutritionalData{
 
-	private static final long serialVersionUID = 1L;
-
-	private float calories = 0;
-	private float protein = 0;
-	private float lipids = 0;
-	private float carbohydrate = 0;
+	private float calories;
+	private float protein;
+	private float lipids;
+	private float carbohydrate;
 
 }

@@ -30,6 +30,7 @@ import br.com.softnutri.domain.RefreshToken;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.ModuleDTO;
 import br.com.softnutri.dto.UserDTO;
+import br.com.softnutri.dto.prototype.UserPrototype;
 import br.com.softnutri.exception.TokenRefreshException;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.UserRepository;
@@ -90,7 +91,6 @@ public class AutenticationService {
 			papels.add(usuarioPapel);
 		}
 
-		//usuario.setPaper(papels);
 		this.userRepository.save(usuario);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
@@ -163,7 +163,7 @@ public class AutenticationService {
 		UserDTO resultDTO = null;
 		try {
 			if (utils.verifyUserLogged(usuario.getEmail())) {
-				User usuarioParam =  new User(usuario, null);
+				User usuarioParam =  UserPrototype.getUser(usuario, null);
 				if (!usuarioParam.getPassword().isBlank()) {
 					usuarioParam.setPassword(usuarioParam.getPassword());
 				}

@@ -40,8 +40,14 @@ public class PermissionService{
 		if(listPermission.isEmpty()) {
 			resultado.addAll(arrangePermission(this.moduleRoleRepository.findAll()));
 		}else {
-			List<ModuleRole> list = this.moduleRoleRepository.getNotPermissionPerson(PaperDTO.converterToLong(listPermission)).stream().map(c -> new ModuleRole(new Paper(c.getIdPaper(), c.getDescription(), c.getAccess(), c.getSend(), c.getAlterar(), c.getRemove()), 
-																					 new Module(c.getIdModule(), c.getName()))).toList();
+			List<ModuleRole> list = this.moduleRoleRepository.getNotPermissionPerson(PaperDTO.converterToLong(listPermission)).stream().map(c -> 
+			ModuleRole.builder()
+						.paper(
+						   Paper.builder().idPaper(c.getIdPaper()).description(c.getDescription()).get(c.getAccess()).post(c.getSend()).put(c.getAlterar()).delete(c.getRemove()).build())
+						.module( 
+						   Module.builder().idModule(c.getIdModule()).name(c.getName()).build())
+						.build()
+						).toList();
 			resultado.addAll(arrangePermission(list));
 		}
 		
@@ -72,8 +78,10 @@ public class PermissionService{
 		for (PermissionDTO p : dto.getPermission()) {
 			for (PaperDTO pp : p.getPaper()) {
 				PersonPaper personPaper = permissions.stream().filter(x -> pp.getIdPaper().equals(x.getPaper().getIdPaper())).findAny().orElse(null);
-				this.personPaperRepository.save(new PersonPaper(personPaper == null ? null : personPaper.getIdPersonPaper(), new User(dto.getIdPerson()), new Paper(pp.getIdPaper()), pp.getGet(), pp.getPost(), pp.getPut(), pp.getDelete()));
+				this.personPaperRepository.save(
+						PersonPaper.builder().idPersonPaper(personPaper == null ? null : personPaper.getIdPersonPaper()).user(User.builder().idPerson(dto.getIdPerson()).build()).paper( Paper.builder().idPaper(pp.getIdPaper()).build()).get(pp.getGet()).post(pp.getPost()).put(pp.getPut()).delete(pp.getDelete()).build());
 			}
+			
 		}
 		
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));

@@ -17,13 +17,22 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
-public class Person {
+public abstract class Person {
 
 	@Id
 	@Column
@@ -54,16 +63,12 @@ public class Person {
 	@Column(name = "gender", nullable = false, length = 1)
 	protected Gender gender;
 
+	@Builder.Default
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	protected List<Phone> phones = new ArrayList<>();
 
+	@Builder.Default
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	protected List<BodyHistory> bodyHistory = new ArrayList<>();
 	
-	public Person() {
-	}
-
-	public Person(Long idPerson) {
-		this.idPerson = idPerson;
-	}
 }

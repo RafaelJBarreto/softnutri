@@ -8,10 +8,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "personPaper")
 @EqualsAndHashCode
@@ -38,23 +46,4 @@ public class PersonPaper {
 
 	@Column(name = "remove", nullable = true)
 	private int delete;
-	
-	public PersonPaper() {
-	}
-	
-
-	public PersonPaper(Long idPersonPaper, User user, Paper paper, int get, int post, int put, int delete) {
-		this.idPersonPaper = idPersonPaper;
-		this.user = user;
-		this.paper = paper;
-		this.get = get;
-		this.post = post;
-		this.put = put;
-		this.delete = delete;
-	}
-
-
-
-	
-	
 }

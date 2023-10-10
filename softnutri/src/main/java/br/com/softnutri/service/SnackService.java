@@ -23,7 +23,9 @@ public class SnackService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(SnackDTO snackDTO) { 
-		this.snackRepository.save(new Snack(snackDTO));
+		this.snackRepository.save(
+				Snack.builder().idSnack(snackDTO.getIdSnack()).name(snackDTO.getName()).description(snackDTO.getDescription()).build()
+		);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	

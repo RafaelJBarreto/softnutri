@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
+import br.com.softnutri.domain.CompositionTable;
 import br.com.softnutri.domain.Food;
+import br.com.softnutri.domain.NutritionalData;
 import br.com.softnutri.dto.FoodDTO;
 import br.com.softnutri.repository.FoodRepository;
 
@@ -23,7 +25,14 @@ public class FoodService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(FoodDTO foodDTO) { 
-		this.foodRepository.save(new Food(foodDTO));
+		this.foodRepository.save(
+				
+				Food.builder().idFood(foodDTO.getIdFood()).description(foodDTO.getDescription()).descriptionPreparation(foodDTO.getDescriptionPreparation()).
+				compositionTable(CompositionTable.builder().idCompositionTable(foodDTO.getCompositionTable().getIdCompositionTable()).build()).
+				nutritionalData(NutritionalData.builder().calories(foodDTO.getNutritionalData().getCalories()).carbohydrate(foodDTO.getNutritionalData().getCarbohydrate()).
+						lipids(foodDTO.getNutritionalData().getLipids()).protein(foodDTO.getNutritionalData().getProtein()).build()).build()
+				
+		);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	public ResponseEntity<List<FoodDTO>> listAll() { 

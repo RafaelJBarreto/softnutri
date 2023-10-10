@@ -12,9 +12,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "menuPerson")
 public class MenuPerson {
@@ -32,21 +40,7 @@ public class MenuPerson {
 	@Embedded
 	private NutritionalData nutritionalData;
 
+	@Builder.Default
 	private LocalDateTime dateTimeRegistration = LocalDateTime.now();
-	
-	public MenuPerson() {
-		super();
-	}
-
-	public MenuPerson(Food food, float amount, float calories, float protein, float lipids, float carbohydrate) {
-		this.nutritionalData = new NutritionalData();
-		this.nutritionalData.setCalories(calories);
-		this.nutritionalData.setCarbohydrate(carbohydrate);
-		this.nutritionalData.setLipids(lipids);
-		this.nutritionalData.setProtein(protein);
-		this.food = food;
-		this.amount = amount;
-		this.dateTimeRegistration = LocalDateTime.now();
-	}
 
 }

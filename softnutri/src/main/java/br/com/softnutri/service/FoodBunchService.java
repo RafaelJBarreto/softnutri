@@ -27,10 +27,10 @@ public class FoodBunchService {
 	
 	public ResponseEntity<MessageResponse> save(FoodBunchDTO foodBunchDTO) { 
 		List<FoodBunch> getAllFoodBunch = this.foodBunchRepository.findAll();
-		Bunch bunch = new Bunch(foodBunchDTO.getBunch());
+		Bunch bunch = Bunch.builder().idBunch(foodBunchDTO.getBunch().getIdBunch()).description(foodBunchDTO.getBunch().getDescription()).build();
 		
 		for(FoodDTO foodDTO: foodBunchDTO.getFoods()) {
-			Food food = new Food(foodDTO);
+			Food food = Food.builder().idFood(foodDTO.getIdFood()).build();
 			FoodBunch foodBunch = getAllFoodBunch.stream().filter(x -> food.getIdFood().equals(x.getFood().getIdFood())).findAny().orElse(null);
 			this.foodBunchRepository.save(new FoodBunch(foodBunch != null ? foodBunch.getIdFoodBunch() : null, food, bunch));
 		}

@@ -1,6 +1,5 @@
 package br.com.softnutri.domain;
 
-import br.com.softnutri.dto.CompositionTableDTO;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,9 +7,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "compositionTable")
 public class CompositionTable {
@@ -26,19 +33,4 @@ public class CompositionTable {
 	@Basic(optional = false)
 	@Column(name = "description", nullable = false, length = 100)
 	private String description;
-	
-	public CompositionTable() {
-	}
-
-	public CompositionTable(Long idCompositionTable, String name, String description) {
-		this.idCompositionTable = idCompositionTable;
-		this.name = name;
-		this.description = description;
-	}
-	
-	public CompositionTable(CompositionTableDTO compositionTableDTO) {
-		this.idCompositionTable = compositionTableDTO.getIdCompositionTable();
-		this.description = compositionTableDTO.getDescription();
-		this.name = compositionTableDTO.getName();
-	}
 }

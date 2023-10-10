@@ -23,7 +23,9 @@ public class TableService {
 	}
 	
 	public ResponseEntity<MessageResponse> save(CompositionTableDTO compositionTableDTO) { 
-		this.tableRepository.save(new CompositionTable(compositionTableDTO));
+		this.tableRepository.save(
+				CompositionTable.builder().idCompositionTable(compositionTableDTO.getIdCompositionTable()).name(compositionTableDTO.getName()).description(compositionTableDTO.getDescription()).build()
+		);
 		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 	

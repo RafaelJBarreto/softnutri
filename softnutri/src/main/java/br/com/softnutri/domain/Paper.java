@@ -12,9 +12,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "paper")
 public class Paper {
@@ -44,20 +52,5 @@ public class Paper {
 	@OneToMany(mappedBy = "paper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PersonPaper> personPaper;
 
-	public Paper() {
-	}
-	
-	public Paper(Long idPaper) {
-		this.idPaper = idPaper;
-	}
-
-	public Paper(Long idPaper, String description, String get, String post, String put, String delete) {
-		this.idPaper = idPaper;
-		this.description = description;
-		this.get = get;
-		this.post = post;
-		this.put = put;
-		this.delete = delete;
-	}
 	
 }

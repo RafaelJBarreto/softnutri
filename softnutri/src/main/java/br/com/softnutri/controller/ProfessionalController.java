@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.UserDTO;
+import br.com.softnutri.dto.prototype.UserPrototype;
 import br.com.softnutri.service.PersonService;
 import br.com.softnutri.service.UserService;
 import jakarta.transaction.Transactional;
@@ -48,7 +48,7 @@ public class ProfessionalController {
 	@PostMapping("/save")
 	@Transactional
 	public ResponseEntity<MessageResponse> cadastrar(@RequestBody UserDTO form) {
-		return this.userService.save(new User(form, userService));
+		return this.userService.save(UserPrototype.getUser(form, userService));
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")

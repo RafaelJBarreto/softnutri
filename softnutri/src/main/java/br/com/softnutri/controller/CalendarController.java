@@ -1,5 +1,6 @@
 package br.com.softnutri.controller;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,13 @@ public class CalendarController {
 
 	@PostMapping("/save")
 	public ResponseEntity<MessageResponse> saveData(@RequestBody CalendarDTO dto) {
-		return calendarService.save(new Calendar(dto, autenticationService.getUserLogged().getIdPerson()));
+		return calendarService.save(
+				Calendar.builder().idCalendar(dto.getIdCalendar()).cancel(dto.isCancel()).dateOfDay(dto.getDateOfDay()).
+				hourOfDay(LocalTime.of(dto.getHourOfDayAux().getHour(), dto.getHourOfDayAux().getMinute())).note(dto.getNote()).
+				patient(User.builder().idPerson(dto.getPatient().getIdPerson()).build()).
+				professional(User.builder().idPerson(dto.getProfessional().getIdPerson()).build()).
+				receptionist(User.builder().idPerson(autenticationService.getUserLogged().getIdPerson()).build()).build()	
+		);
 	}
 
 	@GetMapping("/")
