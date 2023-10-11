@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Intermission;
 import br.com.softnutri.dto.IntermissionDTO;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.repository.IntermissionRepository;
 
 @Service
@@ -21,20 +22,28 @@ public class IntermissionService {
 		this.intermissionRepository = intermissionRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(IntermissionDTO intermissionDTO) { 
-		this.intermissionRepository.save(
-				Intermission.builder().idIntermission(intermissionDTO.getIdIntermission()).time(intermissionDTO.getTime()).build()
-				
-		);
-		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
+	public ResponseEntity<MessageResponse> save(IntermissionDTO intermissionDTO)throws SoftNutriException { 
+		try {
+			this.intermissionRepository.save(
+					Intermission.builder().idIntermission(intermissionDTO.getIdIntermission()).time(intermissionDTO.getTime()).build()
+					
+			);
+			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
+		} catch (Exception e) {
+			throw new SoftNutriException("Error save Intermission ", e);
+		}	
 	}
 	
-	public IntermissionDTO get() { 
-		List<Intermission> intermission = this.intermissionRepository.findAll();
-		if (!intermission.isEmpty()) {
-			return IntermissionDTO.converter(intermission.get(0));
-		} else {
-			return null;
-		}
+	public IntermissionDTO get() throws SoftNutriException{ 
+		try {
+			List<Intermission> intermission = this.intermissionRepository.findAll();
+			if (!intermission.isEmpty()) {
+				return IntermissionDTO.converter(intermission.get(0));
+			} else {
+				return null;
+			}		
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get Intermission ", e);
+		}	
 	}	 
 }

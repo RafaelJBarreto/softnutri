@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.FoodBunchDTO;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.FoodBunchService;
 
 @RestController
@@ -26,22 +27,22 @@ public class FoodBunchController {
 	private FoodBunchService foodBunchService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody FoodBunchDTO dto) {
+	public ResponseEntity<MessageResponse> saveData(@RequestBody FoodBunchDTO dto) throws SoftNutriException {
 		return foodBunchService.save(dto);
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<FoodBunchDTO>> findAll(){
+	public ResponseEntity<List<FoodBunchDTO>> findAll() throws SoftNutriException {
 		return foodBunchService.getAll();
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return this.foodBunchService.delete(id);
 	}
 	
 	@GetMapping(value = "/table/{id}")
-	public ResponseEntity<List<FoodBunchDTO>> getFoodTable(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<List<FoodBunchDTO>> getFoodTable(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return this.foodBunchService.getFoodTable(id);
 	}
 }

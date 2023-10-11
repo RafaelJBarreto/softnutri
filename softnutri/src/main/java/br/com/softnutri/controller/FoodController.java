@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.FoodDTO;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.FoodService;
 
 @RestController
@@ -25,17 +26,17 @@ public class FoodController {
 	private FoodService foodService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> salvar(@RequestBody FoodDTO dto) {
+	public ResponseEntity<MessageResponse> salvar(@RequestBody FoodDTO dto) throws SoftNutriException {
 		return this.foodService.save(dto);
 	}
 	
 	@GetMapping("/")
-	public ResponseEntity<List<FoodDTO>> findAll(){
+	public ResponseEntity<List<FoodDTO>> findAll() throws SoftNutriException {
 		return this.foodService.listAll(); 
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return this.foodService.delete(id);
 	}
 }

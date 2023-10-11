@@ -17,6 +17,7 @@ import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Calendar;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.CalendarDTO;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.AutenticationService;
 import br.com.softnutri.service.CalendarService;
 
@@ -36,7 +37,7 @@ public class CalendarController {
 	}
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody CalendarDTO dto) {
+	public ResponseEntity<MessageResponse> saveData(@RequestBody CalendarDTO dto) throws SoftNutriException {
 		return calendarService.save(
 				Calendar.builder().idCalendar(dto.getIdCalendar()).cancel(dto.isCancel()).dateOfDay(dto.getDateOfDay()).
 				hourOfDay(LocalTime.of(dto.getHourOfDayAux().getHour(), dto.getHourOfDayAux().getMinute())).note(dto.getNote()).
@@ -47,27 +48,22 @@ public class CalendarController {
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<CalendarDTO>> findAll(){
+	public ResponseEntity<List<CalendarDTO>> findAll() throws SoftNutriException{
 		return this.calendarService.listAll(); 
 	}
 	
 	@GetMapping(value = "/cancel/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return calendarService.cancel(id);
 	}
 	
 	@GetMapping(value = "/get/{id}")
-	public CalendarDTO getCalendar(@PathVariable(value = "id") Long id) {
+	public CalendarDTO getCalendar(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return calendarService.getCalendar(id);
 	}
 	
 	@GetMapping("/professional")
-	public ResponseEntity<List<CalendarDTO>> findCalendarProfessional(){
-		return this.calendarService.findCalendarProfessional(getProfessional().getIdPerson()); 
+	public ResponseEntity<List<CalendarDTO>> findCalendarProfessional() throws SoftNutriException{
+		return this.calendarService.findCalendarProfessional(autenticationService.getUserLogged().getIdPerson()); 
 	}
-	
-	private User getProfessional() {
-		return autenticationService.getUserLogged();
-	}
-	
 }

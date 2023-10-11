@@ -16,6 +16,7 @@ import br.com.softnutri.config.security.services.UtilsServiceImpl;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.UserDTO;
 import br.com.softnutri.enuns.UserType;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.UserRepository;
 
@@ -30,7 +31,7 @@ public class UserService extends AutenticationService {
 		this.userRepository = userRepository;
 	}
 
-	public ResponseEntity<UserDTO> findById(Long idUsuario) {
+	public ResponseEntity<UserDTO> findById(Long idUsuario) throws SoftNutriException {
 		UserDTO resultDto = null;
 		try {
 			Optional<User> user = this.userRepository.findById(idUsuario);
@@ -42,63 +43,83 @@ public class UserService extends AutenticationService {
 			}
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(resultDto, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new SoftNutriException("Error find by id User " + e.getMessage(), e);
 		}
 	}
 
-	public ResponseEntity<MessageResponse> save(User user) {
+	public ResponseEntity<MessageResponse> save(User user) throws SoftNutriException {
 
 		try {
 			this.userRepository.save(user);
 			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 
 		} catch (Exception e) {
-			return ResponseEntity.ok(new MessageResponse(e.getMessage()));
+			throw new SoftNutriException("Error save User " + e.getMessage(), e);
 		}
 	}
 	
-	public UserDTO getUser(Long idPerson) {
-		Optional<User> user = this.userRepository.findById(idPerson);
-		if (user.isPresent()) {
-			return UserDTO.converter(user.get());
-		} else {
-			return null;
+	public UserDTO getUser(Long idPerson) throws SoftNutriException {
+		try {
+			Optional<User> user = this.userRepository.findById(idPerson);
+			if (user.isPresent()) {
+				return UserDTO.converter(user.get());
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get User " + e.getMessage(), e);
 		}
 	}
 	
-	public User getUserById(Long idPerson) {
-		Optional<User> user = this.userRepository.findById(idPerson);
-		if (user.isPresent()) {
-			return user.get();
-		} else {
-			return null;
+	public User getUserById(Long idPerson) throws SoftNutriException {
+		try {
+			Optional<User> user = this.userRepository.findById(idPerson);
+			if (user.isPresent()) {
+				return user.get();
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get User By Id " + e.getMessage(), e);
 		}
 	}
 
-	public List<UserDTO> getUsers(String name) {
-		if (name == null) {
-			List<User> users = userRepository.findAll();
-			return UserDTO.converter(users);
+	public List<UserDTO> getUsers(String name) throws SoftNutriException {
+		try {
+			if (name == null) {
+				return UserDTO.converter(userRepository.findAll());
+			}
+			return Collections.emptyList();
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get Users " + e.getMessage(), e);
 		}
-		return Collections.emptyList();
 
 	}
 	
-	public List<UserDTO> getPatients() {
-		List<User> users = userRepository.findByUserType(UserType.PATIENT);
-		return UserDTO.converter(users);
+	public List<UserDTO> getPatients() throws SoftNutriException {
+		try {
+			return UserDTO.converter(userRepository.findByUserType(UserType.PATIENT));
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get Patients " + e.getMessage(), e);
+		}
 
 	}
 	
-	public List<UserDTO> getProfessional() {
-		List<User> users = userRepository.getProfessional(UserType.PATIENT);
-		return UserDTO.converter(users);
+	public List<UserDTO> getProfessional() throws SoftNutriException {
+		try {
+			return UserDTO.converter(userRepository.getProfessional(UserType.PATIENT));
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get Professional " + e.getMessage(), e);
+		}
 
 	}
 	
-	public List<UserDTO> getNutritionist() {
-		List<User> users = userRepository.getNutritionist(UserType.NUTRITIONIST);
-		return UserDTO.converter(users);
+	public List<UserDTO> getNutritionist() throws SoftNutriException {
+		try {
+			return UserDTO.converter(userRepository.getNutritionist(UserType.NUTRITIONIST));
+		} catch (Exception e) {
+			throw new SoftNutriException("Error get Nutritionist " + e.getMessage(), e);
+		}
 
 	}
 }

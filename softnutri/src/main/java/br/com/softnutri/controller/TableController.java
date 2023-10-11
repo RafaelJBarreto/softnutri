@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.CompositionTableDTO;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.TableService;
 
 @RestController
@@ -26,22 +27,22 @@ public class TableController {
 	private TableService tableService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody CompositionTableDTO dto) {
+	public ResponseEntity<MessageResponse> saveData(@RequestBody CompositionTableDTO dto) throws SoftNutriException {
 		return this.tableService.save(dto);
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<CompositionTableDTO>> findAll(){
+	public ResponseEntity<List<CompositionTableDTO>> findAll() throws SoftNutriException {
 		return this.tableService.listAll(); 
 	}
 	
 	@GetMapping(value = "/get/{id}")
-	public CompositionTableDTO get(@PathVariable(value = "id") Long id) {
+	public CompositionTableDTO get(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return this.tableService.get(id);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return this.tableService.delete(id);
 	}
 }

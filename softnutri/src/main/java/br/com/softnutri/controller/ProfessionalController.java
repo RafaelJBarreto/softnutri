@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.UserDTO;
 import br.com.softnutri.dto.prototype.UserPrototype;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.PersonService;
 import br.com.softnutri.service.UserService;
 import jakarta.transaction.Transactional;
@@ -36,29 +37,29 @@ public class ProfessionalController {
 	}
 
 	@GetMapping("/")
-	public List<UserDTO> getProfessional() {
+	public List<UserDTO> getProfessional() throws SoftNutriException {
 		return userService.getProfessional();
 	}
 
 	@GetMapping(value = "/get/{id}")
-	public UserDTO getProfessional(@PathVariable(value = "id") Long id) {
+	public UserDTO getProfessional(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return userService.getUser(id);
 	}
 
 	@PostMapping("/save")
 	@Transactional
-	public ResponseEntity<MessageResponse> cadastrar(@RequestBody UserDTO form) {
+	public ResponseEntity<MessageResponse> cadastrar(@RequestBody UserDTO form) throws SoftNutriException {
 		return this.userService.save(UserPrototype.getUser(form, userService));
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
 		return personService.delete(id);
 	}
 	
 	@GetMapping("/nutritionist")
 	@Cacheable("nutritionist")
-	public List<UserDTO> getNutritionist() {
+	public List<UserDTO> getNutritionist() throws SoftNutriException {
 		return userService.getNutritionist();
 	}
 

@@ -10,27 +10,28 @@ import br.com.softnutri.domain.Phone;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.PhoneDTO;
 import br.com.softnutri.dto.UserDTO;
+import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.UserService;
 import br.com.softnutri.util.Criptografia;
 
 public class UserPrototype {
 	
-	public static User getUser(UserDTO userDTO, UserService userService) {
+	public static User getUser(UserDTO userDTO, UserService userService) throws SoftNutriException {
     	
     	String password = null;
     	Set<PersonPaper> paper = null;
     	LocalDateTime dateRegister = LocalDateTime.now();
     	
     	if(userDTO.getIdPerson() != null && userService != null) {
-			User userAux = userService.getUserById(userDTO.getIdPerson());
-			if(userAux != null) {
+			User user = userService.getUserById(userDTO.getIdPerson());
+			if(user != null) {
 				if(userDTO.getPassword() == null) {
-					password = userAux.getPassword();
+					password = user.getPassword();
 				}else {
 					password = userDTO.getPassword();
 				}
-				paper = userAux.getPaper();
-				dateRegister = userAux.getDateRegister();
+				paper = user.getPaper();
+				dateRegister = user.getDateRegister();
 			}
 		}
     	
