@@ -103,7 +103,8 @@
         "ERROR_FOOD_EMPTY": "Você precisa selecionar pelo menos um alimento.",
         "FOOD_EDIT": "Editar alimento",
         "FOOD_REMOVE": "Remover alimento",
-        "DESCRIPTION_REMOVE": "Deseja remover o alimento?"
+        "DESCRIPTION_REMOVE": "Deseja remover o alimento?",
+        "FOOD_REMOVE_ERROR": "Erro ao tentar remover alimento"
     },
     "MENU": {
         "HOME": "Home",
@@ -150,7 +151,8 @@
         "PERSON_MALE": "Masculino",
         "PERSON_FEMINISM": "Feminimo",
         "PERSON_CELULAR": "Celular",
-        "PERSON_CELULAR2": "Celular auxiliar"
+        "PERSON_CELULAR2": "Celular auxiliar",
+        "PERSON_DELETE": "Erro ao tentar remover pessoa"
     },
     "BUNCH":{
         "BUNCH_NAME": "Grupo",
@@ -158,7 +160,8 @@
         "BUNCH_REMOVE": "Remover grupo",
         "FOOD_BUNCH_REMOVE": "Remover alimento do grupo",
         "DESCRIPTION_REMOVE_BUNCH": "Deseja remover o grupo?",
-        "DESCRIPTION_REMOVE_FOODBUNCH": "Deseja remover o alimento do grupo?"
+        "DESCRIPTION_REMOVE_FOODBUNCH": "Deseja remover o alimento do grupo?",
+        "BUNCH_REMOVE_ERROR": "Erro ao tentar remover grupo"
     },
     "CALENDAR":{
         "CALENDAR_TITLE": "Agendamentos",
@@ -173,7 +176,8 @@
         "ERROR_LIST_CALENDAR": "Erro ao listar agendamentos.",
         "CALENDAR_NEW": "Novo Agendamento",
         "CALENDAR_CANCEL_": "Cancelar agendamento",
-        "MSG_CANCEL": "Agenda cancelada com sucesso!"
+        "MSG_CANCEL": "Agenda cancelada com sucesso!",
+        "CALENDAR_CANCEL_ERROR": "Erro ao tentar cancelar agendamento"
     },
     "INTERVAL":{
         "INTERVAL_CALENDAR": "Intervalo entre agendas",
