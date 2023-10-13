@@ -8,11 +8,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SoftNutriException extends Exception {
 	
+	private static final String CAUSE = "Cause: ";
+	
 	public SoftNutriException(String message, Throwable cause) {
+		 super(message, cause);
 		 Throwable causeA = cause.getCause();
 		 if (causeA instanceof ConstraintViolationException) {
 			 ConstraintViolationException sqlEx = (ConstraintViolationException) cause.getCause();
-		     log.error(message + "Cause: " + sqlEx.getSQLException().getLocalizedMessage() + " Error code: " + sqlEx.getErrorCode());     
+		     log.error(super.getMessage() + CAUSE + sqlEx.getSQLException().getLocalizedMessage() + " Error code: " + sqlEx.getErrorCode());     
+		 }else	if (causeA instanceof ArrayIndexOutOfBoundsException) {
+			 ArrayIndexOutOfBoundsException arrayEx = (ArrayIndexOutOfBoundsException) cause.getCause();
+		     log.error(super.getMessage() + CAUSE + arrayEx.getLocalizedMessage());     
+		 }else {
+			 log.error(super.getMessage() + CAUSE + super.getLocalizedMessage());     
 		 }
     }
 }
