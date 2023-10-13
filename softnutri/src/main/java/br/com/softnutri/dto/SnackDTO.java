@@ -11,6 +11,7 @@ public class SnackDTO {
 	private Long idSnack;
 	private String name;
 	private String description;
+	private boolean selected;
 
 	public SnackDTO() {
 
