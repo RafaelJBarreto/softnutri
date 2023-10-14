@@ -1,8 +1,8 @@
 <mat-card style="margin-bottom: 100px;">
   <mat-card-content class="table-table__content style-mat-card-contet">
 <mat-card-content class="table-table__content style-mat-card-contet">
-  <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column"> 
-  <mat-form-field fxFlex="34%">
+  <div fxLayout="row"> 
+  <mat-form-field fxFlex="34%" appearance="outline">
       <mat-label>{{'TABLE.TABLE' | translate}}</mat-label>
       <input type="text" matInput [formControl]="tableControl" [matAutocomplete]="autoTable"
           required>
@@ -14,106 +14,35 @@
       </mat-autocomplete>
   </mat-form-field>
 </div>
+<div class="div-center" fxFlex="100%"> 
+  <button *ngIf="loadingFoods" mat-mini-fab  matTooltip="{{'MENU.ADD_SNACK_MENU' | translate}}" class="style-button" (click)="setSnackMenu()">
+    <i class="style-icon fa-solid fa-plus"></i>
+  </button>
+</div>
 </mat-card-content>
 
-<mat-accordion class="example-headers-align" *ngIf="loadingFoods">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{'GLOBAL.BREAKFAST' | translate}}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{'GLOBAL.MSG_ATTENDANCE' | translate}}
-          <img class="auth-page__logo-img" src="./assets/auth/healthy-food.png" alt="logo" height="36" width="36">
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <button mat-icon-button (click)="setFoodBreakFast()">
-        <i class="fa-regular fa-square-plus"></i>
-      </button>
-  
-      <div *ngFor="let o of listBreakFast">
-        <app-food-attendance [idTable]="idTable"></app-food-attendance>
+  <div fxLayout="row" *ngFor="let sm of listSnackMenu track by $">
+    <mat-card fxFlex="100%">
+      <mat-card-content >
+        <div>
+          <mat-chip-listbox fxFlex="95%"  *ngFor="let s of sm.listSnackMenu track by $">
+            <mat-chip-option fxFlex="85%" selected="{{s.selected}}" value="{{s.idSnack}}" (click)="selectedSnack(s.idSnack, sm.idSnackMenu)" >{{s.name}}</mat-chip-option>
+          </mat-chip-listbox>
+            <button mat-mini-fab class="style-button-remove" matTooltip="{{'MENU.REMOVE_SNACK_MENU' | translate}}" (click)="removeSnackMenu(sm.idSnackMenu)">
+              <i class="style-icon fa-solid fa-minus"></i>
+            </button>
+        </div>
+        <div class="margin-food">
+          <button mat-mini-fab matTooltip="{{'MENU.ADD_FOOD' | translate}}" class="style-button" [disabled]="sm.listBreakFast.length == 0" (click)="setFoodBreakFast(sm.idSnackMenu)">
+            <i class="style-icon fa-solid fa-utensils"></i>
+          </button>
       </div>
-      <mat-action-row>
-       <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
-    </mat-action-row>
-    </mat-expansion-panel>
-  
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{'GLOBAL.LUNCH' | translate}}
-        </mat-panel-title>
-        <mat-panel-description>
-            {{'GLOBAL.MSG_LUNCH' | translate}}
-            <img class="auth-page__logo-img" src="./assets/auth/healthy-food.png" alt="logo" height="36" width="36">
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-  
-      <app-food-attendance [idTable]="idTable"></app-food-attendance>
-  
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
-        <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-            {{'GLOBAL.THROW' | translate}}
-        </mat-panel-title>
-        <mat-panel-description>
-            {{'GLOBAL.MSG_THROW' | translate}}
-            <img class="auth-page__logo-img" src="./assets/auth/healthy-food.png" alt="logo" height="36" width="36">
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-  
-      <app-food-attendance [idTable]="idTable"></app-food-attendance>
-  
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
-        <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{'GLOBAL.DINNER' | translate}}
-          </mat-panel-title>
-          <mat-panel-description>
-            {{'GLOBAL.MSG_DINNER' | translate}}
-            <img class="auth-page__logo-img" src="./assets/auth/healthy-food.png" alt="logo" height="36" width="36">
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-    
-        <app-food-attendance [idTable]="idTable"></app-food-attendance>
-    
-        <mat-action-row>
-          <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
-          <button mat-button color="primary" (click)="nextStep()">{{'GLOBAL.NEXT' | translate}}</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{'GLOBAL.SUPPER' | translate}}
-          </mat-panel-title>
-          <mat-panel-description>
-            {{'GLOBAL.MSG_SUPPER' | translate}}
-            <img class="auth-page__logo-img" src="./assets/auth/healthy-food.png" alt="logo" height="36" width="36">
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-    
-        <app-food-attendance [idTable]="idTable"></app-food-attendance>
-    
-        <mat-action-row>
-          <button mat-button color="warn" (click)="prevStep()">{{'GLOBAL.PREVIOUS' | translate}}</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-  
-  </mat-accordion>
+        <div *ngFor="let o of sm.listBreakFast">
+          <app-food-attendance [idTable]="idTable"></app-food-attendance>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
   </mat-card-content>
 </mat-card>
+

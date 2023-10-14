@@ -2,7 +2,7 @@
   <mat-card-content class="table-table__content style-mat-card-contet">
 
     <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-      <mat-form-field fxFlex="35%">
+      <mat-form-field fxFlex="35%" appearance="outline">
         <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
         <input matInput (keyup)="applyFilter($event)" #input>
       </mat-form-field>
