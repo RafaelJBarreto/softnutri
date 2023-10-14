@@ -115,7 +115,12 @@
         "PERMISSION": "Permissões",
         "CALENDAR": "Agenda",
         "TABLE": "Tabela",
-        "SNACK": "Refeição"
+        "SNACK": "Refeição",
+        "ERROR_SNACK_MENU": "Você não pode adicionar mais refeições ao cardápio",
+        "REMOVE_SNACK_MENU": "Remover do cardápio",
+        "ADD_FOOD": "Adicionar alimento",
+        "ADD_SNACK_MENU": "Adicionar refeição ao cardápio",
+        "REMOVE_FOOD_MENU": "Remover alimento do cardápio"        
     } ,
     "PATIENT": {
         "PATIENT_NEW": "Cadastro de Pacientes",
