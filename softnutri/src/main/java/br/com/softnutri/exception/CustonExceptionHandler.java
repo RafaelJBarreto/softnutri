@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class Exceptions {
+public class CustonExceptionHandler {
 	
 	@ExceptionHandler({SoftNutriException.class})
     public ResponseEntity<Object> handleRuntimeException(Exception exception) {
