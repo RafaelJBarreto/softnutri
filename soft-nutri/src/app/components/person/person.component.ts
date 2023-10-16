@@ -25,6 +25,7 @@ export class PersonComponent implements OnInit {
   errorMessage: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+
   constructor(public dialog: MatDialog,
     public service: PersonService,
     public translate: TranslateService,
@@ -43,6 +44,7 @@ export class PersonComponent implements OnInit {
       next: data => {
         this.person = data;
         this.dataSource = new MatTableDataSource(this.person);
+        this.dataSource.paginator = this.paginator;
       },
       error: err => {
         this.errorMessage = err.message;
@@ -73,7 +75,6 @@ export class PersonComponent implements OnInit {
   }
 
   getPhone(phones: Array<Phone>) {
-    debugger;
     const dialogRef = this.dialog.open(PhoneDetailComponent, {
       width: '300px',
       data: phones,

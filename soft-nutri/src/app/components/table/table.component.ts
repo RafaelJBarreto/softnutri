@@ -43,6 +43,7 @@ export class TableComponent implements OnInit {
       next: data => {
         this.table = data;
         this.dataSource = new MatTableDataSource(this.table);
+        this.dataSource.paginator = this.paginator;
       },
       error: err => {
         this.errorMessage = err.message;

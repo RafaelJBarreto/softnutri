@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Table } from 'src/app/model/table/table';
@@ -9,9 +9,10 @@ import { map, startWith } from 'rxjs/operators';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 import { TableService } from 'src/app/services/table/table.service';
 import { SnackService } from 'src/app/services/snack/snack.service';
-import { Snack } from 'src/app/model/snack/snak';
-import { SnackMenu } from 'src/app/model/snackMenu/snakMenu';
+import { Snack } from 'src/app/model/snack/snack';
 import * as _ from 'lodash';
+import { SnackMenu } from 'src/app/model/snackMenu/snackMenu';
+import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
 
 
 @Component({
@@ -28,11 +29,16 @@ export class AttendanceComponent implements OnInit {
   table: Table = new Table;
   tables: Table[] = [];
   idTable!: number;
-  listBreakFast!: Array<number>;
+  listBreakFast!: Array<FoodMenu>;
   step = 0;
   loadingFoods: boolean = false;
   snacks: Snack[] = [];
   listSnackMenu!: Array<SnackMenu>;
+  @Input() foodMenu!: FoodMenu;
+  caloriesSum: number = 0;
+  proteinSum: number = 0;
+  carbohydrateSum: number = 0;
+  lipidsSum: number = 0;
 
   constructor(
     public snackService: SnackService,
@@ -109,7 +115,7 @@ export class AttendanceComponent implements OnInit {
           if(idSnack === this.listSnackMenu[sm].listSnackMenu[s].idSnack){
             this.listSnackMenu[sm].listSnackMenu[s].selected = this.listSnackMenu[sm].listSnackMenu[s].selected ? false : true;
             if(this.listSnackMenu[sm].listSnackMenu[s].selected && this.listSnackMenu[sm].listBreakFast.length == 0){
-              this.listSnackMenu[sm].listBreakFast.push(0);
+              this.listSnackMenu[sm].listBreakFast.push(new FoodMenu(this.listSnackMenu[sm].listBreakFast.length + 1, idSnackMenu, 0, 0, 0, 0, 0, 0));
             }
           }else{
             this.listSnackMenu[sm].listSnackMenu[s].selected = false;
@@ -136,7 +142,7 @@ export class AttendanceComponent implements OnInit {
   setFoodBreakFast(idSnackMenu: number) {
     for(let sm = 0; sm < this.listSnackMenu.length; sm++){
       if(idSnackMenu === this.listSnackMenu[sm].idSnackMenu){
-        this.listSnackMenu[sm].listBreakFast.push(0);
+        this.listSnackMenu[sm].listBreakFast.push(new FoodMenu(this.listSnackMenu[sm].listBreakFast.length + 1, idSnackMenu, 0, 0, 0, 0, 0, 0));
       }
     }
   }
@@ -173,6 +179,61 @@ export class AttendanceComponent implements OnInit {
       this.listSnackMenu.splice(indexOfObject, 1);
     }
 
+  }
+
+  deleteFoodMenu(food: FoodMenu) {
+    for(let sm = 0; sm < this.listSnackMenu.length; sm++){
+      if(food.idSnackMenu === this.listSnackMenu[sm].idSnackMenu){
+
+        const indexOfObject = this.listSnackMenu[sm].listBreakFast.findIndex((o: { idSnackMenu: number; }) => {
+          return o.idSnackMenu === food.idSnackMenu;
+        });
+    
+        if (indexOfObject !== -1) {
+          this.listSnackMenu[sm].listBreakFast.splice(indexOfObject, 1);
+        }
+        
+      }
+    }
+    this.setTotalFoodMenu();
+  }
+
+  totalFoodMenu(food: FoodMenu) {
+    for(let sm = 0; sm < this.listSnackMenu.length; sm++){
+      if(food.idSnackMenu === this.listSnackMenu[sm].idSnackMenu){
+        for(let f = 0; f <  this.listSnackMenu[sm].listBreakFast.length; f++){
+          if(food.id === this.listSnackMenu[sm].listBreakFast[f].id){
+            this.listSnackMenu[sm].listBreakFast[f].idFood = food.idFood;
+            this.listSnackMenu[sm].listBreakFast[f].amount = food.amount;
+            this.listSnackMenu[sm].listBreakFast[f].calories = food.calories;
+            this.listSnackMenu[sm].listBreakFast[f].protein = food.protein;
+            this.listSnackMenu[sm].listBreakFast[f].lipids = food.lipids;
+            this.listSnackMenu[sm].listBreakFast[f].carbohydrate = food.carbohydrate;
+            break;
+          }
+        }
+      }
+    }
+
+    this.setTotalFoodMenu();
+  }
+
+  setTotalFoodMenu() {
+    this.resetSum();
+    debugger;
+    for(let sm = 0; sm < this.listSnackMenu.length; sm++){
+      this.listSnackMenu[sm].listBreakFast.forEach(a => this.caloriesSum += a.calories);
+      this.listSnackMenu[sm].listBreakFast.forEach(b => this.proteinSum += b.protein);
+      this.listSnackMenu[sm].listBreakFast.forEach(c => this.lipidsSum += c.lipids);
+      this.listSnackMenu[sm].listBreakFast.forEach(d => this.carbohydrateSum += d.carbohydrate);
+    }
+  }
+
+  resetSum(){
+    this.caloriesSum = 0;
+    this.proteinSum = 0;
+    this.carbohydrateSum = 0;
+    this.lipidsSum = 0;
   }
 
   

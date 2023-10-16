@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { ConstService } from '../shared/const.service';
 import { Table } from 'src/app/model/table/table';
-import { Snack } from 'src/app/model/snack/snak';
+import { Snack } from 'src/app/model/snack/snack';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

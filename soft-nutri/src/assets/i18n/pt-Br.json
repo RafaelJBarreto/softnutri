@@ -154,7 +154,7 @@
         "PERSON_ADDRESS": "Endereço",
         "PERSON_GENDER": "Sexo* :",
         "PERSON_MALE": "Masculino",
-        "PERSON_FEMINISM": "Feminimo",
+        "PERSON_FEMINISM": "Feminino",
         "PERSON_CELULAR": "Celular",
         "PERSON_CELULAR2": "Celular auxiliar",
         "PERSON_DELETE": "Erro ao tentar remover pessoa"
@@ -229,5 +229,8 @@
         "SNACK": "refeição",
         "NAME": "Nome",
         "DESCRIPTION": "Descrição"
+    },
+    "MENU_FOOD": {
+        "TOTAL": "Total:"
     }
 }

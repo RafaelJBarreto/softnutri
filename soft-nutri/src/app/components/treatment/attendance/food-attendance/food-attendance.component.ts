@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { map, Observable, startWith } from 'rxjs';
-import { Food, FoodBunch } from 'src/app/model';
+import { FoodBunch } from 'src/app/model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 import { MatOption } from '@angular/material/core';
-import { Table } from 'src/app/model/table/table';
+import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
 
 @Component({
   selector: 'app-food-attendance',
@@ -21,6 +21,10 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
   foods: FoodBunch[] = [];
   foodSelected: FoodBunch = new FoodBunch;
   @Input() idTable!: number;
+  @Input() foodMenu!: FoodMenu;
+  @Output() changedFoodMenu = new EventEmitter<FoodMenu>();
+  @Output() changedTotal = new EventEmitter<FoodMenu>();
+  foodMenuChanged!: FoodMenu;
 
   constructor(
     public service: FoodBunchService,
@@ -46,7 +50,7 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
       lipids: new UntypedFormControl('', [Validators.required]),
       carbohydrate: new UntypedFormControl('', [Validators.required])
     });
-
+    this.form.controls['amount'].disable();
     this.form.controls['calories'].disable();
     this.form.controls['protein'].disable();
     this.form.controls['lipids'].disable();
@@ -56,6 +60,7 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
 
   onFoodSelected(option: MatOption) {
     this.foodSelected = option.value;
+    this.form.controls['amount'].enable();
     this.form.controls['calories'].setValue(option.value.food.nutritionalData.calories);
     this.form.controls['protein'].setValue(option.value.food.nutritionalData.protein);
     this.form.controls['lipids'].setValue(option.value.food.nutritionalData.lipids);
@@ -63,7 +68,6 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
   }
 
   setCalories(): void{
-    debugger;
     let amount = this.form.controls['amount'].value;
     if(amount == null){
        this.form.controls['calories'].setValue(this.foodSelected.food.nutritionalData.calories);
@@ -75,6 +79,8 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
       this.form.controls['protein'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.protein / 100), 2));
       this.form.controls['lipids'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.lipids / 100), 2));
       this.form.controls['carbohydrate'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.carbohydrate / 100), 2));
+      this.changedTotal.emit(new FoodMenu(this.foodMenu.id, this.foodMenu.idSnackMenu, this.foodSelected.food.idFood, amount, this.form.controls['calories'].value, 
+                              this.form.controls['protein'].value, this.form.controls['lipids'].value, this.form.controls['carbohydrate'].value));
     }
   }
 
@@ -123,6 +129,10 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
     return this.foods.filter(
       option => option.food.description.toLowerCase().indexOf(filterValue) === 0 || this.translate.instant(option.bunch.description).toLowerCase().indexOf(filterValue) === 0
     );
+  }
+
+  deleteFood(food: FoodMenu) {
+    this.changedFoodMenu.emit(food);
   }
 
 }

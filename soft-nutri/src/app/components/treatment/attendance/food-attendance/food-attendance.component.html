@@ -23,27 +23,27 @@
           <mat-button matPrefix matTooltip="{{'FOOD.FOOD_CALORIES' | translate}}">
             <i class="fa-solid fa-circle-question"></i>
           </mat-button>
-            <input matInput type="text" formControlName="calories" readonly/>
+            <input matInput type="text" formControlName="calories" readonly *ngIf="true"/>
           </mat-form-field>
             <mat-form-field fxFlex="10%" appearance="outline">
               <mat-button matPrefix matTooltip="{{'FOOD.FOOD_PROTEIN' | translate}}">
                 <i class="fa-solid fa-circle-question"></i>
               </mat-button>
-                <input [disabled]="true" matInput type="text" formControlName="protein"/>
+                <input matInput type="text" formControlName="protein" readonly *ngIf="true"/>
               </mat-form-field>
               <mat-form-field fxFlex="10%" appearance="outline">
                 <mat-button matPrefix matTooltip="{{'FOOD.FOOD_LIPIDS' | translate}}">
                   <i class="fa-solid fa-circle-question"></i>
                 </mat-button>
-                <input [disabled]="true" matInput type="text" formControlName="lipids"/>
+                <input matInput type="text" formControlName="lipids" readonly *ngIf="true"/>
               </mat-form-field>
               <mat-form-field fxFlex="10%" appearance="outline">
                 <mat-button matPrefix matTooltip="{{'FOOD.FOOD_CARBOHYDRATE' | translate}}">
                   <i class="fa-solid fa-circle-question"></i>
                 </mat-button>
-                <input [disabled]="true" matInput type="text" formControlName="carbohydrate"/>
+                <input matInput type="text" formControlName="carbohydrate" readonly *ngIf="true"/>
               </mat-form-field>
-              <button mat-mini-fab class="style-button-remove" matTooltip="{{'MENU.REMOVE_FOOD_MENU' | translate}}">
+              <button mat-mini-fab class="style-button-remove" matTooltip="{{'MENU.REMOVE_FOOD_MENU' | translate}}" (click)="deleteFood(foodMenu)">
                 <i class="style-icon fa-solid fa-trash-arrow-up"></i>
               </button>
       </div>

@@ -10,7 +10,7 @@ import { ConstService } from 'src/app/services/shared/const.service';
 import { TableService } from 'src/app/services/table/table.service';
 import { TableDeleteComponent } from '../table/table-delete/table-delete.component';
 import { SnackService } from 'src/app/services/snack/snack.service';
-import { Snack } from 'src/app/model/snack/snak';
+import { Snack } from 'src/app/model/snack/snack';
 import { SnackDeleteComponent } from './snack-delete/snack-delete.component';
 
 @Component({
@@ -45,6 +45,7 @@ export class SnackComponent implements OnInit {
       next: data => {
         this.snack = data;
         this.dataSource = new MatTableDataSource(this.snack);
+        this.dataSource.paginator = this.paginator;
       },
       error: err => {
         this.errorMessage = err.message;

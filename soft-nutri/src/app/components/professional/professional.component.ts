@@ -45,6 +45,7 @@ export class ProfessionalComponent implements OnInit {
       next: data => {
         this.person = data;
         this.dataSource = new MatTableDataSource(this.person);
+        this.dataSource.paginator = this.paginator;
       },
       error: err => {
         this.errorMessage = err.message;

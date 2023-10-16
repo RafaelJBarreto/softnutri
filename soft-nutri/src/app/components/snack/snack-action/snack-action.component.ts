@@ -6,7 +6,7 @@ import { Table } from 'src/app/model/table/table';
 import { ConstService } from 'src/app/services/shared/const.service';
 import { TableService } from 'src/app/services/table/table.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Snack } from 'src/app/model/snack/snak';
+import { Snack } from 'src/app/model/snack/snack';
 import { SnackService } from 'src/app/services/snack/snack.service';
 
 @Component({

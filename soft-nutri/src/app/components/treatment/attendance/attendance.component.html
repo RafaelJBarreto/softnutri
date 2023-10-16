@@ -21,11 +21,11 @@
 </div>
 </mat-card-content>
 
-  <div fxLayout="row" *ngFor="let sm of listSnackMenu track by $">
+  <div fxLayout="row" *ngFor="let sm of listSnackMenu">
     <mat-card fxFlex="100%">
       <mat-card-content >
         <div>
-          <mat-chip-listbox fxFlex="95%"  *ngFor="let s of sm.listSnackMenu track by $">
+          <mat-chip-listbox fxFlex="95%"  *ngFor="let s of sm.listSnackMenu">
             <mat-chip-option fxFlex="85%" selected="{{s.selected}}" value="{{s.idSnack}}" (click)="selectedSnack(s.idSnack, sm.idSnackMenu)" >{{s.name}}</mat-chip-option>
           </mat-chip-listbox>
             <button mat-mini-fab class="style-button-remove" matTooltip="{{'MENU.REMOVE_SNACK_MENU' | translate}}" (click)="removeSnackMenu(sm.idSnackMenu)">
@@ -33,16 +33,22 @@
             </button>
         </div>
         <div class="margin-food">
-          <button mat-mini-fab matTooltip="{{'MENU.ADD_FOOD' | translate}}" class="style-button" [disabled]="sm.listBreakFast.length == 0" (click)="setFoodBreakFast(sm.idSnackMenu)">
+          <button mat-mini-fab matTooltip="{{'MENU.ADD_FOOD' | translate}}" class="style-button" (click)="setFoodBreakFast(sm.idSnackMenu)">
             <i class="style-icon fa-solid fa-utensils"></i>
           </button>
       </div>
         <div *ngFor="let o of sm.listBreakFast">
-          <app-food-attendance [idTable]="idTable"></app-food-attendance>
+          <app-food-attendance [idTable]="idTable" [foodMenu]="o" (changedFoodMenu)="deleteFoodMenu($event)" (changedTotal)="totalFoodMenu($event)"></app-food-attendance>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
+  <mat-card *ngIf="loadingFoods" fxLayout="row" fxFlex="100%" style="height: 25px; margin-top: 10px; text-align: center;">
+      <span fxFlex="25%"><b>{{'FOOD.FOOD_CALORIES' | translate}} : {{caloriesSum | number}} </b></span>
+      <span fxFlex="25%"><b>{{'FOOD.FOOD_PROTEIN' | translate}} : {{proteinSum | number}}</b></span>
+      <span fxFlex="25%"><b>{{'FOOD.FOOD_LIPIDS' | translate}} : {{lipidsSum | number}}</b></span>
+      <span fxFlex="25%"><b>{{'FOOD.FOOD_CARBOHYDRATE' | translate}} : {{carbohydrateSum | number}}</b></span>
+  </mat-card>
   </mat-card-content>
 </mat-card>
 
