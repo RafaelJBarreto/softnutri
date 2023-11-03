@@ -1,6 +1,7 @@
 package br.com.softnutri.util;
 
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -8,6 +9,8 @@ import java.util.function.Predicate;
 import br.com.softnutri.domain.PersonPaper;
 
 public class Util {
+	
+	private static final String ROLE = "ROLE_";
 
 	public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
 		Map<Object, Boolean> seen = new ConcurrentHashMap<>();
@@ -49,21 +52,33 @@ public class Util {
 	public static String getRole(PersonPaper paper) {
 		StringBuilder permissoes = new StringBuilder();
 		if(paper.getGet() == 1) {
-			permissoes.append("ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_GET");
+			permissoes.append(ROLE + paper.getPaper().getDescription().toUpperCase() + "_GET");
 		}
 		
 		if(paper.getPost() == 1) {
-			permissoes.append(", ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_POST");
+			permissoes.append(", " + ROLE + paper.getPaper().getDescription().toUpperCase() + "_POST");
 		}
 		
 		if(paper.getPut() == 1) {
-			permissoes.append(", ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_PUT");
+			permissoes.append(", " + ROLE + paper.getPaper().getDescription().toUpperCase() + "_PUT");
 		}
 		
 		if(paper.getDelete() == 1) {
-			permissoes.append(", ROLE_" + paper.getPaper().getDescription().toUpperCase() + "_DELETE");
+			permissoes.append(", " + ROLE + paper.getPaper().getDescription().toUpperCase() + "_DELETE");
 		}
 		
 		return permissoes.toString();
+	}
+	
+	public static String[] separateRoles(String roles) {
+		StringTokenizer tokenizer = new StringTokenizer(roles, ",");
+        int tokenCount = tokenizer.countTokens();
+        String[] stringArray = new String[tokenCount];
+
+        for (int i = 0; i < tokenCount; i++) {
+            stringArray[i] = tokenizer.nextToken();
+        }
+        
+        return stringArray;
 	}
 }

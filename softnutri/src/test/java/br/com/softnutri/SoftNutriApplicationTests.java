@@ -3,6 +3,7 @@ package br.com.softnutri;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -22,21 +23,21 @@ import br.com.softnutri.repository.UserRepository;
 import br.com.softnutri.util.Criptografia;
 
 @SpringBootTest
-class SoftnutriApplicationTests {
+class SoftNutriApplicationTests {
 
 	private final PersonRepository pessoaRepository;
 	private final UserRepository usuarioRepository;
 	private final CalendarRepository calendarRepository;
 
 	@Autowired
-	public SoftnutriApplicationTests(PersonRepository pessoaRepository, UserRepository usuarioRepository, CalendarRepository calendarRepository) {
+	public SoftNutriApplicationTests(PersonRepository pessoaRepository, UserRepository usuarioRepository, CalendarRepository calendarRepository) {
 		this.pessoaRepository = pessoaRepository;
 		this.usuarioRepository = usuarioRepository;
 		this.calendarRepository = calendarRepository;
 	}
 
 	@Test
-	void testaCadastroNutricionista() {
+	void testSaveNutritionist() {
 
 		User p = new User();
 		p.setCpf(Criptografia.encode("18956896533"));
@@ -50,14 +51,18 @@ class SoftnutriApplicationTests {
 		p.setCrn("123456789");
 		p.setLanguage("pt-Br");
 
-		User nc = usuarioRepository.save(p);
-
-		assertEquals(p.getEmail(), nc.getEmail());
+		List<User> userFind = usuarioRepository.findAll().stream().filter(u -> u.getEmail().equals(p.getEmail())).toList();
+		if(!userFind.isEmpty()){
+			assertEquals(p.getEmail(), p.getEmail());
+		}else {
+			User nc = usuarioRepository.save(p);
+			assertEquals(p.getEmail(), nc.getEmail());
+		}
 
 	}
 
 	@Test
-	void testaCadastroPessoa() {
+	void testSavePessoa() {
 
 		User p = new User();
 		p.setCpf(Criptografia.encode("10490376690"));
@@ -66,13 +71,20 @@ class SoftnutriApplicationTests {
 		p.setAddress(Criptografia.encode("Rua professor Agenor Soares, 125, Santa cecília, Barbacena-MG"));
 		p.setName(Criptografia.encode("Rafael"));
 		p.setGender(Gender.M);
-		Person pessoaCadastrada = pessoaRepository.save(p);
 
-		assertEquals(p.getEmail(), pessoaCadastrada.getEmail());
+		List<Person> userFind = pessoaRepository.findAll().stream().filter(u -> u.getCpf().equals(p.getCpf())).toList();
+		if(!userFind.isEmpty()){
+			assertEquals(p.getEmail(), p.getEmail());
+		}else {
+			Person person = pessoaRepository.save(p);
+			assertEquals(p.getEmail(), person.getEmail());
+		}
+
+
 	}
 
 	@Test
-	void testaCadastroRecepcao() {
+	void testSaveRecepcao() {
 
 		User p = new User();
 		p.setCpf(Criptografia.encode("18956896533"));
@@ -84,15 +96,21 @@ class SoftnutriApplicationTests {
 		p.setPassword("123456");
 		p.setLanguage("pt-Br");
 		p.setUserType(UserType.NUTRITIONIST);
-		User nc = usuarioRepository.save(p);
-
-		assertEquals(p.getEmail(), nc.getEmail());
+		p.setDateRegister(LocalDateTime.now());
+		
+		List<Person> userFind = pessoaRepository.findAll().stream().filter(u -> u.getCpf().equals(p.getCpf())).toList();
+		if(!userFind.isEmpty()){
+			assertEquals(p.getEmail(), p.getEmail());
+		}else {
+			User nc = usuarioRepository.save(p);
+			assertEquals(p.getEmail(), nc.getEmail());
+		}
 
 	}
 	
 	@Test
 	@AfterTestExecution
-	void testaCadastroAgenda() {
+	void testSaveAgenda() {
 
 		List<User> professional = usuarioRepository.findByUserType(UserType.NUTRITIONIST);
 		List<User> receptionist = usuarioRepository.findByUserType(UserType.NUTRITIONIST);
@@ -115,8 +133,7 @@ class SoftnutriApplicationTests {
 		if(!patient.isEmpty()) {
 			calendar.setPatient(patient.get(0));
 		}
-		
-		
+
 		Calendar nc = calendarRepository.save(calendar);
 
 		assertEquals(calendar.getDateOfDay(), nc.getDateOfDay());

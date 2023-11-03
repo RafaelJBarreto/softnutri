@@ -32,7 +32,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Person {
+public class Person {
 
 	@Id
 	@Column
