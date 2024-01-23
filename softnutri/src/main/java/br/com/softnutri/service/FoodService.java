@@ -30,7 +30,7 @@ public class FoodService {
 			this.foodRepository.save(
 					
 					Food.builder().idFood(foodDTO.getIdFood()).description(foodDTO.getDescription()).descriptionPreparation(foodDTO.getDescriptionPreparation()).
-					compositionTable(CompositionTable.builder().idCompositionTable(foodDTO.getCompositionTable().getIdCompositionTable()).build()).
+					compositionTable(CompositionTable.builder().idCompositionTable(foodDTO.getCompositionTable().idCompositionTable()).build()).
 					nutritionalData(NutritionalData.builder().calories(foodDTO.getNutritionalData().getCalories()).carbohydrate(foodDTO.getNutritionalData().getCarbohydrate()).
 							lipids(foodDTO.getNutritionalData().getLipids()).protein(foodDTO.getNutritionalData().getProtein()).build()).build()
 					

@@ -39,6 +39,7 @@ export class TableComponent implements OnInit {
   }
 
   private listData() {
+    debugger;
     this.service.listAll().subscribe({
       next: data => {
         this.table = data;

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.CompositionTable;
-import br.com.softnutri.dto.CompositionTableDTO;
 import br.com.softnutri.exception.SoftNutriException;
+import br.com.softnutri.record.CompositionTableRecord;
 import br.com.softnutri.repository.TableRepository;
 
 @Service
@@ -23,10 +23,10 @@ public class TableService {
 		this.tableRepository = tableRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(CompositionTableDTO compositionTableDTO) throws SoftNutriException { 
+	public ResponseEntity<MessageResponse> save(CompositionTableRecord ctr) throws SoftNutriException { 
 		try {
 			this.tableRepository.save(
-					CompositionTable.builder().idCompositionTable(compositionTableDTO.getIdCompositionTable()).name(compositionTableDTO.getName()).description(compositionTableDTO.getDescription()).build()
+					CompositionTable.builder().idCompositionTable(ctr.idCompositionTable()).name(ctr.name()).description(ctr.description()).build()
 			);
 			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 		}catch (Exception e) {
@@ -34,19 +34,19 @@ public class TableService {
 		}
 	}
 	
-	public ResponseEntity<List<CompositionTableDTO>> listAll() throws SoftNutriException { 
+	public ResponseEntity<List<CompositionTableRecord>> listAll() throws SoftNutriException { 
 		try {
-			return ResponseEntity.ok(CompositionTableDTO.converter(this.tableRepository.findAll()));
+			return ResponseEntity.ok(this.tableRepository.findAll().stream().map(obj -> new CompositionTableRecord(obj.getIdCompositionTable(), obj.getName(), obj.getDescription())).toList());
 		}catch (Exception e) {
 			throw new SoftNutriException("Error list all CompositionTable " + e.getMessage(), e);
 		}
 	}
 	
-	public CompositionTableDTO get(Long idCompositionTable) throws SoftNutriException{
+	public CompositionTableRecord get(Long idCompositionTable) throws SoftNutriException{
 		try {
 			Optional<CompositionTable> ct = this.tableRepository.findById(idCompositionTable);
 			if (ct.isPresent()) {
-				return CompositionTableDTO.converter(ct.get());
+				return new CompositionTableRecord(ct.get().getIdCompositionTable(), ct.get().getName(), ct.get().getDescription());
 			} else {
 				return null;
 			}

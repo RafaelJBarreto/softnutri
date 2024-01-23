@@ -29,7 +29,7 @@ public class FoodBunchService {
 	public ResponseEntity<MessageResponse> save(FoodBunchDTO foodBunchDTO) throws SoftNutriException { 
 		try {
 			List<FoodBunch> getAllFoodBunch = this.foodBunchRepository.findAll();
-			Bunch bunch = Bunch.builder().idBunch(foodBunchDTO.getBunch().getIdBunch()).description(foodBunchDTO.getBunch().getDescription()).build();
+			Bunch bunch = Bunch.builder().idBunch(foodBunchDTO.getBunch().idBunch()).description(foodBunchDTO.getBunch().description()).build();
 			
 			for(FoodDTO foodDTO: foodBunchDTO.getFoods()) {
 				Food food = Food.builder().idFood(foodDTO.getIdFood()).build();

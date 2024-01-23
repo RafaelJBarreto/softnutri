@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.softnutri.domain.Food;
 import br.com.softnutri.interfaces.FoodBunchReturn;
+import br.com.softnutri.record.CompositionTableRecord;
 import lombok.Data;
 
 @Data
@@ -12,7 +13,7 @@ public class FoodDTO {
 	private Long idFood;
 	private String description;
 	private String descriptionPreparation;
-	private CompositionTableDTO compositionTable;
+	private CompositionTableRecord compositionTable;
 	private NutritionalDataDTO nutritionalData;
 
 	public FoodDTO() {
@@ -27,7 +28,7 @@ public class FoodDTO {
 		this.nutritionalData.setCarbohydrate(foodBunch.getCarbohydrate());
 		this.nutritionalData.setLipids(foodBunch.getLipids());
 		this.nutritionalData.setProtein(foodBunch.getProtein());
-		this.compositionTable = new CompositionTableDTO (foodBunch.getIdCompositionTable(), foodBunch.getNameTable(), foodBunch.getDescriptionTable());
+		this.compositionTable = new CompositionTableRecord (foodBunch.getIdCompositionTable(), foodBunch.getNameTable(), foodBunch.getDescriptionTable());
 	}
 	
 	public FoodDTO(Food food) {
