@@ -182,7 +182,14 @@
         "CALENDAR_NEW": "Novo Agendamento",
         "CALENDAR_CANCEL_": "Cancelar agendamento",
         "MSG_CANCEL": "Agenda cancelada com sucesso!",
-        "CALENDAR_CANCEL_ERROR": "Erro ao tentar cancelar agendamento"
+        "CALENDAR_CANCEL_ERROR": "Erro ao tentar cancelar agendamento",
+        "MONTH": "Mês",
+        "WEEK": "Semana",
+        "DAY": "Dia",
+        "PREVIOUS": "Voltar",
+        "TODAY": "Hoje",
+        "NEXT": "Próximo"
+
     },
     "INTERVAL":{
         "INTERVAL_CALENDAR": "Intervalo entre agendas",

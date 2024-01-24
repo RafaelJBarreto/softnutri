@@ -56,7 +56,6 @@ import { CalendaractionComponent } from './calendar/calendaraction/calendaractio
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { TimeCalendarComponent } from './calendar/time-calendar/time-calendar.component';
 import { CancelCalendarComponent } from './calendar/cancel-calendar/cancel-calendar.component';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -75,7 +74,9 @@ import { SnackActionComponent } from './snack/snack-action/snack-action.componen
 import { SnackDeleteComponent } from './snack/snack-delete/snack-delete.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -123,6 +124,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       isolate: true,
       defaultLanguage: 'pt-BR'
     }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     MatIconModule,
     RouterModule,
     MatButtonModule,
@@ -162,12 +167,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     NgxMatTimepickerModule,
     MatSlideToggleModule,
-    FlexLayoutModule,
     MatExpansionModule, 
     MatButtonToggleModule,
     MatTabsModule,
     MatChipsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    FlexLayoutModule
   ],
   exports: [
     SidebarComponent,

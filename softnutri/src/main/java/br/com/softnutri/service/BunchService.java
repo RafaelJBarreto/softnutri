@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Bunch;
-import br.com.softnutri.dto.BunchDTO;
 import br.com.softnutri.exception.SoftNutriException;
+import br.com.softnutri.record.BunchRecord;
 import br.com.softnutri.repository.BunchRepository;
 
 @Service
@@ -23,10 +23,10 @@ public class BunchService {
 		this.bunchRepository = bunchRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(BunchDTO groupDTO) throws SoftNutriException{ 
+	public ResponseEntity<MessageResponse> save(BunchRecord br) throws SoftNutriException{ 
 		try {
 			this.bunchRepository.save(
-					Bunch.builder().idBunch(groupDTO.getIdBunch()).description(groupDTO.getDescription()).build()
+					Bunch.builder().idBunch(br.idBunch()).description(br.description()).build()
 			);
 			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 		}catch (Exception e) {
@@ -34,9 +34,9 @@ public class BunchService {
 		}
 	}
 	
-	public ResponseEntity<List<BunchDTO>> listAll() throws SoftNutriException { 
+	public ResponseEntity<List<BunchRecord>> listAll() throws SoftNutriException { 
 		try {
-			return ResponseEntity.ok(BunchDTO.converter(this.bunchRepository.findAll()));
+			return ResponseEntity.ok(this.bunchRepository.findAll().stream().map(obj -> new BunchRecord(obj.getIdBunch(), obj.getDescription())).toList());
 		}catch (Exception e) {
 			throw new SoftNutriException("Error list all Bunch ", e);
 		}

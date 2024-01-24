@@ -37,6 +37,7 @@ export class AuthPageComponent {
         this.router.navigate([this.global.redirect.HOME]).then();
       },
       error: err => {
+        debugger;
         this.errorMessage = err.message;
         this.snackBar.open('Login ou senha inválido', '', {
           horizontalPosition: 'right',

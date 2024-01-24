@@ -11,12 +11,13 @@ import { ConstService } from './services/shared/const.service';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PaginatorI18n } from './services/shared/paginators/paginatorI18n';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { ComponentsModule } from './components/components.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DataFoodService } from './services/food/dataFood.service';
 import { Update } from './services/shared/updated/updated.service';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { ComponentsModule } from './components/components.module';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -54,8 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
+    FontAwesomeModule,
     ComponentsModule,
-    FontAwesomeModule
   ],
   providers: [authInterceptorProviders, ConstService, DataFoodService, Update,
     {

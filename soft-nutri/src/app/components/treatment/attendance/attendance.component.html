@@ -15,7 +15,7 @@
   </mat-form-field>
 </div>
 <div class="div-center" fxFlex="100%"> 
-  <button *ngIf="loadingFoods" mat-mini-fab  matTooltip="{{'MENU.ADD_SNACK_MENU' | translate}}" class="style-button" (click)="setSnackMenu()">
+  <button *ngIf="loadingFoods" mat-mini-fab  matTooltip="{{'MENU.ADD_SNACK_MENU' | translate}}" [disabled]="listSnackMenu.length === snacks.length" class="style-button" (click)="setSnackMenu()">
     <i class="style-icon fa-solid fa-plus"></i>
   </button>
 </div>

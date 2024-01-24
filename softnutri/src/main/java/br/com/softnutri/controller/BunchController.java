@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.dto.BunchDTO;
 import br.com.softnutri.exception.SoftNutriException;
+import br.com.softnutri.record.BunchRecord;
 import br.com.softnutri.service.BunchService;
 
 @RestController
@@ -27,12 +27,12 @@ public class BunchController {
 	private BunchService bunchService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody BunchDTO dto) throws SoftNutriException {
-		return this.bunchService.save(dto);
+	public ResponseEntity<MessageResponse> saveData(@RequestBody BunchRecord br) throws SoftNutriException {
+		return this.bunchService.save(br);
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<BunchDTO>> findAll() throws SoftNutriException{
+	public ResponseEntity<List<BunchRecord>> findAll() throws SoftNutriException{
 		return this.bunchService.listAll(); 
 	}
 	
