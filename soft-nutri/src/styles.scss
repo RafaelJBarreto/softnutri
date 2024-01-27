@@ -497,3 +497,15 @@ button {
   flex: initial !important;
 }
 
+
+.cal-event-actions{
+  float: right;
+  color: white;
+  font-size: 13px;
+}
+
+.cal-month-view .cal-draggable {
+  cursor: move;
+  display: flow-root;
+  color: white;
+}

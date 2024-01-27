@@ -1,5 +1,7 @@
 package br.com.softnutri.util;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
@@ -80,5 +82,10 @@ public class Util {
         }
         
         return stringArray;
+	}
+	
+	
+	public static float convertHour(LocalTime hour) {
+		return hour.get(ChronoField.MINUTE_OF_DAY) / 60f;
 	}
 }

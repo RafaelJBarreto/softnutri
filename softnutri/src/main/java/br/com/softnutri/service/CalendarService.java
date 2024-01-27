@@ -1,6 +1,8 @@
 package br.com.softnutri.service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,9 +12,13 @@ import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Calendar;
+import br.com.softnutri.domain.Phone;
 import br.com.softnutri.dto.CalendarDTO;
 import br.com.softnutri.exception.SoftNutriException;
+import br.com.softnutri.record.CalendarEvent;
 import br.com.softnutri.repository.CalendarRepository;
+import br.com.softnutri.util.Criptografia;
+import br.com.softnutri.util.Util;
 
 @Service
 public class CalendarService {
@@ -34,9 +40,10 @@ public class CalendarService {
 		}
 	}
 	
-	public ResponseEntity<List<CalendarDTO>> listAll() throws SoftNutriException { 
+	public ResponseEntity<List<CalendarEvent>> listAll() throws SoftNutriException { 
 		try {
-			return ResponseEntity.ok(CalendarDTO.converter(this.calendarRepository.findAll()));
+			return ResponseEntity.ok(this.calendarRepository.findAll().stream().map(obj -> new CalendarEvent(obj.getIdCalendar(), Date.from(obj.getDateOfDay().atStartOfDay().atZone(ZoneId.systemDefault()) .toInstant()), 
+					Util.convertHour(obj.getHourOfDay()), this.getTitle(obj), obj.isCancel(), obj.isCompleted(), null, true)).toList());
 		} catch (Exception e) {
 			throw new SoftNutriException("Error list all Calendar ", e);
 		}
@@ -77,5 +84,14 @@ public class CalendarService {
 		} catch (Exception e) {
 			throw new SoftNutriException("Error findCalendarProfessional ", e);
 		}
+	}
+	
+	private String getTitle(Calendar calendar) {
+		StringBuilder title = new StringBuilder();
+		title.append(Criptografia.decode(calendar.getPatient().getName()) + " - " + Criptografia.decode(calendar.getPatient().getEmail()));
+		for(Phone p: calendar.getPatient().getPhones()) {
+			title.append(" - " + Criptografia.decode(p.getNumber()));
+		}
+		return title.toString();
 	}
 }

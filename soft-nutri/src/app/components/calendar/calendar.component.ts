@@ -12,23 +12,7 @@ import { TimeCalendarComponent } from './time-calendar/time-calendar.component';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays } from 'date-fns';
-import { EventColor } from 'calendar-utils';
 import { Router } from '@angular/router';
-
-const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
 
 @Component({
   selector: 'app-calendar',
@@ -44,6 +28,7 @@ export class CalendarComponent implements OnInit {
   displayedColumns: string[] = ['professional', 'patient', 'dateOfDay', 'hourOfDay', 'note', 'completed', 'cancel', 'actions'];
   dataSource!: MatTableDataSource<Calendar>;
   calendar: Calendar[] = [];
+  events: CalendarEvent[]= [];
   errorMessage: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -70,10 +55,14 @@ export class CalendarComponent implements OnInit {
   private listData() {
     this.service.listAll().subscribe({
       next: data => {
-        this.calendar = data;
-        this.dataSource = new MatTableDataSource(this.calendar);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+        this.events = [];
+        for(let i = 0; i < data.length; i++){
+          data[i].actions = this.actions;
+          let date = startOfDay(data[i].start);
+          data[i].start = addHours(date, data[i].end);
+          data[i].end = addHours(data[i].start, 1),
+          this.events.push(data[i]);
+        }
       },
       error: err => {
         this.errorMessage = err.message;
@@ -86,6 +75,7 @@ export class CalendarComponent implements OnInit {
       }
     });
   }
+
 
   private customFilterPredicate(data: Calendar, filter: string): boolean {
     return data.professional.name.toLowerCase().includes(filter)
@@ -126,64 +116,22 @@ export class CalendarComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      label: '<i class="fa-solid fa-pen-to-square" style="color: white;"></i>',
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.edit(event.id);
       },
     },
     {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      label: '<i class="fa-solid fa-trash" style="color: white;"></i>',
       a11yLabel: 'Delete',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.cancelCalendar(event.id);
       },
     },
   ];
 
   refresh = new Subject<void>();
-
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
 
   activeDayIsOpen: boolean = true;
 
@@ -220,30 +168,10 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    //this.modalData = { event, action };
+      //this.modalData = { event, action };
    // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
 
   setView(view: CalendarView) {
     this.view = view;
