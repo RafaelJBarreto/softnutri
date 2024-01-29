@@ -77,6 +77,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarDraggableComponent } from './calendar/calendar-draggable/calendar-draggable.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -116,7 +117,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TableDeleteComponent,
     SnackComponent,
     SnackActionComponent,
-    SnackDeleteComponent],
+    SnackDeleteComponent,
+    CalendarDraggableComponent]
+    ,
   imports: [
     MatListModule,
     TranslateModule.forRoot({

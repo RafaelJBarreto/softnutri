@@ -146,7 +146,7 @@ export class ConstService implements OnChanges{
             get: e.rota + "calendar/get/",
             calendaraction: "/calendaraction",
             cancel: e.rota + "calendar/cancel/",
-            professional: e.rota + "calendar/professional",
+            professional: e.rota + "calendar/professional"
         },
         intermission:{
             save: e.rota + "intermission/save",

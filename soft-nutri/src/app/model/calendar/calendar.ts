@@ -1,8 +1,7 @@
-import { Time } from "@angular/common";
 import { User } from "../user/user";
 
 export class Calendar {
-    idCalendar!: number;
+    idCalendar!: any;
     professional: User = new User;
     patient: User = new User;
     dateOfDay!: Date;

@@ -11,8 +11,10 @@ import { CancelCalendarComponent } from './cancel-calendar/cancel-calendar.compo
 import { TimeCalendarComponent } from './time-calendar/time-calendar.component';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { Subject } from 'rxjs';
-import { addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays } from 'date-fns';
+import { addDays, addHours, isSameDay, isSameMonth, startOfDay, subDays } from 'date-fns';
 import { Router } from '@angular/router';
+import { CalendarSend } from 'src/app/model/calendar/calendarSend';
+import { CalendarDraggableComponent } from './calendar-draggable/calendar-draggable.component';
 
 @Component({
   selector: 'app-calendar',
@@ -156,20 +158,24 @@ export class CalendarComponent implements OnInit {
   }: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
+        event.start = newStart;
+        event.end = newEnd
+        this.handleEvent('Dropped or resized', event);
       }
+
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-      //this.modalData = { event, action };
-   // this.modal.open(this.modalContent, { size: 'lg' });
+    const dialogRef = this.dialog.open(CalendarDraggableComponent, {
+      width: '800px',
+      data: { calendarEvent: event },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.listData();
+    });
   }
 
 

@@ -18,8 +18,13 @@ import { Update } from './services/shared/updated/updated.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
 import { ComponentsModule } from './components/components.module';
+/* Importando a configuração de algumas linguagens */
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+import localeES from '@angular/common/locales/es';
+registerLocaleData(localePT);
+registerLocaleData(localeES);
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {

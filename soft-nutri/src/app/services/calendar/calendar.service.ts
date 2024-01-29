@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ConstService } from '../shared/const.service';
-import { User } from 'src/app/model/user/user';
 import { Calendar } from 'src/app/model/calendar/calendar';
+import { CalendarSend} from 'src/app/model/calendar/calendarSend';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

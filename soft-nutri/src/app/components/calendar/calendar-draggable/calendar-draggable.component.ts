@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,14 +13,16 @@ import { ProfessionalService } from 'src/app/services/professional/professional.
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { MatOption } from '@angular/material/core';
 import * as moment from 'moment';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CalendarEvent } from 'angular-calendar';
 
 @Component({
-  selector: 'app-calendaraction',
-  templateUrl: './calendaraction.component.html',
-  styleUrls: ['./calendaraction.component.scss']
+  selector: 'app-calendar-draggable',
+  templateUrl: './calendar-draggable.component.html',
+  styleUrl: './calendar-draggable.component.scss'
 })
-export class CalendaractionComponent implements OnInit {
-  
+export class CalendarDraggableComponent {
+
   public back: any;
   public form!: UntypedFormGroup;
   user: User = new User;
@@ -38,23 +40,28 @@ export class CalendaractionComponent implements OnInit {
   time: any;
 
   constructor(
-    private activatedroute: ActivatedRoute,
+    @Optional() public dialogRef: MatDialogRef<CalendarDraggableComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public event: any,
     public service: PersonService,
     public serviceCalendar: CalendarService,
     public professionalService: ProfessionalService,
     public translate: TranslateService,
-    private snackBar: MatSnackBar,
-    private global: ConstService,
-    private router: Router
+    private snackBar: MatSnackBar
   ) {
-    this.back = this.global.rest.calendar.calendar
   }
 
   ngOnInit(): void {
-    this.validaForm(false);
-    this.edit();
+    this.getCalendar();
     this.listPatient();
     this.listNutritionist();
+    this.form = new UntypedFormGroup({
+      idCalendar: new UntypedFormControl(''),
+      cancel: new UntypedFormControl(''),
+      hourofday: new UntypedFormControl('',  [Validators.required]),
+      dateofday: new UntypedFormControl('',  [Validators.required]),
+      note: new UntypedFormControl('')
+
+    });
   }
 
   onProfessionalSelected(option: MatOption) {
@@ -89,11 +96,8 @@ export class CalendaractionComponent implements OnInit {
             verticalPosition: 'top',
             duration: 3000
           });
-          if (this.isEdit) {
-            this.router.navigate([this.back]);
-          } else {
-            this.clearForm();
-          }
+
+          this.dialogRef.close();
         },
         error: err => {
           this.errorMessage = err.message;
@@ -112,16 +116,12 @@ export class CalendaractionComponent implements OnInit {
       });
     }
   }
-  public edit(): void {
-    this.activatedroute.paramMap.subscribe(params => {
-      let id = params.get('id');
-      if (id === null) {
-        return;
-      }
-      this.serviceCalendar.get(id).subscribe({
+  public getCalendar(): void {
+    debugger;
+      this.serviceCalendar.get(this.event.calendarEvent.id).subscribe({
         next: data => {
           this.calendar = data;
-          this.validaForm(true);
+          this.validaForm();
         },
         error: err => {
           this.errorMessage = err.message;
@@ -132,31 +132,19 @@ export class CalendaractionComponent implements OnInit {
           });
         }
       });
-    });
   }
 
-  public validaForm(isEdit: boolean): void {
-    this.isEdit = isEdit;
-    if (!isEdit) {
-      this.form = new UntypedFormGroup({
-        idCalendar: new UntypedFormControl(''),
-        cancel: new UntypedFormControl(''),
-        hourofday: new UntypedFormControl('',  [Validators.required]),
-        dateofday: new UntypedFormControl('',  [Validators.required]),
-        note: new UntypedFormControl('')
-
-      });
-    } else {
-      this.form.controls['idCalendar'].setValue(this.calendar.idCalendar);
-      this.form.controls['dateofday'].setValue(this.calendar.dateOfDay);
-      this.form.controls['hourofday'].setValue(this.calendar.hourOfDay.toLocaleString().slice(0, -3));
+  public validaForm(): void {
+    this.form.controls['idCalendar'].setValue(this.calendar.idCalendar);
+      this.form.controls['dateofday'].setValue(this.event.calendarEvent.start);
+      console.log(moment(this.event.calendarEvent.start, "DD/MM/YYYY hh:mm:ss").format("HH:mm"));
+      this.form.controls['hourofday'].setValue(moment(this.event.calendarEvent.start, "DD/MM/YYYY hh:mm:ss").format("HH:mm"));
       this.form.controls['note'].setValue(this.calendar.note);
       this.form.controls['cancel'].setValue(this.calendar.cancel);
       this.patientSelected = this.calendar.patient;
       this.professional = this.calendar.professional;
       this.patientControl.setValue(this.patientSelected);
       this.nutritionistControl.setValue(this.calendar.professional);
-    }
   }
 
   public setObject(): void{
@@ -169,10 +157,6 @@ export class CalendaractionComponent implements OnInit {
     this.calendar.hourOfDayAux =  new Date(hourOfDay.getTime() - userTimezoneOffset);
     this.calendar.note = this.form.controls['note'].value; 
     this.calendar.cancel = this.form.controls['cancel'].value; 
-  }
-
-  public clearForm(): void{
-    this.form.reset();
   }
 
   private listPatient() {
@@ -245,7 +229,4 @@ export class CalendaractionComponent implements OnInit {
       option => option.name.toLowerCase().indexOf(filterValue) === 0
     );
   }
-
-  
-
 }
