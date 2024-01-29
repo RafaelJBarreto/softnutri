@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
 import { BunchService } from 'src/app/services/bunch/bunch.service';
 import { FoodService } from 'src/app/services/food/food.service';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
+
+import { Component, Inject, Optional } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-remove-dialog',

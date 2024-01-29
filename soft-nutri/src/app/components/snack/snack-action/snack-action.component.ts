@@ -1,13 +1,12 @@
+import { Snack } from 'src/app/model/snack/snack';
+import { ConstService } from 'src/app/services/shared/const.service';
+import { SnackService } from 'src/app/services/snack/snack.service';
+
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Table } from 'src/app/model/table/table';
-import { ConstService } from 'src/app/services/shared/const.service';
-import { TableService } from 'src/app/services/table/table.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Snack } from 'src/app/model/snack/snack';
-import { SnackService } from 'src/app/services/snack/snack.service';
 
 @Component({
   selector: 'app-snack-action',

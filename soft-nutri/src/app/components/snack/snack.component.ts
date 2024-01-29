@@ -1,3 +1,7 @@
+import { Snack } from 'src/app/model/snack/snack';
+import { ConstService } from 'src/app/services/shared/const.service';
+import { SnackService } from 'src/app/services/snack/snack.service';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -5,12 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Table } from 'src/app/model/table/table';
-import { ConstService } from 'src/app/services/shared/const.service';
-import { TableService } from 'src/app/services/table/table.service';
-import { TableDeleteComponent } from '../table/table-delete/table-delete.component';
-import { SnackService } from 'src/app/services/snack/snack.service';
-import { Snack } from 'src/app/model/snack/snack';
+
 import { SnackDeleteComponent } from './snack-delete/snack-delete.component';
 
 @Component({

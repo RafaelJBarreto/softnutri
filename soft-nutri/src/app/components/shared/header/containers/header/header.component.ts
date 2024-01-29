@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router'; 
 import { AuthService } from 'src/app/services';
 import { ConstService } from 'src/app/services/shared/const.service';
 
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',

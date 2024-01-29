@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+    CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView
+} from 'angular-calendar';
+import { addHours, isSameDay, isSameMonth, startOfDay } from 'date-fns';
+import { Subject } from 'rxjs';
+import { Calendar } from 'src/app/model/calendar/calendar';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { ConstService } from 'src/app/services/shared/const.service';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Calendar } from 'src/app/model/calendar/calendar';
-import { CalendarService } from 'src/app/services/calendar/calendar.service';
-import { ConstService } from 'src/app/services/shared/const.service';
+
+import { CalendarDraggableComponent } from './calendar-draggable/calendar-draggable.component';
 import { CancelCalendarComponent } from './cancel-calendar/cancel-calendar.component';
 import { TimeCalendarComponent } from './time-calendar/time-calendar.component';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-import { Subject } from 'rxjs';
-import { addDays, addHours, isSameDay, isSameMonth, startOfDay, subDays } from 'date-fns';
-import { Router } from '@angular/router';
-import { CalendarSend } from 'src/app/model/calendar/calendarSend';
-import { CalendarDraggableComponent } from './calendar-draggable/calendar-draggable.component';
 
 @Component({
   selector: 'app-calendar',

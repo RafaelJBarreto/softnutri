@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { Phone } from 'src/app/model/phone/phone';
 import { UserType } from 'src/app/model/shared/userType';
 import { User } from 'src/app/model/user/user';
 import { PersonService } from 'src/app/services';
 import { ConstService } from 'src/app/services/shared/const.service';
 
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-person-action',

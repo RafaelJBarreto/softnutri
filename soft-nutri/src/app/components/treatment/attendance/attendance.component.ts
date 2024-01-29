@@ -1,19 +1,19 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Table } from 'src/app/model/table/table';
-import { MatOption } from '@angular/material/core';
-import { TranslateService } from '@ngx-translate/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, startWith } from 'rxjs/operators';
-import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
-import { TableService } from 'src/app/services/table/table.service';
-import { SnackService } from 'src/app/services/snack/snack.service';
-import { Snack } from 'src/app/model/snack/snack';
 import * as _ from 'lodash';
-import { SnackMenu } from 'src/app/model/snackMenu/snackMenu';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Snack } from 'src/app/model/snack/snack';
 import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
+import { SnackMenu } from 'src/app/model/snackMenu/snackMenu';
+import { Table } from 'src/app/model/table/table';
+import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
+import { SnackService } from 'src/app/services/snack/snack.service';
+import { TableService } from 'src/app/services/table/table.service';
 
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-attendance',

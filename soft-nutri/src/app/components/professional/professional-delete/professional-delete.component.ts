@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProfessionalService } from 'src/app/services/professional/professional.service';
+
+import { Component, Inject, Optional } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { PersonService } from 'src/app/services';
-import { ProfessionalService } from 'src/app/services/professional/professional.service';
 
 @Component({
   selector: 'app-professional-delete',

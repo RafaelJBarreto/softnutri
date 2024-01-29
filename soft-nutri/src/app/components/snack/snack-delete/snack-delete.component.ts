@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TranslateService } from '@ngx-translate/core';
-import { TableService } from 'src/app/services/table/table.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackService } from 'src/app/services/snack/snack.service';
+
+import { Component, Inject, Optional } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-snack-delete',

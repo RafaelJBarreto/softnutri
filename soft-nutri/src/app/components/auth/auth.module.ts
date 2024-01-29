@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginFormComponent, SearchFormComponent } from './components';
-import { AuthPageComponent } from './containers/auth-page/auth-page.component'; 
+import { AuthPageComponent } from './containers/auth-page/auth-page.component';
 
 @NgModule({
   declarations: [

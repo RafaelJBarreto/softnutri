@@ -1,3 +1,8 @@
+import * as moment from 'moment';
+import { Calendar } from 'src/app/model/calendar/calendar';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { ConstService } from 'src/app/services/shared/const.service';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -5,10 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import { Calendar } from 'src/app/model/calendar/calendar';
-import { CalendarService } from 'src/app/services/calendar/calendar.service';
-import { ConstService } from 'src/app/services/shared/const.service';
 
 @Component({
   selector: 'app-calendar-professional',

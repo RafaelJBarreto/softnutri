@@ -1,3 +1,8 @@
+import { Phone } from 'src/app/model/phone/phone';
+import { User } from 'src/app/model/user/user';
+import { ProfessionalService } from 'src/app/services/professional/professional.service';
+import { ConstService } from 'src/app/services/shared/const.service';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -5,10 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Phone } from 'src/app/model/phone/phone';
-import { User } from 'src/app/model/user/user';
-import { ProfessionalService } from 'src/app/services/professional/professional.service';
-import { ConstService } from 'src/app/services/shared/const.service';
+
 import { PhoneDetailComponent } from '../phone-detail/phone-detail.component';
 import { ProfessionalDeleteComponent } from './professional-delete/professional-delete.component';
 

@@ -1,12 +1,15 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { map, Observable, startWith } from 'rxjs';
 import { FoodBunch } from 'src/app/model';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
-import { MatOption } from '@angular/material/core';
 import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
+import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
+
+import {
+    Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
+} from '@angular/core';
+import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-food-attendance',

@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
-import { FoodsComponent } from 'src/app/components/foods/foods.component';
 import { Bunch, Food, FoodBunch } from 'src/app/model';
 import { BunchService } from 'src/app/services/bunch/bunch.service';
 import { DataFoodService } from 'src/app/services/food/dataFood.service';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 import { Update } from 'src/app/services/shared/updated/updated.service';
+
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-food-group-association',

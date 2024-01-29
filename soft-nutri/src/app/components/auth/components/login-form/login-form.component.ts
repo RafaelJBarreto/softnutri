@@ -1,6 +1,7 @@
+import { SignIn } from 'src/app/model';
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { SignIn } from 'src/app/model';
 
 @Component({
   selector: 'app-login-form',

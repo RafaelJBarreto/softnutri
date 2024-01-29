@@ -1,20 +1,18 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/model/user/user';
-import { PersonService } from 'src/app/services';
-import { ConstService } from 'src/app/services/shared/const.service';
 import { map, startWith } from 'rxjs/operators';
 import { Calendar } from 'src/app/model/calendar/calendar';
-import { ProfessionalService } from 'src/app/services/professional/professional.service';
+import { User } from 'src/app/model/user/user';
+import { PersonService } from 'src/app/services';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { ProfessionalService } from 'src/app/services/professional/professional.service';
+
+import { Component, Inject, Optional } from '@angular/core';
+import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
-import * as moment from 'moment';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CalendarEvent } from 'angular-calendar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calendar-draggable',

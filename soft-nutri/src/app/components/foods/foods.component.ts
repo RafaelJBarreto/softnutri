@@ -1,20 +1,22 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Bunch, Food, FoodBunch } from 'src/app/model';
+import { DataFoodService } from 'src/app/services/food/dataFood.service';
+import { FoodService } from 'src/app/services/food/food.service';
+import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
+import { Update } from 'src/app/services/shared/updated/updated.service';
+
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
-import { Bunch, Food, FoodBunch } from 'src/app/model';
-import { FoodService } from 'src/app/services/food/food.service';
-import { FoodComponent } from '../dialog/form/food/food.component';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
+import { TranslateService } from '@ngx-translate/core';
+
 import { FoodGroupComponent } from '../dialog/form/food-group/food-group.component';
-import { DataFoodService } from 'src/app/services/food/dataFood.service';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
+import { FoodComponent } from '../dialog/form/food/food.component';
 import { RemoveDialogComponent } from '../dialog/form/remove-dialog/remove-dialog.component';
-import { Update } from 'src/app/services/shared/updated/updated.service';
 
 @Component({
   selector: 'app-foods',

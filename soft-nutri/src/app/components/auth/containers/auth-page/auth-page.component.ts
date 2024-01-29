@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { AuthService } from 'src/app/services/';
 import { MyErrorStateMatcher } from 'src/app/errors';
-import { JwtResponse } from 'src/app/model';
+import { AuthService } from 'src/app/services/';
 import { ConstService } from 'src/app/services/shared/const.service';
+
+import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-page',

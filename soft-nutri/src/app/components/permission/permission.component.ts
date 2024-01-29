@@ -1,16 +1,17 @@
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Paper } from 'src/app/model/permission/paper';
+import { Permission } from 'src/app/model/permission/permission';
+import { PersonPaper } from 'src/app/model/permission/personPaper';
+import { User } from 'src/app/model/user/user';
+import { PermissionService } from 'src/app/services/permission/permission.service';
+import { ProfessionalService } from 'src/app/services/professional/professional.service';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, UntypedFormGroup } from '@angular/forms';
-import { Observable} from 'rxjs';
-import { User } from 'src/app/model/user/user';
-import { map, startWith } from 'rxjs/operators';
-import { ProfessionalService } from 'src/app/services/professional/professional.service';
-import { TranslateService } from '@ngx-translate/core';
 import { MatOption } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PermissionService } from 'src/app/services/permission/permission.service';
-import { Permission } from 'src/app/model/permission/permission';
-import { Paper } from 'src/app/model/permission/paper';
-import { PersonPaper } from 'src/app/model/permission/personPaper';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-permission',
