@@ -188,7 +188,8 @@
         "DAY": "Dia",
         "PREVIOUS": "Voltar",
         "TODAY": "Hoje",
-        "NEXT": "Próximo"
+        "NEXT": "Próximo",
+        "UPDATE_CALENDAR":"Alterar agendamento"
 
     },
     "INTERVAL":{

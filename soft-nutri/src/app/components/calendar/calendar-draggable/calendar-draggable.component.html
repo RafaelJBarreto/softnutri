@@ -1,3 +1,8 @@
+
+<mat-toolbar color="white">
+  <span class="title-dialog">{{'CALENDAR.UPDATE_CALENDAR' | translate}}</span>
+</mat-toolbar>
+<mat-divider></mat-divider>
 <div mat-dialog-content>
     <form class="form" [formGroup]="form" (ngSubmit)="send()">
           <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
@@ -15,9 +20,9 @@
               <mat-label>{{'PATIENT.PATIENT' | translate}}</mat-label>
               <input type="text" matInput [formControl]="patientControl" [matAutocomplete]="autoPatient" required>
               <mat-autocomplete #autoPatient="matAutocomplete" [displayWith]="autoCompleteDisplayPatient" (optionSelected)="onPatientSelected($event.option)">
-                <mat-option *ngFor="let option of filteredOptionsPatient | async" [value]="option">
-                  {{option.name}}
-                </mat-option>
+                @for (option of filteredOptionsPatient | async; track option) {
+                  <mat-option [value]="option">{{option.name}}</mat-option>
+                }
               </mat-autocomplete>
             </mat-form-field>
     

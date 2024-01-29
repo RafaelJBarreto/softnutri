@@ -48,6 +48,8 @@ import { AuthModule } from './auth/auth.module';
 import {
     CalendarDraggableComponent
 } from './calendar/calendar-draggable/calendar-draggable.component';
+import { CalendarFormComponent } from './calendar/calendar-form/calendar-form.component';
+import { CalendarListComponent } from './calendar/calendar-list/calendar-list.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendaractionComponent } from './calendar/calendaraction/calendaraction.component';
 import { CancelCalendarComponent } from './calendar/cancel-calendar/cancel-calendar.component';
@@ -132,7 +134,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     SnackComponent,
     SnackActionComponent,
     SnackDeleteComponent,
-    CalendarDraggableComponent]
+    CalendarDraggableComponent,
+    CalendarListComponent,
+    CalendarFormComponent]
     ,
   imports: [
     MatListModule,

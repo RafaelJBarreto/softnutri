@@ -1,5 +1,5 @@
-import { Table } from "../table/table";
-import { NutritionalData } from "./nutritional-data";
+import { Table } from '../table/table';
+import { NutritionalData } from './nutritional-data';
 
 export class Food {
     idFood!: number;

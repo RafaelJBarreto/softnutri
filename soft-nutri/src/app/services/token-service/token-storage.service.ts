@@ -1,8 +1,9 @@
+
+
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
- 
-import { LogOutRequest } from 'src/app/model';
-import { UserInfoService,UserService } from '../index'; 
+
+import { UserInfoService, UserService } from '../index';
 import { ConstService } from '../shared/const.service';
 
 const TOKEN_KEY = 'token';

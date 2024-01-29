@@ -1,0 +1,65 @@
+<mat-card class="table-table-wrapper" style="margin-bottom: 100px;">
+    <mat-card-content class="table-table__content style-mat-card-contet">    
+      <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
+
+        <div fxFlex="25%" style="padding: 8px;">
+          <mat-button-toggle-group>
+            <mat-button-toggle class="button-color" value="Month"  (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month">
+              {{'CALENDAR.MONTH' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle class="button-color" value="Week"  (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week">
+              {{'CALENDAR.WEEK' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle  class="button-color" value="Day"  (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day">
+              {{'CALENDAR.DAY' | translate}}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div fxFlex="50%" class="div-text-calendar">
+          <span class="table-table-wrapper__title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'pt-BR' }}</span>
+        </div>
+        <div fxFlex="25%" appearance="outline">
+          <mat-button-toggle-group class="div-calendar-end">
+            <mat-button-toggle class="button-color" mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+              {{'CALENDAR.PREVIOUS' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle class="button-color" mwlCalendarToday
+            [(viewDate)]="viewDate">
+              {{'CALENDAR.TODAY' | translate}}
+            </mat-button-toggle>
+            <mat-button-toggle class="button-color" mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+              {{'CALENDAR.NEXT' | translate}}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+
+        </div>
+      </div>
+      
+      <br />
+
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+      </div>
+
+    </mat-card-content>
+  </mat-card>

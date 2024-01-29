@@ -1,5 +1,5 @@
-import { Snack } from "../snack/snack";
-import { FoodMenu } from "./foodMenu";
+import { Snack } from '../snack/snack';
+import { FoodMenu } from './foodMenu';
 
 export class SnackMenu {
     idSnackMenu!: number;

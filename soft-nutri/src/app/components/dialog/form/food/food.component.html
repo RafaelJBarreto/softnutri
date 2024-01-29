@@ -1,5 +1,8 @@
+<mat-toolbar color="white">
+  <span class="title-dialog">{{'FOOD.FOOD_NEW_FOOD' | translate}}</span>
+</mat-toolbar>
+<mat-divider></mat-divider>
 <form class="form" [formGroup]="form" (ngSubmit)="send()">
-  <h2 mat-dialog-title>{{'FOOD.FOOD_NEW_FOOD' | translate}}</h2>
   <mat-dialog-content style="overflow: hidden;">
   <div [hidden]="true">
     <mat-form-field class="form__input" appearance="outline" disable>
@@ -25,9 +28,11 @@
   <app-nutritional-data [sendNutritionalData]="nutritionalData" (sendNutritionalForm)="updateNutritionalData($event)">
   </app-nutritional-data>
   </mat-dialog-content>
-  <mat-dialog-actions class="position-button-modal">
+  <mat-divider></mat-divider>
+  <mat-dialog-actions>
   <div class="form-actions">
-    <button class="form-actions__login" mat-raised-button color="primary" type="submit">{{'GLOBAL.WORD_SAVE' | translate}}</button>
+    <button mat-stroked-button color="warn" [mat-dialog-close]>{{'GLOBAL.CLOSE' | translate}}</button>
+    <button mat-stroked-button color="primary" type="submit">{{'GLOBAL.WORD_SAVE' | translate}}</button>
   </div>
 </mat-dialog-actions>
 </form>

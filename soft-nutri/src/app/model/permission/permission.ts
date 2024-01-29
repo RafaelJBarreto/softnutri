@@ -1,4 +1,4 @@
-import { Paper } from "./paper";
+import { Paper } from './paper';
 
 export class Permission {
     idModule!: number;

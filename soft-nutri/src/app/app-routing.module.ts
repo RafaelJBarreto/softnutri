@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { CalendaractionComponent } from './components/calendar/calendaraction/calendaraction.component';
+import {
+    CalendaractionComponent
+} from './components/calendar/calendaraction/calendaraction.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PermissionComponent } from './components/permission/permission.component';
 import { PersonActionComponent } from './components/person/person-action/person-action.component';
 import { PersonComponent } from './components/person/person.component';
-import { ProfessionalActionComponent } from './components/professional/professional-action/professional-action.component';
+import {
+    ProfessionalActionComponent
+} from './components/professional/professional-action/professional-action.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
-import { AuthGuardService as AuthGuard  } from './services';
-import { PermissionComponent } from './components/permission/permission.component';
-import { TreatmentComponent } from './components/treatment/treatment.component';
-import { TableComponent } from './components/table/table.component';
-import { TableActionComponent } from './components/table/table-action/table-action.component';
-import { SnackComponent } from './components/snack/snack.component';
 import { SnackActionComponent } from './components/snack/snack-action/snack-action.component';
+import { SnackComponent } from './components/snack/snack.component';
+import { TableActionComponent } from './components/table/table-action/table-action.component';
+import { TableComponent } from './components/table/table.component';
+import { TreatmentComponent } from './components/treatment/treatment.component';
+import { AuthGuardService as AuthGuard } from './services';
 
 const routes: Routes = [
   {

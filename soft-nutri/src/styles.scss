@@ -510,10 +510,19 @@ button {
   color: white;
 }
 
-.position-button-modal{
-  float: right;
-}
 
 .size-icon-tab{
   font-size: 25px;
+}
+
+.title-dialog {
+  margin: 0;
+  color: rgba(98, 95, 95, 0.5019607843);
+  font-family: Mooli !important;
+  font-weight: bold;
+  font-style: inherit;
+}
+
+.mat-mdc-dialog-actions {
+  justify-content: end !important;
 }

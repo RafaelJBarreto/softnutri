@@ -1,5 +1,5 @@
-import { Phone } from "../phone/phone";
-import { Gender } from "../shared/gender";
+import { Phone } from '../phone/phone';
+import { Gender } from '../shared/gender';
 
 export class Person {
     idPerson!: number;

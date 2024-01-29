@@ -1,6 +1,8 @@
-import { Injectable, OnChanges} from '@angular/core';
 import { JwtResponse } from 'src/app/model';
 import { ModuleUser } from 'src/app/model/module/module';
+
+import { Injectable, OnChanges } from '@angular/core';
+
 import { environment as e } from '../../../environments/environment';
 
 type rest = { 

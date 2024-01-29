@@ -1,5 +1,5 @@
-import { Food } from "../food/food";
-import { Bunch } from "../food/bunch";
+import { Bunch } from '../food/bunch';
+import { Food } from '../food/food';
 
 export class FoodBunch {
     bunch!: Bunch;

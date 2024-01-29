@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SignIn } from 'src/app/model';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { environment as e } from '../../../environments/environment';
-import { LoginRequest, SignIn, SignupRequest } from 'src/app/model';
 import { TokenStorageService } from '../';
 import { ConstService } from '../shared/const.service';
 

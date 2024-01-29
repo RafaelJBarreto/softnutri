@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SignIn } from 'src/app/model';
 
-import { environment as e } from 'src/environments/environment';
-import { LogOutRequest, SignIn } from 'src/app/model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
 import { ConstService } from '../shared/const.service';
 
 @Injectable({

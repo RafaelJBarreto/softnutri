@@ -2,186 +2,22 @@
 
   <mat-card class="table-table-wrapper">
   <mat-tab-group animationDuration="500ms" mat-align-tabs="center" dynamicHeight>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <i class="size-icon-tab fa-regular fa-calendar-days"></i>
-      </ng-template>
-      
-      <mat-card class="table-table-wrapper" style="margin-bottom: 100px;">
-        <mat-card-content class="table-table__content style-mat-card-contet">    
-          <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-    
-            <div fxFlex="25%" style="padding: 8px;">
-              <mat-button-toggle-group>
-                <mat-button-toggle class="button-color" value="Month"  (click)="setView(CalendarView.Month)"
-                  [class.active]="view === CalendarView.Month">
-                  {{'CALENDAR.MONTH' | translate}}
-                </mat-button-toggle>
-                <mat-button-toggle class="button-color" value="Week"  (click)="setView(CalendarView.Week)"
-                  [class.active]="view === CalendarView.Week">
-                  {{'CALENDAR.WEEK' | translate}}
-                </mat-button-toggle>
-                <mat-button-toggle  class="button-color" value="Day"  (click)="setView(CalendarView.Day)"
-                  [class.active]="view === CalendarView.Day">
-                  {{'CALENDAR.DAY' | translate}}
-                </mat-button-toggle>
-              </mat-button-toggle-group>
-            </div>
-            <div fxFlex="50%" class="div-text-calendar">
-              <span class="table-table-wrapper__title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'pt-BR' }}</span>
-            </div>
-            <div fxFlex="25%" appearance="outline">
-              <mat-button-toggle-group class="div-calendar-end">
-                <mat-button-toggle class="button-color" mwlCalendarPreviousView
-                [view]="view"
-                [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenMonthViewDay()">
-                  {{'CALENDAR.PREVIOUS' | translate}}
-                </mat-button-toggle>
-                <mat-button-toggle class="button-color" mwlCalendarToday
-                [(viewDate)]="viewDate">
-                  {{'CALENDAR.TODAY' | translate}}
-                </mat-button-toggle>
-                <mat-button-toggle class="button-color" mwlCalendarNextView
-                [view]="view"
-                [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenMonthViewDay()">
-                  {{'CALENDAR.NEXT' | translate}}
-                </mat-button-toggle>
-              </mat-button-toggle-group>
-    
-            </div>
-          </div>
-          
-          <br />
-    
-          <div [ngSwitch]="view">
-            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-              [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-              (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-month-view>
-            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
-              [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-              (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-week-view>
-            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
-              [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-              (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-day-view>
-          </div>
-    
-        </mat-card-content>
-      </mat-card>
-
-    </mat-tab>
-  
+     
     <mat-tab>
       <ng-template mat-tab-label>
         <i class="size-icon-tab fa-regular fa-calendar-check"></i>
       </ng-template>
 
-      <mat-card class="table-table-wrapper" style="margin-bottom: 100px;">
-        <mat-toolbar color="white">
-          <span class="table-table-wrapper__title">{{'CALENDAR.CALENDAR_TITLE' | translate}}</span>
-          <span class="header-spacer"></span>
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="position_menu">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="action" routerLinkActive="active">
-              <span><i class="fa-regular fa-calendar-plus"></i> {{'CALENDAR.CALENDAR_NEW' | translate}}</span>
-            </button>
-            <button mat-menu-item (click)="openDialog()">
-              <span><i class="fa-solid fa-hourglass-start"></i> {{'INTERVAL.INTERVAL_CALENDAR' | translate}}</span>
-            </button>
-          </mat-menu>
-        </mat-toolbar>
-        <mat-card-content class="table-table__content style-mat-card-contet">  
+      <app-calendar-list></app-calendar-list>
+      
+    </mat-tab>
 
-          <div fxLayout="row" fxFlexFill fxLayout.lt-sm="column">
-            <mat-form-field fxFlex="35%">
-              <mat-label>{{'GLOBAL.FILTER' | translate}}</mat-label>
-              <input matInput (keyup)="applyFilter($event)" #input>
-            </mat-form-field>
-          </div>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <i class="size-icon-tab fa-regular fa-calendar-days"></i>
+      </ng-template>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-        <ng-container matColumnDef="idCalendar">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_IDCALENDAR' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.idCalendar}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="professional">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_PROFESSIONAL' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.professional.name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="patient">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_PATIENT' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.patient.name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="dateOfDay">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_DATEOFDAY' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.dateOfDay | date: 'dd/MM/yyyy'}} </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="hourOfDay">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_HOUROFDAY' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.hourOfDay | mask:"hh:mm"}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="note">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_NOTE' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.note}} </td>
-        </ng-container>
-        <ng-container matColumnDef="completed">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_COMPLETED' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> 
-
-            <mat-card-actions>
-              <button mat-mini-fab disabled="true" class="button-yes" *ngIf="element.completed">{{'GLOBAL.YES' | translate}}</button>
-              <button mat-mini-fab disabled="true" class="button-not" *ngIf="!element.completed">{{'GLOBAL.NO' | translate}}</button>
-            </mat-card-actions>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="cancel">
-          <th mat-header-cell *matHeaderCellDef> {{'CALENDAR.CALENDAR_CANCEL' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> 
-            <mat-card-actions>
-              <button mat-mini-fab disabled="true" class="button-yes" *ngIf="element.cancel">{{'GLOBAL.YES' | translate}}</button>
-              <button mat-mini-fab disabled="true" class="button-not" *ngIf="!element.cancel">{{'GLOBAL.NO' | translate}}</button>
-            </mat-card-actions>
-
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-          <td mat-cell *matCellDef="let element">
-
-            <mat-button-toggle-group #group="matButtonToggleGroup">
-              <mat-button-toggle (click)="edit(element.idCalendar)">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </mat-button-toggle>
-              <mat-button-toggle [disabled]="element.cancel" (click)="cancelCalendar(element.idCalendar)">
-                <i class="fa-solid fa-ban"></i>
-            </mat-button-toggle>
-          </mat-button-toggle-group>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </mat-card-content>
-    <div class="pagination">
-      <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
-        </div>
-  </mat-card>
+      <app-calendar-form></app-calendar-form>
       
     </mat-tab>
   

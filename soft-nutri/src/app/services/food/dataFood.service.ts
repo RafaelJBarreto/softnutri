@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Food } from 'src/app/model';
+
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DataFoodService {

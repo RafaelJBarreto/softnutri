@@ -1,4 +1,4 @@
-import { Permission } from "./permission";
+import { Permission } from './permission';
 
 export class PersonPaper {
     idPerson!: number;

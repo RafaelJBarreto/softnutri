@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Intermission } from 'src/app/model/Intermission/Intermission';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { ConstService } from '../shared/const.service';
-import { Intermission } from 'src/app/model/Intermission/Intermission';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
