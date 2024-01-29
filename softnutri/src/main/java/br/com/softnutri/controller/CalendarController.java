@@ -18,7 +18,7 @@ import br.com.softnutri.domain.Calendar;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.CalendarDTO;
 import br.com.softnutri.exception.SoftNutriException;
-import br.com.softnutri.record.CalendarEvent;
+import br.com.softnutri.record.CalendarAllRecord;
 import br.com.softnutri.service.AutenticationService;
 import br.com.softnutri.service.CalendarService;
 
@@ -49,7 +49,7 @@ public class CalendarController {
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<CalendarEvent>> findAll() throws SoftNutriException{
+	public ResponseEntity<CalendarAllRecord> findAll() throws SoftNutriException{
 		return this.calendarService.listAll(); 
 	}
 	
