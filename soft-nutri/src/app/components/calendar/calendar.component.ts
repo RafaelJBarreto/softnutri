@@ -18,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CalendarDraggableComponent } from './calendar-draggable/calendar-draggable.component';
 import { CancelCalendarComponent } from './cancel-calendar/cancel-calendar.component';
 import { TimeCalendarComponent } from './time-calendar/time-calendar.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendar',
@@ -61,13 +62,18 @@ export class CalendarComponent implements OnInit {
     this.service.listAll().subscribe({
       next: data => {
         this.events = [];
-        for(let i = 0; i < data.length; i++){
-          data[i].actions = this.actions;
-          let date = startOfDay(data[i].start);
-          data[i].start = addHours(date, data[i].end);
-          data[i].end = addHours(data[i].start, 1),
-          this.events.push(data[i]);
+        for(let i = 0; i < data.calendarEvent.length; i++){
+          data.calendarEvent[i].actions = this.actions;
+          let date = startOfDay(data.calendarEvent[i].start);
+          data.calendarEvent[i].start = addHours(date, data.calendarEvent[i].end);
+          data.calendarEvent[i].end = addHours(data.calendarEvent[i].start, 1),
+          this.events.push(data.calendarEvent[i]);
         }
+
+        this.calendar = data.calendar;
+        this.dataSource = new MatTableDataSource(this.calendar);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
       },
       error: err => {
         this.errorMessage = err.message;
@@ -86,7 +92,7 @@ export class CalendarComponent implements OnInit {
     return data.professional.name.toLowerCase().includes(filter)
       || String(data.patient.name).toLowerCase().includes(filter)
       || String(data.note).toLowerCase().includes(filter)
-      //|| String(moment(data.dateOfDay, "YYYY-MM-DD").format("DD/MM/YYYY")).toLowerCase().includes(filter)
+      || String(moment(data.dateOfDay, "YYYY-MM-DD").format("DD/MM/YYYY")).toLowerCase().includes(filter)
       || String(data.hourOfDay).toLowerCase().includes(filter);
   }
 
@@ -171,6 +177,7 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    debugger;
     const dialogRef = this.dialog.open(CalendarDraggableComponent, {
       width: '800px',
       data: { calendarEvent: event },

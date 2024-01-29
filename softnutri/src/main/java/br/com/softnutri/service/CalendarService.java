@@ -15,6 +15,7 @@ import br.com.softnutri.domain.Calendar;
 import br.com.softnutri.domain.Phone;
 import br.com.softnutri.dto.CalendarDTO;
 import br.com.softnutri.exception.SoftNutriException;
+import br.com.softnutri.record.CalendarAllRecord;
 import br.com.softnutri.record.CalendarEvent;
 import br.com.softnutri.repository.CalendarRepository;
 import br.com.softnutri.util.Criptografia;
@@ -40,10 +41,12 @@ public class CalendarService {
 		}
 	}
 	
-	public ResponseEntity<List<CalendarEvent>> listAll() throws SoftNutriException { 
+	public ResponseEntity<CalendarAllRecord> listAll() throws SoftNutriException { 
 		try {
-			return ResponseEntity.ok(this.calendarRepository.findAll().stream().map(obj -> new CalendarEvent(obj.getIdCalendar(), Date.from(obj.getDateOfDay().atStartOfDay().atZone(ZoneId.systemDefault()) .toInstant()), 
-					Util.convertHour(obj.getHourOfDay()), this.getTitle(obj), obj.isCancel(), obj.isCompleted(), null, true)).toList());
+			List<Calendar> calendarAll = this.calendarRepository.findAll();
+			
+			return ResponseEntity.ok(new CalendarAllRecord(CalendarDTO.converter(calendarAll), calendarAll.stream().map(obj -> new CalendarEvent(obj.getIdCalendar(), Date.from(obj.getDateOfDay().atStartOfDay().atZone(ZoneId.systemDefault()) .toInstant()), 
+					Util.convertHour(obj.getHourOfDay()), this.getTitle(obj), obj.isCancel(), obj.isCompleted(), null, true)).toList()));
 		} catch (Exception e) {
 			throw new SoftNutriException("Error list all Calendar ", e);
 		}
