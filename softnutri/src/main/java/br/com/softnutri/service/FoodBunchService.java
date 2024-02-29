@@ -4,15 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Bunch;
 import br.com.softnutri.domain.Food;
 import br.com.softnutri.domain.FoodBunch;
 import br.com.softnutri.dto.FoodBunchDTO;
-import br.com.softnutri.dto.FoodDTO;
 import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.repository.FoodBunchRepository;
 
@@ -26,50 +23,43 @@ public class FoodBunchService {
 		this.foodBunchRepository = foodBunchRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(FoodBunchDTO foodBunchDTO) throws SoftNutriException { 
+	public void save(FoodBunchDTO foodBunchDTO) { 
 		try {
-			List<FoodBunch> getAllFoodBunch = this.foodBunchRepository.findAll();
-			Bunch bunch = Bunch.builder().idBunch(foodBunchDTO.getBunch().idBunch()).description(foodBunchDTO.getBunch().description()).build();
+			final List<FoodBunch> getAllFoodBunch = this.foodBunchRepository.findAll();
+			final Bunch bunch = Bunch.builder().idBunch(foodBunchDTO.getBunch().idBunch()).description(foodBunchDTO.getBunch().description()).build();
 			
-			for(FoodDTO foodDTO: foodBunchDTO.getFoods()) {
-				Food food = Food.builder().idFood(foodDTO.getIdFood()).build();
-				FoodBunch foodBunch = getAllFoodBunch.stream().filter(x -> food.getIdFood().equals(x.getFood().getIdFood())).findAny().orElse(null);
+			foodBunchDTO.getFoods().stream().map(foodDTO -> Food.builder().idFood(foodDTO.getIdFood()).build()).forEach(food -> {
+				final FoodBunch foodBunch = getAllFoodBunch.stream().filter(x -> food.getIdFood().equals(x.getFood().getIdFood())).findAny().orElse(null);
 				this.foodBunchRepository.save(new FoodBunch(foodBunch != null ? foodBunch.getIdFoodBunch() : null, food, bunch));
-			}
+			});
 			
-			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 		} catch (Exception e) {
-			throw new SoftNutriException("Error save FoodBunch ", e);
+			throw new SoftNutriException("FOODBUNCH.ERROR_SAVE", e);
 		}
 	}
 	
-	public ResponseEntity<List<FoodBunchDTO>> getAll() throws SoftNutriException {
+	public List<FoodBunchDTO> getAll() {
 		try {	
-			return ResponseEntity.ok(FoodBunchDTO.converter(this.foodBunchRepository.getAll()));
+			return FoodBunchDTO.converter(this.foodBunchRepository.getAll());
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get all FoodBunch ", e);
+			throw new SoftNutriException("FOODBUNCH.ERROR_LIST", e);
 		}
 	}
 	
-	public ResponseEntity<MessageResponse> delete(Long id) throws SoftNutriException {
+	public void delete(Long id) {
 		try {
-			Optional<FoodBunch> foodBunch = this.foodBunchRepository.findById(id);
-			if (foodBunch.isPresent()) {
-				foodBunchRepository.delete(foodBunch.get());
-				return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
-			} else {
-				return ResponseEntity.ok(new MessageResponse("BUNCH.BUNCH_REMOVE_ERROR"));
-			}
+			final Optional<FoodBunch> foodBunch = this.foodBunchRepository.findById(id);
+			foodBunch.ifPresent(foodBunchRepository::delete);
 		} catch (Exception e) {
-			throw new SoftNutriException("Error delete FoodBunch ", e);
+			throw new SoftNutriException("BUNCH.BUNCH_REMOVE_ERROR", e);
 		}	
 	}
 	
-	public ResponseEntity<List<FoodBunchDTO>> getFoodTable(Long idCompositionTable) throws SoftNutriException {
+	public List<FoodBunchDTO> getFoodTable(Long idCompositionTable) {
 		try {
-			return ResponseEntity.ok(FoodBunchDTO.converter(this.foodBunchRepository.getFoodTable(idCompositionTable)));
+			return FoodBunchDTO.converter(this.foodBunchRepository.getFoodTable(idCompositionTable));
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get FoodBunch ", e);
+			throw new SoftNutriException("FOODBUNCH.ERROR_LIST_FOOD", e);
 		}
 	}
 	 

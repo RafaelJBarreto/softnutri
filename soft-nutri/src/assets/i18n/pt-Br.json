@@ -56,7 +56,10 @@
         "NEXT": "Próximo",
         "PREVIOUS": "Anterior",
         "WITHOUTGROUP": "Sem grupo",
-        "QUANTITY": "Quantidade"
+        "QUANTITY": "Quantidade",
+        "ERROR_SAVE": "Erro ao tentar salvar registro",
+        "ERROR_GET": "Erro ao tentar recuperar registro",
+        "ERROR_LIST_ALL": "Erro ao tentar listar usuários"
         },
     "LOGIN": {
         "BTN_CREATE_USER": "Criar usuário",
@@ -104,7 +107,9 @@
         "FOOD_EDIT": "Editar alimento",
         "FOOD_REMOVE": "Remover alimento",
         "DESCRIPTION_REMOVE": "Deseja remover o alimento?",
-        "FOOD_REMOVE_ERROR": "Erro ao tentar remover alimento"
+        "FOOD_REMOVE_ERROR": "Erro ao tentar remover alimento",
+        "FOOD_SAVE_ERROR": "Erro ao tentar salvar alimento",
+        "FOOD_LIST_ERROR": "Erro ao tentar listar alimentos"
     },
     "MENU": {
         "HOME": "Home",
@@ -130,7 +135,8 @@
         "ERROR_DELETE_PATIENT": "Erro ao tentar deletar paciente.",
         "ERROR_DADO_PATIENT": "Paciente não existe.",
         "ERROR_SAVE_PATIENT": "Erro ao tentar cadastrar paciente.",
-        "PATIENT": "Paciente"
+        "PATIENT": "Paciente",
+        "ERROR_GET_PATIENT": "Erro ao recuperar pacientes"
     },
     "PROFESSIONAL": {
         "PROFESSIONAL_NEW": "Cadastro de Profissionais",
@@ -166,7 +172,9 @@
         "FOOD_BUNCH_REMOVE": "Remover alimento do grupo",
         "DESCRIPTION_REMOVE_BUNCH": "Deseja remover o grupo?",
         "DESCRIPTION_REMOVE_FOODBUNCH": "Deseja remover o alimento do grupo?",
-        "BUNCH_REMOVE_ERROR": "Erro ao tentar remover grupo"
+        "BUNCH_REMOVE_ERROR": "Erro ao tentar remover grupo",
+        "ERROR_SAVE_BUNCH": "Erro ao tentar cadastrar grupo.",
+        "ERROR_LIST_BUNCH": "Erro ao listar grupos."
     },
     "CALENDAR":{
         "CALENDAR_TITLE": "Agendamentos",
@@ -189,7 +197,8 @@
         "PREVIOUS": "Voltar",
         "TODAY": "Hoje",
         "NEXT": "Próximo",
-        "UPDATE_CALENDAR":"Alterar agendamento"
+        "UPDATE_CALENDAR":"Alterar agendamento",
+        "ERROR_GET_CALENDAR": "Erro ao tentar recuperar agendamento."
 
     },
     "INTERVAL":{
@@ -211,7 +220,9 @@
         "LIST_USER": "Erro ao listar usuários",
         "ERROR_SAVE": "Erro ao salvar permissões",
         "ERROR_USER": "Selecione um usuário para salvar",
-        "LIBERAR": "Permitir"
+        "LIBERAR": "Permitir",
+        "LIST_PERMISSION": "Erro ao listar permissões"
+
     },
     "TABLE": {
         "TABLE_NEW": "Cadastro de Tabelas",
@@ -240,5 +251,11 @@
     },
     "MENU_FOOD": {
         "TOTAL": "Total:"
+    },
+    "FOODBUNCH":{
+        "BUNCH_REMOVE_ERROR": "Erro ao tentar remover alimento do grupo",
+        "ERROR_SAVE": "Erro ao tentar cadastrar alimento no grupo.",
+        "ERROR_LIST": "Erro ao listar grupos de alimentos.",
+        "ERROR_LIST_FOOD": "Erro ao listar alimentos."
     }
 }

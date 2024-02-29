@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.exception.SoftNutriException;
-import br.com.softnutri.record.CompositionTableRecord;
+import br.com.softnutri.records.CompositionTableDTO;
 import br.com.softnutri.service.TableService;
 
 @RestController
@@ -27,22 +26,24 @@ public class TableController {
 	private TableService tableService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody CompositionTableRecord ctr) throws SoftNutriException {
-		return this.tableService.save(ctr);
+	public ResponseEntity<MessageResponse> saveData(@RequestBody CompositionTableDTO ctr) {
+		this.tableService.save(ctr);
+		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<CompositionTableRecord>> findAll() throws SoftNutriException {
-		return this.tableService.listAll(); 
+	public ResponseEntity<List<CompositionTableDTO>> findAll() {
+		return ResponseEntity.ok(this.tableService.listAll()); 
 	}
 	
 	@GetMapping(value = "/get/{id}")
-	public CompositionTableRecord get(@PathVariable(value = "id") Long id) throws SoftNutriException {
+	public CompositionTableDTO get(@PathVariable(value = "id") Long id) {
 		return this.tableService.get(id);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
-		return this.tableService.delete(id);
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+		this.tableService.delete(id);
+		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
 	}
 }

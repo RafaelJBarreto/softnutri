@@ -69,8 +69,8 @@ export class PermissionComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('PERMISSION.LIST_USER'), '', {
-          horizontalPosition: 'right',
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
+          horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
 
@@ -106,7 +106,7 @@ export class PermissionComponent implements OnInit {
         },
         error: err => { 
           this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant('PERMISSION.ERROR_SAVE'), '', {
+          this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
@@ -114,7 +114,7 @@ export class PermissionComponent implements OnInit {
         }
       });
     }else{
-      this.snackBar.open(this.translate.instant('PERMISSION.ERROR_USER'), '', {
+      this.snackBar.open(this.translate.instant('PERMISSION.ERROR_USER'), 'Error', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         duration: 3000
@@ -131,7 +131,7 @@ export class PermissionComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000

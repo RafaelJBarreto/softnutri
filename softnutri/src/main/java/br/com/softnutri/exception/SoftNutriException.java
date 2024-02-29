@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("serial")
 @Slf4j
-public class SoftNutriException extends Exception {
+public class SoftNutriException extends RuntimeException {
 	
 	private static final String CAUSE = "Cause: ";
 	
@@ -23,4 +23,8 @@ public class SoftNutriException extends Exception {
 			 log.error(super.getMessage() + CAUSE + super.getLocalizedMessage());     
 		 }
     }
+	
+	public SoftNutriException(String message) {
+		 super(message);
+   }
 }

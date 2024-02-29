@@ -98,7 +98,7 @@ export class CalendaractionComponent implements OnInit {
         },
         error: err => {
           this.errorMessage = err.message;
-          this.snackBar.open(this.translate.instant('PATIENT.ERROR_SAVE_PATIENT'), '', {
+          this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
@@ -106,7 +106,7 @@ export class CalendaractionComponent implements OnInit {
         }
       });
     } else {
-      this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
+      this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), 'Error', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         duration: 3000
@@ -126,7 +126,7 @@ export class CalendaractionComponent implements OnInit {
         },
         error: err => {
           this.errorMessage = err.message;
-          this.snackBar.open(this.translate.instant('PATIENT.ERROR_DADO_PATIENT'), '', {
+          this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
@@ -188,7 +188,7 @@ export class CalendaractionComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000
@@ -211,7 +211,7 @@ export class CalendaractionComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
+        this.snackBar.open(this.translate.instant(err.error.message), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000

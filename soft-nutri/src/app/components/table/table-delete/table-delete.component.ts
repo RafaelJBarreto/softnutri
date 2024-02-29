@@ -33,7 +33,7 @@ export class TableDeleteComponent{
         });
       },
       error: err => {
-        this.snackBar.open(this.translate.instant('TABLE.ERROR_DELETE_TABLE'), 'Error', {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000

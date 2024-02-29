@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.exception.SoftNutriException;
-import br.com.softnutri.record.BunchRecord;
+import br.com.softnutri.records.BunchDTO;
 import br.com.softnutri.service.BunchService;
 
 @RestController
@@ -27,17 +26,19 @@ public class BunchController {
 	private BunchService bunchService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody BunchRecord br) throws SoftNutriException {
-		return this.bunchService.save(br);
+	public ResponseEntity<MessageResponse> saveData(@RequestBody BunchDTO br) {
+		this.bunchService.save(br);
+		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<List<BunchRecord>> findAll() throws SoftNutriException{
-		return this.bunchService.listAll(); 
+	public ResponseEntity<List<BunchDTO>> findAll(){
+		return ResponseEntity.ok(this.bunchService.listAll()); 
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) throws SoftNutriException {
-		return this.bunchService.delete(id);
+	public ResponseEntity<MessageResponse> delete(@PathVariable(value = "id") Long id) {
+		this.bunchService.delete(id);
+		return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
 	}
 }

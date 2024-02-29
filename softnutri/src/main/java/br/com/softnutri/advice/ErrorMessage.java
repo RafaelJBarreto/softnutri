@@ -1,6 +1,6 @@
 package br.com.softnutri.advice;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -8,11 +8,11 @@ import lombok.Data;
 public class ErrorMessage {
 
 	private int statusCode;
-	private Date timestamp;
+	private LocalDateTime timestamp;
 	private String message;
 	private String description;
 
-	public ErrorMessage(int statusCode, Date timestamp, String message, String description) {
+	public ErrorMessage(int statusCode, LocalDateTime timestamp, String message, String description) {
 		this.statusCode = statusCode;
 		this.timestamp = timestamp;
 		this.message = message;

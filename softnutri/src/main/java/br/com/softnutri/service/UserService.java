@@ -4,13 +4,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 
 import br.com.softnutri.config.security.jwt.JwtUtils;
-import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.config.security.services.RefreshTokenService;
 import br.com.softnutri.config.security.services.UtilsServiceImpl;
 import br.com.softnutri.domain.User;
@@ -20,9 +17,10 @@ import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.UserRepository;
 
-@Service(value = "usuarioService")
+@Service
 public class UserService extends AutenticationService {
 
+	private static final String MESSAGE = "GLOBAL.ERROR_GET";
 	private final UserRepository userRepository;
 
 	public UserService(UserRepository userRepository, AuthenticationManager authenticationManager, JwtUtils jwtUtils,
@@ -31,95 +29,69 @@ public class UserService extends AutenticationService {
 		this.userRepository = userRepository;
 	}
 
-	public ResponseEntity<UserDTO> findById(Long idUsuario) throws SoftNutriException {
-		UserDTO resultDto = null;
+	public UserDTO getUser(Long idUsuario) {
 		try {
-			Optional<User> user = this.userRepository.findById(idUsuario);
-			if (user.isPresent()) {
-				resultDto = UserDTO.converter(user.get());
-				return new ResponseEntity<>(resultDto, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-
-		} catch (Exception e) {
-			throw new SoftNutriException("Error find by id User " + e.getMessage(), e);
-		}
-	}
-
-	public ResponseEntity<MessageResponse> save(User user) throws SoftNutriException {
-
-		try {
-			this.userRepository.save(user);
-			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
-
-		} catch (Exception e) {
-			throw new SoftNutriException("Error save User " + e.getMessage(), e);
-		}
-	}
-	
-	public UserDTO getUser(Long idPerson) throws SoftNutriException {
-		try {
-			Optional<User> user = this.userRepository.findById(idPerson);
+			final Optional<User> user = this.userRepository.findById(idUsuario);
 			if (user.isPresent()) {
 				return UserDTO.converter(user.get());
-			} else {
-				return null;
+			}else {
+				throw new SoftNutriException(MESSAGE);
 			}
+
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get User " + e.getMessage(), e);
+			throw new SoftNutriException(MESSAGE, e);
+		}
+	}
+
+	public void save(User user) {
+		try {
+			this.userRepository.save(user);
+		} catch (Exception e) {
+			throw new SoftNutriException("GLOBAL.ERROR_SAVE" + e.getMessage(), e);
 		}
 	}
 	
-	public User getUserById(Long idPerson) throws SoftNutriException {
+	public User getUserById(Long idPerson) {
 		try {
-			Optional<User> user = this.userRepository.findById(idPerson);
+			final Optional<User> user = this.userRepository.findById(idPerson);
 			if (user.isPresent()) {
 				return user.get();
 			} else {
-				return null;
+				throw new SoftNutriException(MESSAGE);
 			}
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get User By Id " + e.getMessage(), e);
+			throw new SoftNutriException(MESSAGE, e);
 		}
 	}
 
-	public List<UserDTO> getUsers(String name) throws SoftNutriException {
+	public List<UserDTO> getUsers(String name) {
 		try {
 			if (name == null) {
 				return UserDTO.converter(userRepository.findAll());
 			}
 			return Collections.emptyList();
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get Users " + e.getMessage(), e);
+			throw new SoftNutriException("GLOBAL.ERROR_LIST_ALL" + e.getMessage(), e);
 		}
 
 	}
 	
-	public List<UserDTO> getPatients() throws SoftNutriException {
+	public List<UserDTO> getPatients() {
 		try {
-			return UserDTO.converter(userRepository.findByUserType(UserType.PATIENT));
+			return UserDTO.converter(userRepository.getUser(UserType.PATIENT));
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get Patients " + e.getMessage(), e);
+			throw new SoftNutriException("PATIENT.ERROR_LIST_PATIENT", e);
 		}
 
 	}
 	
-	public List<UserDTO> getProfessional() throws SoftNutriException {
+	public List<UserDTO> getProfessional() {
 		try {
-			return UserDTO.converter(userRepository.getProfessional(UserType.PATIENT));
+			return UserDTO.converter(userRepository.getUser(UserType.NUTRITIONIST));
 		} catch (Exception e) {
-			throw new SoftNutriException("Error get Professional " + e.getMessage(), e);
+			throw new SoftNutriException("PROFESSIONAL.ERROR_LIST_PROFESSIONAL", e);
 		}
 
 	}
 	
-	public List<UserDTO> getNutritionist() throws SoftNutriException {
-		try {
-			return UserDTO.converter(userRepository.getNutritionist(UserType.NUTRITIONIST));
-		} catch (Exception e) {
-			throw new SoftNutriException("Error get Nutritionist " + e.getMessage(), e);
-		}
-
-	}
 }

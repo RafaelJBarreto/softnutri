@@ -47,9 +47,10 @@ export class SnackComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       },
       error: err => {
+        debugger;
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('SNACK.ERROR_LIST_SNACK'), '', {
-          horizontalPosition: 'right',
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
+          horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
 

@@ -3,14 +3,14 @@ package br.com.softnutri.dto;
 import java.util.List;
 
 import br.com.softnutri.interfaces.FoodBunchReturn;
-import br.com.softnutri.record.BunchRecord;
+import br.com.softnutri.records.BunchDTO;
 import lombok.Data;
 
 @Data
 public class FoodBunchDTO {
 
 	private Long idFoodBunch;
-	private BunchRecord bunch;
+	private BunchDTO bunch;
 	private FoodDTO food;
 	private List<FoodDTO> foods;
 
@@ -19,7 +19,7 @@ public class FoodBunchDTO {
 
 	public FoodBunchDTO(FoodBunchReturn foodBunch) {
 		this.idFoodBunch = foodBunch.getIdFoodBunch();
-		this.bunch = new BunchRecord(foodBunch.getIdBunch(), foodBunch.getDescription());
+		this.bunch = new BunchDTO(foodBunch.getIdBunch(), foodBunch.getDescription());
 		this.food = new FoodDTO(foodBunch);
 	}
 

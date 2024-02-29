@@ -52,7 +52,7 @@ export class CalendarListComponent implements OnInit{
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('CALENDAR.ERROR_LIST_CALENDAR'), '', {
+        this.snackBar.open(this.translate.instant(err.error.message), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000

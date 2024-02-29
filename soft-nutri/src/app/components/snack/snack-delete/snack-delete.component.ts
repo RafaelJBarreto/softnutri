@@ -4,6 +4,7 @@ import { Component, Inject, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { debug, error } from 'console';
 
 @Component({
   selector: 'app-snack-delete',
@@ -33,7 +34,7 @@ export class SnackDeleteComponent {
         });
       },
       error: err => {
-        this.snackBar.open(this.translate.instant('SNACK.ERROR_DELETE_SNACK'), 'Error', {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.IntermissionDTO;
-import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.IntermissionService;
 
 @RestController
@@ -23,12 +22,12 @@ public class IntermissionController {
 	private IntermissionService intermissionService;
 
 	@PostMapping("/save")
-	public ResponseEntity<MessageResponse> saveData(@RequestBody IntermissionDTO dto) throws SoftNutriException{
+	public ResponseEntity<MessageResponse> saveData(@RequestBody IntermissionDTO dto){
 		return this.intermissionService.save(dto);
 	}
 
 	@GetMapping("/get")
-	public IntermissionDTO get() throws SoftNutriException{
+	public IntermissionDTO get(){
 		return intermissionService.get();
 	}
 	

@@ -17,7 +17,6 @@ import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
 import br.com.softnutri.config.security.payload.response.JwtResponse;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.UserDTO;
-import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.service.UserService;
 import jakarta.validation.Valid;
 
@@ -34,8 +33,8 @@ public class UserController {
 	}
 
 	@GetMapping("/findId")
-	public ResponseEntity<UserDTO> getFindById(@RequestParam Long idUsuario) throws SoftNutriException {
-		return userService.findById(idUsuario);
+	public ResponseEntity<UserDTO> getFindById(@RequestParam Long idUsuario) {
+		return ResponseEntity.ok(this.userService.getUser(idUsuario));
 	}
 
 	@PutMapping("/updateUsuario")

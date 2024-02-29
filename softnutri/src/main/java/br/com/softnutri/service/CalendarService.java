@@ -1,22 +1,21 @@
 package br.com.softnutri.service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Calendar;
-import br.com.softnutri.domain.Phone;
+import br.com.softnutri.domain.User;
 import br.com.softnutri.dto.CalendarDTO;
 import br.com.softnutri.exception.SoftNutriException;
-import br.com.softnutri.record.CalendarAllRecord;
-import br.com.softnutri.record.CalendarEvent;
+import br.com.softnutri.records.CalendarAll;
+import br.com.softnutri.records.CalendarEvent;
 import br.com.softnutri.repository.CalendarRepository;
 import br.com.softnutri.util.Criptografia;
 import br.com.softnutri.util.Util;
@@ -25,76 +24,75 @@ import br.com.softnutri.util.Util;
 public class CalendarService {
 	
 	private final CalendarRepository calendarRepository;
+	private final AutenticationService autenticationService;
 
 	@Autowired
-	public CalendarService(CalendarRepository calendarRepository) {
+	public CalendarService(CalendarRepository calendarRepository, AutenticationService autenticationService) {
 		this.calendarRepository = calendarRepository;
+		this.autenticationService = autenticationService;
 	}
 	
-	public ResponseEntity<MessageResponse> save(Calendar calendar) throws SoftNutriException { 
+	public void save(CalendarDTO dto) { 
 		try {
-			this.calendarRepository.save(calendar);
-			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
-
+			this.calendarRepository.save(Calendar.builder().idCalendar(dto.getIdCalendar()).cancel(dto.isCancel()).dateOfDay(dto.getDateOfDay()).
+					hourOfDay(LocalTime.of(dto.getHourOfDayAux().getHour(), dto.getHourOfDayAux().getMinute())).note(dto.getNote()).
+					patient(User.builder().idPerson(dto.getPatient().getIdPerson()).build()).
+					professional(User.builder().idPerson(dto.getProfessional().getIdPerson()).build()).
+					receptionist(User.builder().idPerson(autenticationService.getUserLogged().getIdPerson()).build()).build());
 		} catch (Exception e) {
-			throw new SoftNutriException("Error save Calendar ", e);
+			throw new SoftNutriException("PATIENT.ERROR_SAVE_PATIENT", e);
 		}
 	}
 	
-	public ResponseEntity<CalendarAllRecord> listAll() throws SoftNutriException { 
+	public CalendarAll listAll() { 
 		try {
-			List<Calendar> calendarAll = this.calendarRepository.findAll();
-			
-			return ResponseEntity.ok(new CalendarAllRecord(CalendarDTO.converter(calendarAll), calendarAll.stream().map(obj -> new CalendarEvent(obj.getIdCalendar(), Date.from(obj.getDateOfDay().atStartOfDay().atZone(ZoneId.systemDefault()) .toInstant()), 
-					Util.convertHour(obj.getHourOfDay()), this.getTitle(obj), obj.isCancel(), obj.isCompleted(), null, true)).toList()));
+			final List<Calendar> calendarAll = this.calendarRepository.findAll();			
+			return new CalendarAll(CalendarDTO.converter(calendarAll), calendarAll.stream().map(obj -> new CalendarEvent(obj.getIdCalendar(), Date.from(obj.getDateOfDay().atStartOfDay().atZone(ZoneId.systemDefault()) .toInstant()), 
+					Util.convertHour(obj.getHourOfDay()), this.getTitle(obj), obj.isCancel(), obj.isCompleted(), null, true)).toList());
 		} catch (Exception e) {
-			throw new SoftNutriException("Error list all Calendar ", e);
+			throw new SoftNutriException("CALENDAR.ERROR_LIST_CALENDAR", e);
 		}
 	}
 	
-	public ResponseEntity<MessageResponse> cancel(Long idCalendar) throws SoftNutriException {
+	public void cancel(Long idCalendar) {
 		try {
-				Optional<Calendar> calendar = this.calendarRepository.findById(idCalendar);
-				if (calendar.isPresent()) {
-					Calendar c = calendar.get();
+				final Optional<Calendar> calendar = this.calendarRepository.findById(idCalendar);
+				calendar.ifPresent(c -> {
 					c.setCancel(true);
 					this.calendarRepository.save(c);
-					return ResponseEntity.ok(new MessageResponse("CALENDAR.MSG_CANCEL"));
-				} else {
-					return ResponseEntity.ok(new MessageResponse("CALENDAR.CALENDAR_CANCEL_ERROR"));
-				}
+				});
 		} catch (Exception e) {
-			throw new SoftNutriException("Error cancel Calendar ", e);
+			throw new SoftNutriException("CALENDAR.CALENDAR_CANCEL_ERROR", e);
 		}
 	}
 	
-	public CalendarDTO getCalendar(Long idCalendar) throws SoftNutriException {
+	public CalendarDTO getCalendar(Long idCalendar) {
 		try {
-			Optional<Calendar> calendar = this.calendarRepository.findById(idCalendar);
+			final Optional<Calendar> calendar = this.calendarRepository.findById(idCalendar);
 			if (calendar.isPresent()) {
 				return CalendarDTO.converter(calendar.get());
 			} else {
 				return null;
 			}
 		} catch (Exception e) {
-			throw new SoftNutriException("Error getCalendar ", e);
+			throw new SoftNutriException("CALENDAR.ERROR_GET_CALENDAR", e);
 		}
 	}
 		
-	public ResponseEntity<List<CalendarDTO>> findCalendarProfessional(long idProfessional) throws SoftNutriException { 
+	public List<CalendarDTO> findCalendarProfessional() { 
 		try {
-			return ResponseEntity.ok(CalendarDTO.converter(this.calendarRepository.findByProfessionalIdPersonAndDateOfDayAndCancelOrderByHourOfDayAsc(idProfessional, LocalDate.now(), false)));
+			return CalendarDTO.converter(this.calendarRepository.findByProfessionalIdPersonAndDateOfDayAndCancelOrderByHourOfDayAsc(autenticationService.getUserLogged().getIdPerson(), LocalDate.now(), false));
 		} catch (Exception e) {
-			throw new SoftNutriException("Error findCalendarProfessional ", e);
+			throw new SoftNutriException("CALENDAR.ERROR_LIST_CALENDAR", e);
 		}
 	}
 	
 	private String getTitle(Calendar calendar) {
-		StringBuilder title = new StringBuilder();
+		final StringBuilder title = new StringBuilder();
 		title.append(Criptografia.decode(calendar.getPatient().getName()) + " - " + Criptografia.decode(calendar.getPatient().getEmail()));
-		for(Phone p: calendar.getPatient().getPhones()) {
-			title.append(" - " + Criptografia.decode(p.getNumber()));
-		}
+		calendar.getPatient().getPhones().forEach(p -> 
+			title.append(" - " + Criptografia.decode(p.getNumber()))
+		);
 		return title.toString();
 	}
 }

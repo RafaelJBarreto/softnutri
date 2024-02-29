@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Snack;
 import br.com.softnutri.dto.SnackDTO;
 import br.com.softnutri.exception.SoftNutriException;
@@ -23,49 +21,41 @@ public class SnackService {
 		this.snackRepository = snackRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(SnackDTO snackDTO) throws SoftNutriException { 
+	public void save(SnackDTO snackDTO) { 
 		try {
-			this.snackRepository.save(
-					Snack.builder().idSnack(snackDTO.getIdSnack()).name(snackDTO.getName()).description(snackDTO.getDescription()).build()
-			);
-			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
+			this.snackRepository.save(Snack.builder().idSnack(snackDTO.getIdSnack()).name(snackDTO.getName()).description(snackDTO.getDescription()).build());
 		}catch (Exception e) {
-			throw new SoftNutriException("Error save Snack " + e.getMessage(), e);
+			throw new SoftNutriException("SNACK.ERROR_SAVE_SNACK", e);
 		}
 	}
 	
-	public ResponseEntity<List<SnackDTO>> listAll() throws SoftNutriException { 
+	public List<SnackDTO> listAll() { 
 		try {
-			return ResponseEntity.ok(SnackDTO.converter(this.snackRepository.findAll()));
+			return SnackDTO.converter(this.snackRepository.findAll());
 		}catch (Exception e) {
-			throw new SoftNutriException("Error list all Snack " + e.getMessage(), e);
+			throw new SoftNutriException("SNACK.ERROR_LIST_SNACK", e);
 		}
 	}
 	
-	public SnackDTO get(Long idSnack) throws SoftNutriException {
+	public SnackDTO get(Long idSnack) {
 		try {
-			Optional<Snack> ct = this.snackRepository.findById(idSnack);
+			final Optional<Snack> ct = this.snackRepository.findById(idSnack);
 			if (ct.isPresent()) {
 				return SnackDTO.converter(ct.get());
 			} else {
-				return null;
+				throw new SoftNutriException("SNACK.ERROR_DADO_SNACK");
 			}
 		}catch (Exception e) {
-			throw new SoftNutriException("Error get Snack " + e.getMessage(), e);
+			throw new SoftNutriException("SNACK.ERROR_DADO_SNACK", e);
 		}
 	}
 	
-	public ResponseEntity<MessageResponse> delete(Long id) throws SoftNutriException {
+	public void delete(Long id) {
 		try {
-			Optional<Snack> ct = this.snackRepository.findById(id);
-			if (ct.isPresent()) {
-				this.snackRepository.delete(ct.get());
-				return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
-			} else {
-				return ResponseEntity.ok(new MessageResponse("SNACK.ERROR_DELETE_SNACK"));
-			}
+			final Optional<Snack> ct = this.snackRepository.findById(id);
+			ct.ifPresent(this.snackRepository::delete);
 		}catch (Exception e) {
-			throw new SoftNutriException("Error delete Snack " + e.getMessage(), e);
+			throw new SoftNutriException("SNACK.ERROR_DELETE_SNACK", e);
 		}
 	}
 		 

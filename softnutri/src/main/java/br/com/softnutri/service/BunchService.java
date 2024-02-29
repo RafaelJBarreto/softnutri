@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.domain.Bunch;
 import br.com.softnutri.exception.SoftNutriException;
-import br.com.softnutri.record.BunchRecord;
+import br.com.softnutri.records.BunchDTO;
 import br.com.softnutri.repository.BunchRepository;
 
 @Service
@@ -23,36 +21,28 @@ public class BunchService {
 		this.bunchRepository = bunchRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(BunchRecord br) throws SoftNutriException{ 
+	public void save(BunchDTO br){ 
 		try {
-			this.bunchRepository.save(
-					Bunch.builder().idBunch(br.idBunch()).description(br.description()).build()
-			);
-			return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_CREATE_SUCCESS"));
+			this.bunchRepository.save(Bunch.builder().idBunch(br.idBunch()).description(br.description()).build());
 		}catch (Exception e) {
-			throw new SoftNutriException("Error save Bunch " + e.getMessage(), e);
+			throw new SoftNutriException("BUNCH.ERROR_SAVE_BUNCH", e);
 		}
 	}
 	
-	public ResponseEntity<List<BunchRecord>> listAll() throws SoftNutriException { 
+	public List<BunchDTO> listAll() { 
 		try {
-			return ResponseEntity.ok(this.bunchRepository.findAll().stream().map(obj -> new BunchRecord(obj.getIdBunch(), obj.getDescription())).toList());
+			return this.bunchRepository.findAll().stream().map(obj -> new BunchDTO(obj.getIdBunch(), obj.getDescription())).toList();
 		}catch (Exception e) {
-			throw new SoftNutriException("Error list all Bunch ", e);
+			throw new SoftNutriException("BUNCH.ERROR_LIST_BUNCH", e);
 		}
 	}
 	
-	public ResponseEntity<MessageResponse> delete(Long id) throws SoftNutriException {
+	public void delete(Long id) {
 		try {
-			Optional<Bunch> bunch = this.bunchRepository.findById(id);
-			if (bunch.isPresent()) {
-				bunchRepository.delete(bunch.get());
-				return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));
-			} else {
-				return ResponseEntity.ok(new MessageResponse("BUNCH.BUNCH_REMOVE_ERROR"));
-			}
+			final Optional<Bunch> bunch = this.bunchRepository.findById(id);
+			bunch.ifPresent(bunchRepository::delete); 
 		}catch (Exception e) {
-			throw new SoftNutriException("Error delete Bunch ", e);
+			throw new SoftNutriException("BUNCH.BUNCH_REMOVE_ERROR", e);
 		}
 	}
 	 

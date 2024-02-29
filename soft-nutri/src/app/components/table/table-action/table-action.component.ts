@@ -71,7 +71,7 @@ export class TableActionComponent implements OnInit {
         },
         error: err => { 
           this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant('TABLE.ERROR_SAVE_TABLE'), '', {
+          this.snackBar.open(this.translate.instant(err.error.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
@@ -110,7 +110,7 @@ export class TableActionComponent implements OnInit {
         },
         error: err => { 
           this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant('TABLE.ERROR_DADO_TABLE'), '', {
+          this.snackBar.open(this.translate.instant(err.error.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000

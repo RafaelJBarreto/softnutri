@@ -30,5 +30,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> getProfessional(UserType userType);
 	
 	@Query("SELECT u FROM User u WHERE u.userType = :userType ")
-	List<User> getNutritionist(UserType userType);
+	List<User> getUser(UserType userType);
 }

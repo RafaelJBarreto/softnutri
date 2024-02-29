@@ -1,4 +1,4 @@
-package br.com.softnutri.record;
+package br.com.softnutri.records;
 
 import java.util.Date;
 

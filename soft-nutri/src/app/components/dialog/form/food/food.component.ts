@@ -55,7 +55,7 @@ export class FoodComponent implements OnInit {
       },
       error: err => {
         this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('TABLE.ERROR_LIST_TABLE'), '', {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000
@@ -93,7 +93,7 @@ export class FoodComponent implements OnInit {
         },
         error: err => { 
           this.errorMessage = err.message; 
-          this.snackBar.open('Erro ao cadastrar', '', {
+          this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
             duration: 3000
