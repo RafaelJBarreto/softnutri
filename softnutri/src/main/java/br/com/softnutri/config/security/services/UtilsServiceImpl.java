@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 public class UtilsServiceImpl {
 	
 	private String getUserLogged() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+		final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails userdetails) {
 		    return userdetails.getUsername();
 		}
-		
 		return principal.toString();
 	}
 	

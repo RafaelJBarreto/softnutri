@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.softnutri.config.security.payload.request.LoginRequest;
-import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
+import br.com.softnutri.config.security.payload.request.dto.LoginRequest;
+import br.com.softnutri.config.security.payload.request.dto.TokenRefreshRequest;
 import br.com.softnutri.config.security.payload.response.JwtResponse;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.dto.UserDTO;

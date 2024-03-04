@@ -10,9 +10,7 @@ import br.com.softnutri.domain.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
-	
-	Optional<Person> findById(Long id);
-	
+		
 	Optional<Person> findByEmail(String email);
 
 	List<Person> findByName(String nome);

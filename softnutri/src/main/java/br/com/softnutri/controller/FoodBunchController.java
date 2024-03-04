@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.dto.FoodBunchDTO;
+import br.com.softnutri.records.FoodBunchDTO;
 import br.com.softnutri.service.FoodBunchService;
 
 @RestController

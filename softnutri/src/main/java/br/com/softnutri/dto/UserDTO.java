@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.com.softnutri.domain.User;
 import br.com.softnutri.enuns.UserType;
+import br.com.softnutri.records.PaperDTO;
 import br.com.softnutri.util.Criptografia;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,6 @@ public class UserDTO extends PersonDTO {
 	private LocalDateTime dateRegister;
 	
 	public UserDTO() {
-		super();
 	}
 
 	public UserDTO(User user) {

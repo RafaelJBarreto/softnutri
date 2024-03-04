@@ -72,7 +72,7 @@ public class CalendarService {
 			if (calendar.isPresent()) {
 				return CalendarDTO.converter(calendar.get());
 			} else {
-				return null;
+				throw new SoftNutriException("CALENDAR.ERROR_GET_CALENDAR");
 			}
 		} catch (Exception e) {
 			throw new SoftNutriException("CALENDAR.ERROR_GET_CALENDAR", e);

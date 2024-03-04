@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.softnutri.domain.Person;
 import br.com.softnutri.domain.RefreshToken;
@@ -35,13 +34,14 @@ public class RefreshTokenService {
 
 	public RefreshToken createRefreshToken(Long idPessoa) {
 		RefreshToken refreshToken = new RefreshToken();
-		User u = userRepository.findById(idPessoa).orElseGet(User::new);
+		final User u = userRepository.findById(idPessoa).orElseGet(User::new);
 
 		refreshToken.setPerson(u);
 		refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
 		refreshToken.setToken(UUID.randomUUID().toString());
-		if(validRefreshTokenByPessoa(u))
+		if(validRefreshTokenByPessoa(u)) {
 			refreshToken = refreshTokenRepository.save(refreshToken);
+		}
 		return refreshToken;
 	}
 
@@ -55,14 +55,11 @@ public class RefreshTokenService {
 		return token;
 	}
 	public boolean validRefreshTokenByPessoa(Person pessoa) {
-		Optional<RefreshToken> rT=refreshTokenRepository.findByPerson(pessoa);
-		if(rT.isPresent() ){
-			refreshTokenRepository.delete(rT.get());
-		}
-			return true;
+		final Optional<RefreshToken> rT=refreshTokenRepository.findByPerson(pessoa);
+		rT.ifPresent(refreshTokenRepository::delete);
+		return true;
 	}
 
-	@Transactional
 	public int deleteByUsuarioId(User u) { 
 		return refreshTokenRepository.deleteByPerson(u);
 	}

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softnutri.config.security.payload.response.MessageResponse;
-import br.com.softnutri.dto.PermissionDTO;
-import br.com.softnutri.dto.PersonPaperDTO;
+import br.com.softnutri.records.PermissionDTO;
+import br.com.softnutri.records.PersonPaperDTO;
 import br.com.softnutri.service.PermissionService;
 
 @RestController

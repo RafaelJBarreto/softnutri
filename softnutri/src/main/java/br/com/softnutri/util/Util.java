@@ -15,44 +15,48 @@ public class Util {
 	private static final String ROLE = "ROLE_";
 
 	public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-		Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+		final Map<Object, Boolean> seen = new ConcurrentHashMap<>();
 		return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
 	}
 	
 	public static int getGet(String permission) {
-		if(permission != null)
+		if(permission != null) {
 			return permission.contains("get") ? 1 : 0;
-		else
+		} else {
 			return -1;
+		}
 		
 	}
 	
 	public static int getPost(String permission) {
-		if(permission != null)
+		if(permission != null) {
 			return permission.contains("post") ? 1 : 0;
-		else
+		} else {
 			return -1;
+		}
 		
 	}
 	
 	public static int getPut(String permission) {
-		if(permission != null)
+		if(permission != null) {
 			return permission.contains("put") ? 1 : 0;
-		else
+		} else {
 			return -1;
+		}
 		
 	}
 	
 	public static int getDelete(String permission) {
-		if(permission != null)
+		if(permission != null) {
 			return permission.contains("delete") ? 1 : 0;
-		else
+		} else {
 			return -1;
+		}
 		
 	}
 
 	public static String getRole(PersonPaper paper) {
-		StringBuilder permissoes = new StringBuilder();
+		final StringBuilder permissoes = new StringBuilder();
 		if(paper.getGet() == 1) {
 			permissoes.append(ROLE + paper.getPaper().getDescription().toUpperCase() + "_GET");
 		}
@@ -73,9 +77,9 @@ public class Util {
 	}
 	
 	public static String[] separateRoles(String roles) {
-		StringTokenizer tokenizer = new StringTokenizer(roles, ",");
-        int tokenCount = tokenizer.countTokens();
-        String[] stringArray = new String[tokenCount];
+		final StringTokenizer tokenizer = new StringTokenizer(roles, ",");
+        final int tokenCount = tokenizer.countTokens();
+        final String[] stringArray = new String[tokenCount];
 
         for (int i = 0; i < tokenCount; i++) {
             stringArray[i] = tokenizer.nextToken();

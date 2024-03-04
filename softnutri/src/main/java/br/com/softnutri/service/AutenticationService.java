@@ -15,9 +15,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import br.com.softnutri.config.security.jwt.JwtUtils;
-import br.com.softnutri.config.security.payload.request.LoginRequest;
-import br.com.softnutri.config.security.payload.request.SignupRequest;
-import br.com.softnutri.config.security.payload.request.TokenRefreshRequest;
+import br.com.softnutri.config.security.payload.request.dto.LoginRequest;
+import br.com.softnutri.config.security.payload.request.dto.SignupRequest;
+import br.com.softnutri.config.security.payload.request.dto.TokenRefreshRequest;
 import br.com.softnutri.config.security.payload.response.JwtResponse;
 import br.com.softnutri.config.security.payload.response.MessageResponse;
 import br.com.softnutri.config.security.services.RefreshTokenService;
@@ -28,18 +28,18 @@ import br.com.softnutri.domain.Paper;
 import br.com.softnutri.domain.Person;
 import br.com.softnutri.domain.RefreshToken;
 import br.com.softnutri.domain.User;
-import br.com.softnutri.dto.ModuleDTO;
 import br.com.softnutri.dto.UserDTO;
 import br.com.softnutri.dto.prototype.UserPrototype;
 import br.com.softnutri.exception.TokenRefreshException;
+import br.com.softnutri.records.ModuleDTO;
 import br.com.softnutri.repository.ModuleRepository;
 import br.com.softnutri.repository.UserRepository;
 import br.com.softnutri.util.Criptografia;
 
 public class AutenticationService {
-	
+
 	static final String ROLENOTFOUND = "Error: Papel is not found.";
-	
+
 	private final UserRepository userRepository;
 
 	private final AuthenticationManager authenticationManager;
@@ -49,7 +49,7 @@ public class AutenticationService {
 	private final RefreshTokenService refreshTokenService;
 
 	private final UtilsServiceImpl utils;
-	
+
 	private final ModuleRepository moduleRepository;
 
 	@Autowired
@@ -61,9 +61,9 @@ public class AutenticationService {
 		this.jwtUtils = jwtUtils;
 		this.refreshTokenService = refreshTokenService;
 		this.utils = utils;
-        this.moduleRepository = moduleRepository;
+		this.moduleRepository = moduleRepository;
 	}
-	
+
 	public User updateUsuario(User usuario) {
 		if (usuario.getPassword().isBlank()) {
 			usuario.setPassword(this.userRepository.getSenhaByIdPessoa(usuario.getIdPerson()));
@@ -73,21 +73,20 @@ public class AutenticationService {
 
 	public ResponseEntity<MessageResponse> save(SignupRequest signUpRequest) {
 
-		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+		if (userRepository.existsByEmail(signUpRequest.email())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("GLOBAL.MSG_EMAIL_ALREADY"));
 		}
 
-		User usuario = new User();
-		usuario.setEmail(signUpRequest.getUsername());
-		usuario.setPassword(signUpRequest.getPassword());
-		usuario.setLanguage(signUpRequest.getLanguage());
+		final User usuario = new User();
+		usuario.setEmail(signUpRequest.username());
+		usuario.setPassword(signUpRequest.password());
+		usuario.setLanguage(signUpRequest.language());
 
-		Set<String> strPapels = signUpRequest.getRole();
-		Set<Paper> papels = new HashSet<>();
+		final Set<String> strPapels = signUpRequest.role();
+		final Set<Paper> papels = new HashSet<>();
 
 		if (strPapels == null) {
-			Paper usuarioPapel = new Paper();
-
+			final Paper usuarioPapel = new Paper();
 			papels.add(usuarioPapel);
 		}
 
@@ -96,26 +95,25 @@ public class AutenticationService {
 	}
 
 	public ResponseEntity<JwtResponse> autenticacao(LoginRequest loginRequest) {
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(Criptografia.encode(loginRequest.getUsername()), loginRequest.getPassword()));
+		final Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(Criptografia.encode(loginRequest.username()),
+						loginRequest.password()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		JwtResponse jwt = gerarTokens(authentication);
-		return ResponseEntity.ok(jwt);
+		return ResponseEntity.ok(gerarTokens(authentication));
 	}
-	
+
 	/**
 	 * @param request
 	 * @return
 	 * @throws TokenRefreshException
 	 */
-	public ResponseEntity<JwtResponse> refreshToken(TokenRefreshRequest request) throws TokenRefreshException {
-		String requestRefreshToken = request.getRefreshToken();
-		Optional<Person> resultUsuario = refreshTokenService.findByToken(requestRefreshToken)
+	public ResponseEntity<JwtResponse> refreshToken(TokenRefreshRequest request) {
+		final String requestRefreshToken = request.refreshToken();
+		final Optional<Person> resultUsuario = refreshTokenService.findByToken(requestRefreshToken)
 				.map(refreshTokenService::verifyExpiration).map(RefreshToken::getPerson);
 		if (resultUsuario.isPresent()) {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			JwtResponse jwt = gerarTokens(authentication);
-			return ResponseEntity.ok(jwt);
+			final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			return ResponseEntity.ok(gerarTokens(authentication));
 		}
 
 		throw new TokenRefreshException(requestRefreshToken, "Refresh token is not in database!");
@@ -126,22 +124,21 @@ public class AutenticationService {
 	 * @return JwtResponse
 	 */
 	private JwtResponse gerarTokens(Authentication authentication) {
-		UserDetailsImpl usuarioDetails = (UserDetailsImpl) authentication.getPrincipal();
-		String languageUsuario = this.getLanguageUsuario(usuarioDetails.getId());
-		JwtResponse jwt = jwtUtils.generateToken(authentication);
-		List<String> papels = usuarioDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+		final UserDetailsImpl usuarioDetails = (UserDetailsImpl) authentication.getPrincipal();
+		final String languageUsuario = this.getLanguageUsuario(usuarioDetails.getId());
+		final JwtResponse jwt = jwtUtils.generateToken(authentication);
+		final List<String> papels = usuarioDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
 				.toList();
-		List<Module> modules = moduleRepository.findModuleByIdPessoa(usuarioDetails.getId());
-				
-		RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
-		jwt.setLanguage(languageUsuario);
-		jwt.setRefreshToken(refreshToken.getToken());
-		jwt.setRoles(papels);
-		jwt.setModules(ModuleDTO.converter(modules));
-		return jwt;
+		final List<Module> modules = moduleRepository.findModuleByIdPessoa(usuarioDetails.getId());
+
+		final RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
+		return new JwtResponse(jwt.token(), jwt.type(), refreshToken.getToken(), languageUsuario, jwt.expiration(),
+				papels,
+				modules.stream().map(
+						o -> new ModuleDTO(o.getIdModule(), o.getName(), o.getPathBase(), o.getIcon(), o.getOrders()))
+						.toList());
 	}
 
-	
 	public String getLanguageUsuario(Long idPessoa) {
 		return this.userRepository.findIdiomaByIdPessoa(idPessoa);
 	}
@@ -151,10 +148,10 @@ public class AutenticationService {
 	 * @return
 	 */
 	public ResponseEntity<MessageResponse> logOut(User u) {
-		refreshTokenService.deleteByUsuarioId(u);
+		this.refreshTokenService.deleteByUsuarioId(u);
 		return ResponseEntity.ok(new MessageResponse("Log out successful!"));
 	}
-	
+
 	/**
 	 * @param usuario
 	 * @return
@@ -163,7 +160,7 @@ public class AutenticationService {
 		UserDTO resultDTO = null;
 		try {
 			if (utils.verifyUserLogged(usuario.getEmail())) {
-				User usuarioParam =  UserPrototype.getUser(usuario, null);
+				final User usuarioParam = UserPrototype.getUser(usuario, null);
 				if (!usuarioParam.getPassword().isBlank()) {
 					usuarioParam.setPassword(usuarioParam.getPassword());
 				}
@@ -178,9 +175,9 @@ public class AutenticationService {
 	}
 
 	public User getUserLogged() {
-		Authentication principal = SecurityContextHolder.getContext().getAuthentication();  
-		Optional<User> user = this.userRepository.findByEmail(principal.getName());
-		return user.isPresent() ? user.get() : null; 
+		final Authentication principal = SecurityContextHolder.getContext().getAuthentication();
+		final Optional<User> user = this.userRepository.findByEmail(principal.getName());
+		return user.isPresent() ? user.get() : null;
 	}
 
 }

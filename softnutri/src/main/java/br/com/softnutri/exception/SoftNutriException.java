@@ -12,15 +12,12 @@ public class SoftNutriException extends RuntimeException {
 	
 	public SoftNutriException(String message, Throwable cause) {
 		 super(message, cause);
-		 Throwable causeA = cause.getCause();
+		 final Throwable causeA = cause.getCause();
 		 if (causeA instanceof ConstraintViolationException) {
-			 ConstraintViolationException sqlEx = (ConstraintViolationException) cause.getCause();
+			 final ConstraintViolationException sqlEx = (ConstraintViolationException) cause.getCause();
 		     log.error(super.getMessage() + CAUSE + sqlEx.getSQLException().getLocalizedMessage() + " Error code: " + sqlEx.getErrorCode());     
-		 }else	if (causeA instanceof ArrayIndexOutOfBoundsException) {
-			 ArrayIndexOutOfBoundsException arrayEx = (ArrayIndexOutOfBoundsException) cause.getCause();
-		     log.error(super.getMessage() + CAUSE + arrayEx.getLocalizedMessage());     
 		 }else {
-			 log.error(super.getMessage() + CAUSE + super.getLocalizedMessage());     
+			 log.error(super.getMessage() + CAUSE + cause.getMessage());     
 		 }
     }
 	

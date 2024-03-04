@@ -12,11 +12,10 @@ import br.com.softnutri.domain.ModuleRole;
 import br.com.softnutri.domain.Paper;
 import br.com.softnutri.domain.PersonPaper;
 import br.com.softnutri.domain.User;
-import br.com.softnutri.dto.PaperDTO;
-import br.com.softnutri.dto.PermissionDTO;
-import br.com.softnutri.dto.PersonPaperDTO;
 import br.com.softnutri.exception.SoftNutriException;
 import br.com.softnutri.interfaces.PermissionReturn;
+import br.com.softnutri.records.PermissionDTO;
+import br.com.softnutri.records.PersonPaperDTO;
 import br.com.softnutri.repository.ModuleRoleRepository;
 import br.com.softnutri.repository.PersonPaperRepository;
 import br.com.softnutri.util.Util;
@@ -26,11 +25,13 @@ public class PermissionService{
 
 	private final ModuleRoleRepository moduleRoleRepository;
 	private final PersonPaperRepository personPaperRepository;
+	private final PaperService paperService;
 
 	@Autowired
-	public PermissionService(ModuleRoleRepository moduleRoleRepository, PersonPaperRepository personPaperRepository) {
+	public PermissionService(ModuleRoleRepository moduleRoleRepository, PersonPaperRepository personPaperRepository, PaperService paperService) {
 		this.moduleRoleRepository = moduleRoleRepository;
 		this.personPaperRepository = personPaperRepository;
+		this.paperService = paperService;
 	}
 	
 	public List<PermissionDTO> getPermission(Long idUsuario){
@@ -40,7 +41,7 @@ public class PermissionService{
 			if(listPermission.isEmpty()) {
 				resultado.addAll(arrangePermission(this.moduleRoleRepository.findAll()));
 			}else {
-				final List<ModuleRole> list = this.moduleRoleRepository.getNotPermissionPerson(PaperDTO.converterToLong(listPermission)).stream().map(c -> 
+				final List<ModuleRole> list = this.moduleRoleRepository.getNotPermissionPerson(listPermission.stream().map(PermissionReturn::getIdPaper).toList()).stream().map(c -> 
 				ModuleRole.builder()
 							.paper(
 							   Paper.builder().idPaper(c.getIdPaper()).description(c.getDescription()).get(c.getAccess()).post(c.getSend()).put(c.getAlterar()).delete(c.getRemove()).build())
@@ -51,7 +52,7 @@ public class PermissionService{
 				resultado.addAll(arrangePermission(list));
 			}
 			
-			return resultado.stream().sorted(Comparator.comparing(PermissionDTO::getIdModule)).toList();
+			return resultado.stream().sorted(Comparator.comparing(PermissionDTO::idModule)).toList();
 		} catch (Exception e) {
 			throw new SoftNutriException("PERMISSION.LIST_PERMISSION", e);
 		}
@@ -62,7 +63,7 @@ public class PermissionService{
 		final List<PermissionDTO> resultado = new ArrayList<>();
 		final List<ModuleRole> modules = list.stream() .filter(Util.distinctByKey(p -> p.getModule().getIdModule())).toList();
 		modules.forEach(mr -> 
-			resultado.add(new PermissionDTO(mr.getModule().getIdModule(), mr.getModule().getName(), PaperDTO.converter(list.stream().filter(d -> mr.getModule().getIdModule().equals(d.getModule().getIdModule())).toList())))
+			resultado.add(new PermissionDTO(mr.getModule().getIdModule(), mr.getModule().getName(), this.paperService.converterPermission(list.stream().filter(d -> mr.getModule().getIdModule().equals(d.getModule().getIdModule())).toList()), false))
 		);
 		return resultado;
 
@@ -72,19 +73,19 @@ public class PermissionService{
 			final List<PermissionDTO> resultado = new ArrayList<>();
 			final List<PermissionReturn> modules = list.stream() .filter(Util.distinctByKey(PermissionReturn::getIdModule)).toList();
 			modules.forEach(mr -> 
-				resultado.add(new PermissionDTO(mr.getIdModule(), mr.getName(), PaperDTO.converterPermissionTrue(list.stream().filter(d -> mr.getIdModule().equals(d.getIdModule())).toList())))
+				resultado.add(new PermissionDTO(mr.getIdModule(), mr.getName(), this.paperService.converterPermissionTrue(list.stream().filter(d -> mr.getIdModule().equals(d.getIdModule())).toList()), false))
 			);
 			return resultado;
 	}
 
 	public void save(PersonPaperDTO dto){
 		try {
-			final List<PersonPaper> permissions = this.personPaperRepository.findByUserIdPerson(dto.getIdPerson()).stream().toList();
-			dto.getPermission().forEach(p -> 
-				p.getPaper().forEach(pp -> {
-					final PersonPaper personPaper = permissions.stream().filter(x -> pp.getIdPaper().equals(x.getPaper().getIdPaper())).findAny().orElse(null);
+			final List<PersonPaper> permissions = this.personPaperRepository.findByUserIdPerson(dto.idPerson()).stream().toList();
+			dto.permission().forEach(p -> 
+				p.paper().forEach(pp -> {
+					final PersonPaper personPaper = permissions.stream().filter(x -> pp.idPaper().equals(x.getPaper().getIdPaper())).findAny().orElse(null);
 					this.personPaperRepository.save(
-							PersonPaper.builder().idPersonPaper(personPaper == null ? null : personPaper.getIdPersonPaper()).user(User.builder().idPerson(dto.getIdPerson()).build()).paper( Paper.builder().idPaper(pp.getIdPaper()).build()).get(pp.getGet()).post(pp.getPost()).put(pp.getPut()).delete(pp.getDelete()).build());
+							PersonPaper.builder().idPersonPaper(personPaper == null ? null : personPaper.getIdPersonPaper()).user(User.builder().idPerson(dto.idPerson()).build()).paper( Paper.builder().idPaper(pp.idPaper()).build()).get(pp.get()).post(pp.post()).put(pp.put()).delete(pp.delete()).build());
 				})
 				
 			);

@@ -33,10 +33,10 @@ public class JwtUtils {
 
 	public String generateTokenFromUsername(Authentication authentication, Date expiration) {
 		
-		 String authorities = authentication.getAuthorities().stream()
+		 final String authorities = authentication.getAuthorities().stream()
 	                .map(GrantedAuthority::getAuthority)
 	                .collect(Collectors.joining(","));
-		 Map<String, Object> claims = new HashMap<>();
+		 final Map<String, Object> claims = new HashMap<>();
 		 claims.put("id", authentication.getName());
 		 claims.put("roles", authorities);
 		 
@@ -49,13 +49,9 @@ public class JwtUtils {
         .compact();
 	}
 	 public JwtResponse generateToken(Authentication authentication) {
-
-         JwtResponse response = new JwtResponse();
-         Date expiration =  new Date((new Date()).getTime() + jwtExpirationMs);
-         String token = generateTokenFromUsername(authentication, expiration);
-         response.setToken(token);
-         response.setExpiration(expiration); 
-         return response;
+		final Date expiration =  new Date((new Date()).getTime() + jwtExpirationMs);
+	    final String token = generateTokenFromUsername(authentication, expiration);
+		return new JwtResponse(generateTokenFromUsername(authentication, expiration), "Bearer", token, null, expiration, null, null);
 	 }
 
 	public String getUserNameFromJwtToken(String token) {

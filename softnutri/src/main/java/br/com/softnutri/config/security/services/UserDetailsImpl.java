@@ -18,14 +18,14 @@ public class UserDetailsImpl implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	  private Long id;
+	  private final Long id;
 
-	  private String username;
+	  private final String username;
 
 	  @JsonIgnore
-	  private String password;
+	  private final String password;
 
-	  private Collection<? extends GrantedAuthority> authorities;
+	  private final Collection<? extends GrantedAuthority> authorities;
 
 	  public UserDetailsImpl(Long id, String username, String password,
 	      Collection<? extends GrantedAuthority> authorities) {
@@ -36,13 +36,10 @@ public class UserDetailsImpl implements UserDetails {
 	  }
 
 	  public static UserDetailsImpl build(User user, List<PersonPaper> paper) {
-		  List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		  for(PersonPaper pp: paper) {
-			  String roles = Util.getRole(pp);
-			  if(!roles.equals("")) {
-				  authorities.add(new SimpleGrantedAuthority(roles));
-			  }
-		  }
+		  final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		  paper.stream().map(Util::getRole).filter(roles -> !"".equals(roles)).forEach(roles -> 
+			  authorities.add(new SimpleGrantedAuthority(roles))
+		  );
 
 	    return new UserDetailsImpl(user.getIdPerson(), user.getEmail(),  user.getPassword(),  authorities);
 	  }
