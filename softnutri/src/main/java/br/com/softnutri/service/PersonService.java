@@ -21,9 +21,9 @@ public class PersonService {
 		this.personRepository = personRepository;
 	}
 
-	public ResponseEntity<MessageResponse> delete(Long idPerson) throws SoftNutriException {
+	public ResponseEntity<MessageResponse> delete(Long idPerson) {
 		try {
-			Optional<Person> person = this.personRepository.findById(idPerson);
+			final Optional<Person> person = this.personRepository.findById(idPerson);
 			if (person.isPresent()) {
 				personRepository.delete(person.get());
 				return ResponseEntity.ok(new MessageResponse("GLOBAL.MSG_REMOVE"));

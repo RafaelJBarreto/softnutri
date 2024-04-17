@@ -98,7 +98,7 @@ public enum ModuleAll {
 	}
 
 	private static List<PaperAll> getPapers(String name) {
-		EnumSet<PaperAll> list = listPapers();
+		final EnumSet<PaperAll> list = listPapers();
 		return list.stream().filter(c -> c.name().contains(name.toUpperCase())).toList();
 	}
 

@@ -2,7 +2,6 @@ package br.com.softnutri.domain;
 
 import java.util.List;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,10 +30,9 @@ public class Bunch {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idBunch;
 
-	@Basic(optional = false)
 	@Column(name = "description", nullable = false, length = 100)
 	private String description;
-	
+
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "bunch", fetch = FetchType.LAZY)
 	private List<FoodBunch> foodBunch;
 

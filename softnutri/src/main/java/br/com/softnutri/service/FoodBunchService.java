@@ -70,7 +70,7 @@ public class FoodBunchService {
 	}
 	
 	private List<FoodBunchDTO> converter(List<FoodBunchReturn> list){
-		return list.stream().map(o -> new FoodBunchDTO(o.getIdFoodBunch(), new BunchDTO(o.getIdBunch(), o.getDescription()), new FoodDTO(o.getIdFood(), o.getDescription(), o.getDescriptionPreparation(), 
+		return list.stream().map(o -> new FoodBunchDTO(o.getIdFoodBunch(), new BunchDTO(o.getIdBunch(), o.getDescription()), new FoodDTO(o.getIdFood(), o.getDescriptionFood(), o.getDescriptionPreparation(), 
 				new CompositionTableDTO(o.getIdCompositionTable(), o.getNameTable(), o.getDescriptionPreparation()), 
 				new NutritionalDataDTO(o.getCalories(), o.getProtein(), o.getLipids(), o.getCarbohydrate())), Collections.emptyList())).toList();
 	}

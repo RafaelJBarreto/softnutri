@@ -14,9 +14,8 @@ import br.com.softnutri.domain.PersonPaper;
 import br.com.softnutri.domain.User;
 import br.com.softnutri.util.Util;
 
+@SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
-
-	private static final long serialVersionUID = 1L;
 
 	  private final Long id;
 

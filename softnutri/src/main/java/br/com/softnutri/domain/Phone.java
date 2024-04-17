@@ -1,6 +1,5 @@
 package br.com.softnutri.domain;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,7 +27,6 @@ public class Phone {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPhone;
 
-	@Basic(optional = true)
 	@Column(name = "number", nullable = true)
 	private String number;
 

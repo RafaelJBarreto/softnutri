@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class Criptografia {
 
 	protected Criptografia() {
-		super();
 	}
 
 	public static String encode(String encodedString) {

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.softnutri.enuns.UserType;
-import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,19 +30,15 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "user")
 public class User extends Person {
 
-	@Basic(optional = true)
 	@Column(name = "password", nullable = true)
 	private String password;
 
-	@Basic(optional = true)
 	@Column(name = "language", nullable = true)
 	private String language;
 
-	@Basic(optional = false)
 	@Column(name = "userType", nullable = false, length = 30)
 	private UserType userType;
 
-	@Basic(optional = false)
 	@Column(name = "dateRegister", nullable = false)
 	private LocalDateTime dateRegister;
 

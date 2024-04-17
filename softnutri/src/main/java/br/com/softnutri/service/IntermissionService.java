@@ -22,7 +22,7 @@ public class IntermissionService {
 		this.intermissionRepository = intermissionRepository;
 	}
 	
-	public ResponseEntity<MessageResponse> save(IntermissionDTO intermissionDTO)throws SoftNutriException { 
+	public ResponseEntity<MessageResponse> save(IntermissionDTO intermissionDTO) { 
 		try {
 			this.intermissionRepository.save(
 					Intermission.builder().idIntermission(intermissionDTO.getIdIntermission()).time(intermissionDTO.getTime()).build()
@@ -34,7 +34,7 @@ public class IntermissionService {
 		}	
 	}
 	
-	public IntermissionDTO get() throws SoftNutriException{ 
+	public IntermissionDTO get(){ 
 		try {
 			List<Intermission> intermission = this.intermissionRepository.findAll();
 			if (!intermission.isEmpty()) {

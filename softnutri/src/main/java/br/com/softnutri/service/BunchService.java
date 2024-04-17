@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.softnutri.domain.Bunch;
 import br.com.softnutri.exception.SoftNutriException;
@@ -21,6 +22,7 @@ public class BunchService {
 		this.bunchRepository = bunchRepository;
 	}
 	
+	@Transactional
 	public void save(BunchDTO br){ 
 		try {
 			this.bunchRepository.save(Bunch.builder().idBunch(br.idBunch()).description(br.description()).build());

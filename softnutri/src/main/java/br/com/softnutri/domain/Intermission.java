@@ -1,6 +1,5 @@
 package br.com.softnutri.domain;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +25,6 @@ public class Intermission {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idIntermission;
 
-	@Basic(optional = true)
 	@Column(name = "time", nullable = true)
 	private int time;
 }

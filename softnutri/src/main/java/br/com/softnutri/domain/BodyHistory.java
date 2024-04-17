@@ -3,7 +3,6 @@ package br.com.softnutri.domain;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,19 +21,15 @@ public class BodyHistory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idBodyHistory;
 
-	@Basic(optional = false)
 	@Column(name = "data", nullable = false)
 	private LocalDateTime data;
 
-	@Basic(optional = false)
 	@Column(name = "weight", nullable = false)
 	private BigDecimal weight;
 
-	@Basic(optional = false)
 	@Column(name = "height", nullable = false)
 	protected BigDecimal height;
 
-	@Basic(optional = false)
 	@Column(name = "imc", nullable = false)
 	private BigDecimal imc;
 

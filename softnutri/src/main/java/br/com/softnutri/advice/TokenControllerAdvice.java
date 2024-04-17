@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import br.com.softnutri.exception.TokenRefreshException;
+import br.com.softnutri.exception.dto.ErrorMessage;
 
 
 @RestControllerAdvice

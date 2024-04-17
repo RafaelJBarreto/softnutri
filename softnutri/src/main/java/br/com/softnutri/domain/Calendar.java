@@ -3,7 +3,6 @@ package br.com.softnutri.domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,21 +44,17 @@ public class Calendar {
 	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private User receptionist;
 
-	@Basic(optional = false)
 	@Column(name = "dateOfDay", nullable = false)
 	private LocalDate dateOfDay;
 
-	@Basic(optional = false)
 	@Column(name = "hourOfDay", nullable = false)
 	private LocalTime hourOfDay;
 
 	private String note;
 
-	@Basic(optional = false)
 	@Column(name = "completed", nullable = false)
 	private boolean completed;
 
-	@Basic(optional = false)
 	@Column(name = "cancel", nullable = false)
 	private boolean cancel;
 }

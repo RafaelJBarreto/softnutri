@@ -1,4 +1,4 @@
-package br.com.softnutri.advice;
+package br.com.softnutri.exception.dto;
 
 import java.time.LocalDateTime;
 
