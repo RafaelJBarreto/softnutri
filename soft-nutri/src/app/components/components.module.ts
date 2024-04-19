@@ -75,8 +75,7 @@ import {
     ProfessionalDeleteComponent
 } from './professional/professional-delete/professional-delete.component';
 import { ProfessionalComponent } from './professional/professional.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { HeaderModule } from './shared/header/containers/header/header.module';
+import { HeaderModule } from './shared/header/components/header.module';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { NutritionalDataComponent } from './shared/nutrional-data/nutritional-data.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -105,7 +104,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FoodsComponent,
     FoodComponent,
     SidebarComponent,
-    FooterComponent,
     LayoutComponent,
     NutritionalDataComponent,
     FoodGroupComponent,
@@ -179,7 +177,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    AuthModule,
     MatGridListModule,
     NgxMaskModule,
     FontAwesomeModule,
@@ -198,7 +195,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports: [
     SidebarComponent,
     HeaderModule,
-    LayoutComponent
+    LayoutComponent,
+    AuthModule,
   ],
   providers:[ authInterceptorProviders,ConstService,
     {

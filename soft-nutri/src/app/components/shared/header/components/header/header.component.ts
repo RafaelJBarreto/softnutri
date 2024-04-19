@@ -13,14 +13,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   @Input() isMenuOpened!: boolean;
   @Output() isShowSidebar = new EventEmitter<boolean>();
-  //public user$: Observable<User> 
-
+ 
   constructor(
     private authService: AuthService,
     private router: Router,
     private global: ConstService
   ) {
-    //this.user$ = this.userService.getUser();
   }
 
   public openMenu(): void {
@@ -31,7 +29,7 @@ export class HeaderComponent {
 
   public signOut(): void {
     this.authService.signOut();
-
     this.router.navigate([this.global.redirect.LOGIN]);
   }
+
 }

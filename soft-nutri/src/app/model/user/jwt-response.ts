@@ -6,6 +6,7 @@ import { ModuleUser } from '../module/module';
     providedIn: 'root',
   })
 export class JwtResponse {
+    
     public _token!: string;
     public refreshToken!: string;
     public type!: string;
@@ -13,4 +14,5 @@ export class JwtResponse {
     public language!: string;
     public expiration!: Date;
     public modules!: ModuleUser[];
+    public email!: string;;
 }

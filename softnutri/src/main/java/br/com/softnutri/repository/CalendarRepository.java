@@ -12,5 +12,7 @@ import br.com.softnutri.domain.Calendar;
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
 
 	List<Calendar> findByProfessionalIdPersonAndDateOfDayAndCancelOrderByHourOfDayAsc(Long idPessoa, LocalDate now, boolean cancel);
+	
+	List<Calendar> findByCompletedAndCancel(boolean completed, boolean cancel);
 
 }

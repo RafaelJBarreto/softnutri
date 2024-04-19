@@ -526,3 +526,18 @@ button {
 .mat-mdc-dialog-actions {
   justify-content: end !important;
 }
+
+.mat-drawer-side {
+  box-shadow: none;
+  border-right-color: var(--mat-sidenav-container-divider-color);
+  border-right-width: 1px;
+  border-right-style: solid;
+  width: 220px !important;
+}
+
+
+.mat-button-toggle-disabled .mat-button-toggle-button {
+  cursor: default;
+  background-color: #cdc8c8;
+  opacity: 0.4;
+}

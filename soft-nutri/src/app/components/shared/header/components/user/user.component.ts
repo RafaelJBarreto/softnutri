@@ -11,6 +11,8 @@ export class UserComponent {
   @Input() user!: UserSimple;
   @Output() signOut: EventEmitter<void> = new EventEmitter<void>(); 
 
+
+
   public signOutEmit(): void {
     this.signOut.emit();
   }

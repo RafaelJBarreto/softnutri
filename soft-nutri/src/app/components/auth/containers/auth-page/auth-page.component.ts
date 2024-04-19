@@ -1,4 +1,3 @@
-import { MyErrorStateMatcher } from 'src/app/errors';
 import { AuthService } from 'src/app/services/';
 import { ConstService } from 'src/app/services/shared/const.service';
 
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class AuthPageComponent {
   public currentYear: number = new Date().getFullYear();
-  matcher = new MyErrorStateMatcher();
   errorMessage = '';
 
   constructor(
@@ -21,11 +19,13 @@ export class AuthPageComponent {
     private snackBar: MatSnackBar,
     private router: Router,
     private global: ConstService
-  ) { }
+  ) { 
+  }
 
   public sendLoginForm(sign: any): void { 
     this.service.login(sign).subscribe({
       next: data => {
+        this.global.setEmail(data['email']);
         this.global.setTokenVar(data['token']);
         this.global.setRefreshTokenVar(data['refreshToken']);
         this.global.setTypeVar(data['type']);
@@ -36,7 +36,6 @@ export class AuthPageComponent {
         this.router.navigate([this.global.redirect.HOME]).then();
       },
       error: err => {
-        debugger;
         this.errorMessage = err.message;
         this.snackBar.open('Login ou senha inválido', '', {
           horizontalPosition: 'right',

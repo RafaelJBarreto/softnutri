@@ -4,7 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class Criptografia {
+public final class Criptografia {
 
 	protected Criptografia() {
 	}

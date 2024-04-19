@@ -99,7 +99,7 @@
         "FOOD_CARBOHYDRATE": "Carboidrato",
         "FOOD_EXEMPLE_FILTER": "Ex. Arroz",
         "FOOD_NEW_FOOD": "Novo Alimento",
-        "FOOD_NEW_FOOD_GROUP": "Novo Grupo de Alimento",
+        "FOOD_NEW_FOOD_GROUP": "Grupo de Alimento",
         "FOOD_FOOD_GROUP": "Grupo de Alimento",
         "FOOD_TITLE": "Alimentos",
         "ERROR_FOOD_BUNCH": "Erro ao tentar cadastrar grupo de alimento.",
@@ -198,7 +198,8 @@
         "TODAY": "Hoje",
         "NEXT": "Próximo",
         "UPDATE_CALENDAR":"Alterar agendamento",
-        "ERROR_GET_CALENDAR": "Erro ao tentar recuperar agendamento."
+        "ERROR_GET_CALENDAR": "Erro ao tentar recuperar agendamento.",
+        "CALENDAR_CANCEL_AUTOMATICALLY": "Agendamento cancelado automaticamente"
 
     },
     "INTERVAL":{

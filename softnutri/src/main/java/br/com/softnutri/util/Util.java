@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
 import br.com.softnutri.domain.PersonPaper;
 
-public class Util {
+public final class Util {
 	
 	private static final String ROLE = "ROLE_";
 

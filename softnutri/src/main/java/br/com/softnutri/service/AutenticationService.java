@@ -132,7 +132,7 @@ public class AutenticationService {
 		final List<Module> modules = moduleRepository.findModuleByIdPessoa(usuarioDetails.getId());
 
 		final RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
-		return new JwtResponse(jwt.token(), jwt.type(), refreshToken.getToken(), languageUsuario, jwt.expiration(),
+		return new JwtResponse(Criptografia.decode(authentication.getName()), jwt.token(), jwt.type(), refreshToken.getToken(), languageUsuario, jwt.expiration(),
 				papels,
 				modules.stream().map(
 						o -> new ModuleDTO(o.getIdModule(), o.getName(), o.getPathBase(), o.getIcon(), o.getOrders()))

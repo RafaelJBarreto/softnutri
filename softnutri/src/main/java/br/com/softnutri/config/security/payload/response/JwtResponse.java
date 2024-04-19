@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.softnutri.records.ModuleDTO;
 
-public record JwtResponse(String token, String type, String refreshToken, String language, Date expiration,
+public record JwtResponse(String email, String token, String type, String refreshToken, String language, Date expiration,
 		List<String> roles, List<ModuleDTO> modules) {
 
 }

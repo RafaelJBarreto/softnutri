@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { UserComponent } from '../../components/user/user.component';
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from './header/header.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { HeaderComponent } from './header.component';
     UserComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +28,8 @@ import { HeaderComponent } from './header.component';
     MatMenuModule,
     MatButtonModule,
     MatInputModule,
-    MatBadgeModule
+    MatBadgeModule,
   ]
 })
-export class HeaderModule { }
+export class HeaderModule {  
+ }

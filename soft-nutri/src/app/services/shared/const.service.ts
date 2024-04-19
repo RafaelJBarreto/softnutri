@@ -180,15 +180,22 @@ export class ConstService implements OnChanges{
         FOOD: '/food',
         LOGIN: '/login',
     };
+
     constructor() {
         var valid = localStorage.getItem('safe');
-        if(valid !=null)
-        this.jwtResponse=JSON.parse(atob(valid)); 
+        if(valid !=null){
+            this.jwtResponse=JSON.parse(atob(valid)); 
+        }
     } 
 
     ngOnChanges(): void {
         localStorage.setItem('safe',btoa(JSON.stringify(this.jwtResponse)));
     }  
+
+    setEmail(email: string) {
+        this.ngOnChanges();
+        this.jwtResponse.email = email;
+    }
 
     setTypeVar(type: string) {
         this.ngOnChanges();

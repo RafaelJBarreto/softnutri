@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import br.com.softnutri.config.security.payload.response.JwtResponse;
+import br.com.softnutri.util.Criptografia;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -33,9 +34,7 @@ public class JwtUtils {
 
 	public String generateTokenFromUsername(Authentication authentication, Date expiration) {
 		
-		 final String authorities = authentication.getAuthorities().stream()
-	                .map(GrantedAuthority::getAuthority)
-	                .collect(Collectors.joining(","));
+		 final String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
 		 final Map<String, Object> claims = new HashMap<>();
 		 claims.put("id", authentication.getName());
 		 claims.put("roles", authorities);
@@ -51,7 +50,7 @@ public class JwtUtils {
 	 public JwtResponse generateToken(Authentication authentication) {
 		final Date expiration =  new Date((new Date()).getTime() + jwtExpirationMs);
 	    final String token = generateTokenFromUsername(authentication, expiration);
-		return new JwtResponse(generateTokenFromUsername(authentication, expiration), "Bearer", token, null, expiration, null, null);
+		return new JwtResponse(Criptografia.decode(authentication.getName()), generateTokenFromUsername(authentication, expiration), "Bearer", token, null, expiration, null, null);
 	 }
 
 	public String getUserNameFromJwtToken(String token) {
