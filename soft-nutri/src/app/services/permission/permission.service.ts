@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { PersonPaper } from 'src/app/model/permission/personPaper';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,27 +7,22 @@ import { Injectable } from '@angular/core';
 import { ConstService } from '../shared/const.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PermissionService { 
+export class PermissionService {
+  constructor(private http: HttpClient, private api: ConstService) {}
 
-  constructor(
-    private http: HttpClient,
-    private api:ConstService
-  ) { }
-
-  listAll(): Observable<any> { 
-    return this.http.get(this.api.rest.professional.listall);
+  listAll(): Promise<any> {
+    return firstValueFrom(this.http.get(this.api.rest.professional.listall));
   }
 
-  save(obj:PersonPaper): Observable<any> {
-    return this.http.post(this.api.rest.permission.save, obj );
-  } 
-  get(idUser:any): Observable<any> {
-    return this.http.get(this.api.rest.permission.get + idUser );
-  } 
-
+  save(obj: PersonPaper): Promise<any> {
+    return firstValueFrom(this.http.post(this.api.rest.permission.save, obj));
+  }
+  get(idUser: any): Promise<any> {
+    return firstValueFrom(this.http.get(this.api.rest.permission.get + idUser));
+  }
 }

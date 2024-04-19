@@ -8,10 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-professional-delete',
   templateUrl: './professional-delete.component.html',
-  styleUrls: ['./professional-delete.component.scss']
+  styleUrls: ['./professional-delete.component.scss'],
 })
-export class ProfessionalDeleteComponent{
-
+export class ProfessionalDeleteComponent {
   public action: any;
 
   constructor(
@@ -20,27 +19,25 @@ export class ProfessionalDeleteComponent{
     private service: ProfessionalService,
     public translate: TranslateService,
     private snackBar: MatSnackBar
-  ) {
-  }
+  ) {}
 
   onClickDelete(): void {
-    this.service.delete(this.data.id).subscribe({
-      next: data => {
+    this.service
+      .delete(this.data.id)
+      .then((data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('PROFESSIONAL.ERROR_DELETE_PROFESSIONAL'), 'Error', {
+      })
+      .catch((err) => {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      }
-    });
+      });
     this.dialogRef.close();
   }
-
 }

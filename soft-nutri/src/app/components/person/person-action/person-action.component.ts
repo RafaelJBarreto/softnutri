@@ -5,7 +5,11 @@ import { PersonService } from 'src/app/services';
 import { ConstService } from 'src/app/services/shared/const.service';
 
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,24 +17,24 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-person-action',
   templateUrl: './person-action.component.html',
-  styleUrls: ['./person-action.component.scss']
+  styleUrls: ['./person-action.component.scss'],
 })
 export class PersonActionComponent implements OnInit {
   public back: any;
   public form!: UntypedFormGroup;
-  user: User = new User;  
-  errorMessage: any; 
+  user: User = new User();
+  errorMessage: any;
   isEdit!: boolean;
-  
-  constructor(  
-    private activatedroute:ActivatedRoute,
-    public service:PersonService,
+
+  constructor(
+    private activatedroute: ActivatedRoute,
+    public service: PersonService,
     public translate: TranslateService,
     private snackBar: MatSnackBar,
-    private global:ConstService,
+    private global: ConstService,
     private router: Router
   ) {
-    this.back= this.global.rest.patient.patient
+    this.back = this.global.rest.patient.patient;
   }
 
   ngOnInit(): void {
@@ -39,69 +43,72 @@ export class PersonActionComponent implements OnInit {
   }
 
   public send(): void {
-    if (this.form.valid) { 
+    if (this.form.valid) {
       this.setObject();
-      this.service.save(this.user).subscribe({
-        next: data => {  
+      this.service
+        .save(this.user)
+        .then((data) => {
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000
+            duration: 3000,
           });
-          if(this.isEdit){
+          if (this.isEdit) {
             this.router.navigate([this.back]);
-          }else{
+          } else {
             this.clearForm();
           }
-        },
-        error: err => { 
-          this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant('PATIENT.ERROR_SAVE_PATIENT'), '', {
+        })
+        .catch((err) => {
+          this.errorMessage = err.message;
+          this.snackBar.open(this.translate.instant(err.error.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            duration: 3000
+            duration: 3000,
           });
-        }
-      });
-    }else{
+        });
+    } else {
       this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        duration: 3000
+        duration: 3000,
       });
     }
-  } 
-  
+  }
+
   public edit(): void {
-      this.activatedroute.paramMap.subscribe(params => { 
-        let id = params.get('id');
-        if(id === null){
-          return;
-        }
-        this.service.get(id).subscribe({
-          next: data => {  
-            this.user = data;
-            this.validaForm(true);
-          },
-          error: err => { 
-            this.errorMessage = err.message; 
-            this.snackBar.open(this.translate.instant('PATIENT.ERROR_DADO_PATIENT'), '', {
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-              duration: 3000
-            });
-          }
+    this.activatedroute.paramMap.subscribe((params) => {
+      let id = params.get('id');
+      if (id === null) {
+        return;
+      }
+      this.service
+        .get(id)
+        .then((data) => {
+          this.user = data;
+          this.validaForm(true);
+        })
+        .catch((err) => {
+          this.errorMessage = err.message;
+          this.snackBar.open(this.translate.instant(err.error.message), '', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            duration: 3000,
+          });
         });
     });
   }
 
-  public validaForm(isEdit: boolean): void{
+  public validaForm(isEdit: boolean): void {
     this.isEdit = isEdit;
-    if(!isEdit){
+    if (!isEdit) {
       this.form = new UntypedFormGroup({
         idPerson: new UntypedFormControl(''),
         name: new UntypedFormControl('', [Validators.required]),
-        email: new UntypedFormControl('', [Validators.required,  Validators.email]),
+        email: new UntypedFormControl('', [
+          Validators.required,
+          Validators.email,
+        ]),
         cpf: new UntypedFormControl('', [Validators.required]),
         address: new UntypedFormControl('', [Validators.required]),
         birthDate: new UntypedFormControl('', [Validators.required]),
@@ -110,9 +117,8 @@ export class PersonActionComponent implements OnInit {
         celular: new UntypedFormControl(''),
         idPhone2: new UntypedFormControl(''),
         celular2: new UntypedFormControl(''),
-
-      }); 
-    }else{
+      });
+    } else {
       this.form.controls['idPerson'].setValue(this.user.idPerson);
       this.form.controls['name'].setValue(this.user.name);
       this.form.controls['email'].setValue(this.user.email);
@@ -120,38 +126,47 @@ export class PersonActionComponent implements OnInit {
       this.form.controls['address'].setValue(this.user.address);
       this.form.controls['birthDate'].setValue(this.user.birthDate);
       this.form.controls['gender'].setValue(this.user.gender);
-      for(let i = 0; i < this.user.phones.length; i++){
-        if(i == 0){
+      for (let i = 0; i < this.user.phones.length; i++) {
+        if (i == 0) {
           this.form.controls['idPhone'].setValue(this.user.phones[i].idPhone);
           this.form.controls['celular'].setValue(this.user.phones[i].numero);
-        }else{
+        } else {
           this.form.controls['idPhone2'].setValue(this.user.phones[i].idPhone);
           this.form.controls['celular2'].setValue(this.user.phones[i].numero);
         }
       }
     }
   }
-  public setObject(): void{
+  public setObject(): void {
     this.user.idPerson = this.form.controls['idPerson'].value;
     this.user.name = this.form.controls['name'].value;
-    this.user.email = this.form.controls['email'].value; 
-    this.user.cpf = this.form.controls['cpf'].value; 
-    this.user.address = this.form.controls['address'].value; 
-    this.user.birthDate = this.form.controls['birthDate'].value; 
-    this.user.gender = this.form.controls['gender'].value; 
+    this.user.email = this.form.controls['email'].value;
+    this.user.cpf = this.form.controls['cpf'].value;
+    this.user.address = this.form.controls['address'].value;
+    this.user.birthDate = this.form.controls['birthDate'].value;
+    this.user.gender = this.form.controls['gender'].value;
     this.user.userType = UserType.PATIENT;
     let phones = [];
-    if(this.form.controls['celular'].value != ""){
-      phones.push(new Phone(this.form.controls['idPhone'].value, this.form.controls['celular'].value));
+    if (this.form.controls['celular'].value != '') {
+      phones.push(
+        new Phone(
+          this.form.controls['idPhone'].value,
+          this.form.controls['celular'].value
+        )
+      );
     }
-    if(this.form.controls['celular2'].value != ""){
-      phones.push(new Phone(this.form.controls['idPhone2'].value, this.form.controls['celular2'].value));
+    if (this.form.controls['celular2'].value != '') {
+      phones.push(
+        new Phone(
+          this.form.controls['idPhone2'].value,
+          this.form.controls['celular2'].value
+        )
+      );
     }
     this.user.phones = phones;
   }
 
-  public clearForm(): void{
+  public clearForm(): void {
     this.form.reset();
   }
-
 }

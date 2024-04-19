@@ -15,23 +15,24 @@ import { TableDeleteComponent } from './table-delete/table-delete.component';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-
   public action: any;
-  displayedColumns: string[] = ['name', 'description', "actions"];
+  displayedColumns: string[] = ['name', 'description', 'actions'];
   dataSource!: MatTableDataSource<Table>;
   table: Table[] = [];
   errorMessage: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     public service: TableService,
     public translate: TranslateService,
     private snackBar: MatSnackBar,
     private global: ConstService,
-    private router: Router) {
+    private router: Router
+  ) {
     this.action = this.global.rest.table.tableaction;
   }
 
@@ -40,23 +41,25 @@ export class TableComponent implements OnInit {
   }
 
   private listData() {
-    debugger;
-    this.service.listAll().subscribe({
-      next: data => {
+    this.service
+      .listAll()
+      .then((data) => {
         this.table = data;
         this.dataSource = new MatTableDataSource(this.table);
         this.dataSource.paginator = this.paginator;
-      },
-      error: err => {
-        this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          duration: 3000
-
-        });
-      }
-    });
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
+        this.snackBar.open(
+          this.translate.instant(error.error.message),
+          'Error',
+          {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 3000,
+          }
+        );
+      });
   }
 
   applyFilter(event: Event) {
@@ -74,9 +77,8 @@ export class TableComponent implements OnInit {
       data: { id: idCompositionTable },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
   }
-
 }

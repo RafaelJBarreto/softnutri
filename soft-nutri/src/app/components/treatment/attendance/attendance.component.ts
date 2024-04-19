@@ -57,41 +57,38 @@ export class AttendanceComponent implements OnInit {
   }
 
   private listTable() {
-    this.tableService.listAll().subscribe({
-      next: data => {
+    this.tableService.listAll().then(
+      (data) => {
         this.tables = data;
         this.filteredOptionsTable = this.tableControl.valueChanges
           .pipe(
             startWith(''),
             map((name) => name ? this.filterTable(name) : this.tables.slice())
           );
-      },
-      error: err => {
-        this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant('TABLE.ERROR_LIST_TABLE'), '', {
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
+        this.snackBar.open(this.translate.instant(error.error.message), 'Error', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000
 
         });
-      }
-    });
-  }
-
+      })
+    };
+    
   private listSnack() {
-    this.snackService.listAll().subscribe({
-      next: data => {
+    this.snackService.listAll().then(
+      (data) => {
         this.snacks = data;
-      },
-      error: err => {
-        this.errorMessage = err.message;
+      }).catch((error) => {
+        this.errorMessage = error.message;
         this.snackBar.open(this.translate.instant('SNACK.ERROR_LIST_SNACK'), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000
 
         });
-      }
     });
   }
 

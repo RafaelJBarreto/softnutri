@@ -24,22 +24,20 @@ export class TableDeleteComponent{
   }
 
   onClickDelete(): void {
-    this.service.delete(this.data.id).subscribe({
-      next: data => {
+    this.service.delete(this.data.id).then(
+      (data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
+      }) .catch((error) => {
+        this.snackBar.open(this.translate.instant(error.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
         });
-      }
-    });
+      })
     this.dialogRef.close();
   }
 

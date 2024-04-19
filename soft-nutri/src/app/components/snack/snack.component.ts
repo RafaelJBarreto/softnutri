@@ -40,22 +40,19 @@ export class SnackComponent implements OnInit {
   }
 
   private listData() {
-    this.service.listAll().subscribe({
-      next: data => {
+    this.service.listAll().then(
+      (data) => {
         this.snack = data;
         this.dataSource = new MatTableDataSource(this.snack);
         this.dataSource.paginator = this.paginator;
-      },
-      error: err => {
-        debugger;
-        this.errorMessage = err.message;
-        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
+      }).catch((error) => {
+        this.errorMessage = error.message;
+        this.snackBar.open(this.translate.instant(error.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
 
         });
-      }
     });
   }
 

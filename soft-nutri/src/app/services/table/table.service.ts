@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { Table } from 'src/app/model/table/table';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,20 +19,20 @@ export class TableService {
     private api:ConstService
   ) { }
 
-  listAll(): Observable<any> { 
-    return this.http.get(this.api.rest.table.listall);
+  listAll(): Promise<any> { 
+    return firstValueFrom(this.http.get(this.api.rest.table.listall));
   }
 
-  save(obj:Table): Observable<any> {
-    return this.http.post(this.api.rest.table.save, obj );
+  save(obj:Table): Promise<any> {
+    return firstValueFrom(this.http.post(this.api.rest.table.save, obj ));
   } 
 
-  get(idTable:any): Observable<any> {
-    return this.http.get(this.api.rest.table.get + idTable );
+  get(idTable:any): Promise<any> {
+    return firstValueFrom(this.http.get(this.api.rest.table.get + idTable ));
   } 
 
-  delete(idTable:any): Observable<any> {
-    return this.http.delete(this.api.rest.table.delete + idTable );
+  delete(idTable:any): Promise<any> {
+    return firstValueFrom(this.http.delete(this.api.rest.table.delete + idTable ));
   } 
 
 }

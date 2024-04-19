@@ -52,8 +52,8 @@ export class FoodGroupComponent implements OnInit {
     if (this.form.valid) { 
       this.bunch.description = this.form.controls['description'].value;
       this.bunch.idBunch = (this.form.controls['idBunch'].value != 0 ? this.form.controls['idBunch'].value : null); 
-      this.service.saveBunch(this.bunch).subscribe({
-        next: data => {  
+      this.service.saveBunch(this.bunch).then(
+       (data) => {  
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
@@ -61,15 +61,13 @@ export class FoodGroupComponent implements OnInit {
           });
           this.update.updatForm(true);
           this.dialogRef.close();
-        },
-        error: err => { 
+        }).catch((err) => { 
           this.errorMessage = err.message; 
-          this.snackBar.open('Erro ao cadastrar', '', {
+          this.snackBar.open(err.error.message, '', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
             duration: 3000
           });
-        }
       });
     }
   } 

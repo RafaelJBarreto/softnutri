@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-person-delete',
   templateUrl: './person-delete.component.html',
-  styleUrls: ['./person-delete.component.scss']
+  styleUrls: ['./person-delete.component.scss'],
 })
 export class PersonDeleteComponent {
   public action: any;
@@ -19,27 +19,25 @@ export class PersonDeleteComponent {
     private service: PersonService,
     public translate: TranslateService,
     private snackBar: MatSnackBar
-  ) {
-  }
+  ) {}
 
   onClickDelete(): void {
-    this.service.delete(this.data.id).subscribe({
-      next: data => {
+    this.service
+      .delete(this.data.id)
+      .then((data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
+      })
+      .catch((err) => {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      }
-    });
+      });
     this.dialogRef.close();
   }
-
 }

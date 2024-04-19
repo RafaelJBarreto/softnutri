@@ -4,9 +4,20 @@ import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
 import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 
 import {
-    Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
-import { FormControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,15 +25,14 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-food-attendance',
   templateUrl: './food-attendance.component.html',
-  styleUrls: ['./food-attendance.component.scss']
+  styleUrls: ['./food-attendance.component.scss'],
 })
 export class FoodAttendanceComponent implements OnInit, OnChanges {
-
   public form!: UntypedFormGroup;
   foodControl = new FormControl();
-  filteredOptionsFood: Observable<FoodBunch[]>  = new Observable;
+  filteredOptionsFood: Observable<FoodBunch[]> = new Observable();
   foods: FoodBunch[] = [];
-  foodSelected: FoodBunch = new FoodBunch;
+  foodSelected: FoodBunch = new FoodBunch();
   @Input() idTable!: number;
   @Input() foodMenu!: FoodMenu;
   @Output() changedFoodMenu = new EventEmitter<FoodMenu>();
@@ -40,18 +50,18 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes['idTable'].currentValue != undefined){
+    if (changes['idTable'].currentValue != undefined) {
       this.listFood(changes['idTable'].currentValue);
     }
   }
 
-  setForm(): void{
+  setForm(): void {
     this.form = new UntypedFormGroup({
       amount: new UntypedFormControl('', [Validators.required]),
-      calories: new UntypedFormControl('',  [Validators.required]),
-      protein: new UntypedFormControl('',  [Validators.required]),
+      calories: new UntypedFormControl('', [Validators.required]),
+      protein: new UntypedFormControl('', [Validators.required]),
       lipids: new UntypedFormControl('', [Validators.required]),
-      carbohydrate: new UntypedFormControl('', [Validators.required])
+      carbohydrate: new UntypedFormControl('', [Validators.required]),
     });
     this.form.controls['amount'].disable();
     this.form.controls['calories'].disable();
@@ -60,30 +70,75 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
     this.form.controls['carbohydrate'].disable();
   }
 
-
   onFoodSelected(option: MatOption) {
     this.foodSelected = option.value;
     this.form.controls['amount'].enable();
-    this.form.controls['calories'].setValue(option.value.food.nutritionalData.calories);
-    this.form.controls['protein'].setValue(option.value.food.nutritionalData.protein);
-    this.form.controls['lipids'].setValue(option.value.food.nutritionalData.lipids);
-    this.form.controls['carbohydrate'].setValue(option.value.food.nutritionalData.carbohydrate);
+    this.form.controls['calories'].setValue(
+      option.value.food.nutritionalData.calories
+    );
+    this.form.controls['protein'].setValue(
+      option.value.food.nutritionalData.protein
+    );
+    this.form.controls['lipids'].setValue(
+      option.value.food.nutritionalData.lipids
+    );
+    this.form.controls['carbohydrate'].setValue(
+      option.value.food.nutritionalData.carbohydrate
+    );
   }
 
-  setCalories(): void{
+  setCalories(): void {
     let amount = this.form.controls['amount'].value;
-    if(amount == null){
-       this.form.controls['calories'].setValue(this.foodSelected.food.nutritionalData.calories);
-       this.form.controls['protein'].setValue(this.foodSelected.food.nutritionalData.protein);
-       this.form.controls['lipids'].setValue(this.foodSelected.food.nutritionalData.lipids);
-       this.form.controls['carbohydrate'].setValue(this.foodSelected.food.nutritionalData.carbohydrate);
-    }else{
-      this.form.controls['calories'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.calories / 100), 2));
-      this.form.controls['protein'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.protein / 100), 2));
-      this.form.controls['lipids'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.lipids / 100), 2));
-      this.form.controls['carbohydrate'].setValue(this.toFixed((amount * this.foodSelected.food.nutritionalData.carbohydrate / 100), 2));
-      this.changedTotal.emit(new FoodMenu(this.foodMenu.id, this.foodMenu.idSnackMenu, this.foodSelected.food.idFood, amount, this.form.controls['calories'].value, 
-                              this.form.controls['protein'].value, this.form.controls['lipids'].value, this.form.controls['carbohydrate'].value));
+    if (amount == null) {
+      this.form.controls['calories'].setValue(
+        this.foodSelected.food.nutritionalData.calories
+      );
+      this.form.controls['protein'].setValue(
+        this.foodSelected.food.nutritionalData.protein
+      );
+      this.form.controls['lipids'].setValue(
+        this.foodSelected.food.nutritionalData.lipids
+      );
+      this.form.controls['carbohydrate'].setValue(
+        this.foodSelected.food.nutritionalData.carbohydrate
+      );
+    } else {
+      this.form.controls['calories'].setValue(
+        this.toFixed(
+          (amount * this.foodSelected.food.nutritionalData.calories) / 100,
+          2
+        )
+      );
+      this.form.controls['protein'].setValue(
+        this.toFixed(
+          (amount * this.foodSelected.food.nutritionalData.protein) / 100,
+          2
+        )
+      );
+      this.form.controls['lipids'].setValue(
+        this.toFixed(
+          (amount * this.foodSelected.food.nutritionalData.lipids) / 100,
+          2
+        )
+      );
+      this.form.controls['carbohydrate'].setValue(
+        this.toFixed(
+          (amount * this.foodSelected.food.nutritionalData.carbohydrate) / 100,
+          2
+        )
+      );
+      this.changedTotal.emit(
+        new FoodMenu(
+          this.foodMenu.id,
+          this.foodMenu.idSnackMenu,
+          this.foodSelected.food.idFood,
+          amount,
+          this.form.controls['calories'].value,
+          this.form.controls['protein'].value,
+          this.form.controls['lipids'].value,
+          this.form.controls['carbohydrate'].value
+        )
+      );
     }
   }
 
@@ -91,52 +146,53 @@ export class FoodAttendanceComponent implements OnInit, OnChanges {
     fixed = fixed || 0;
     fixed = Math.pow(10, fixed);
     return Math.floor(num * fixed) / fixed;
-}
+  }
 
   autoCompleteDisplayFood(item: any): string {
-    if (item == undefined || item == "") { 
+    if (item == undefined || item == '') {
       return '';
     }
     return item.food.description;
   }
 
   private listFood(idTable: number) {
-    this.service.getFoodTable(idTable).subscribe({
-      next: data => {
+    this.service
+      .getFoodTable(idTable)
+      .then((data) => {
         this.foods = data;
-        this.filteredOptionsFood = this.foodControl.valueChanges
-        .pipe(
+        this.filteredOptionsFood = this.foodControl.valueChanges.pipe(
           startWith(''),
-          map(name => name ? this.filterFood(name) : this.foods.slice())
-        )
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('FOOD.ERROR_LIST_FOOD'), '', {
+          map((name) => (name ? this.filterFood(name) : this.foods.slice()))
+        );
+      })
+      .catch((err) => {
+        this.snackBar.open(this.translate.instant(err.error.message), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000
-
+          duration: 3000,
         });
-      }
-    });
+      });
   }
 
   private filterFood(value: any) {
     let filterValue = '';
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       filterValue = value.toLowerCase();
     } else {
       filterValue = value.food.description.toLowerCase();
     }
 
     return this.foods.filter(
-      option => option.food.description.toLowerCase().indexOf(filterValue) === 0 || this.translate.instant(option.bunch.description).toLowerCase().indexOf(filterValue) === 0
+      (option) =>
+        option.food.description.toLowerCase().indexOf(filterValue) === 0 ||
+        this.translate
+          .instant(option.bunch.description)
+          .toLowerCase()
+          .indexOf(filterValue) === 0
     );
   }
 
   deleteFood(food: FoodMenu) {
     this.changedFoodMenu.emit(food);
   }
-
 }
-

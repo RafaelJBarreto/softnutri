@@ -42,8 +42,8 @@ export class ProfessionalActionComponent implements OnInit {
   public send(): void {
     if (this.form.valid) { 
       this.setObject();
-      this.service.save(this.user).subscribe({
-        next: data => {  
+      this.service.save(this.user).then(
+        (data) => {  
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
@@ -54,15 +54,13 @@ export class ProfessionalActionComponent implements OnInit {
           }else{
             this.clearForm();
           }
-        },
-        error: err => { 
+        }).catch((err) => { 
           this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant('PROFESSIONAL.ERROR_SAVE_PROFESSIONAL'), '', {
+          this.snackBar.open(this.translate.instant(err.error.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
           });
-        }
       });
     }else{
       this.errorForm();
@@ -74,19 +72,17 @@ export class ProfessionalActionComponent implements OnInit {
         if(id === null){
           return;
         }
-        this.service.get(id).subscribe({
-          next: data => {  
+        this.service.get(id).then(
+          (data) => {  
             this.user = data;
             this.validaForm(true);
-          },
-          error: err => { 
+          }).catch((err) => { 
             this.errorMessage = err.message; 
-            this.snackBar.open(this.translate.instant('PROFESSIONAL.ERROR_DADO_PROFESSIONAL'), '', {
+            this.snackBar.open(this.translate.instant(err.error.message), '', {
               horizontalPosition: 'center',
               verticalPosition: 'top',
               duration: 3000
             });
-          }
         });
     });
   }

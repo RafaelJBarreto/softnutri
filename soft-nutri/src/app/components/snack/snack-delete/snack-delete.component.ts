@@ -1,10 +1,10 @@
+import { error } from 'console';
 import { SnackService } from 'src/app/services/snack/snack.service';
 
 import { Component, Inject, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { debug, error } from 'console';
 
 @Component({
   selector: 'app-snack-delete',
@@ -25,21 +25,19 @@ export class SnackDeleteComponent {
   }
 
   onClickDelete(): void {
-    this.service.delete(this.data.id).subscribe({
-      next: data => {
+    this.service.delete(this.data.id).then(
+      (data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
+      }).catch((error) => {
+        this.snackBar.open(this.translate.instant(error.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
           duration: 3000
         });
-      }
     });
     this.dialogRef.close();
   }

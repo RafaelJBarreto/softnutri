@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { Bunch } from 'src/app/model';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,17 +19,13 @@ export class BunchService {
     private api:ConstService
   ) { }
 
-  listAll(): Observable<any> { 
-    return this.http.get(this.api.rest.bunch.listall);
+  listAll(): Promise<any> { 
+    return firstValueFrom(this.http.get(this.api.rest.bunch.listall));
   }
-  saveBunch(bunch: Bunch): Observable<any> {
-    return this.http.post(this.api.rest.bunch.save, bunch );
+  saveBunch(bunch: Bunch): Promise<any> {
+    return firstValueFrom(this.http.post(this.api.rest.bunch.save, bunch ));
   }
-  listAllBunch(): Observable<any> { 
-    return this.http.get(this.api.rest.bunch.listall);
-  }
-
-  delete(id:any): Observable<any> {
-    return this.http.delete(this.api.rest.bunch.delete + id );
+  delete(id:any): Promise<any> {
+    return firstValueFrom(this.http.delete(this.api.rest.bunch.delete + id ));
   } 
 }

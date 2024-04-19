@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { Calendar } from 'src/app/model/calendar/calendar';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';

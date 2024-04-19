@@ -56,8 +56,8 @@ export class TableActionComponent implements OnInit {
   public send(): void {
     if (this.form.valid) { 
       this.setObject();
-      this.service.save(this.table).subscribe({
-        next: data => {  
+      this.service.save(this.table).then(
+        (data) => {  
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
@@ -68,16 +68,15 @@ export class TableActionComponent implements OnInit {
           }else{
             this.clearForm();
           }
-        },
-        error: err => { 
-          this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant(err.error.message), '', {
+        })
+        .catch((error) => {
+          this.errorMessage = error.message; 
+          this.snackBar.open(this.translate.instant(error.error.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
           });
-        }
-      });
+        })
     }else{
       this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), '', {
         horizontalPosition: 'center',
@@ -103,20 +102,18 @@ export class TableActionComponent implements OnInit {
       if(id === null){
         return;
       }
-      this.service.get(id).subscribe({
-        next: data => {  
+      this.service.get(id).then(
+        (data) => {  
           this.table = data;
           this.validaForm(true);
-        },
-        error: err => { 
-          this.errorMessage = err.message; 
-          this.snackBar.open(this.translate.instant(err.error.message), '', {
+        }).catch((error) => {
+          this.errorMessage = error.message; 
+          this.snackBar.open(this.translate.instant(error.error.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
           });
-        }
-      });
+        })
   });
 }
 

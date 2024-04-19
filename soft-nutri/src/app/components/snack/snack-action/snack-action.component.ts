@@ -7,6 +7,7 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { error } from 'console';
 
 @Component({
   selector: 'app-snack-action',
@@ -56,20 +57,20 @@ export class SnackActionComponent implements OnInit {
   public send(): void {
     if (this.form.valid) { 
       this.setObject();
-      this.service.save(this.snack).subscribe({
-        next: data => {  
+      this.service.save(this.snack).then(
+        (data) => {  
           this.snackBar.open(this.translate.instant(data.message), '', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
           });
+
           if(this.isEdit){
             this.router.navigate([this.back]);
           }else{
             this.clearForm();
           }
-        },
-        error: err => { 
+        }).catch((err) => { 
           debugger;
           this.errorMessage = err.message; 
           this.snackBar.open(this.translate.instant(err.error.message), '', {
@@ -77,7 +78,6 @@ export class SnackActionComponent implements OnInit {
             verticalPosition: 'top',
             duration: 3000
           });
-        }
       });
     }else{
       this.snackBar.open(this.translate.instant('GLOBAL.ERROR_FORM'), 'Error', {
@@ -104,19 +104,17 @@ export class SnackActionComponent implements OnInit {
       if(id === null){
         return;
       }
-      this.service.get(id).subscribe({
-        next: data => {  
+      this.service.get(id).then(
+        (data) => {  
           this.snack = data;
           this.validaForm(true);
-        },
-        error: err => { 
+        }).catch((err) => { 
           this.errorMessage = err.message; 
           this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
             horizontalPosition: 'center',
             verticalPosition: 'top',
             duration: 3000
           });
-        }
       });
   });
 }

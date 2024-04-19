@@ -10,11 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-remove-dialog',
   templateUrl: './remove-dialog.component.html',
-  styleUrls: ['./remove-dialog.component.scss']
+  styleUrls: ['./remove-dialog.component.scss'],
 })
-export class RemoveDialogComponent{
- 
-  message: String = "";
+export class RemoveDialogComponent {
+  message: String = '';
 
   constructor(
     @Optional() public dialogRef: MatDialogRef<RemoveDialogComponent>,
@@ -25,84 +24,82 @@ export class RemoveDialogComponent{
     public translate: TranslateService,
     private snackBar: MatSnackBar
   ) {
-    if(this.data.valueForm === 'foodbunch'){
+    if (this.data.valueForm === 'foodbunch') {
       this.message = translate.instant('BUNCH.DESCRIPTION_REMOVE_FOODBUNCH');
-    }else if(this.data.valueForm === 'bunch'){
+    } else if (this.data.valueForm === 'bunch') {
       this.message = translate.instant('BUNCH.DESCRIPTION_REMOVE_BUNCH');
-    }else if(this.data.valueForm === 'food'){
+    } else if (this.data.valueForm === 'food') {
       this.message = translate.instant('FOOD.DESCRIPTION_REMOVE');
     }
   }
 
   onClickDelete(): void {
-    if(this.data.valueForm === 'foodbunch'){
-      this. removeFoodBunch(this.data.id);
-    }else if(this.data.valueForm === 'bunch'){
-      this. removeBunch(this.data.id);
-    }else if(this.data.valueForm === 'food'){
-      this. removeFood(this.data.id);
+    if (this.data.valueForm === 'foodbunch') {
+      this.removeFoodBunch(this.data.id);
+    } else if (this.data.valueForm === 'bunch') {
+      this.removeBunch(this.data.id);
+    } else if (this.data.valueForm === 'food') {
+      this.removeFood(this.data.id);
     }
   }
 
-  private removeFoodBunch(id: number): void{
-    this.foodBunchService.delete(id).subscribe({
-      next: data => {
+  private removeFoodBunch(id: number): void {
+    this.foodBunchService
+      .delete(id)
+      .then((data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
+      })
+      .catch((err) => {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      }
-    });
+      });
     this.dialogRef.close();
   }
 
-  private removeBunch(id: number): void{
-    this.bunchService.delete(id).subscribe({
-      next: data => {
+  private removeBunch(id: number): void {
+    this.bunchService
+      .delete(id)
+      .then((data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
+      })
+      .catch((err) => {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      }
-    });
+      });
     this.dialogRef.close();
   }
 
-  private removeFood(id: number): void{
-    this.foodService.delete(id).subscribe({
-      next: data => {
+  private removeFood(id: number): void {
+    this.foodService
+      .delete(id)
+      .then((data) => {
         this.snackBar.open(this.translate.instant(data.message), '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      },
-      error: err => {
-        this.snackBar.open(this.translate.instant('PATIENT.ERROR_DELETE_PATIENT'), 'Error', {
+      })
+      .catch((err) => {
+        this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
-          duration: 3000
+          duration: 3000,
         });
-      }
-    });
+      });
     this.dialogRef.close();
   }
-
-
 }

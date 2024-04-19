@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { User } from 'src/app/model/user/user';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,24 +19,24 @@ export class ProfessionalService {
     private api:ConstService
   ) { }
 
-  listAll(): Observable<any> { 
-    return this.http.get(this.api.rest.professional.listall);
+  listAll(): Promise<any> { 
+    return firstValueFrom(this.http.get(this.api.rest.professional.listall));
   }
 
-  save(obj:User): Observable<any> {
-    return this.http.post(this.api.rest.professional.save, obj );
+  save(obj:User): Promise<any> {
+    return firstValueFrom(this.http.post(this.api.rest.professional.save, obj ));
   } 
 
-  get(idPerson:any): Observable<any> {
-    return this.http.get(this.api.rest.professional.get + idPerson );
+  get(idPerson:any): Promise<any> {
+    return firstValueFrom(this.http.get(this.api.rest.professional.get + idPerson ));
   } 
 
-  delete(idPerson:any): Observable<any> {
-    return this.http.delete(this.api.rest.professional.delete + idPerson );
+  delete(idPerson:any): Promise<any> {
+    return firstValueFrom(this.http.delete(this.api.rest.professional.delete + idPerson ));
   } 
 
-  getNutritionist(): Observable<any> { 
-    return this.http.get(this.api.rest.professional.nutritionist);
+  getNutritionist(): Promise<any> { 
+    return firstValueFrom(this.http.get(this.api.rest.professional.nutritionist));
   }
 
 }

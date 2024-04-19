@@ -5,7 +5,13 @@ import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 import { Update } from 'src/app/services/shared/updated/updated.service';
 
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,11 +27,22 @@ import { RemoveDialogComponent } from '../dialog/form/remove-dialog/remove-dialo
 @Component({
   selector: 'app-foods',
   templateUrl: './foods.component.html',
-  styleUrls: ['./foods.component.scss']
+  styleUrls: ['./foods.component.scss'],
 })
-export class FoodsComponent implements OnInit, OnChanges{
-  displayedColumns: string[] = ['select', 'bunch', 'table', 'description', 'preparation', 'calories', 'protein', 'lipids', 'carbohydrate', 'actionsFood'];
-  dataSource: MatTableDataSource<FoodBunch> = new MatTableDataSource;
+export class FoodsComponent implements OnInit, OnChanges {
+  displayedColumns: string[] = [
+    'select',
+    'bunch',
+    'table',
+    'description',
+    'preparation',
+    'calories',
+    'protein',
+    'lipids',
+    'carbohydrate',
+    'actionsFood',
+  ];
+  dataSource: MatTableDataSource<FoodBunch> = new MatTableDataSource();
   selection = new SelectionModel<FoodBunch>(true, []);
   food: FoodBunch[] = [];
   errorMessage: any;
@@ -33,19 +50,23 @@ export class FoodsComponent implements OnInit, OnChanges{
   @ViewChild(MatSort) sort!: MatSort;
   reloadForm!: boolean;
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     public service: FoodService,
     public serviceFoodBunch: FoodBunchService,
     public translate: TranslateService,
     private snackBar: MatSnackBar,
     private dataFood: DataFoodService,
-    private update: Update) {
-      this.update.alteracaoData.subscribe(reloadForm => this.reloadForm = reloadForm);
+    private update: Update
+  ) {
+    this.update.alteracaoData.subscribe(
+      (reloadForm) => (this.reloadForm = reloadForm)
+    );
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.update.reloadForm;
-    if(changes["name"]) {
-      console.log(changes["name"]);
+    if (changes['name']) {
+      console.log(changes['name']);
     }
   }
 
@@ -54,60 +75,54 @@ export class FoodsComponent implements OnInit, OnChanges{
   }
 
   public listData() {
-    this.serviceFoodBunch.listAll().subscribe({
-      next: data => {
+    this.serviceFoodBunch.listAll().then(
+      (data) => {
         this.food = data;
         this.dataSource = new MatTableDataSource(this.food);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
         this.update.updatForm(true);
-      },
-      error: err => {
+      }).catch((err) => {
         this.errorMessage = err.message;
         this.snackBar.open('Erro ao cadastrar', '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000
-
+          duration: 3000,
         });
-      }
     });
   }
 
   openDialog(number: number): void {
     if (number == 1) {
       const dialogRef = this.dialog.open(FoodComponent, {
-        width: '600px'
+        width: '600px',
       });
 
-      dialogRef.afterClosed().subscribe(_result => {
+      dialogRef.afterClosed().subscribe((_result) => {
         this.listData();
       });
     } else if (number == 2) {
       const dialogRef = this.dialog.open(FoodGroupComponent, {
-        width: '450px'
+        width: '450px',
       });
 
-      dialogRef.afterClosed().subscribe(_result => {
-      });
-
+      dialogRef.afterClosed().subscribe((_result) => {});
     }
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource != undefined ? this.dataSource.data.length : 0;
+    const numRows =
+      this.dataSource != undefined ? this.dataSource.data.length : 0;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -116,12 +131,13 @@ export class FoodsComponent implements OnInit, OnChanges{
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: FoodBunch): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.food.idFood + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.food.idFood + 1
+    }`;
   }
 
   public getSelected(event: MatCheckboxChange, row: Food): void {
@@ -129,73 +145,76 @@ export class FoodsComponent implements OnInit, OnChanges{
   }
 
   private customFilterPredicate(data: FoodBunch, filter: string): boolean {
-    return data.food.description.toLowerCase().includes(filter)
-      || String(data.bunch.description).toLowerCase().includes(filter)
-      || String(data.food.nutritionalData.calories).toLowerCase().includes(filter)
-      || String(data.food.nutritionalData.carbohydrate).toLowerCase().includes(filter)
-      || String(data.food.nutritionalData.lipids).toLowerCase().includes(filter)
-      || String(data.food.nutritionalData.protein).toLowerCase().includes(filter)
-      || String(data.food.descriptionPreparation).toLowerCase().includes(filter)
-      || String(data.food.compositionTable.name).toLowerCase().includes(filter);
+    return (
+      data.food.description.toLowerCase().includes(filter) ||
+      String(data.bunch.description).toLowerCase().includes(filter) ||
+      String(data.food.nutritionalData.calories)
+        .toLowerCase()
+        .includes(filter) ||
+      String(data.food.nutritionalData.carbohydrate)
+        .toLowerCase()
+        .includes(filter) ||
+      String(data.food.nutritionalData.lipids).toLowerCase().includes(filter) ||
+      String(data.food.nutritionalData.protein)
+        .toLowerCase()
+        .includes(filter) ||
+      String(data.food.descriptionPreparation).toLowerCase().includes(filter) ||
+      String(data.food.compositionTable.name).toLowerCase().includes(filter)
+    );
   }
 
-  
-  public removeFoodbunch(idFoodbunch: any):void{
+  public removeFoodbunch(idFoodbunch: any): void {
     const dialogRef = this.dialog.open(RemoveDialogComponent, {
       width: '250px',
       data: { id: idFoodbunch, valueForm: 'foodbunch' },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
-
   }
 
-  public removeBunch(idBunch: any):void{
+  public removeBunch(idBunch: any): void {
     const dialogRef = this.dialog.open(RemoveDialogComponent, {
       width: '250px',
       data: { id: idBunch, valueForm: 'bunch' },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
-
   }
 
-  public removeFood(idFood: any):void{
+  public removeFood(idFood: any): void {
     const dialogRef = this.dialog.open(RemoveDialogComponent, {
       width: '250px',
       data: { id: idFood, valueForm: 'food' },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
   }
 
-  public editFood(food: Food):void{
+  public editFood(food: Food): void {
     const dialogRef = this.dialog.open(FoodComponent, {
       width: '600px',
-      data: {food},
+      data: { food },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
   }
 
-  public editBunch(bunch: Bunch):void{
+  public editBunch(bunch: Bunch): void {
     const dialogRef = this.dialog.open(FoodGroupComponent, {
       width: '400px',
-      data: {bunch},
+      data: { bunch },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
   }
-
 }
-

@@ -42,13 +42,12 @@ export class PersonComponent implements OnInit {
   }
 
   private listData() {
-    this.service.listAll().subscribe({
-      next: data => {
+    this.service.listAll().then(
+      (data) => {
         this.person = data;
         this.dataSource = new MatTableDataSource(this.person);
         this.dataSource.paginator = this.paginator;
-      },
-      error: err => {
+      }).catch((err) => {
         this.errorMessage = err.message;
         this.snackBar.open(this.translate.instant('PATIENT.ERROR_LIST_PATIENT'), '', {
           horizontalPosition: 'right',
@@ -56,7 +55,6 @@ export class PersonComponent implements OnInit {
           duration: 3000
 
         });
-      }
     });
   }
 

@@ -177,16 +177,15 @@ export class CalendaractionComponent implements OnInit {
   }
 
   private listPatient() {
-    this.service.listAll().subscribe({
-      next: data => {
+    this.service.listAll().then(
+      (data) => {
         this.patient = data;
         this.filteredOptionsPatient = this.patientControl.valueChanges
           .pipe(
             startWith(''),
             map(name => name ? this.filterPatient(name) : this.patient.slice())
           );
-      },
-      error: err => {
+      }).catch((err) => {
         this.errorMessage = err.message;
         this.snackBar.open(this.translate.instant(err.error.message), 'Error', {
           horizontalPosition: 'right',
@@ -194,30 +193,26 @@ export class CalendaractionComponent implements OnInit {
           duration: 3000
 
         });
-      }
     });
   }
 
 
   private listNutritionist() {
-    this.professionalService.getNutritionist().subscribe({
-      next: data => {
+    this.professionalService.getNutritionist().then(
+      (data) => {
         this.nutritionist = data;
         this.filteredOptionsNutritionist = this.nutritionistControl.valueChanges
           .pipe(
             startWith(''),
             map(name => name ? this.filterNutritionist(name) : this.nutritionist.slice())
           );
-      },
-      error: err => {
+      }).catch((err) => {
         this.errorMessage = err.message;
         this.snackBar.open(this.translate.instant(err.error.message), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
           duration: 3000
-
         });
-      }
     });
   }
 

@@ -17,12 +17,20 @@ import { TimeCalendarComponent } from '../time-calendar/time-calendar.component'
 @Component({
   selector: 'app-calendar-list',
   templateUrl: './calendar-list.component.html',
-  styleUrl: './calendar-list.component.scss'
+  styleUrl: './calendar-list.component.scss',
 })
-export class CalendarListComponent implements OnInit{
-
+export class CalendarListComponent implements OnInit {
   public action: any;
-  displayedColumns: string[] = ['professional', 'patient', 'dateOfDay', 'hourOfDay', 'note', 'completed', 'cancel', 'actions'];
+  displayedColumns: string[] = [
+    'professional',
+    'patient',
+    'dateOfDay',
+    'hourOfDay',
+    'note',
+    'completed',
+    'cancel',
+    'actions',
+  ];
   dataSource!: MatTableDataSource<Calendar>;
   calendar: Calendar[] = [];
   errorMessage: any;
@@ -34,7 +42,8 @@ export class CalendarListComponent implements OnInit{
     public translate: TranslateService,
     private snackBar: MatSnackBar,
     private global: ConstService,
-    private router: Router) {
+    private router: Router
+  ) {
     this.action = this.global.rest.calendar.calendaraction;
   }
 
@@ -44,45 +53,46 @@ export class CalendarListComponent implements OnInit{
 
   private listData() {
     this.service.listAll().subscribe({
-      next: data => {
+      next: (data) => {
         this.calendar = data.calendar;
         this.dataSource = new MatTableDataSource(this.calendar);
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
       },
-      error: err => {
+      error: (err) => {
         this.errorMessage = err.message;
         this.snackBar.open(this.translate.instant(err.error.message), '', {
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          duration: 3000
-
+          duration: 3000,
         });
-      }
+      },
     });
   }
 
-
   private customFilterPredicate(data: Calendar, filter: string): boolean {
-    return data.professional.name.toLowerCase().includes(filter)
-      || String(data.patient.name).toLowerCase().includes(filter)
-      || String(data.note).toLowerCase().includes(filter)
-      || String(moment(data.dateOfDay, "YYYY-MM-DD").format("DD/MM/YYYY")).toLowerCase().includes(filter)
-      || String(data.hourOfDay).toLowerCase().includes(filter);
+    return (
+      data.professional.name.toLowerCase().includes(filter) ||
+      String(data.patient.name).toLowerCase().includes(filter) ||
+      String(data.note).toLowerCase().includes(filter) ||
+      String(moment(data.dateOfDay, 'YYYY-MM-DD').format('DD/MM/YYYY'))
+        .toLowerCase()
+        .includes(filter) ||
+      String(data.hourOfDay).toLowerCase().includes(filter)
+    );
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
-  openDialog(): void {
-      const dialogRef = this.dialog.open(TimeCalendarComponent, {
-        width: '300px'
-      });
 
-      dialogRef.afterClosed().subscribe(_result => {
-      });
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TimeCalendarComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe((_result) => {});
   }
 
   cancelCalendar(idCalendar: any) {
@@ -91,7 +101,7 @@ export class CalendarListComponent implements OnInit{
       data: { id: idCalendar },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.listData();
     });
   }
@@ -99,5 +109,4 @@ export class CalendarListComponent implements OnInit{
   edit(idCalendar: any) {
     this.router.navigate([this.action, idCalendar]);
   }
-
 }
