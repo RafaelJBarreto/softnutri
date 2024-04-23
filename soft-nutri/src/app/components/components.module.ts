@@ -93,6 +93,8 @@ import {
     CalendarProfessionalComponent
 } from './treatment/calendar-professional/calendar-professional.component';
 import { TreatmentComponent } from './treatment/treatment.component';
+import { LoaderModule } from './loader/loader.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -190,13 +192,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTabsModule,
     MatChipsModule,
     NgxMaterialTimepickerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LoaderModule
   ],
   exports: [
     SidebarComponent,
     HeaderModule,
     LayoutComponent,
     AuthModule,
+    LoaderModule
   ],
   providers:[ authInterceptorProviders,ConstService,
     {

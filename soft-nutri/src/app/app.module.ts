@@ -4,7 +4,7 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 /* Importando a configuração de algumas linguagens */
 import { registerLocaleData } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import localeES from '@angular/common/locales/es';
 import localePT from '@angular/common/locales/pt';
 import { NgModule } from '@angular/core';
@@ -25,6 +25,9 @@ import { DataFoodService } from './services/food/dataFood.service';
 import { ConstService } from './services/shared/const.service';
 import { PaginatorI18n } from './services/shared/paginators/paginatorI18n';
 import { Update } from './services/shared/updated/updated.service';
+import { LoaderModule } from './components/loader/loader.module';
+import { LoaderInterceptor } from './components/loader/loader.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 registerLocaleData(localePT);
 registerLocaleData(localeES);
@@ -45,7 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,12 +74,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     FontAwesomeModule,
     ComponentsModule,
+    LoaderModule
   ],
   providers: [authInterceptorProviders, ConstService, DataFoodService, Update,
     {
       provide: MatPaginatorIntl, deps: [TranslateService],
       useFactory: (translateService: TranslateService) => new PaginatorI18n(translateService).getPaginatorIntl()
-    }],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

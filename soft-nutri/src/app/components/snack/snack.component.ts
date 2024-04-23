@@ -23,7 +23,6 @@ export class SnackComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', "actions"];
   dataSource!: MatTableDataSource<Snack>;
   snack: Snack[] = [];
-  errorMessage: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public dialog: MatDialog,
@@ -46,7 +45,6 @@ export class SnackComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.snack);
         this.dataSource.paginator = this.paginator;
       }).catch((error) => {
-        this.errorMessage = error.message;
         this.snackBar.open(this.translate.instant(error.error.message), 'Error', {
           horizontalPosition: 'center',
           verticalPosition: 'top',

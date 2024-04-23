@@ -40,7 +40,7 @@ public class CalendarService {
 					professional(User.builder().idPerson(dto.getProfessional().getIdPerson()).build()).
 					receptionist(User.builder().idPerson(autenticationService.getUserLogged().getIdPerson()).build()).build());
 		} catch (Exception e) {
-			throw new SoftNutriException("PATIENT.ERROR_SAVE_PATIENT", e);
+			throw new SoftNutriException("CALENDAR.ERROR_SAVE_CALENDAR", e);
 		}
 	}
 	

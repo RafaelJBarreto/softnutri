@@ -36,6 +36,7 @@
     "luxon": "^3.4.3",
     "moment": "^2.29.4",
     "ngx-daterangepicker-material": "^6.0.2",
+    "ngx-loading": "^17.0.0",
     "ngx-mask": "^14.2.2",
     "ngx-mat-timepicker": "^14.0.2",
     "ngx-material-timepicker": "^13.1.1",

@@ -31,7 +31,7 @@ public class PersonService {
 				return ResponseEntity.ok(new MessageResponse("PERSON.PERSON_DELETE"));
 			}
 		}catch (Exception e) {
-			throw new SoftNutriException("Error delete person " + e.getMessage(), e);
+			throw new SoftNutriException("PERSON.PERSON_DELETE", e);
 		}
 	}
 

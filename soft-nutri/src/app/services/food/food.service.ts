@@ -1,4 +1,4 @@
-import { Observable, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { Food } from 'src/app/model';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';

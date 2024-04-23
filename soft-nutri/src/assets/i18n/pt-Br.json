@@ -193,14 +193,16 @@
         "CALENDAR_CANCEL_ERROR": "Erro ao tentar cancelar agendamento",
         "MONTH": "Mês",
         "WEEK": "Semana",
+
+        
         "DAY": "Dia",
         "PREVIOUS": "Voltar",
         "TODAY": "Hoje",
         "NEXT": "Próximo",
         "UPDATE_CALENDAR":"Alterar agendamento",
         "ERROR_GET_CALENDAR": "Erro ao tentar recuperar agendamento.",
-        "CALENDAR_CANCEL_AUTOMATICALLY": "Agendamento cancelado automaticamente"
-
+        "CALENDAR_CANCEL_AUTOMATICALLY": "Agendamento cancelado automaticamente",
+        "ERROR_SAVE_CALENDAR": "Erro ao tentar realizar agendamento."
     },
     "INTERVAL":{
         "INTERVAL_CALENDAR": "Intervalo entre agendas",
