@@ -57,6 +57,5 @@ public class TableService {
 		}catch (Exception e) {
 			throw new SoftNutriException("TABLE.ERROR_DELETE_TABLE", e);
 		}
-	}
-		 
+	}		 
 }
