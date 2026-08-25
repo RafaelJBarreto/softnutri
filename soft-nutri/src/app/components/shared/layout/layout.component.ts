@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { LoaderService } from '../../loader/loader.service';
 
 @Component({
   selector: 'app-layout',
@@ -13,7 +14,7 @@ export class LayoutComponent implements OnDestroy {
   public mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public loaderService: LoaderService) {
     this.mobileQuery = media.matchMedia('(max-width: 1024px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);

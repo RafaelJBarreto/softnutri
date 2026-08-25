@@ -1,5 +1,5 @@
+<app-spinner></app-spinner>
 <app-header (isShowSidebar)="sidenav.toggle($event)" [isMenuOpened]="isShowSidebar"></app-header>
-
 <mat-sidenav-container class="layout">
   <mat-sidenav
     #sidenav
@@ -12,6 +12,6 @@
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content class="layout-content">
-    <ng-content></ng-content>
+    <ng-content *ngIf="!this.loaderService.getLoading()" ></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

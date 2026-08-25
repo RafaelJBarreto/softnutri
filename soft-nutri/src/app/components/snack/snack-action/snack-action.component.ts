@@ -7,7 +7,6 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { error } from 'console';
 
 @Component({
   selector: 'app-snack-action',
