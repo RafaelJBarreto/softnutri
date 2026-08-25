@@ -1,8 +1,4 @@
-import { map, Observable, startWith } from 'rxjs';
-import { FoodBunch } from 'src/app/model';
-import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
-import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
-
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -14,16 +10,43 @@ import {
 } from '@angular/core';
 import {
   FormControl,
+  FormsModule,
+  ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
+import { map, Observable, startWith } from 'rxjs';
+import { FoodBunch } from 'src/app/model';
+import { FoodMenu } from 'src/app/model/snackMenu/foodMenu';
+import { FoodBunchService } from 'src/app/services/foodBunch/foodBunch.service';
 
 @Component({
   selector: 'app-food-attendance',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule,
+    TranslatePipe,
+  ],
   templateUrl: './food-attendance.component.html',
   styleUrls: ['./food-attendance.component.scss'],
 })

@@ -13,34 +13,34 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="13%" appearance="outline">
-            <mat-button matPrefix matTooltip="{{'GLOBAL.QUANTITY' | translate}}">
+            <button type="button" mat-button matPrefix matTooltip="{{'GLOBAL.QUANTITY' | translate}}">
               <i class="fa-solid fa-person-circle-question"></i>
-            </mat-button>
+            </button>
             <input matInput type="number" formControlName="amount" (ngModelChange)="setCalories()"/>
           </mat-form-field>
 
         <mat-form-field fxFlex="10%" aria-disabled="true" appearance="outline">
-          <mat-button matPrefix matTooltip="{{'FOOD.FOOD_CALORIES' | translate}}">
+          <button type="button" mat-button matPrefix matTooltip="{{'FOOD.FOOD_CALORIES' | translate}}">
             <i class="fa-solid fa-circle-question"></i>
-          </mat-button>
+          </button>
             <input matInput type="text" formControlName="calories" readonly *ngIf="true"/>
           </mat-form-field>
             <mat-form-field fxFlex="10%" appearance="outline">
-              <mat-button matPrefix matTooltip="{{'FOOD.FOOD_PROTEIN' | translate}}">
+              <button type="button" mat-button matPrefix matTooltip="{{'FOOD.FOOD_PROTEIN' | translate}}">
                 <i class="fa-solid fa-circle-question"></i>
-              </mat-button>
+              </button>
                 <input matInput type="text" formControlName="protein" readonly *ngIf="true"/>
               </mat-form-field>
               <mat-form-field fxFlex="10%" appearance="outline">
-                <mat-button matPrefix matTooltip="{{'FOOD.FOOD_LIPIDS' | translate}}">
+                <button type="button" mat-button matPrefix matTooltip="{{'FOOD.FOOD_LIPIDS' | translate}}">
                   <i class="fa-solid fa-circle-question"></i>
-                </mat-button>
+                </button>
                 <input matInput type="text" formControlName="lipids" readonly *ngIf="true"/>
               </mat-form-field>
               <mat-form-field fxFlex="10%" appearance="outline">
-                <mat-button matPrefix matTooltip="{{'FOOD.FOOD_CARBOHYDRATE' | translate}}">
+                <button type="button" mat-button matPrefix matTooltip="{{'FOOD.FOOD_CARBOHYDRATE' | translate}}">
                   <i class="fa-solid fa-circle-question"></i>
-                </mat-button>
+                </button>
                 <input matInput type="text" formControlName="carbohydrate" readonly *ngIf="true"/>
               </mat-form-field>
               <button mat-mini-fab class="style-button-remove" matTooltip="{{'MENU.REMOVE_FOOD_MENU' | translate}}" (click)="deleteFood(foodMenu)">
