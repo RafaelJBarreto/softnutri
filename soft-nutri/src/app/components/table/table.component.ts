@@ -1,19 +1,45 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router, RouterModule } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { Table } from 'src/app/model/table/table';
 import { ConstService } from 'src/app/services/shared/const.service';
 import { TableService } from 'src/app/services/table/table.service';
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-
+import { LayoutComponent } from '../shared/layout/layout.component';
 import { TableDeleteComponent } from './table-delete/table-delete.component';
 
 @Component({
   selector: 'app-table',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FlexLayoutModule,
+    LayoutComponent,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    TranslatePipe,
+  ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
@@ -77,7 +103,7 @@ export class TableComponent implements OnInit {
       data: { id: idCompositionTable },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.listData();
     });
   }
