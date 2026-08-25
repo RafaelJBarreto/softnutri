@@ -12,24 +12,22 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    UserComponent
-  ],
-  exports: [
-    HeaderComponent,
-    UserComponent
-  ],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatInputModule,
-    MatBadgeModule,
-  ]
+    exports: [
+        HeaderComponent,
+        UserComponent
+    ],
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatInputModule,
+        MatBadgeModule,
+        HeaderComponent,
+        UserComponent,
+    ]
 })
 export class HeaderModule {  
  }

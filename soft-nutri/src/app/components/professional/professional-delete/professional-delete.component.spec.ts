@@ -8,8 +8,8 @@ describe('ProfessionalDeleteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfessionalDeleteComponent ]
-    })
+    imports: [ProfessionalDeleteComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ProfessionalDeleteComponent);

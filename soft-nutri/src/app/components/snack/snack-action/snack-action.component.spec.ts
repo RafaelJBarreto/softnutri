@@ -8,8 +8,8 @@ describe('SnackActionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SnackActionComponent ]
-    })
+    imports: [SnackActionComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(SnackActionComponent);

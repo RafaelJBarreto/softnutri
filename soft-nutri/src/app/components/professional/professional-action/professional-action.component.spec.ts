@@ -8,8 +8,8 @@ describe('ProfessionalActionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfessionalActionComponent ]
-    })
+    imports: [ProfessionalActionComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ProfessionalActionComponent);

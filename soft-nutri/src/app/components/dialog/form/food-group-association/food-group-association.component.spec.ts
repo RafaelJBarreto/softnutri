@@ -8,8 +8,8 @@ describe('FoodGroupAssociationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FoodGroupAssociationComponent ]
-    })
+    imports: [FoodGroupAssociationComponent]
+})
     .compileComponents();
   });
 

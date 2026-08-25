@@ -18,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "allowedCommonJsDependencies": [
               "rxjs",
@@ -114,6 +114,6 @@
   },
   "cli": {
     "analytics": "db3db42c-0702-471b-8422-de593b44e490",
-    "packageManager": "pnpm"
+    "packageManager": "npm"
   }
 }

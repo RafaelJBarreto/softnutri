@@ -8,8 +8,8 @@ describe('TableDeleteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableDeleteComponent ]
-    })
+    imports: [TableDeleteComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(TableDeleteComponent);

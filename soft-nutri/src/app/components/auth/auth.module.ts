@@ -10,21 +10,18 @@ import { LoginFormComponent, SearchFormComponent } from './components';
 import { AuthPageComponent } from './containers/auth-page/auth-page.component';
 
 @NgModule({
-  declarations: [
-    AuthPageComponent,
-    LoginFormComponent,
-    SearchFormComponent,
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  providers: [ 
-  ]
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AuthPageComponent,
+        LoginFormComponent,
+        SearchFormComponent
+    ],
+    providers: []
 })
 export class AuthModule { }
